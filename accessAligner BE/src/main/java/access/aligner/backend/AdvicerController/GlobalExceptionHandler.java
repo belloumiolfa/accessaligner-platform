@@ -1,15 +1,17 @@
 package access.aligner.backend.AdvicerController;
 
 import io.jsonwebtoken.security.SignatureException;
-import jakarta.mail.SendFailedException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.UnexpectedTypeException;
+import jakarta.persistence.EntityNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailSendException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -21,25 +23,33 @@ import javax.naming.ServiceUnavailableException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     // detect 500 status error
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ValidationErrorResponse> handleExceptionErrors(
             Exception exception
     ) {
+        logger.error("Unhandled exception while processing request", exception);
         ValidationErrorResponse validationErrorResponse = new ValidationErrorResponse();
-        validationErrorResponse.setCode(HttpStatus.INTERNAL_SERVER_ERROR.hashCode());
-        validationErrorResponse.addError(HttpStatus.INTERNAL_SERVER_ERROR.hashCode(),
-                "exception", exception.getMessage());
+        validationErrorResponse.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        validationErrorResponse.addError(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "exception", "An unexpected error occurred.");
 
         return new ResponseEntity<>(validationErrorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
-    public ResponseEntity<ValidationErrorResponse> UnexpectedTypeExceptionErrors(
+    @ExceptionHandler(UnexpectedTypeException.class)
+    public ResponseEntity<ValidationErrorResponse> handleUnexpectedTypeException(
             UnexpectedTypeException exception
     ) {
         ValidationErrorResponse validationErrorResponse = new ValidationErrorResponse();
-        validationErrorResponse.setCode(HttpStatus.BAD_REQUEST.hashCode());
-        validationErrorResponse.addError(HttpStatus.BAD_REQUEST.hashCode(),"exception", exception.getMessage());
+        validationErrorResponse.setCode(HttpStatus.BAD_REQUEST.value());
+        validationErrorResponse.addError(
+                HttpStatus.BAD_REQUEST.value(),
+                "request",
+                "The request contains invalid data."
+        );
 
         return new ResponseEntity<>(validationErrorResponse, HttpStatus.BAD_REQUEST);
     }
@@ -50,7 +60,7 @@ public class GlobalExceptionHandler {
 
         // Build ValidationErrorResponse with bad request error status
         ValidationErrorResponse validationErrorResponse = new ValidationErrorResponse();
-        validationErrorResponse.setCode(HttpStatus.BAD_REQUEST.hashCode());
+        validationErrorResponse.setCode(HttpStatus.BAD_REQUEST.value());
         // Handle data validations
         for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
             validationErrorResponse.addError( 400,fieldError.getField(), fieldError.getDefaultMessage());
@@ -94,7 +104,7 @@ public class GlobalExceptionHandler {
 
         // Build ValidationErrorResponse with bad request error status
         ValidationErrorResponse validationErrorResponse = new ValidationErrorResponse();
-        validationErrorResponse.setCode(HttpStatus.BAD_REQUEST.hashCode());
+        validationErrorResponse.setCode(HttpStatus.BAD_REQUEST.value());
 
 
         // Track object errors
@@ -109,24 +119,24 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<ValidationErrorResponse> handleSignatureErrors(
             AuthenticationException exception) {
-        // Build ValidationErrorResponse
         ValidationErrorResponse error =new ValidationErrorResponse();
-
-        // Adapt the exception to return bad request error
-        error.setCode(exception.hashCode());
-        error.addError( 400,"credential", exception.getMessage());
-
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        error.setCode(HttpStatus.UNAUTHORIZED.value());
+        error.addError(HttpStatus.UNAUTHORIZED.value(), "credential", "Authentication failed.");
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
     @ExceptionHandler(SignatureException.class)
     public ResponseEntity<ValidationErrorResponse> handleSignatureExceptionErrors(
             SignatureException exception
     ) {
         ValidationErrorResponse validationErrorResponse = new ValidationErrorResponse();
-        validationErrorResponse.setCode(exception.hashCode());
-        validationErrorResponse.addError(exception.hashCode(),"exception", exception.getMessage());
+        validationErrorResponse.setCode(HttpStatus.UNAUTHORIZED.value());
+        validationErrorResponse.addError(
+                HttpStatus.UNAUTHORIZED.value(),
+                "token",
+                "Invalid or malformed authentication token."
+        );
 
-        return new ResponseEntity<>(validationErrorResponse, HttpStatusCode.valueOf(exception.hashCode()));
+        return new ResponseEntity<>(validationErrorResponse, HttpStatus.UNAUTHORIZED);
 
     }
     @ExceptionHandler(ServiceUnavailableException.class)
@@ -134,8 +144,8 @@ public class GlobalExceptionHandler {
             ServiceUnavailableException exception
     ) {
         ValidationErrorResponse validationErrorResponse = new ValidationErrorResponse();
-        validationErrorResponse.setCode(HttpStatus.SERVICE_UNAVAILABLE.hashCode());
-        validationErrorResponse.addError(HttpStatus.SERVICE_UNAVAILABLE.hashCode(), "exception", exception.getMessage());
+        validationErrorResponse.setCode(HttpStatus.SERVICE_UNAVAILABLE.value());
+        validationErrorResponse.addError(HttpStatus.SERVICE_UNAVAILABLE.value(), "exception", "Service is temporarily unavailable.");
 
         return new ResponseEntity<>(validationErrorResponse, HttpStatus.SERVICE_UNAVAILABLE);
     }
@@ -144,8 +154,8 @@ public class GlobalExceptionHandler {
             MailSendException exception
     ) {
         ValidationErrorResponse validationErrorResponse = new ValidationErrorResponse();
-        validationErrorResponse.setCode(HttpStatus.BAD_REQUEST.hashCode());
-        validationErrorResponse.addError(HttpStatus.BAD_REQUEST.hashCode(),
+        validationErrorResponse.setCode(HttpStatus.BAD_REQUEST.value());
+        validationErrorResponse.addError(HttpStatus.BAD_REQUEST.value(),
                 "email",
                 "Invalid address; please validate your email.  ");
 
@@ -187,5 +197,21 @@ public class GlobalExceptionHandler {
                 response,
                 HttpStatus.NOT_FOUND
         );
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<ValidationErrorResponse> handleEntityNotFound(EntityNotFoundException exception) {
+        ValidationErrorResponse response = new ValidationErrorResponse();
+        response.setCode(HttpStatus.NOT_FOUND.value());
+        response.addError(HttpStatus.NOT_FOUND.value(), "resource", "Requested resource was not found.");
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ValidationErrorResponse> handleAccessDenied(AccessDeniedException exception) {
+        ValidationErrorResponse response = new ValidationErrorResponse();
+        response.setCode(HttpStatus.FORBIDDEN.value());
+        response.addError(HttpStatus.FORBIDDEN.value(), "authorization", "You are not authorized to access this resource.");
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
     }
 }

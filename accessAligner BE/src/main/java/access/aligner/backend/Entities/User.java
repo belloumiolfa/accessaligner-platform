@@ -53,7 +53,9 @@ public class User implements UserDetails {
             name = "user_role",
             joinColumns = @JoinColumn(name = "user"),
             inverseJoinColumns = @JoinColumn(name = "role"))
+    @Builder.Default
     private Set<Role> roleList = new HashSet<>();
+
     public void setRole(Role role) {
         if (roleList == null) {
              roleList = new HashSet<>();
@@ -64,6 +66,7 @@ public class User implements UserDetails {
     public Set<Role> getRoleList(){
         return this.roleList;
     }
+
     public void removeRole(Long roleId) {
         Role role = this.roleList.stream().filter(t -> t.getId() == roleId).findFirst().orElse(null);
         if (role != null) {
@@ -105,7 +108,10 @@ public class User implements UserDetails {
         }
 
         return userStatus.stream()
-                .findFirst().get().getStatus().getId();}
+                .findFirst()
+                .map(status -> status.getStatus().getId())
+                .orElse(null);
+    }
 
 
 
@@ -122,8 +128,12 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (roleList == null || roleList.isEmpty()) {
+            return Collections.emptySet();
+        }
+
         return roleList.stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName().name()))
                 .collect(Collectors.toSet());
     }
     @Override

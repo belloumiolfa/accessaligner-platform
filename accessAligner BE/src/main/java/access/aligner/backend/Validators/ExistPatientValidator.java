@@ -30,7 +30,10 @@ public class ExistPatientValidator implements ConstraintValidator<ValidExistPati
             return true;
         }
 
-        Patient existingPatient = patient.get();
+        Patient existingPatient = patient.orElse(null);
+        if (existingPatient == null) {
+            return true;
+        }
 
         // existing patient information string
         String existingPatientString = existingPatient.getFirstName() + existingPatient.getLastName() +

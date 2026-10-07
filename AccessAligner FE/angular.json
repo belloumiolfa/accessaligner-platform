@@ -31,8 +31,7 @@
               "node_modules/moment/min/moment.min.js",
               "node_modules/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/popper.js/dist/umd/popper.min.js",
-              "node_modules/easy-pie-chart/dist/angular.easypiechart.min.js"
+              "node_modules/popper.js/dist/umd/popper.min.js"
             ],
             "server": "src/main.server.ts",
             "prerender": true,

@@ -1,5 +1,6 @@
 package access.aligner.backend.DTOs.Mappers;
 
+import access.aligner.backend.AdvicerController.ResourceNotFoundException;
 import access.aligner.backend.DTOs.*;
 import access.aligner.backend.Entities.*;
 import access.aligner.backend.Enum.Enum_Status;
@@ -111,13 +112,16 @@ public class TreatmentDTOMapper     {
 
 
     Set<AdminDTO>getResponsible(Long id ){
-        Set<TreatmentTeam> data= treatmentTeamRepository.findByProject(treatmentRepository.findById(id).get());
+        Treatment treatment = treatmentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
+        Set<TreatmentTeam> data = treatmentTeamRepository.findByProject(treatment);
 
         Set<AdminDTO> result=new HashSet<>();
 
         if(!data.isEmpty()) {
             for (TreatmentTeam team : data) {
-                Admin admin= adminRepository.findById(team.getResponsible().getId()).get();
+                Admin admin = adminRepository.findById(team.getResponsible().getId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Treatment team admin not found"));
                 result.add(adminDTOMapper.apply(admin));
             }
         }
@@ -133,10 +137,9 @@ public class TreatmentDTOMapper     {
 
             for (File file : data
             ) {
-                Optional<Estimate> estimate =estimateRepository.findByFile(file);
-                if(estimate.isPresent()) {
-                    result.add(estimateDTOMapper.apply(estimate.get()));
-                }
+                estimateRepository.findByFile(file)
+                        .map(estimateDTOMapper)
+                        .ifPresent(result::add);
             }
         }
         return result;

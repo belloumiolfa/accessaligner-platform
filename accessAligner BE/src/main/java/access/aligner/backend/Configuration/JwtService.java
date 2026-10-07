@@ -1,11 +1,11 @@
 package access.aligner.backend.Configuration;
 
 import access.aligner.backend.Entities.User;
+import access.aligner.backend.AdvicerController.InvalidVerificationTokenException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -34,6 +34,29 @@ public class JwtService {
     }
     public String generateRefreshToken(User userDetails) {
         return buildToken(new HashMap<>(), userDetails, refreshExpiration);
+    }
+
+    public String generatePasswordResetToken(User user) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", user.getId());
+        claims.put("purpose", "PASSWORD_RESET");
+        return buildToken(claims, user, jwtExpiration);
+    }
+
+    public Long extractPasswordResetUserId(String token) {
+        try {
+            Claims claims = extractAllClaims(token);
+            if (!"PASSWORD_RESET".equals(claims.get("purpose", String.class))) {
+                throw new InvalidVerificationTokenException("Invalid or expired password reset token.");
+            }
+            Long userId = claims.get("userId", Long.class);
+            if (userId == null || claims.getSubject() == null) {
+                throw new InvalidVerificationTokenException("Invalid or expired password reset token.");
+            }
+            return userId;
+        } catch (JwtException | IllegalArgumentException exception) {
+            throw new InvalidVerificationTokenException("Invalid or expired password reset token.");
+        }
     }
     public String buildToken(Map<String, Object> extraClaims, User user, long expiration) {
         return Jwts.builder()
@@ -91,11 +114,7 @@ public class JwtService {
                     claims.get("purpose", String.class)
             );
 
-        } catch (ExpiredJwtException |
-                 UnsupportedJwtException |
-                 MalformedJwtException |
-                 SignatureException |
-                 IllegalArgumentException e) {
+        } catch (JwtException | IllegalArgumentException e) {
 
             return false;
         }

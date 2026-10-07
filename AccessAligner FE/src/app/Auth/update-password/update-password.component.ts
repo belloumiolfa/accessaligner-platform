@@ -12,7 +12,6 @@ import { HandleErrorsService } from "../../Core/Helpers/handle-errors.service";
 import { HandleAlertsService } from "../../Core/Helpers/handle-alerts.service";
 import { ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
-import { UtilsService } from "../Helpers/utils.service";
 import { AuthRequestsService } from "../../Core/Requests/Auth/auth-requests.service";
 import { TranslateModule } from "@ngx-translate/core";
 
@@ -37,7 +36,6 @@ export class UpdatePasswordComponent {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private utils: UtilsService,
     private authService: AuthRequestsService,
     private handleErrors: HandleErrorsService,
     private handleAlerts: HandleAlertsService,
@@ -55,9 +53,7 @@ export class UpdatePasswordComponent {
     if (this.updateForm.valid) {
       this.authService
         .updatePassword(
-          this.utils.getDecodedAccessToken(
-            this.route.snapshot.paramMap.get("token")
-          ).userId,
+          this.route.snapshot.paramMap.get("token") ?? "",
           this.updateForm.value.password,
           this.updateForm.value.confirmPassword
         )

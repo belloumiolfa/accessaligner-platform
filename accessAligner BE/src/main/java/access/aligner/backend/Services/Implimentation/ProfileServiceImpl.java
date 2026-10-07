@@ -1,9 +1,11 @@
 package access.aligner.backend.Services.Implimentation;
 
+import access.aligner.backend.AdvicerController.ResourceNotFoundException;
 import access.aligner.backend.DTOs.Mappers.ProfileDtoMapper;
 import access.aligner.backend.DTOs.ProfileDTO;
 import access.aligner.backend.DTOs.Requests.ProfileRequest;
 import access.aligner.backend.Entities.Profile;
+import access.aligner.backend.Entities.User;
 import access.aligner.backend.Repositories.ProfileRepository;
 import access.aligner.backend.Repositories.UserRepository;
 import access.aligner.backend.Services.ProfileService;
@@ -25,10 +27,13 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public ProfileDTO updateProfile(ProfileRequest data, Long userId) {
-        Profile profile=profileRepository.findById(
-                userRepository.findById(userId).get().getProfile().getId()
-        ).get();
-System.out.print("data = "+profile);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        if (user.getProfile() == null) {
+            throw new ResourceNotFoundException("Profile not found for user");
+        }
+        Profile profile = profileRepository.findById(user.getProfile().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Profile not found"));
         profile.setFirstName(data.getFirstName());
         profile.setLastName(data.getLastName());
         profile.setPhone(data.getPhone());

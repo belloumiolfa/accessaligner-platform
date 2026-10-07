@@ -242,9 +242,9 @@ export class AuthService {
     }
   }
  */
-  GetUserById(userId: any) {
+  GetUserById(userId: any, accessToken?: string | null) {
     this.spinner.show();
-    this.authRequests.getUserById(userId).subscribe(
+    this.authRequests.getUserById(userId, accessToken).subscribe(
       (data) => {
         this.spinner.hide();
         this.setUser$(data);

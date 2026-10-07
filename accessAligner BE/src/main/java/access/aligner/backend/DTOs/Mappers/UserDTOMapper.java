@@ -25,8 +25,11 @@ public class UserDTOMapper implements Function<User, UserDTO> {
                 user.getRoleList(),
                 profileDtoMapper.apply(user.getProfile()),
                 user.getEventList(),
-                userStatusDTO.apply( user.getUserStatus().stream()
-                        .filter(s->s.getUpdatedLast()==true).findFirst().get())
+                user.getUserStatus().stream()
+                        .filter(s -> s.getUpdatedLast())
+                        .findFirst()
+                        .map(userStatusDTO)
+                        .orElse(null)
         );
     }
  }

@@ -1,5 +1,6 @@
 package access.aligner.backend.Services.Implimentation;
 
+import access.aligner.backend.AdvicerController.ResourceNotFoundException;
 import access.aligner.backend.DTOs.AdminDTO;
 import access.aligner.backend.DTOs.FileDTO;
 import access.aligner.backend.DTOs.Mappers.AdminDTOMapper;
@@ -23,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -67,7 +69,8 @@ public class TreatmentServiceImpl implements TreatmentService {
         // If there is no current treat so build new one
         if(treatment.isEmpty()){
 
-            Patient patient =patientRepository.findById(patientId).get();
+            Patient patient = patientRepository.findById(patientId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Patient not found"));
 
             Treatment newTreat =Treatment.builder()
                     .antCross(data.getAntCross())
@@ -88,7 +91,8 @@ public class TreatmentServiceImpl implements TreatmentService {
               return treatmentDTOMapper.apply(newTreat , locale);
         }
         // If there is a current treatment the update it with new values
-        Treatment newTreat =treatment.get();
+        Treatment newTreat = treatment.orElseThrow(
+                () -> new ResourceNotFoundException("Current treatment not found"));
         newTreat.setAntCross(data.getAntCross());
         newTreat.setClassI(data.getClassI());
         newTreat.setCrowding(data.getCrowding());
@@ -105,7 +109,8 @@ public class TreatmentServiceImpl implements TreatmentService {
     }
     @Override
     public Treatment getTreatment(Long id) {
-        return treatmentRepository.findById(id).get();
+        return treatmentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
     }
     @Override
     public Collection<Treatment> getPatientTreatments(Long patientId){
@@ -114,12 +119,7 @@ public class TreatmentServiceImpl implements TreatmentService {
         Optional<Patient> patientOpt = patientRepository.findById(patientId);
 
         // Check if the patient exists
-        if (patientOpt.isPresent()) {
-            return treatmentRepository.findByPatient(patientOpt.get());
-        } else {
-            // Handle the case where the patient does not exist
-             return Collections.emptyList(); // Return an empty collection instead of null
-        }
+        return patientOpt.map(treatmentRepository::findByPatient).orElseGet(Collections::emptyList);
     }
     @Override
     public TreatmentDTO getCurrentTreatment(Long patientId, Locale locale) {
@@ -147,7 +147,8 @@ public class TreatmentServiceImpl implements TreatmentService {
     @Override
     public TreatmentDTO addTeeth(TeethRequest data, Long treatId, Locale locale) {
         // Get current treatment
-        Treatment treatment=treatmentRepository.findById(treatId).get();
+        Treatment treatment = treatmentRepository.findById(treatId)
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
         treatment.setUpdatedAt(new Date());
         treatment.setTeethComment(data.getComment());
 
@@ -171,7 +172,8 @@ public class TreatmentServiceImpl implements TreatmentService {
     public TreatmentDTO addPhotos(MultipartFile[] photos, Long treatId,String comment, String role , Locale locale)
             throws IOException {
         // Get current treatment
-        Treatment treatment=treatmentRepository.findById(treatId).get();
+        Treatment treatment = treatmentRepository.findById(treatId)
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
         treatment.setUpdatedAt(new Date());
 
          if(role.equals("photo")==true ){
@@ -197,7 +199,8 @@ public class TreatmentServiceImpl implements TreatmentService {
     @Override
     public FileDTO addPhoto(MultipartFile photo, Long treatId, String role) throws IOException {
         // Get current treatment
-        Treatment treatment=treatmentRepository.findById(treatId).get();
+        Treatment treatment = treatmentRepository.findById(treatId)
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
         treatment.setUpdatedAt(new Date());
 
         File file = fileService.saveFile(photo, "Treat-" + treatment.getId());
@@ -209,25 +212,26 @@ public class TreatmentServiceImpl implements TreatmentService {
 
     @Override
     public Resource getTreatPhoto(Long fileId, Long treatId) throws MalformedURLException {
-        Optional<File> file = fileRepository.findById(fileId);
+        File file = fileRepository.findById(fileId)
+                .orElseThrow(() -> new ResourceNotFoundException("File not found"));
 
-        if (file!=null && !file.isEmpty()) {
-            if(file.get().getRole().equals("clinic") || file.get().getRole().equals("photo") ){
-
-                return fileService.getFile(file.get().getId(),"Treat-" +treatId );
+        if (file.getRole().equals("clinic") || file.getRole().equals("photo")) {
+                return fileService.getFile(file.getId(),"Treat-" +treatId );
 
             }else {
-                return fileService.getFile(file.get().getId(),
-                        "Plan-"+file.get().getPlan().getId()+"-Treat-"+treatId );
+                if (file.getPlan() == null) {
+                    throw new ResourceNotFoundException("Plan not found for file");
+                }
+                return fileService.getFile(file.getId(),
+                        "Plan-"+file.getPlan().getId()+"-Treat-"+treatId );
             }
-        }
-        return null;
     }
 
     @Override
     public TreatmentDTO updateStatus(Long treatId, String status, Locale locale) {
 
-        Treatment treatment =treatmentRepository.findById(treatId).get();
+        Treatment treatment = treatmentRepository.findById(treatId)
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
         treatment.setPreviousStatus(treatment.getStatus().name());
         // get status by default if there is a plan so put it as in progress
         // if plan is in production or in delevery get plan status
@@ -253,7 +257,8 @@ public class TreatmentServiceImpl implements TreatmentService {
     @Override
     public List<TreatmentDTO> deleteTreatment(Long treatId, Locale locale) {
 
-        Treatment treatment= treatmentRepository.findById(treatId).get();
+        Treatment treatment = treatmentRepository.findById(treatId)
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
 
         // delete files related to treatment
         Set<File> files= fileRepository.findByTreatment(treatment);
@@ -261,9 +266,8 @@ public class TreatmentServiceImpl implements TreatmentService {
             for (File file : files
              ) {
                 Optional<Estimate> estimate =estimateRepository.findByFile(file);
-                if(!estimate.isEmpty()) {
-                    estimateRepository.delete(estimate.get());
-                }            }
+                estimate.ifPresent(estimateRepository::delete);
+            }
             fileRepository.deleteAll(files);
         }
 
@@ -304,15 +308,23 @@ public class TreatmentServiceImpl implements TreatmentService {
     }
     @Override
     public TreatmentDTO getTreatmentById(Long treatId, Locale locale) {
-        return treatmentDTOMapper.apply(treatmentRepository.findById(treatId).get(), locale);
+        return treatmentDTOMapper.apply(treatmentRepository.findById(treatId)
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found")), locale);
     }
     @Override
+    @Transactional(readOnly = true)
     public Integer getTreatmentNbr(Long userId) {
         Integer result =0;
-         Set<Role> userRole=userRepository.findById(userId).get().getRoleList();
-         if(userRole.contains(Enum_Role.DENTIST)){
+         User user = userRepository.findById(userId)
+                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+         Set<Role> userRole = user.getRoleList();
+         if(userRole.stream().anyMatch(role -> role.getName() == Enum_Role.SUPER_ADMIN)){
+             result = treatmentRepository.findAll().size();
+         } else if(userRole.stream().anyMatch(role -> role.getName() == Enum_Role.DENTIST)){
              // get patients , foreach patient to get treatments and calculate treatments
-             Collection<Patient> patients= patientRepository.findByDoctor(doctorRepository.findById(userId).get());
+             Doctor doctor = doctorRepository.findById(userId)
+                     .orElseThrow(() -> new ResourceNotFoundException("Doctor not found"));
+             Collection<Patient> patients = patientRepository.findByDoctor(doctor);
              for (Patient patient: patients) {
                 result=result+ treatmentRepository.findByPatient(patient).size();
              }
@@ -325,10 +337,12 @@ public class TreatmentServiceImpl implements TreatmentService {
     @Override
     public TreatmentDTO addTeam(Long treatId, List<Long> admins, Locale locale) {
 
-        Treatment treatment = treatmentRepository.findById(treatId).get();
+        Treatment treatment = treatmentRepository.findById(treatId)
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
         treatment.setUpdatedAt(new Date());
         for (Long  adminId : admins) {
-            Admin admin =adminRepository.findById(adminId).get();
+            Admin admin = adminRepository.findById(adminId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Admin not found"));
 
             TreatmentTeam treatmentTeam= TreatmentTeam.builder()
                     .responsible(admin)
@@ -347,7 +361,8 @@ public class TreatmentServiceImpl implements TreatmentService {
     public List<AdminDTO> getTeam(Long treatId) {
         List<AdminDTO> result = new ArrayList<>();
 
-        Treatment treatment=treatmentRepository.findById(treatId).get();
+        Treatment treatment = treatmentRepository.findById(treatId)
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
         List <TreatmentTeam> treatmentTeam=treatmentTeamRepository.findByProject(treatment).stream().toList();
 
         for (TreatmentTeam treat :treatmentTeam) {
@@ -358,7 +373,8 @@ public class TreatmentServiceImpl implements TreatmentService {
     @Override
     public List<AdminDTO> removeTeam(Long treatId, Long adminId) {
         List<TreatmentTeam> treatmentTeam =
-                treatmentTeamRepository.findByResponsible(adminRepository.findById(adminId).get())
+                treatmentTeamRepository.findByResponsible(adminRepository.findById(adminId)
+                                .orElseThrow(() -> new ResourceNotFoundException("Admin not found")))
                 .stream().toList();
         // Remove admin from team treatment
 
@@ -377,7 +393,8 @@ public class TreatmentServiceImpl implements TreatmentService {
     @Override
     public MessageResponse resetTeam(Long treatId) {
         List<TreatmentTeam> treatmentTeam =
-                treatmentTeamRepository.findByProject(treatmentRepository.findById(treatId).get())
+                treatmentTeamRepository.findByProject(treatmentRepository.findById(treatId)
+                                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found")))
                         .stream().toList();
 
         treatmentTeamRepository.deleteAll(treatmentTeam);
@@ -385,7 +402,9 @@ public class TreatmentServiceImpl implements TreatmentService {
     }
     @Override
     public  List<TreatmentDTO> getDoctorTreatments(Long doctorId, Locale locale){
-        Collection <Patient> patients = patientRepository.findByDoctor(doctorRepository.findById(doctorId).get());
+        Doctor doctor = doctorRepository.findById(doctorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor not found"));
+        Collection <Patient> patients = patientRepository.findByDoctor(doctor);
 
         List<TreatmentDTO> result = new ArrayList<>();
 
@@ -415,7 +434,8 @@ public class TreatmentServiceImpl implements TreatmentService {
     }
     @Override
     public List<TreatDto> getNotArchivedTreatments(Locale locale, String loggedInUsername) {
-         User loggedInUser = userRepository.findByEmail(loggedInUsername).get();
+         User loggedInUser = userRepository.findByEmail(loggedInUsername)
+                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         List<Enum_Status> statuses = Arrays.asList(
                 Enum_Status.CONFIRMED,
@@ -486,7 +506,8 @@ public class TreatmentServiceImpl implements TreatmentService {
     @Override
     public List<TreatDto> getNotArchivedTreatments(Locale locale, String loggedInUsername) {
 
-        User loggedInUser = userRepository.findByEmail(loggedInUsername).get();
+        User loggedInUser = userRepository.findByEmail(loggedInUsername)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         List<Enum_Status> statuses = Arrays.asList(
                 Enum_Status.CONFIRMED,
@@ -508,5 +529,3 @@ public class TreatmentServiceImpl implements TreatmentService {
     }
 }
 */
-
-

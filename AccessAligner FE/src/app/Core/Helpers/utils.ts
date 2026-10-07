@@ -1,8 +1,11 @@
 function loggedInUser(): any {
-  let user = JSON.parse(sessionStorage.getItem("currentUser")!);
+  const storedUser =
+    sessionStorage.getItem("currentUser") ??
+    localStorage.getItem("currentUser");
+  if (storedUser === null) return null;
 
-  if (user?.accessToken !== undefined) return user?.accessToken;
-  else return JSON.parse(sessionStorage.getItem("currentUser")!);
+  const user = JSON.parse(storedUser);
+  return user?.accessToken ?? user;
 }
 
 function signInUser(token: string, keepLoggedIn: boolean) {

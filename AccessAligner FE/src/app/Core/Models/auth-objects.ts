@@ -9,6 +9,7 @@ export interface SignUpObject {
 }
 
 export interface updatePasswordObject {
+  token?: string;
   password?: string;
   confirmPassword?: string;
 }

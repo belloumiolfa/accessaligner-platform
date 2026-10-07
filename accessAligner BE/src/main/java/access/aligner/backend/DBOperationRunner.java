@@ -146,20 +146,25 @@ public class DBOperationRunner implements CommandLineRunner {
                             .build())
                     .build();
             // Add USER role by default
-            superAdmin.setRole(roleRepository.findByName(Enum_Role.valueOf("SUPER_ADMIN")).get());
-            superAdmin.setRole(roleRepository.findByName(Enum_Role.valueOf("SUPER_ADMIN")).get());
-            superAdmin.setRole(roleRepository.findByName(Enum_Role.valueOf("ADMIN")).get());
+            Role superAdminRole = roleRepository.findByName(Enum_Role.SUPER_ADMIN)
+                    .orElseThrow(() -> new IllegalStateException("SUPER_ADMIN role was not initialized"));
+            Role adminRole = roleRepository.findByName(Enum_Role.ADMIN)
+                    .orElseThrow(() -> new IllegalStateException("ADMIN role was not initialized"));
+            superAdmin.setRole(superAdminRole);
+            superAdmin.setRole(adminRole);
 
             User newUser = userRepository.save(superAdmin);
 
             // Add ACCEPTED status by default
+            Status acceptedStatus = statusRepository.findByName(Enum_Status.ACCEPTED)
+                    .orElseThrow(() -> new IllegalStateException("ACCEPTED status was not initialized"));
             UserStatus userStatus = UserStatus.builder()
-                    .status(statusRepository.findByName(Enum_Status.valueOf("ACCEPTED")).get())
+                    .status(acceptedStatus)
                     .updatedLast(true)
                     .user(newUser)
                     .updatedAt(new Date())
                     //.responsible((Admin) newUser)
-                    .id(new UserStatusKey(newUser.getId(), statusRepository.findByName(Enum_Status.valueOf("ACCEPTED")).get().getId()))
+                    .id(new UserStatusKey(newUser.getId(), acceptedStatus.getId()))
                     .build();
             superAdmin.setStatus(userStatus);
 

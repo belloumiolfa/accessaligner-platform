@@ -31,7 +31,7 @@ public interface UserService {
     UserDTO updateStatus (UpdateStatusRequest data);
     AuthenticationResponse signin(SigninRequest signinRequest);
     MessageResponse forgetPassword(String email);
-    MessageResponse updatePassword (UpdatePasswordRequest data);
+    MessageResponse updatePassword(UpdatePasswordRequest data);
     AuthenticationResponse securitySettings(SecuritySettingRequest data);
      List<UserDTO> getDoctors();
 

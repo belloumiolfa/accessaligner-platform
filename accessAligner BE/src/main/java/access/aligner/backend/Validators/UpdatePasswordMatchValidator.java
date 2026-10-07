@@ -7,10 +7,14 @@
         import jakarta.validation.ConstraintValidator;
         import jakarta.validation.ConstraintValidatorContext;
 
+        import java.util.Objects;
 
 public class UpdatePasswordMatchValidator implements ConstraintValidator<ValidUpdatePasswordMatch, UpdatePasswordRequest> {
     @Override
     public boolean isValid(UpdatePasswordRequest updatePasswordRequest, ConstraintValidatorContext context) {
-        return updatePasswordRequest.getPassword().equals(updatePasswordRequest.getConfirmPassword());
+        return updatePasswordRequest != null
+                && updatePasswordRequest.getPassword() != null
+                && updatePasswordRequest.getConfirmPassword() != null
+                && Objects.equals(updatePasswordRequest.getPassword(), updatePasswordRequest.getConfirmPassword());
     }
 }

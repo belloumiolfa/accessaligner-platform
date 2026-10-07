@@ -1,5 +1,6 @@
 package access.aligner.backend.Services.Implimentation;
 
+import access.aligner.backend.AdvicerController.ResourceNotFoundException;
 import access.aligner.backend.DTOs.Mappers.MessageDTOMapper;
 import access.aligner.backend.DTOs.MessageDTO;
 import access.aligner.backend.DTOs.Requests.SaveMessageRequest;
@@ -10,8 +11,6 @@ import access.aligner.backend.Repositories.MessageRepository;
 import access.aligner.backend.Repositories.TreatmentRepository;
 import access.aligner.backend.Repositories.UserRepository;
 import access.aligner.backend.Services.MessageServices;
-import access.aligner.backend.Services.TreatmentService;
-import access.aligner.backend.Services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +28,10 @@ public class MessageServiceImpl implements MessageServices {
     private final MessageDTOMapper messageDTOMapper;
     @Override
     public MessageDTO saveMessage(SaveMessageRequest saveMessageRequest) {
-        User user =userRepository.findById(saveMessageRequest.getSender()).get();
-        Treatment treatment=treatmentRepository.findById(saveMessageRequest.getTreatment()).get();
+        User user = userRepository.findById(saveMessageRequest.getSender())
+                .orElseThrow(() -> new ResourceNotFoundException("Message sender not found"));
+        Treatment treatment = treatmentRepository.findById(saveMessageRequest.getTreatment())
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
 
         Message newMessage= Message.builder()
                 .sender(user)
@@ -47,7 +48,9 @@ public class MessageServiceImpl implements MessageServices {
     public List<MessageDTO> getMessages(Long treatId) {
         List<MessageDTO> result = new ArrayList<>();
 
-        List<Message> messages = messageRepository.findByTreatment(treatmentRepository.findById(treatId).get());
+        Treatment treatment = treatmentRepository.findById(treatId)
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
+        List<Message> messages = messageRepository.findByTreatment(treatment);
 
         for (Message message: messages) {
             result.add(messageDTOMapper.apply(message));
@@ -57,8 +60,10 @@ public class MessageServiceImpl implements MessageServices {
 
     @Override
     public MessageDTO markAsSeen(Long messageId, Long userId) {
-        Message message =messageRepository.findById(messageId).get();
-        User user =userRepository.findById(userId).get();
+        Message message = messageRepository.findById(messageId)
+                .orElseThrow(() -> new ResourceNotFoundException("Message not found"));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         message.getSeenBy().add(user);
         message=messageRepository.save(message);
         return messageDTOMapper.apply(message);

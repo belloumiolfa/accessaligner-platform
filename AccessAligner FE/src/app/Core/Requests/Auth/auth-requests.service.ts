@@ -64,12 +64,29 @@ export class AuthRequestsService {
     );
   }
   /****************************************************************************** */
-  getUserById(id: any): Observable<any> {
+  getUserById(id: any, accessToken?: string | null): Observable<any> {
+    const token = accessToken ?? loggedInUser();
     return this.http
       .get<any>(`${this.apiBaseUrl}/api/private/getById?id=${id}`, {
-        headers: new HttpHeaders().set('Accept-Language', this.lang), // Set the Accept-Language header
+        headers: this.authorizationHeaders(token),
       })
       .pipe(map((user: any) => user));
+  }
+
+  getCurrentUser(): Observable<any> {
+    return this.http
+      .get<any>(`${this.apiBaseUrl}/api/private/me`, {
+        headers: this.authorizationHeaders(loggedInUser()),
+      })
+      .pipe(map((user: any) => user));
+  }
+
+  private authorizationHeaders(token: unknown): HttpHeaders {
+    let headers = new HttpHeaders().set('Accept-Language', this.lang);
+    if (typeof token === 'string' && token.length > 0) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
   }
 
   login(email: string, password: string): Observable<any> {
@@ -129,7 +146,7 @@ export class AuthRequestsService {
   }
 
   updatePassword(
-    userId: Number,
+    token: string,
     password: String,
     confirmPassword: String,
   ): Observable<any> {
@@ -137,9 +154,9 @@ export class AuthRequestsService {
       .post<any>(
         `${this.apiBaseUrl}/api/updatePassword`,
         {
+          token,
           password,
           confirmPassword,
-          userId,
         },
         {
           headers: new HttpHeaders().set('Accept-Language', this.lang), // Set the Accept-Language header

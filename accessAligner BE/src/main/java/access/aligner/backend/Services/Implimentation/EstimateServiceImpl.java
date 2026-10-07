@@ -1,5 +1,6 @@
 package access.aligner.backend.Services.Implimentation;
 
+import access.aligner.backend.AdvicerController.ResourceNotFoundException;
 import access.aligner.backend.DTOs.EstimateDTO;
 import access.aligner.backend.DTOs.Mappers.EstimateDTOMapper;
 import access.aligner.backend.DTOs.Mappers.TreatmentDTOMapper;
@@ -42,7 +43,8 @@ public class EstimateServiceImpl implements EstimateService {
     public TreatmentDTO saveEstimate(MultipartFile file,String type,Long treatId  ) throws IOException {
         // Save the file
         File savedFile=fileService.saveFile(file,"Estimates");
-        Treatment treatment =treatmentRepository.findById(treatId).get();
+        Treatment treatment = treatmentRepository.findById(treatId)
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
 
         treatment.setUpdatedAt(new Date());
 
@@ -57,7 +59,8 @@ public class EstimateServiceImpl implements EstimateService {
         // Save estimate
         estimateRepository.save(estimate);
 
-        return treatmentDTOMapper.apply(treatmentRepository.findById(treatId).get(),null);
+        return treatmentDTOMapper.apply(treatmentRepository.findById(treatId)
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found")), null);
     }
 
     @Override
@@ -67,7 +70,8 @@ public class EstimateServiceImpl implements EstimateService {
 
     @Override
     public MessageResponse deleteEstimate(Long id) {
-        Estimate estimate =estimateRepository.findById(id).get();
+        Estimate estimate = estimateRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Estimate not found"));
         File file =estimate.getFile();
 
         Treatment treat = file.getTreatment();
@@ -82,9 +86,11 @@ public class EstimateServiceImpl implements EstimateService {
     @Override
     public EstimateDTO updateEstimateStatus(Long id, String status) {
 
-        Estimate estimate = estimateRepository.findById(id).get();
+        Estimate estimate = estimateRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Estimate not found"));
         File file = estimate.getFile();
-        Treatment treatment = treatmentRepository.findById(file.getTreatment().getId()).get();
+        Treatment treatment = treatmentRepository.findById(file.getTreatment().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
         Enum_Status previousStatus =treatment.getStatus();
 
         if (status.equals("ACCEPTED")) {
@@ -132,7 +138,8 @@ public class EstimateServiceImpl implements EstimateService {
                 .collect(Collectors.toSet());
 
         for (File estimateFile : estimateFiles) {
-            Estimate est = estimateRepository.findByFile(estimateFile).get();
+            Estimate est = estimateRepository.findByFile(estimateFile)
+                    .orElseThrow(() -> new ResourceNotFoundException("Estimate not found for file"));
              est.setStatus(Enum_Status.REJECTED);
             estimateRepository.save(est);
         }
@@ -142,9 +149,11 @@ public class EstimateServiceImpl implements EstimateService {
     @Override
     public EstimateDTO updateEstimateStatus(Long id, String status) {
 
-        Estimate estimate =estimateRepository.findById(id).get();
+        Estimate estimate = estimateRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Estimate not found"));
         File file =estimate.getFile();
-        Treatment treatment =treatmentRepository.findById(file.getTreatment().getId()).get();
+        Treatment treatment = treatmentRepository.findById(file.getTreatment().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
 
         // Reject all others estimate
         if(status.equals(("ACCEPTED"))){
@@ -152,14 +161,16 @@ public class EstimateServiceImpl implements EstimateService {
             // Get estimate files for a specific treatment with the same role
             Set<File> estimateFiles = fileRepository.findByTreatment(treatment).stream().filter(
                     e->e.getRole().equals(
-                            fileRepository.findById(estimate.getFile().getId()).get().getRole()
+                            fileRepository.findById(estimate.getFile().getId())
+                                    .orElseThrow(() -> new ResourceNotFoundException("File not found")).getRole()
                     )
             ).collect(Collectors.toSet());
 
             // Set all others estimates to Rejected
             for (File estimateFile :estimateFiles
                  ) {
-                Estimate est = estimateRepository.findByFile(estimateFile).get();
+                Estimate est = estimateRepository.findByFile(estimateFile)
+                        .orElseThrow(() -> new ResourceNotFoundException("Estimate not found for file"));
                 est.setStatus(Enum_Status.REJECTED);
                 estimateRepository.save(est);
             }
@@ -209,7 +220,8 @@ public class EstimateServiceImpl implements EstimateService {
 
     @Override
     public MessageResponse deleteAllEstimate(Long id) {
-        Treatment treatment = treatmentRepository.findById(id).get();
+        Treatment treatment = treatmentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
 
          Collection<File> files = fileRepository.findByTreatment(treatment);
 
@@ -217,7 +229,8 @@ public class EstimateServiceImpl implements EstimateService {
         for (File file : files
         ) {
             if(file.getRole().equals("init_estim") || file.getRole().equals("final_estim") ) {
-                Estimate estimate = estimateRepository.findByFile(file).get();
+                Estimate estimate = estimateRepository.findByFile(file)
+                        .orElseThrow(() -> new ResourceNotFoundException("Estimate not found for file"));
                 if (!estimate.getStatus().equals(Enum_Status.valueOf("ACCEPTED"))) {
                     Treatment treat = file.getTreatment();
                     treat.setUpdatedAt(new Date());

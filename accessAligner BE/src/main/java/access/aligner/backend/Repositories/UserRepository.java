@@ -2,16 +2,18 @@ package access.aligner.backend.Repositories;
 
 import access.aligner.backend.DTOs.Dashboard.TopDentistProjection;
 import access.aligner.backend.Entities.User;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUserName(String username);
+    @EntityGraph(attributePaths = "roleList")
     Optional<User> findByEmail(String email);
+    Optional<User> findByProfile_Id(Long profileId);
     @Query(value = """
         SELECT 
             d.user_id AS userId, 

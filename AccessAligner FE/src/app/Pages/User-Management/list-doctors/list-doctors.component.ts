@@ -19,14 +19,15 @@ export class ListDoctorsComponent {
   constructor(
     private userRequests: UserRequestsService,
     private spinner: NgxSpinnerService,
-    private handleErrors: HandleErrorsService
+    private handleErrors: HandleErrorsService,
   ) {
     this.spinner.show();
     this.userRequests.getDoctors().subscribe(
       (data) => {
+        console.log('doctors data', data);
         this.doctors$ = data.filter(
           (doctor: { userStatus: { status: { name: string } } }) =>
-            doctor.userStatus.status.name != 'BLOCKED'
+            doctor.userStatus.status.name != 'BLOCKED',
         );
 
         this.spinner.hide();
@@ -34,7 +35,7 @@ export class ListDoctorsComponent {
       (err) => {
         this.errors = this.handleErrors.handleError(err);
         this.spinner.hide();
-      }
+      },
     );
   }
 }

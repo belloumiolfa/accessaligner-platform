@@ -5,8 +5,6 @@ import { NgbCollapseModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { MiniLeftbarComponent } from '../mini-leftbar/mini-leftbar.component';
 import { LeftSidebarComponent } from '../left-sidebar/left-sidebar.component';
-import { loggedInUser } from '../../Core/Helpers/utils';
-import { UtilsService } from '../../Auth/Helpers/utils.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HandleErrorsService } from '../../Core/Helpers/handle-errors.service';
 import { User } from '../../Core/Models/user.models';
@@ -48,7 +46,6 @@ export class LayoutContainerComponent {
   imageUrl!: SafeUrl;
 
   constructor(
-    private utils: UtilsService,
     private authRequests: AuthRequestsService,
     private handleErrors: HandleErrorsService,
     private spinner: NgxSpinnerService,
@@ -60,13 +57,14 @@ export class LayoutContainerComponent {
   ngOnInit(): void {
     this.spinner.show();
     this.authRequests
-      .getUserById(this.utils.getDecodedAccessToken(loggedInUser()).userId)
+      .getCurrentUser()
       .subscribe(
         (data) => {
           this.spinner.hide();
           this.appService.setUser$(data);
         },
         (err) => {
+          this.spinner.hide();
           this.errors = this.handleErrors.handleError(err);
         },
       );

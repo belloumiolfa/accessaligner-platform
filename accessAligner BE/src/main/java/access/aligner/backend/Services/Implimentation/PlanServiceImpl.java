@@ -1,5 +1,6 @@
 package access.aligner.backend.Services.Implimentation;
 
+import access.aligner.backend.AdvicerController.ResourceNotFoundException;
 import access.aligner.backend.DTOs.Mappers.PlanDTOMapper;
 import access.aligner.backend.DTOs.PlanDTO;
 import access.aligner.backend.DTOs.Responces.MessageResponse;
@@ -33,7 +34,8 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public PlanDTO addPlan(Long treatId, String comment,String code ) {
-        Treatment treatment =treatmentRepository.findById(treatId).get();
+        Treatment treatment = treatmentRepository.findById(treatId)
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
 
         // Update treatment status to PROGRESS
         treatment.setStatus(Enum_Status.PROGRESS);
@@ -52,7 +54,8 @@ public class PlanServiceImpl implements PlanService {
     }
     @Override
     public PlanDTO addPlanFiles(MultipartFile[] files, Long planId, String role) throws IOException {
-        Plan plan=planRepository.findById(planId).get();
+        Plan plan = planRepository.findById(planId)
+                .orElseThrow(() -> new ResourceNotFoundException("Plan not found"));
         plan.setUpdatedAt(new Date ());
 
         if(files.length!=0) {
@@ -78,7 +81,8 @@ public class PlanServiceImpl implements PlanService {
     }
     @Override
     public PlanDTO updateStatus(Long planId, String status) {
-        Plan plan =planRepository.findById(planId).get();
+        Plan plan = planRepository.findById(planId)
+                .orElseThrow(() -> new ResourceNotFoundException("Plan not found"));
 
         plan.setStatus(Enum_Status.valueOf(status));
         plan.setUpdatedAt(new Date());
@@ -95,7 +99,8 @@ public class PlanServiceImpl implements PlanService {
     }
     @Override
     public PlanDTO updateDeleveryDate(Long planId, Date date) {
-        Plan plan =planRepository.findById(planId).get();
+        Plan plan = planRepository.findById(planId)
+                .orElseThrow(() -> new ResourceNotFoundException("Plan not found"));
         plan.setUpdatedAt(new Date());
         plan.setDeleveryDate(date);
 
@@ -108,27 +113,29 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public MessageResponse deletePlan(Long planId) {
         // Delete all files related to plan
-        Plan plan  =  planRepository.findById(planId).get();
+        Plan plan = planRepository.findById(planId)
+                .orElseThrow(() -> new ResourceNotFoundException("Plan not found"));
 
         Treatment treat=plan.getTreatment();
         treat.setUpdatedAt(new Date());
         treatmentRepository.save( treat);
 
-        fileRepository.deleteAll(fileRepository.findByPlan(planRepository.findById(planId).get()));
+        fileRepository.deleteAll(fileRepository.findByPlan(plan));
         planRepository.delete(plan);
         return MessageResponse.builder().message(messages.getString("PlanService.deletePlan.MessageResponse")).build();
     }
     @Override
     public MessageResponse deleteAllPlan(Long treatId) {
-        Set<Plan> plans= planRepository.findByTreatment(treatmentRepository.findById(treatId).get());
+        Treatment treatment = treatmentRepository.findById(treatId)
+                .orElseThrow(() -> new ResourceNotFoundException("Treatment not found"));
+        Set<Plan> plans = planRepository.findByTreatment(treatment);
         for (Plan plan:plans) {
 
             fileRepository.deleteAll(fileRepository.findByPlan(plan));
             planRepository.delete(plan);
         }
-        Treatment treat=treatmentRepository.findById(treatId).get();
-        treat.setUpdatedAt(new Date());
-        treatmentRepository.save( treat);
+        treatment.setUpdatedAt(new Date());
+        treatmentRepository.save(treatment);
         return MessageResponse.builder().message(messages.getString("PlanService.deleteAllPlan.MessageResponse")).build();
     }
     @Override
@@ -146,7 +153,8 @@ public class PlanServiceImpl implements PlanService {
     }
     @Override
     public PlanDTO updateFeedBack(Long planId, String comment) {
-        Plan plan =planRepository.findById(planId).get();
+        Plan plan = planRepository.findById(planId)
+                .orElseThrow(() -> new ResourceNotFoundException("Plan not found"));
         plan.setUpdatedAt(new Date());
         plan.setFeedBack(comment);
 
@@ -158,7 +166,8 @@ public class PlanServiceImpl implements PlanService {
     }
     @Override
     public PlanDTO updateProductionDelay(Long planId, Long days) {
-        Plan plan =planRepository.findById(planId).get();
+        Plan plan = planRepository.findById(planId)
+                .orElseThrow(() -> new ResourceNotFoundException("Plan not found"));
         plan.setUpdatedAt(new Date());
         plan.setProductionDays(days);
 

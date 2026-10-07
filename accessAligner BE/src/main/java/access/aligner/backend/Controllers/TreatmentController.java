@@ -6,6 +6,7 @@ import access.aligner.backend.DTOs.Requests.InfosTreatRequest;
 import access.aligner.backend.DTOs.Requests.TeethRequest;
 import access.aligner.backend.DTOs.Responces.MessageResponse;
 import access.aligner.backend.Services.FileService;
+import access.aligner.backend.Services.ResourceAuthorizationService;
 import access.aligner.backend.Services.TreatmentService;
 import access.aligner.backend.Validators.Annotations.NotEmptyFiles;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,9 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,16 +31,20 @@ import java.util.Locale;
 @RequestMapping("/api/private/treatment/")
 @RequiredArgsConstructor
 @Validated
+@PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN', 'DENTIST')")
 
 public class TreatmentController {
     private final TreatmentService treatmentService;
     private final FileService fileservice;
+    private final ResourceAuthorizationService authorizationService;
 
     @PostMapping("add-information")
     public ResponseEntity<TreatmentDTO> addTreatmentInformationController(
             @RequestBody InfosTreatRequest data,
             @RequestParam Long patientId ,
-            HttpServletRequest request) {
+            HttpServletRequest request,
+            Authentication authentication) {
+        authorizationService.requirePatientOwner(patientId, authentication);
         Locale locale = request.getLocale();
         return new ResponseEntity<>(treatmentService.addInfo(data,patientId,locale), HttpStatus.OK);
     }
@@ -48,15 +52,19 @@ public class TreatmentController {
     public ResponseEntity<TreatmentDTO> addTreatmentTeethController(
             @RequestBody  TeethRequest data,
             @RequestParam Long treatId ,
-            HttpServletRequest request) {
+            HttpServletRequest request,
+            Authentication authentication) {
+        authorizationService.requireTreatmentAccess(treatId, authentication);
         Locale locale = request.getLocale();
         return new ResponseEntity<>(treatmentService.addTeeth(data,treatId,locale), HttpStatus.OK);
     }
     @PostMapping("add-photographs")
     public ResponseEntity<TreatmentDTO> addTreatmentPhotosController(
             @RequestBody  MultipartFile[] photos,
-            @RequestParam Long treatId, String role ,String comment,
-            HttpServletRequest request) throws IOException {
+            @RequestParam Long treatId, @RequestParam String role, @RequestParam String comment,
+            HttpServletRequest request,
+            Authentication authentication) throws IOException {
+        authorizationService.requireTreatmentAccess(treatId, authentication);
         Locale locale = request.getLocale();
         return new ResponseEntity<>(treatmentService.addPhotos(photos,treatId,comment , role,locale), HttpStatus.OK);
     }
@@ -65,24 +73,31 @@ public class TreatmentController {
     public ResponseEntity<FileDTO> addTreatPhotoController(
             @RequestBody @Valid @NotEmptyFiles(message = "{Validations.addTreatPhotoController.NotEmptyFiles}") MultipartFile photo ,
             @RequestParam Long treatId,
-            String role ) throws IOException {
+            @RequestParam String role,
+            Authentication authentication) throws IOException {
+        authorizationService.requireTreatmentAccess(treatId, authentication);
         return new ResponseEntity<>(treatmentService.addPhoto(photo,treatId, role), HttpStatus.OK);
     }
     @DeleteMapping("/delete-file")
     public ResponseEntity<MessageResponse>deleteFileController(
-            @RequestParam Long id )   {
+            @RequestParam Long id,
+            Authentication authentication) {
+        authorizationService.requireTreatmentFileAccess(id, authentication);
         return new ResponseEntity<>(fileservice.deleteFile(id,"Treat-"),HttpStatus.OK);
     }
     // move it to file controller
     @GetMapping("/get-file")
     public ResponseEntity<Resource>getPhotoController(
-            @RequestParam Long fileId , Long treatId ) throws MalformedURLException {
+            @RequestParam Long fileId, @RequestParam Long treatId, Authentication authentication)
+            throws MalformedURLException {
+        authorizationService.requireTreatmentFileAccess(fileId, treatId, authentication);
         return new ResponseEntity<>(treatmentService.getTreatPhoto(fileId, treatId),HttpStatus.OK);
     }
     // move to patient : get patient's current treatment
     @GetMapping("getCurrent")
     public ResponseEntity<TreatmentDTO> getInitialTreatmentController(
-            @RequestParam Long patientId, HttpServletRequest request ) {
+            @RequestParam Long patientId, HttpServletRequest request, Authentication authentication) {
+        authorizationService.requirePatientAccess(patientId, authentication);
         // Get locale from request
         Locale locale = request.getLocale();
 
@@ -90,7 +105,8 @@ public class TreatmentController {
     }
     @GetMapping("getTreatment")
     public ResponseEntity<TreatmentDTO> getTreatByIdController(
-            @RequestParam Long treatId , HttpServletRequest request) {
+            @RequestParam Long treatId, HttpServletRequest request, Authentication authentication) {
+        authorizationService.requireTreatmentAccess(treatId, authentication);
         // Get locale from request
         Locale locale = request.getLocale();
 
@@ -116,55 +132,53 @@ public class TreatmentController {
 
     * */
     @GetMapping("getAllValidTreatments")
-     public ResponseEntity<List<TreatDto>>getNotArchivedTreatmentsController(HttpServletRequest request )   {
+     public ResponseEntity<List<TreatDto>>getNotArchivedTreatmentsController(
+             HttpServletRequest request, Authentication authentication) {
         // Get locale from request
         Locale locale = request.getLocale();
 
         // Extract logged-in user details
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String loggedInUsername = null;
-
-        if (authentication != null && authentication.isAuthenticated()) {
-            Object principal = authentication.getPrincipal();
-
-            if (principal instanceof UserDetails) {
-                loggedInUsername = ((UserDetails) principal).getUsername(); // or get other details if needed
-            } else {
-                loggedInUsername = principal.toString();
-            }
-        }
-
-        return new ResponseEntity<>(treatmentService.getNotArchivedTreatments(locale,loggedInUsername),HttpStatus.OK);
+        return new ResponseEntity<>(
+                treatmentService.getNotArchivedTreatments(locale, authentication.getName()), HttpStatus.OK);
     }
 
 
     @PostMapping("updateTreatStatus")
     public ResponseEntity<TreatmentDTO> updateStatusController(
-            @RequestParam Long treatId, @RequestBody String status, HttpServletRequest request
+            @RequestParam Long treatId, @RequestBody String status, HttpServletRequest request,
+            Authentication authentication
     ){
+        authorizationService.requireTreatmentAccess(treatId, authentication);
         // Get locale from request
         Locale locale = request.getLocale();
 
         return new ResponseEntity<>(treatmentService.updateStatus(treatId,status,locale),HttpStatus.OK);
     }
     @GetMapping("/getTreatments")
-    public ResponseEntity<List<TreatmentDTO>>getTreatmentsController(HttpServletRequest request )   {
+    public ResponseEntity<List<TreatmentDTO>>getTreatmentsController(
+            HttpServletRequest request, Authentication authentication) {
         // Get locale from request
         Locale locale = request.getLocale();
 
-        return new ResponseEntity<>(treatmentService.getTreatments(locale),HttpStatus.OK);
+        return new ResponseEntity<>(
+                authorizationService.filterTreatments(treatmentService.getTreatments(locale), authentication),
+                HttpStatus.OK);
     }
     @GetMapping("/getDoctorTreat")
+    @PreAuthorize("hasRole('DENTIST')")
     public ResponseEntity<List<TreatmentDTO>>getDoctorTreatsController(
-            @RequestParam Long doctorId , HttpServletRequest request)   {
+            HttpServletRequest request, Authentication authentication) {
+        Long doctorIdFromPrincipal = authorizationService.currentUserId(authentication);
         // Get locale from request
         Locale locale = request.getLocale();
 
-        return new ResponseEntity<>(treatmentService.getDoctorTreatments(doctorId,locale),HttpStatus.OK);
+        return new ResponseEntity<>(
+                treatmentService.getDoctorTreatments(doctorIdFromPrincipal,locale),HttpStatus.OK);
     }
     @GetMapping("/getPatientTreat")
     public ResponseEntity<List<TreatmentDTO>>getPatientTreatsController(
-            @RequestParam Long patientId , HttpServletRequest request )   {
+            @RequestParam Long patientId, HttpServletRequest request, Authentication authentication) {
+        authorizationService.requirePatientAccess(patientId, authentication);
         // Get locale from request
         Locale locale = request.getLocale();
 
@@ -172,20 +186,28 @@ public class TreatmentController {
     }
     @DeleteMapping("/deleteTreatment")
     public ResponseEntity<List<TreatmentDTO>> deleteTreatmentController(
-            @RequestParam Long treatId, HttpServletRequest request )   {
+            @RequestParam Long treatId, HttpServletRequest request, Authentication authentication) {
+        authorizationService.requireTreatmentOwner(treatId, authentication);
         // Get locale from request
         Locale locale = request.getLocale();
 
-        return new ResponseEntity<>(treatmentService.deleteTreatment(treatId,locale),HttpStatus.OK);
+        treatmentService.deleteTreatment(treatId, locale);
+        return new ResponseEntity<>(
+                authorizationService.filterTreatments(treatmentService.getTreatments(locale), authentication),
+                HttpStatus.OK);
     }
     @GetMapping("/get-nbr-treatment")
+    @PreAuthorize("hasAnyRole('DENTIST', 'SUPER_ADMIN')")
     public ResponseEntity<Integer>getTreatmentNbrByUser(
-            @RequestParam Long userId  )   {
-        return new ResponseEntity<>(treatmentService.getTreatmentNbr(userId),HttpStatus.OK);
+            Authentication authentication) {
+        return new ResponseEntity<>(
+                treatmentService.getTreatmentNbr(authorizationService.currentUserId(authentication)),HttpStatus.OK);
     }
     @PostMapping("/add-team")
     public ResponseEntity<TreatmentDTO>addTeamController(
-            @RequestParam Long treatId ,@RequestBody List<Long> admins , HttpServletRequest request )   {
+            @RequestParam Long treatId, @RequestBody List<Long> admins,
+            HttpServletRequest request, Authentication authentication) {
+        authorizationService.requireTreatmentOwner(treatId, authentication);
         // Get locale from request
         Locale locale = request.getLocale();
 
@@ -193,17 +215,20 @@ public class TreatmentController {
     }
     @GetMapping("/get-team")
     public ResponseEntity<List<AdminDTO>>getTeamController(
-            @RequestParam Long treatId   )   {
+            @RequestParam Long treatId, Authentication authentication) {
+        authorizationService.requireTreatmentAccess(treatId, authentication);
         return new ResponseEntity<>(treatmentService.getTeam(treatId),HttpStatus.OK);
     }
     @GetMapping("/remove-team")
     public ResponseEntity<List<AdminDTO>>removeTeamController(
-            @RequestParam Long treatId ,Long adminId   )   {
+            @RequestParam Long treatId, @RequestParam Long adminId, Authentication authentication) {
+        authorizationService.requireTreatmentOwner(treatId, authentication);
         return new ResponseEntity<>(treatmentService.removeTeam(treatId,adminId),HttpStatus.OK);
     }
     @GetMapping("/reset-team")
     public ResponseEntity<MessageResponse>resetTeamController(
-            @RequestParam Long treatId   )   {
+            @RequestParam Long treatId, Authentication authentication) {
+        authorizationService.requireTreatmentOwner(treatId, authentication);
         return new ResponseEntity<>(treatmentService.resetTeam(treatId),HttpStatus.OK);
     }
 

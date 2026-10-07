@@ -1,10 +1,10 @@
 package access.aligner.backend.Services.Implimentation;
 
+import access.aligner.backend.AdvicerController.ResourceNotFoundException;
 import access.aligner.backend.DTOs.Responces.MessageResponse;
 import access.aligner.backend.Entities.File;
 import access.aligner.backend.Entities.Profile;
 import access.aligner.backend.Repositories.FileRepository;
-import access.aligner.backend.Repositories.TreatmentRepository;
 import access.aligner.backend.Repositories.UserRepository;
 import access.aligner.backend.Services.FileService;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +27,16 @@ public class FileServiceImpl implements FileService {
     private static final String UPLOAD_DIR = "uploads";
     private final UserRepository userRepository;
     private final FileRepository fileRepository;
-    private final TreatmentRepository treatmentRepository;
     ResourceBundle messages = ResourceBundle.getBundle("messages");
 
     @Override
     public File updatePhoto(MultipartFile file, Long userId) throws IOException {
-        Profile profile = userRepository.findById(userId).get().getProfile();
+        Profile profile = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"))
+                .getProfile();
+        if (profile == null) {
+            throw new ResourceNotFoundException("Profile not found for user");
+        }
         File photo =saveFile(file,"Profile");
         profile.setPhoto(photo);
 
@@ -45,7 +49,8 @@ public class FileServiceImpl implements FileService {
     @Override
     public Resource getFile(Long id,String destination) throws MalformedURLException {
 
-        File photo = fileRepository.findById(id).get();
+        File photo = fileRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("File not found"));
         String photoName= photo.getName().substring(0, photo.getName().indexOf('.'));
 
         try{
@@ -108,9 +113,10 @@ public class FileServiceImpl implements FileService {
     @Override
     public MessageResponse deleteFile(Long id, String destination) {
 
-        File file = fileRepository.findById(id).get();
+        File file = fileRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("File not found"));
 
-        if(destination=="Treat-"){
+        if ("Treat-".equals(destination)) {
             destination=destination+file.getTreatment().getId();
         }
         java.io.File toDeleteFile = new java.io.File(UPLOAD_DIR+java.io.File.separator+destination

@@ -3,6 +3,7 @@ package access.aligner.backend.Validators;
 import access.aligner.backend.DTOs.Requests.UpdateStatusRequest;
 import access.aligner.backend.Entities.User;
 import access.aligner.backend.Entities.UserStatus;
+import access.aligner.backend.Enum.Enum_Status;
 import access.aligner.backend.Repositories.UserRepository;
 import access.aligner.backend.Validators.Annotations.ValidStatus;
 import jakarta.validation.ConstraintValidator;
@@ -22,26 +23,19 @@ public class StatusValidator implements ConstraintValidator<ValidStatus, UpdateS
 
     @Override
     public boolean isValid(UpdateStatusRequest value, ConstraintValidatorContext context) {
-        Boolean result=true ;
-
-        Optional<User> user=userRepository.findById(value.getUserId());
-        if (!user.isEmpty()){
-            UserStatus userStatus= user.get()
-                    .getUserStatus().stream().filter(s->s.getUpdatedLast()==true).findFirst().get();
-
-
-            if(value.getStatus()=="CONFIRMED" || value.getStatus()=="CANCELED"){
-                result=userStatus.getStatus().getId()==3;
-                        //&& !hasPassed72Hours(userStatus.getUpdatedAt());
-
-           }/*else if(value.getStatusId()==4 || value.getStatusId()==5 || value.getStatusId()==6) {
-                result=userStatus.getStatus().getId()==1;
-                        //&& !hasPassed72Hours(userStatus.getUpdatedAt());
-
-            }*/
+        if (value == null || value.getUserId() == null) {
+            return false;
         }
 
-        return result;
+        Optional<UserStatus> currentStatus = userRepository.findById(value.getUserId())
+                .flatMap(user -> user.getUserStatus().stream()
+                        .filter(UserStatus::getUpdatedLast)
+                        .findFirst());
+        if (Enum_Status.CONFIRMED.name().equals(value.getStatus())
+                || Enum_Status.CANCELED.name().equals(value.getStatus())) {
+            return currentStatus.map(status -> status.getStatus().getId() == 3).orElse(false);
+        }
+        return currentStatus.isPresent();
     }
     public boolean hasPassed72Hours(Date pastDate) {
         LocalDateTime currentDate = LocalDateTime.now();

@@ -56,9 +56,11 @@ export class AdminDecisionComponent {
 
 */
 
-    this.authService.GetUserById(this.user).subscribe((data) => {
+    this.authService
+      .GetUserById(this.user, this.route.snapshot.paramMap.get('token'))
+      .subscribe((data) => {
       //     console.log('data userrrr ', data);
       this.user$ = data;
-    });
+      });
   }
 }

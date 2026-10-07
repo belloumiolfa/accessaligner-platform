@@ -1,5 +1,6 @@
 package access.aligner.backend.DTOs.Mappers;
 
+import access.aligner.backend.AdvicerController.ResourceNotFoundException;
 import access.aligner.backend.DTOs.PatientDTO;
 import access.aligner.backend.Entities.Patient;
 import access.aligner.backend.Repositories.PatientRepository;
@@ -40,6 +41,8 @@ public class PatientDTOMapper implements Function<Patient, PatientDTO> {
     }
     int getNumberTreatment(Long patientId ){
 
-       return  treatmentRepository.findByPatient(patientRepository.findById(patientId).get()).size();
+       Patient patient = patientRepository.findById(patientId)
+               .orElseThrow(() -> new ResourceNotFoundException("Patient not found"));
+       return treatmentRepository.findByPatient(patient).size();
     }
 }

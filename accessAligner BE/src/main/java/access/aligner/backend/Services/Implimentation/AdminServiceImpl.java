@@ -1,9 +1,9 @@
 package access.aligner.backend.Services.Implimentation;
 
+import access.aligner.backend.AdvicerController.ResourceNotFoundException;
 import access.aligner.backend.Configuration.JwtService;
 import access.aligner.backend.DTOs.AdminDTO;
 import access.aligner.backend.DTOs.Mappers.AdminDTOMapper;
-import access.aligner.backend.DTOs.PatientDTO;
 import access.aligner.backend.DTOs.Requests.NewAdminRequest;
 import access.aligner.backend.DTOs.Responces.MessageResponse;
 import access.aligner.backend.Entities.*;
@@ -37,48 +37,52 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public MessageResponse newAdmin(NewAdminRequest data) throws MessagingException {
-        Optional<User> newUser=userRepository.findByEmail(data.getEmail());
-
-        Optional<Admin> admin=adminRepository.findByEmail(data.getEmail());
-        if(newUser.isEmpty()){
-              admin= Optional.of(new Admin());
-        }
+        Optional<User> existingUser = userRepository.findByEmail(data.getEmail());
+        Admin admin = existingUser.isEmpty()
+                ? new Admin()
+                : adminRepository.findByEmail(data.getEmail())
+                        .orElseThrow(() -> new ResourceNotFoundException("Admin account not found"));
 
         // generate login from email
-        admin.get().setUserName(data.getEmail().substring(0, data.getEmail().indexOf('@')));
-        admin.get().setEmail(data.getEmail());
-        admin.get().setPassword(passwordEncoder.encode(data.getPassword()));
-        admin.get().setCreatedAt (new Date());
-        admin.get().setProfile(Profile.builder()
+        admin.setUserName(data.getEmail().substring(0, data.getEmail().indexOf('@')));
+        admin.setEmail(data.getEmail());
+        admin.setPassword(passwordEncoder.encode(data.getPassword()));
+        admin.setCreatedAt (new Date());
+        admin.setProfile(Profile.builder()
                 .build());
 
         // Add USER role by default
-        admin.get().setRole(roleRepository.findByName(Enum_Role.valueOf("ADMIN")).get() );
+        Role adminRole = roleRepository.findByName(Enum_Role.ADMIN)
+                .orElseThrow(() -> new ResourceNotFoundException("ADMIN role not found"));
+        admin.setRole(adminRole);
 
-        if(!newUser.isEmpty()){
-            newUser.get().setRole(roleRepository.findByName(Enum_Role.valueOf("ADMIN")).get());
+        User newUser;
+        if (existingUser.isPresent()) {
+            newUser = existingUser.orElseThrow(() -> new ResourceNotFoundException("User not found"));
+            newUser.setRole(adminRole);
         }else{
-            newUser = Optional.of(userRepository.save(admin.get()));
+            newUser = userRepository.save(admin);
         }
 
         // Add ACCEPTED status by default
-        Status status= statusRepository.findByName(Enum_Status.valueOf("ACCEPTED")).get();
+        Status status = statusRepository.findByName(Enum_Status.ACCEPTED)
+                .orElseThrow(() -> new ResourceNotFoundException("ACCEPTED status not found"));
         UserStatus userStatus= UserStatus.builder()
                 .status(status)
                 .updatedLast(true)
-                .user(newUser.get())
+                .user(newUser)
                 .updatedAt(new Date())
-                .id(new UserStatusKey(newUser.get().getId(),status.getId()))
+                .id(new UserStatusKey(newUser.getId(),status.getId()))
                 .build();
-        admin.get().setStatus(userStatus);
+        admin.setStatus(userStatus);
 
         // save user
         userStatusRepository.save(userStatus);
 
         Map<String, Object> claims = new HashMap<>();
-        claims.put("userId", newUser.get().getId());
-        var jwtToken = jwtService.generateToken(claims, newUser.get());
-        emailService.sendEmailAdminCredential(newUser.get(), jwtToken, newUser.get().getUsername(), data.getPassword());
+        claims.put("userId", newUser.getId());
+        var jwtToken = jwtService.generateToken(claims, newUser);
+        emailService.sendEmailAdminCredential(newUser, jwtToken, newUser.getUsername(), data.getPassword());
 
         return MessageResponse.builder()
                 .message(messages.getString("AdminService.newAdmin.MessageResponse")).build();
@@ -88,8 +92,10 @@ public class AdminServiceImpl implements AdminService {
     public List<AdminDTO> getAdmins() {
         Collection<Admin> admins = adminRepository.findAll();
         List<AdminDTO> result = new ArrayList<AdminDTO>(admins.size());
+        Role adminRole = roleRepository.findByName(Enum_Role.ADMIN)
+                .orElseThrow(() -> new ResourceNotFoundException("ADMIN role not found"));
         for (Admin admin:admins) {
-            if(admin.getRoleList().contains(roleRepository.findByName(Enum_Role.valueOf("ADMIN")).get())) {
+            if(admin.getRoleList().contains(adminRole)) {
                 result.add(adminDTOMapper.apply(admin));
             }
         }
@@ -98,11 +104,15 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public MessageResponse deleteAdmin(Long id) {
-        User user =userRepository.findById(id).get();
-        Admin admin =adminRepository.findById(id).get();
+        Admin admin = adminRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Admin not found"));
 
-        admin.getRoleList().remove(roleRepository.findByName(Enum_Role.valueOf("ADMIN")).get());
-        admin.setRole(roleRepository.findByName(Enum_Role.valueOf("USER")).get());
+        Role adminRole = roleRepository.findByName(Enum_Role.ADMIN)
+                .orElseThrow(() -> new ResourceNotFoundException("ADMIN role not found"));
+        Role userRole = roleRepository.findByName(Enum_Role.USER)
+                .orElseThrow(() -> new ResourceNotFoundException("USER role not found"));
+        admin.getRoleList().remove(adminRole);
+        admin.setRole(userRole);
 
         adminRepository.save(admin);
 
@@ -114,7 +124,8 @@ public class AdminServiceImpl implements AdminService {
         userStatusRepository.deleteAll(userStatusRepository.findByUser(user));
 
         // delete profile
-        profileRepository.delete(profileRepository.findById(user.getProfile().getId()).get());
+        profileRepository.delete(profileRepository.findById(user.getProfile().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Profile not found")));
 
         //delete admin
         adminRepository.delete(admin);
@@ -132,12 +143,16 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public AdminDTO switchToSuperAdmin(Long adminId, Boolean switchRole ) {
-         Admin admin =adminRepository.findById(adminId).get();
+         Admin admin = adminRepository.findById(adminId)
+                 .orElseThrow(() -> new ResourceNotFoundException("Admin not found"));
          admin.setUpdatedAt(new Date());
         if(switchRole==true) {
-            admin.setRole(roleRepository.findByName(Enum_Role.valueOf("SUPER_ADMIN")).get());
+            admin.setRole(roleRepository.findByName(Enum_Role.SUPER_ADMIN)
+                    .orElseThrow(() -> new ResourceNotFoundException("SUPER_ADMIN role not found")));
         } else {
-            admin.removeRole(roleRepository.findByName(Enum_Role.valueOf("SUPER_ADMIN")).get().getId());
+            Role superAdminRole = roleRepository.findByName(Enum_Role.SUPER_ADMIN)
+                    .orElseThrow(() -> new ResourceNotFoundException("SUPER_ADMIN role not found"));
+            admin.removeRole(superAdminRole.getId());
         }
         return adminDTOMapper.apply(adminRepository.save(admin));
     }

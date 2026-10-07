@@ -18,14 +18,11 @@ public class AcceptedUser implements ConstraintValidator<ValidAccept, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        Optional<User> user= userRepository.findByEmail(value);
-        if(!user.isEmpty()) {
-            UserStatus userStatus = user.get()
-                    .getUserStatus().stream().filter(s -> s.getUpdatedLast() == true).findFirst().get();
-
-            return userStatus.getStatus().getId() == 4;
-        } else{
-        return false ;
-        }
+        return userRepository.findByEmail(value)
+                .flatMap(user -> user.getUserStatus().stream()
+                        .filter(UserStatus::getUpdatedLast)
+                        .findFirst())
+                .map(userStatus -> userStatus.getStatus().getId() == 4)
+                .orElse(false);
     }
 }

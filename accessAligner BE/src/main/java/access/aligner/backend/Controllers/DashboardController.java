@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ import java.util.Locale;
 @RequestMapping("/api/private/dashboard/")
 @RequiredArgsConstructor
 @Validated
+@PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")
 
 public class DashboardController {
     private final DashboardService dashboardService;
@@ -38,8 +40,6 @@ public class DashboardController {
     public ResponseEntity<Integer> getTotalPatientController() {
         return new ResponseEntity<>(dashboardService.getTotalPatient(), HttpStatus.OK);
     }
-
-
 
     @GetMapping("getTopDentist")
     public ResponseEntity<List<TopDentistProjection>> getTopDentistController(){

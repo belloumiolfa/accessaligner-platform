@@ -1,5 +1,6 @@
 package access.aligner.backend.DTOs.Mappers;
 
+import access.aligner.backend.AdvicerController.ResourceNotFoundException;
 import access.aligner.backend.DTOs.MessageDTO;
 import access.aligner.backend.DTOs.SeenDTO;
 import access.aligner.backend.Entities.Message;
@@ -35,9 +36,13 @@ public class MessageDTOMapper implements Function<Message, MessageDTO> {
     }
 
     private String getSenderName(Long sender) {
-        User user=userRepository.findById(sender).get();
-
-        Profile profile= profileRepository.findById(user.getProfile().getId()).get();
+        User user = userRepository.findById(sender)
+                .orElseThrow(() -> new ResourceNotFoundException("Message sender not found"));
+        if (user.getProfile() == null) {
+            return user.getUsername();
+        }
+        Profile profile = profileRepository.findById(user.getProfile().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Profile not found"));
 
         if(profile.getFirstName()==null)
         {

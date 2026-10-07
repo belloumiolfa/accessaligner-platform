@@ -64,12 +64,15 @@ public class UserServiceImpl implements UserService {
                         .build());
 
         // Add USER role by default
-        doctor.setRole(roleRepository.findByName(Enum_Role.valueOf("DENTIST")).get() );
+        Role dentistRole = roleRepository.findByName(Enum_Role.DENTIST)
+                .orElseThrow(() -> new ResourceNotFoundException("DENTIST role not found"));
+        doctor.setRole(dentistRole);
 
         User newUser = userRepository.save(doctor);
 
         // Add WAIT status by default
-        Status status= statusRepository.findByName(Enum_Status.valueOf("WAIT")).get();
+        Status status = statusRepository.findByName(Enum_Status.WAIT)
+                .orElseThrow(() -> new ResourceNotFoundException("WAIT status not found"));
         UserStatus userStatus= UserStatus.builder()
                 .status(status)
                 .updatedLast(true)
@@ -403,13 +406,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO updateStatus(UpdateStatusRequest data) {
 
-        Status status= statusRepository.findByName(Enum_Status.valueOf(data.getStatus())).get();
-        User user =userRepository.findById(data.getUserId()).get();
-        Optional<User> superAdmin =userRepository.findByUserName("SuperAdmin");
-        Optional<User> admin =superAdmin;
-
-        if(data.getAdminId()!=null){
-            admin=userRepository.findById(data.getAdminId());
+        Enum_Status requestedStatus = Enum_Status.valueOf(data.getStatus());
+        Status status = statusRepository.findByName(requestedStatus)
+                .orElseThrow(() -> new ResourceNotFoundException(requestedStatus + " status not found"));
+        User user = userRepository.findById(data.getUserId())
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        User admin = null;
+        if (data.getAdminId() != null) {
+            admin = userRepository.findById(data.getAdminId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Admin user not found"));
         }
 
         user.getUserStatus().forEach(s->s.setUpdatedLast(false));
@@ -421,14 +426,17 @@ public class UserServiceImpl implements UserService {
                 .id(new UserStatusKey(data.getUserId(), status.getId()))
                 .build();
 
-        if(data.getAdminId()!=null){
-            userStatus.setResponsible(admin.get());
+        if (admin != null) {
+            userStatus.setResponsible(admin);
         }
 
-        if(data.getStatus()=="CONFIRMED"){
+        if (requestedStatus == Enum_Status.CONFIRMED) {
+            User superAdmin = userRepository.findByUserName("SuperAdmin")
+                    .orElseThrow(() -> new ResourceNotFoundException("Super Admin user not found"));
+            User decisionAdmin = admin != null ? admin : superAdmin;
             Map<String, Object> claims = new HashMap<>();
-            var jwtToken = jwtService.generateToken(claims, admin.get());
-            emailService.sendEmailDecision(data.getUserId(),superAdmin.get(),jwtToken);
+            var jwtToken = jwtService.generateToken(claims, decisionAdmin);
+            emailService.sendEmailDecision(data.getUserId(), superAdmin, jwtToken);
         }
         user.setStatus(userStatus);
         user.setUpdatedAt(new Date());
@@ -445,7 +453,8 @@ public class UserServiceImpl implements UserService {
                 new UsernamePasswordAuthenticationToken(signinRequest.getEmail(), signinRequest.getPassword()));
 
         if(authentication.isAuthenticated()){
-            User user= userRepository.findByEmail(signinRequest.getEmail()).get();
+            User user = userRepository.findByEmail(signinRequest.getEmail())
+                    .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
             Map<String, Object> claims = new HashMap<>();
             claims.put("userId", user.getId());
@@ -469,11 +478,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public MessageResponse forgetPassword(String email) {
 
-        User user= userRepository.findByEmail(email).get();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("userId", user.getId());
-        var jwtToken = jwtService.generateToken(claims, user);
+        var jwtToken = jwtService.generatePasswordResetToken(user);
 
         emailService.sendEmailUpdatePassword(email,jwtToken);
 
@@ -482,8 +490,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public MessageResponse updatePassword(UpdatePasswordRequest data) {
-
-        User user = userRepository.findById(data.getUserId()).get();
+        Long userId = jwtService.extractPasswordResetUserId(data.getToken());
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         user.setPassword(passwordEncoder.encode(data.getPassword()));
         user.setUpdatedAt(new Date());
         userRepository.save(user);
@@ -493,7 +502,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AuthenticationResponse securitySettings(SecuritySettingRequest data) {
-        User user =userRepository.findByUserName(data.getUserName()).get();
+        User user = userRepository.findByUserName(data.getUserName())
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         user.setPassword(passwordEncoder.encode(data.getNewPassword()));
         user.setUpdatedAt(new Date());
         userRepository.save(user);
@@ -513,8 +523,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> getDoctors() {
+        Role dentistRole = roleRepository.findByName(Enum_Role.DENTIST)
+                .orElseThrow(() -> new ResourceNotFoundException("DENTIST role not found"));
         Set<User> doctors = userRepository.findAll(Sort.by(Sort.Direction.DESC,"createdAt")).stream().filter(
-                e-> e.getRoleList().contains(roleRepository.findByName(Enum_Role.valueOf("DENTIST")).get())
+                e -> e.getRoleList().contains(dentistRole)
         ).collect(Collectors.toSet());
 
 

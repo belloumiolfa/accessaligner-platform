@@ -16,7 +16,13 @@ public class CurrentPasswordValidator implements ConstraintValidator<ValidCurren
 
     @Override
     public boolean isValid(SecuritySettingRequest securitySettingRequest, ConstraintValidatorContext context) {
-        User user=userRepository.findByUserName(securitySettingRequest.getUserName()).get();
-        return passwordEncoder.matches(securitySettingRequest.getCurrentPassword(),user.getPassword());
+        if (securitySettingRequest == null
+                || securitySettingRequest.getUserName() == null
+                || securitySettingRequest.getCurrentPassword() == null) {
+            return false;
+        }
+        User user = userRepository.findByUserName(securitySettingRequest.getUserName()).orElse(null);
+        return user != null
+                && passwordEncoder.matches(securitySettingRequest.getCurrentPassword(), user.getPassword());
     }
 }
