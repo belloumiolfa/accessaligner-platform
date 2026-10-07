@@ -1,0 +1,160 @@
+<div class="card">
+  <div class="header">
+    <h2>
+      <strong>{{
+        "user-account.account-form.form-title-strong" | translate
+      }}</strong>
+      {{ "user-account.account-form.form-title" | translate }}
+    </h2>
+  </div>
+  <div class="body">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit($event)">
+      <div class="row clearfix">
+        <div class="col-lg-6 col-md-12">
+          <div class="form-group">
+            <b>
+              {{ "user-account.account-form.first-name-label" | translate }}</b
+            >
+
+            <input
+              formControlName="firstName"
+              type="text"
+              class="form-control"
+              [placeholder]="
+                'user-account.account-form.first-name-placeholder' | translate
+              "
+            />
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+          <div class="form-group">
+            <b>{{ "user-account.account-form.last-name-label" | translate }}</b>
+
+            <input
+              formControlName="lastName"
+              type="text"
+              class="form-control"
+              [placeholder]="
+                'user-account.account-form.last-name-placeholder' | translate
+              "
+            />
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-12" *ngIf="utilsService.isDoctor(user$)">
+          <div class="form-group">
+            <b>{{ "user-account.account-form.tax-label" | translate }}</b>
+
+            <input
+              formControlName="tax"
+              type="text"
+              class="form-control"
+              [placeholder]="
+                'user-account.account-form.tax-placeholder' | translate
+              "
+            />
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-12">
+          <div class="form-group">
+            <b>{{ "user-account.account-form.phone-label" | translate }}</b>
+
+            <input
+              formControlName="phone"
+              type="text"
+              class="form-control"
+              [placeholder]="
+                'user-account.account-form.phone-placeholder' | translate
+              "
+            />
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+          <div class="form-group">
+            <b>{{ "user-account.account-form.mobile-label" | translate }} </b>
+
+            <input
+              formControlName="mobile"
+              type="text"
+              class="form-control"
+              [placeholder]="
+                'user-account.account-form.mobile-placeholder' | translate
+              "
+            />
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+          <div class="form-group">
+            <b>{{ "user-account.account-form.birthday-label" | translate }} </b>
+
+            <input
+              id="datetimepicker"
+              type="date"
+              [value]="profileForm.value.dateOfBirth | date : 'yyyy-MM-dd'"
+              class="form-control dateOfBirth"
+              [placeholder]="
+                'user-account.account-form.birthday-placeholder' | translate
+              "
+            />
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="form-group">
+            <b>{{ "user-account.account-form.address-label" | translate }}</b>
+
+            <input
+              formControlName="address"
+              type="text"
+              class="form-control"
+              [placeholder]="
+                'user-account.account-form.address-placeholder' | translate
+              "
+            />
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group">
+            <b>{{
+              "user-account.account-form.profession-label" | translate
+            }}</b>
+
+            <input
+              formControlName="profession"
+              type="text"
+              class="form-control"
+              [placeholder]="
+                'user-account.account-form.profession-placeholder' | translate
+              "
+            />
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <b>{{
+              "user-account.account-form.description-label" | translate
+            }}</b>
+
+            <textarea
+              formControlName="description"
+              rows="4"
+              class="form-control no-resize"
+              [placeholder]="
+                'user-account.account-form.description-placeholder' | translate
+              "
+            ></textarea>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <button
+            class="btn btn-primary btn-round"
+            [disabled]="!profileForm.valid"
+          >
+            {{ "user-account.account-form.save-button" | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

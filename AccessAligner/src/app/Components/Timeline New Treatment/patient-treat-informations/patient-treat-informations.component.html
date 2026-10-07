@@ -1,0 +1,26 @@
+<!-- <time class="cbp_tmtime" datetime="2017-11-04T03:45"
+  ><span>03:45 AM</span> <span>Today</span></time
+>
+ -->
+<div class="cbp_tmicon bg-info">
+  <i class="zmdi zmdi-assignment-account"></i>
+</div>
+<div class="cbp_tmlabel row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <h2>
+      {{
+        "components.timeline-new-treatment.patient-treat-informations.header-title"
+          | translate
+      }}
+      <span class="text-primary">
+        {{ getTypeTreatment(treatment.treat) }}
+      </span>
+    </h2>
+
+    <div class="form-float">
+      <app-infos [treatment$]="treatment" [detailsTreat]="false"> </app-infos>
+    </div>
+  </div>
+
+  <div class="col-lg-6 col-md-12"></div>
+</div>

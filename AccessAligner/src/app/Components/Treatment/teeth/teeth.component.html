@@ -1,0 +1,87 @@
+<div class="header">
+  <h2>
+    <strong
+      >{{
+        "components.treatment.teeth.header-title-strong" | translate
+      }}-</strong
+    >
+    {{ getTypeTreatement(treatment$?.treat) }}
+  </h2>
+  <ul
+    class="header-dropdown"
+    *ngIf="
+      ['NEW', 'COMPLETED', 'QUALIFIED', 'CONFIRMED'].includes(treatment$.status)
+    "
+  >
+    <div [class]="show === true ? 'dropdown show' : 'dropdown'">
+      <a
+        class="dropdown-toggle"
+        href="javascript:void(0);"
+        role="button"
+        (click)="show = !show"
+      >
+        <i class="zmdi zmdi-more"></i>
+      </a>
+
+      <div
+        [class]="
+          show === true ? 'dropdown-menu slideUp' : 'dropdown-menu slideDown'
+        "
+      >
+        <a
+          class="dropdown-item"
+          [routerLink]="
+            '/treatment/new-treatment/' + treatment$.patient?.id + '/teeth'
+          "
+          >{{ "components.treatment.teeth.update-button" | translate }}</a
+        >
+      </div>
+    </div>
+  </ul>
+</div>
+<div class="body">
+  <div class="container">
+    <div class="header">
+      <h6 class="align-center"></h6>
+    </div>
+    <div class="row align-center">
+      <div class="col-lg-2 col-md-4 col-sm-4" *ngFor="let item of colors">
+        <b>{{ item.label }} </b>
+        <div class="input-group">
+          <button [class]="'btn btn-primary  ' + item.class">
+            <i></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row well">
+      <div class="col-sm-2 col-md-2 col-lg-1" *ngFor="let t of teethTab">
+        <div class="demo-google-material-icon align-center">
+          <img
+            fill
+            loading="lazy"
+            [src]="t.icone"
+            class="material-icons"
+            [style]="'background-color: ' + t.color"
+          />
+          <span class="icon-name">{{ t.id }} </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-12 col-md-12" *ngIf="this.treatment$?.teethComment">
+  <div class="progress-container">
+    <span class="progress-badge">{{ this.treatment$?.teethComment }}</span>
+    <div class="progress">
+      <div
+        class="progress-bar"
+        role="progressbar"
+        aria-valuenow="100"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        style="width: 100%"
+      ></div>
+    </div>
+  </div>
+</div>

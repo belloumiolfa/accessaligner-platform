@@ -1,0 +1,235 @@
+<ng-template
+  #MenuItemWithChildren
+  let-menu="menu"
+  let-className="className"
+  let-linkClassName="linkClassName"
+>
+  <li
+    [class]="className"
+    [ngClass]="{ active: activeMenuItems.includes(menu.key) }"
+  >
+    <div type="button" class="waves-effect">
+      <a
+        appWaveEffect
+        [class]="linkClassName"
+        [ngClass]="{ active: activeMenuItems.includes(menu.key) }"
+        href="javascript: void(0);"
+        role="button"
+        id="topnav-{{ menu.key }}"
+        (click)="toggleMenuItem(menu, collapse)"
+        [attr.aria-expanded]="!menu.collapsed"
+        aria-controls="collapseExample"
+      >
+        <i class="{{ menu.icon }} me-1" *ngIf="menu.icon"></i>
+        <span> {{ menu.label | translate }}</span>
+
+        <span class="float-right">
+          <i class="zmdi zmdi-caret-down float-right"></i>
+        </span>
+      </a>
+    </div>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="menu.collapsed">
+      <ng-container
+        *ngIf="!hasGrandChildren(menu) && menu.children.length >= 10"
+      >
+        <div
+          class="ml-menu"
+          [ngClass]="{ show: !menu.collapsed }"
+          attr.aria-labelledby="topnav-{{ menu.key }}"
+        >
+          <ng-container
+            *ngTemplateOutlet="MegaMenu; context: { menu: menu.children }"
+          >
+          </ng-container>
+        </div>
+      </ng-container>
+
+      <ng-container
+        *ngIf="!hasGrandChildren(menu) && menu.children.length < 10"
+      >
+        <div
+          class=""
+          [ngClass]="{ show: menu.collapsed }"
+          attr.aria-labelledby="topnav-{{ menu.key }}"
+        >
+          <ng-container *ngFor="let subitem of menu.children">
+            <div *ngIf="roleManger(subitem)">
+              <ng-container
+                *ngTemplateOutlet="
+                  SubMenu;
+                  context: {
+                    menu: subitem,
+                    className: 'ml-menu',
+                    linkClassName: ' nav-link nav-link-ref'
+                  }
+                "
+              >
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+
+      <div
+        [ngClass]="{ show: !menu.collapsed }"
+        attr.aria-labelledby="topnav-{{ menu.key }}"
+        *ngIf="hasGrandChildren(menu)"
+      >
+        <ng-container *ngFor="let subitem of menu.children">
+          <div *ngIf="roleManger(menu)">
+            <ng-container
+              *ngTemplateOutlet="
+                SubMenu;
+                context: {
+                  menu: subitem,
+                  className: 'ml-menu',
+                  linkClassName: 'nav-link nav-link-ref '
+                }
+              "
+            >
+            </ng-container>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </li>
+</ng-template>
+
+<ng-template #MegaMenu let-menu="menu">
+  <div class="row">
+    <div class="col-lg-4" *ngFor="let menuItem of menu">
+      <a
+        [routerLink]="menuItem.url"
+        class="dropdown-item nav-link-ref"
+        [ngClass]="{ active: activeMenuItems.includes(menuItem.key) }"
+        [attr.data-menu-key]="menuItem.key"
+      >
+        {{ menuItem.label | translate }}
+      </a>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #SubMenu let-menu="menu" let-linkClassName="linkClassName">
+  <div *ngIf="hasSubmenu(menu)">
+    <a
+      [class]="linkClassName"
+      href="javascript: void(0);"
+      id="topnav-{{ menu.key }}"
+      role="button"
+      [attr.data-menu-key]="menu.key"
+      (click)="toggleMenuItem(menu, null)"
+    >
+      {{ menu.label | translate }}
+      <div class="arrow-down"></div>
+    </a>
+    <div
+      [ngClass]="{ show: menu.collapsed }"
+      attr.aria-labelledby="topnav-{{ menu.key }}"
+    ></div>
+  </div>
+  <li
+    [ngClass]="{ 'active open': isActive(menu) && isSelected(menu) }"
+    (click)="setSelectedMenuItem(menu)"
+  >
+    <a
+      [routerLink]="menu.url"
+      [attr.data-menu-key]="menu.key"
+      *ngIf="!hasSubmenu(menu)"
+    >
+      <i class="{{ menu.icon }} me-1" *ngIf="menu.icon"></i>
+
+      <span> {{ menu.label | translate }} </span>
+    </a>
+  </li>
+</ng-template>
+
+<ng-template
+  #Title
+  let-menu="menu"
+  let-className="className"
+  let-linkClassName="linkClassName"
+>
+  <li class="header">{{ menu.label | translate }}</li>
+</ng-template>
+
+<ng-template
+  #MenuItem
+  let-menu="menu"
+  let-className="className"
+  let-linkClassName="linkClassName"
+>
+  <li
+    [class]="className"
+    [ngClass]="{ 'active open': isActive(menu) && isSelected(menu) }"
+    (click)="setSelectedMenuItem(menu)"
+  >
+    <a
+      [routerLink]="menu.url"
+      [class]="linkClassName"
+      [attr.data-menu-key]="menu.key"
+    >
+      <i class="{{ menu.icon }} me-1" *ngIf="menu.icon"></i>
+      <span> {{ menu.label | translate }}</span>
+    </a>
+  </li>
+</ng-template>
+
+<div id="leftsidebar" class="sidebar display_left_menu">
+  <div class="menu">
+    <ul class="list">
+      <li>
+        <app-info-profile-menu [user]="user" [profilePhoto$]="profilePhoto$">
+        </app-info-profile-menu>
+      </li>
+
+      <ng-container *ngFor="let menu of menuItems; let i = index">
+        <!-- menu item title  -->
+        <ng-container *ngIf="isTitleItem(menu) && roleManger(menu)">
+          <ng-container
+            *ngTemplateOutlet="
+              Title;
+              context: {
+                menu: menu,
+                className: '',
+                linkClassName: ''
+              }
+            "
+          >
+          </ng-container>
+        </ng-container>
+        <!-- menu item without any child -->
+        <ng-container
+          *ngIf="!hasSubmenu(menu) && !isTitleItem(menu) && roleManger(menu)"
+        >
+          <ng-container
+            *ngTemplateOutlet="
+              MenuItem;
+              context: {
+                menu: menu,
+                className: '',
+                linkClassName: 'nav-link nav-link-ref'
+              }
+            "
+            ><!-- active open -->
+          </ng-container>
+        </ng-container>
+
+        <!-- menu item with child -->
+        <ng-container *ngIf="hasSubmenu(menu)">
+          <ng-container
+            *ngTemplateOutlet="
+              MenuItemWithChildren;
+              context: {
+                menu: menu,
+                className: '',
+                linkClassName: 'menu-toggle'
+              }
+            "
+          >
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,610 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>front-end documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">front-end documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  NewPlanComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/Components/Treatment/new-plan/new-plan.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-new-plan</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>RouterModule</code>
+                            <code>CommonModule</code>
+                                <code><a href="../components/TeamInfoComponent.html" target="_self" >TeamInfoComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./new-plan.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./new-plan.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#user$" >user$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#utils" >utils</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#treatment$" >treatment$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(appService: <a href="../injectables/AppService.html" target="_self">AppService</a>, utils: <a href="../injectables/UtilsService.html" target="_self">UtilsService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/Components/Treatment/new-plan/new-plan.component.ts:17</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>appService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AppService.html" target="_self" >AppService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>utils</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UtilsService.html" target="_self" >UtilsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="treatment$"></a>
+                        <b>treatment$</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/Components/Treatment/new-plan/new-plan.component.ts:16</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="user$"></a>
+                    <span class="name">
+                        <span ><b>user$</b></span>
+                        <a href="#user$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/Components/Treatment/new-plan/new-plan.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="utils"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>utils</b></span>
+                        <a href="#utils"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/UtilsService.html" target="_self" >UtilsService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/Components/Treatment/new-plan/new-plan.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &quot;@angular/common&quot;;
+import { Component, Input } from &quot;@angular/core&quot;;
+import { RouterModule } from &quot;@angular/router&quot;;
+import { UtilsService } from &quot;../../../Auth/Helpers/utils.service&quot;;
+import { AppService } from &quot;../../../Core/Services/app.service&quot;;
+import { TeamInfoComponent } from &quot;../../../Shared/Elements/team-info/team-info.component&quot;;
+
+@Component({
+  selector: &quot;app-new-plan&quot;,
+  standalone: true,
+  imports: [RouterModule, CommonModule, TeamInfoComponent],
+  templateUrl: &quot;./new-plan.component.html&quot;,
+  styleUrl: &quot;./new-plan.component.css&quot;,
+})
+export class NewPlanComponent {
+  @Input() treatment$!: any;
+  user$!: any;
+
+  constructor(private appService: AppService, public utils: UtilsService) {
+    this.appService.getUser$.subscribe((data) &#x3D;&gt; {
+      this.user$ &#x3D; data;
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;row clearfix&quot;&gt;
+  &lt;div class&#x3D;&quot;col-lg-12 col-md-12&quot; *ngIf&#x3D;&quot;utils.isDoctor(user$)&quot;&gt;
+    &lt;div class&#x3D;&quot;card&quot;&gt;
+      &lt;div class&#x3D;&quot;header&quot;&gt;
+        &lt;h2&gt;&lt;strong&gt;Treatment &lt;/strong&gt; decision&lt;/h2&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot; &quot;&gt;
+        &lt;div class&#x3D;&quot;row clearfix&quot;&gt;
+          &lt;div class&#x3D;&quot;col-lg-12 col-md-12&quot; style&#x3D;&quot;text-align: center&quot;&gt;
+            &lt;div class&#x3D;&quot;progress-container progress-danger text-center&quot;&gt;
+              &lt;span class&#x3D;&quot;progress-badge&quot;&gt;Wait the team to add a plan &lt;/span
+              &gt;&lt;br /&gt;
+
+              &lt;div class&#x3D;&quot;progress&quot;&gt;
+                &lt;div
+                  class&#x3D;&quot;progress-bar progress-bar-danger&quot;
+                  role&#x3D;&quot;progressbar&quot;
+                  aria-valuenow&#x3D;&quot;60&quot;
+                  aria-valuemin&#x3D;&quot;0&quot;
+                  aria-valuemax&#x3D;&quot;100&quot;
+                  style&#x3D;&quot;width: 100%&quot;
+                &gt;&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div
+    class&#x3D;&quot;col-lg-12 col-md-12&quot;
+    *ngIf&#x3D;&quot;treatment$?.team?.length !&#x3D; 0; else thereIsAteam&quot;
+  &gt;
+    &lt;div
+      class&#x3D;&quot;col-lg-12 col-md-12&quot;
+      *ngIf&#x3D;&quot;utils.isAdmin(user$) || utils.isSuperAdmin(user$)&quot;
+    &gt;
+      &lt;div class&#x3D;&quot;card&quot;&gt;
+        &lt;div class&#x3D;&quot;header&quot;&gt;
+          &lt;h2&gt;&lt;strong&gt;Start - &lt;/strong&gt; The plan Process&lt;/h2&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot; &quot;&gt;
+          &lt;div class&#x3D;&quot;row clearfix&quot;&gt;
+            &lt;div class&#x3D;&quot;col-lg-12 col-md-12&quot; style&#x3D;&quot;text-align: center&quot;&gt;
+              &lt;a
+                class&#x3D;&quot;btn btn-round btn-primary&quot;
+                [routerLink]&#x3D;&quot;[&#x27;/plan/new-plan/&#x27;, treatment$?.id]&quot;
+                &gt;New Plan&lt;/a
+              &gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;ng-template #thereIsAteam&gt;
+    &lt;div class&#x3D;&quot;card&quot; *ngIf&#x3D;&quot;utils.isSuperAdmin(user$)&quot;&gt;
+      &lt;div class&#x3D;&quot;header&quot;&gt;
+        &lt;strong&gt;Please add an admin &lt;/strong&gt; to work on this treatment
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot; &quot;&gt;
+        &lt;div class&#x3D;&quot;row clearfix&quot;&gt;
+          &lt;div class&#x3D;&quot;col-lg-12 col-md-12&quot; style&#x3D;&quot;text-align: center&quot;&gt;
+            &lt;app-team-info
+              [treatment]&#x3D;&quot;treatment$&quot;
+              [addAction]&#x3D;&quot;true&quot;
+            &gt;&lt;/app-team-info&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/ng-template&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="row clearfix">  <div class="col-lg-12 col-md-12" *ngIf="utils.isDoctor(user$)">    <div class="card">      <div class="header">        <h2><strong>Treatment </strong> decision</h2>      </div>      <div class=" ">        <div class="row clearfix">          <div class="col-lg-12 col-md-12" style="text-align: center">            <div class="progress-container progress-danger text-center">              <span class="progress-badge">Wait the team to add a plan </span              ><br />              <div class="progress">                <div                  class="progress-bar progress-bar-danger"                  role="progressbar"                  aria-valuenow="60"                  aria-valuemin="0"                  aria-valuemax="100"                  style="width: 100%"                ></div>              </div>            </div>          </div>        </div>      </div>    </div>  </div>  <div    class="col-lg-12 col-md-12"    *ngIf="treatment$?.team?.length != 0; else thereIsAteam"  >    <div      class="col-lg-12 col-md-12"      *ngIf="utils.isAdmin(user$) || utils.isSuperAdmin(user$)"    >      <div class="card">        <div class="header">          <h2><strong>Start - </strong> The plan Process</h2>        </div>        <div class=" ">          <div class="row clearfix">            <div class="col-lg-12 col-md-12" style="text-align: center">              <a                class="btn btn-round btn-primary"                [routerLink]="[\'/plan/new-plan/\', treatment$?.id]"                >New Plan</a              >            </div>          </div>        </div>      </div>    </div>  </div>  <ng-template #thereIsAteam>    <div class="card" *ngIf="utils.isSuperAdmin(user$)">      <div class="header">        <strong>Please add an admin </strong> to work on this treatment      </div>      <div class=" ">        <div class="row clearfix">          <div class="col-lg-12 col-md-12" style="text-align: center">            <app-team-info              [treatment]="treatment$"              [addAction]="true"            ></app-team-info>          </div>        </div>      </div>    </div>  </ng-template></div></div>'
+    var COMPONENTS = [{'name': 'AcceptDecisionComponent', 'selector': 'app-accept-decision'},{'name': 'AcceptFormComponent', 'selector': 'app-accept-form'},{'name': 'AccountFormComponent', 'selector': 'app-account-form'},{'name': 'ActivitiesComponent', 'selector': 'app-activities'},{'name': 'AddFileComponent', 'selector': 'app-add-file'},{'name': 'AddNewPatientComponent', 'selector': 'app-add-new-patient'},{'name': 'AddNewPlanComponent', 'selector': 'app-add-new-plan'},{'name': 'AddNewTreatmentComponent', 'selector': 'app-add-new-treatment'},{'name': 'AdminDecisionComponent', 'selector': 'app-admin-decision'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ArchiveDoctorsComponent', 'selector': 'app-archive-doctors'},{'name': 'ArchiveTreatmentsComponent', 'selector': 'app-archive-treatments'},{'name': 'BackHomeComponent', 'selector': 'app-back-home'},{'name': 'BlockHeaderComponent', 'selector': 'app-block-header'},{'name': 'ClinicsComponent', 'selector': 'app-clinics'},{'name': 'ComingPageComponent', 'selector': 'app-coming-page'},{'name': 'CompanyDetailsComponent', 'selector': 'app-company-details'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ConfirmDecisionComponent', 'selector': 'app-confirm-decision'},{'name': 'ConfirmFormComponent', 'selector': 'app-confirm-form'},{'name': 'ContentDevisTreatComponent', 'selector': 'app-content-devis-treat'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'Error403Component', 'selector': 'app-error403'},{'name': 'Error500Component', 'selector': 'app-error500'},{'name': 'Error503Component', 'selector': 'app-error503'},{'name': 'FinishTreatmentComponent', 'selector': 'app-finish-treatment'},{'name': 'ForgetPasswordComponent', 'selector': 'app-forget-password'},{'name': 'GetPlansTreatComponent', 'selector': 'app-get-plans-treat'},{'name': 'GridUsersComponent', 'selector': 'app-grid-users'},{'name': 'HelpLinkComponent', 'selector': 'app-help-link'},{'name': 'InfoProfileMenuComponent', 'selector': 'app-info-profile-menu'},{'name': 'InfosComponent', 'selector': 'app-infos'},{'name': 'LayoutContainerComponent', 'selector': 'app-layout-container'},{'name': 'LeftSidebarComponent', 'selector': 'app-left-sidebar'},{'name': 'LeftSidebarMobilComponent', 'selector': 'app-left-sidebar-mobil'},{'name': 'LinksComponent', 'selector': 'app-links'},{'name': 'ListDoctorsComponent', 'selector': 'app-list-doctors'},{'name': 'ListUsersComponent', 'selector': 'app-list-users'},{'name': 'LockedScreenComponent', 'selector': 'app-locked-screen'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MenuAppComponent', 'selector': 'app-menu-app'},{'name': 'MiniLeftbarComponent', 'selector': 'app-mini-leftbar'},{'name': 'ModalDescriptionEligibleComponent', 'selector': 'app-modal-description-eligible'},{'name': 'ModalDisplayItemPlanComponent', 'selector': 'app-modal-display-item-plan'},{'name': 'ModalDisplayPhotoComponent', 'selector': 'app-modal-display-photo'},{'name': 'ModalDisplayReportComponent', 'selector': 'app-modal-display-report'},{'name': 'ModalEstimateComponent', 'selector': 'app-modal-estimate'},{'name': 'ModalfinishtreatComponent', 'selector': 'app-modalfinishtreat'},{'name': 'ModalPlanDetailsComponent', 'selector': 'app-modal-plan-details'},{'name': 'ModalRemoveTeamComponent', 'selector': 'app-modal-remove-team'},{'name': 'ModalTeamInfoComponent', 'selector': 'app-modal-team-info'},{'name': 'NewAdminComponent', 'selector': 'app-new-admin'},{'name': 'NewPlanComponent', 'selector': 'app-new-plan'},{'name': 'NewTreatClinicsComponent', 'selector': 'app-new-treat-clinics'},{'name': 'NewTreatGeneralComponent', 'selector': 'app-new-treat-general'},{'name': 'NewTreatPatientComponent', 'selector': 'app-new-treat-patient'},{'name': 'NewTreatPhotosComponent', 'selector': 'app-new-treat-photos'},{'name': 'NewTreatTeethComponent', 'selector': 'app-new-treat-teeth'},{'name': 'NewUserDetailsComponent', 'selector': 'app-new-user-details'},{'name': 'NotifMenuComponent', 'selector': 'app-notif-menu'},{'name': 'OfflineComponent', 'selector': 'app-offline'},{'name': 'OverlayMenuComponent', 'selector': 'app-overlay-menu'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PatientComponent', 'selector': 'app-patient'},{'name': 'PatientDetailComponent', 'selector': 'app-patient-detail'},{'name': 'PatientDisplayInformationsComponent', 'selector': 'app-patient-display-informations'},{'name': 'PatientFormComponent', 'selector': 'app-patient-form'},{'name': 'PatientInfosComponent', 'selector': 'app-patient-infos'},{'name': 'PatientListComponent', 'selector': 'app-patient-list'},{'name': 'PatientTreatClinicsInformationsComponent', 'selector': 'app-patient-treat-clinics-informations'},{'name': 'PatientTreatInformationsComponent', 'selector': 'app-patient-treat-informations'},{'name': 'PatientTreatPhotosInformationsComponent', 'selector': 'app-patient-treat-photos-informations'},{'name': 'PatientTreatTeethInformationsComponent', 'selector': 'app-patient-treat-teeth-informations'},{'name': 'PhotoFormComponent', 'selector': 'app-photo-form'},{'name': 'PhotographsComponent', 'selector': 'app-photographs'},{'name': 'PlanComponent', 'selector': 'app-plan'},{'name': 'PlanListComponent', 'selector': 'app-plan-list'},{'name': 'PreloaderComponent', 'selector': 'app-preloader'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileImageComponent', 'selector': 'app-profile-image'},{'name': 'PublicLayoutComponent', 'selector': 'app-public-layout'},{'name': 'QuoteReportComponent', 'selector': 'app-quote-report'},{'name': 'RigthSidebarComponent', 'selector': 'app-rigth-sidebar'},{'name': 'ScheduleComponent', 'selector': 'app-schedule'},{'name': 'SecurityFormComponent', 'selector': 'app-security-form'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SignInComponent', 'selector': 'app-sign-in'},{'name': 'SignUpComponent', 'selector': 'app-sign-up'},{'name': 'TaskMenuComponent', 'selector': 'app-task-menu'},{'name': 'TeamInfoComponent', 'selector': 'app-team-info'},{'name': 'TeethComponent', 'selector': 'app-teeth'},{'name': 'TimelineTreatmentsComponent', 'selector': 'app-timeline-treatments'},{'name': 'TreatmentComponent', 'selector': 'app-treatment'},{'name': 'TreatmentConfirmationComponent', 'selector': 'app-treatment-confirmation'},{'name': 'TreatmentDetailsComponent', 'selector': 'app-treatment-details'},{'name': 'TreatmentEligibleComponent', 'selector': 'app-treatment-eligible'},{'name': 'TreatmentHeaderComponent', 'selector': 'app-treatment-header'},{'name': 'TreatmentListComponent', 'selector': 'app-treatment-list'},{'name': 'TreatmentsComponent', 'selector': 'app-treatments'},{'name': 'TreatmentStatusComponent', 'selector': 'app-treatment-status'},{'name': 'UpdatePasswordComponent', 'selector': 'app-update-password'},{'name': 'UpdatePatientComponent', 'selector': 'app-update-patient'},{'name': 'UsersOverviewComponent', 'selector': 'app-users-overview'},{'name': 'UsersPageComponent', 'selector': 'app-users-page'},{'name': 'WaitingComponent', 'selector': 'app-waiting'}];
+    var DIRECTIVES = [{'name': 'GetPhotoDirective', 'selector': '[appGetPhoto]'}];
+    var ACTUAL_COMPONENT = {'name': 'NewPlanComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'NewPlanComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

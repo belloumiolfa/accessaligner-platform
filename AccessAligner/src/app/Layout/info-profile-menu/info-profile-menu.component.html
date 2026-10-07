@@ -1,0 +1,30 @@
+<div class="user-info m-b-20">
+  <div class="image">
+    <a [routerLink]="'profile/' + user?.id">
+      <app-profile-image
+        [photoId]="this.profilePhoto$"
+        [class]=""
+        [expression]="
+          user?.profile?.firstName && user?.profile?.lastName
+            ? user?.profile?.firstName + ' ' + user?.profile?.lastName
+            : user?.userName
+        "
+      ></app-profile-image>
+    </a>
+  </div>
+  <div class="detail">
+    <h6
+      *ngIf="
+        user?.profile?.firstName !== null && user?.profile?.lastName !== null
+      "
+    >
+      {{ user?.profile?.firstName }} {{ user?.profile?.lastName }}<br />
+    </h6>
+
+    <div *ngFor="let role of user.roleList">
+      <p class="m-b-0">
+        {{ role?.name }}
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,217 @@
+<div
+  class="row clearfix"
+  *ngIf="
+    treatment$?.estimates?.length == 0 && utils.isDoctor(user$);
+    else notDoctor
+  "
+>
+  <div class="col-lg-12 col-md-12">
+    <div class="card">
+      <div class="header">
+        <h2>
+          <strong
+            >{{
+              "components.treatment.quote-report.header-title-strong"
+                | translate
+            }}
+          </strong>
+          {{ "components.treatment.quote-report.header-title" | translate }}
+        </h2>
+      </div>
+      <div class=" ">
+        <div class="row clearfix">
+          <div class="col-lg-12 col-md-12" style="text-align: center">
+            <div class="progress-container progress-danger text-center">
+              <span class="progress-badge">{{
+                "components.treatment.quote-report.wait-estimate-msg"
+                  | translate
+              }}</span
+              ><br />
+
+              <div class="progress">
+                <div
+                  class="progress-bar progress-bar-danger"
+                  role="progressbar"
+                  aria-valuenow="60"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style="width: 100%"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #notDoctor>
+  <div class="row clearfix">
+    <div class="col-lg-12 col-md-12">
+      <div class="card">
+        <div class="header">
+          <h2>
+            <strong
+              >{{
+                "components.treatment.quote-report.card-title-strong"
+                  | translate
+              }}
+            </strong>
+            {{ "components.treatment.quote-report.card-title" | translate }}
+          </h2>
+
+          <ul
+            class="header-dropdown"
+            *ngIf="
+              ['FINISHED', 'UNQUALIFIED', 'CANCELED'].includes(
+                treatment$.status
+              ) === false && this.utils.isSuperAdmin(this.user$)
+            "
+          >
+            <div [class]="show === true ? 'dropdown show' : 'dropdown'">
+              <a
+                class="dropdown-toggle"
+                href="javascript:void(0);"
+                role="button"
+                (click)="show = !show"
+              >
+                <i class="zmdi zmdi-more"></i>
+              </a>
+
+              <div
+                [class]="
+                  show === true
+                    ? 'dropdown-menu slideUp'
+                    : 'dropdown-menu slideDown'
+                "
+              >
+                <a
+                  class="dropdown-item"
+                  href="javascript:void(0);"
+                  (click)="onOpenModal()"
+                  >{{
+                    "components.treatment.quote-report.add-new-button"
+                      | translate
+                  }}
+                </a>
+                <div class="dropdown-divider"></div>
+
+                <a
+                  *ngIf="treatment$?.estimates.length > 0"
+                  class="dropdown-item"
+                  (click)="onDeleteAll(treatment$?.id)"
+                  >{{
+                    "components.treatment.quote-report.delete-all-button"
+                      | translate
+                  }}
+                </a>
+              </div>
+            </div>
+          </ul>
+        </div>
+        <div class="body content file_manager">
+          <div class="row clearfix">
+            <div
+              class="col-lg-12 col-md-12 align-center"
+              *ngIf="spinnerSHow && treatment$?.estimates?.length !== 0"
+            >
+              <div class="spinner-grow" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-3 col-md-4 col-sm-12"
+              *ngFor="let item of estimates"
+            >
+              <div class="card">
+                <div class="file">
+                  <a href="javascript:void(0);">
+                    <div class="hover">
+                      <!-- for doctor -->
+                      <button
+                        *ngIf="item.status !== 'ACCEPTED'"
+                        title="ACCEPTED"
+                        (click)="onUpdateStatus(item, 'ACCEPTED')"
+                        class="btn btn-icon btn-icon-mini btn-round btn-success"
+                      >
+                        <i class="zmdi zmdi-check"></i>
+                      </button>
+                      <button
+                        *ngIf="
+                          item.status !== 'REJECTED' &&
+                          treatment$.status !== 'CONFIRMED' &&
+                          treatment$.status !== 'INPROGRESS' &&
+                          treatment$.status !== 'FINISHED'
+                        "
+                        title="REJECTED"
+                        (click)="onUpdateStatus(item, 'REJECTED')"
+                        class="btn btn-icon btn-icon-mini btn-round btn-warning"
+                      >
+                        <i class="zmdi zmdi-close"></i>
+                      </button>
+
+                      <!-- for admin -->
+                      <button
+                        *ngIf="
+                          item.status !== 'ACCEPTED' &&
+                          this.utils.isSuperAdmin(this.user$)
+                        "
+                        (click)="onDeleteFile(item.id)"
+                        class="btn btn-icon btn-icon-mini btn-round btn-danger"
+                      >
+                        <i class="zmdi zmdi-delete"></i>
+                      </button>
+                    </div>
+                    <a>
+                      <div class="icon" (click)="onOpenPdf(item)">
+                        <i class="zmdi zmdi-file-text"></i>
+                      </div>
+                    </a>
+                    <div class="file-name">
+                      <p class="m-b-5 text-muted">{{ item.file.name }}</p>
+                      <small
+                        >Size: {{ item.file.size }}KB
+                        <span class="date text-muted">{{
+                          item.createdAt
+                        }}</span></small
+                      >
+                      <p class="m-b-5 text-muted">
+                        <span
+                          class="badge"
+                          [ngClass]="getSatusClass(item.status)"
+                          >{{ item.status }}</span
+                        >
+                      </p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <a
+                *ngIf="
+                  treatment$.status !== 'DELIVERED' &&
+                  treatment$.status !== 'FINISHED' &&
+                  treatment$.status !== 'PRODUCTION' &&
+                  !finishAcceptedEstimate() &&
+                  this.utils.isSuperAdmin(this.user$)
+                "
+                class="btn btn-primary btn-sm btn-icon-mini btn-round"
+                style="bottom: 0"
+                (click)="onOpenModal()"
+              >
+                <i
+                  class="zmdi zmdi-plus-circle-o-duplicate"
+                  style="color: white"
+                ></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

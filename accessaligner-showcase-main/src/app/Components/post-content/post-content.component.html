@@ -1,0 +1,23 @@
+<div class="post-section">
+  <div class="paragraphe" *ngFor="let item of post?.slice(0, slice)">
+    <h3>{{ item.title }}</h3>
+    <ng-container *ngIf="item.image != ''; else elseParagraphe">
+      <div class="row">
+        <div class="col-lg-5 col-md-12">
+          <div class="image-container"><img [src]="item.image" alt="" /></div>
+        </div>
+        <div class="col-lg-7 col-md-12">
+          <p>{{ item.content }}</p>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #elseParagraphe>
+      <p>{{ item.content }}</p>
+    </ng-template>
+  </div>
+  <div class="see-more">
+    <button class="button light-button" (click)="seeMore()">
+      {{ isExpanded ? "Voir moins" : "Voir plus" }}
+    </button>
+  </div>
+</div>

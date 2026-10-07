@@ -1,0 +1,8 @@
+.card .body {
+  box-shadow: none;
+}
+
+.progress-plan {
+  height: 6px;
+  border-radius: 25px;
+}

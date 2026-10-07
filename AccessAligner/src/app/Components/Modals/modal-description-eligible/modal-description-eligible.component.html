@@ -1,0 +1,88 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h6 class="title">
+      {{
+        "components.modals.modal-description-eligible.header-title" | translate
+      }}
+    </h6>
+  </div>
+  <div class="modal-body">
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="header">
+            <h2>
+              {{
+                "components.modals.modal-description-eligible.card-title"
+                  | translate
+              }}
+              {{ getTypeTreatement(treatment?.treat) }}
+            </h2>
+          </div>
+          <div class="body content file_manager">
+            <div class="row clearfix">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="container">
+                  <div>
+                    <!-- Your HTML content to be exported -->
+                    <div class="">
+                      <div class="container">
+                        <form class="row clearfix">
+                          <div class="col-lg-12 col-md-12">
+                            <div class="form-group form-float">
+                              <b>
+                                {{
+                                  "components.modals.modal-description-eligible.card-description"
+                                    | translate
+                                }}
+                              </b>
+                              <textarea
+                                rows="4"
+                                class="form-control"
+                                formControlName="description"
+                                (change)="descriptionChange($event)"
+                                class="form-control no-resize"
+                                [placeholder]="
+                                  'components.modals.modal-description-eligible.textarea-placeholder'
+                                    | translate
+                                "
+                              ></textarea>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="float-right">
+      <button
+        type="submit"
+        class="btn btn-primary btn-round"
+        (click)="onSubmit()"
+      >
+        {{
+          "components.modals.modal-description-eligible.save-button" | translate
+        }}
+      </button>
+      <button
+        type="reset"
+        class="btn btn-primary btn-simple btn-round"
+        (click)="close()"
+      >
+        {{
+          "components.modals.modal-description-eligible.cancel-button"
+            | translate
+        }}
+      </button>
+    </div>
+  </div>
+</div>

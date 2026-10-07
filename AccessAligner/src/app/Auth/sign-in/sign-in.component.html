@@ -1,0 +1,79 @@
+<div class="card-plain">
+  <div class="header">
+    <h5>{{ "auth.sign-in.page-title" | translate }}</h5>
+  </div>
+  <form class="form" [formGroup]="signInForm" (ngSubmit)="onSubmit($event)">
+    <div [class]="!errors?.email ? 'input-group ' : 'input-group has-danger'">
+      <input
+        type="text"
+        [class]="
+          !errors?.email ? 'form-control ' : 'form-control form-control-danger'
+        "
+        [placeholder]="'auth.sign-in.form.email-input-placeholder' | translate"
+        formControlName="email"
+      />
+      <span *ngIf="!errors?.email" class="input-group-addon"
+        ><i class="zmdi zmdi-email"></i
+      ></span>
+    </div>
+    <label for="terms" class="text-primary" *ngIf="errors.email">
+      {{ errors.email }}
+    </label>
+
+    <div [class]="'input-group'">
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        [placeholder]="
+          'auth.sign-in.form.password-input-placeholder' | translate
+        "
+        [class]="'form-control'"
+        formControlName="password"
+      />
+      <span class="input-group-addon">
+        <ng-container *ngIf="!showPassword; else elseTemplate">
+          <i
+            type="button"
+            class="zmdi zmdi-lock-outline"
+            (click)="showPassword = !showPassword"
+          ></i>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <i
+            type="button"
+            class="zmdi zmdi-lock-open"
+            style="color: #f96332"
+            (click)="showPassword = !showPassword"
+          ></i>
+        </ng-template>
+      </span>
+    </div>
+    <label for="terms" class="text-primary" *ngIf="errors.credential != ''">
+      {{ errors.credential }}
+    </label>
+    <div class="checkbox">
+      <input id="remember_me" type="checkbox" formControlName="keepLoggedIn" />
+      <label for="remember_me">
+        {{ "auth.sign-in.form.checkbox-label" | translate }}
+      </label>
+    </div>
+    <div class="footer">
+      <button
+        class="btn btn-primary btn-round btn-block"
+        type="submit"
+        [disabled]="!signInForm.valid"
+      >
+        {{ "auth.sign-in.form.signin-button" | translate }}
+      </button>
+      <a
+        [routerLink]="'/sign-up'"
+        class="btn btn-primary btn-simple btn-round btn-block"
+      >
+        {{ "auth.sign-in.form.signup-button" | translate }}</a
+      >
+    </div>
+  </form>
+
+  <a [routerLink]="'/forgot-password'" class=" ">
+    {{ "auth.sign-in.form.forget-password-link" | translate }}
+  </a>
+</div>

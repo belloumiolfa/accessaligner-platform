@@ -1,0 +1,11 @@
+<app-post-banner
+  [title]="post.title"
+  [subTitle]="post.subTitle"
+  [image]="post.image"
+></app-post-banner>
+<app-post-content [post]="post?.text"></app-post-content>
+<app-news
+  [posts]="otherPosts"
+  [title]="'Nos Articles Récents'"
+  [subTitle]="''"
+></app-news>

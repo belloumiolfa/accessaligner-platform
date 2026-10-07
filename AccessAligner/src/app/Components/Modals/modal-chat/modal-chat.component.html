@@ -1,0 +1,112 @@
+<section class="chat-app" style="padding: 50px">
+  <div class="row clearfix">
+    <div class="card">
+      <div class="body overflowhidden">
+        <div class="chat">
+          <div class="chat-header clearfix">
+            <a href="javascript:void(0);" class="btn-detail">
+              <div class="chat-about">
+                <div class="chat-with">
+                  <a
+                    [routerLink]="['/patients/detail/' + treatment.patient.id]"
+                  >
+                    {{ treatment.patient.firstName }}
+                    {{ treatment.patient.lastName }}</a
+                  >
+                  | {{ treatment.treat }}
+                </div>
+                <div class="chat-num-messages">
+                  {{ "components.modals.modal-chat.already" | translate }}
+                  {{ messages.length
+                  }}<span>
+                    {{
+                      "components.modals.modal-chat.messages" | translate
+                    }}</span
+                  >
+                </div>
+              </div>
+            </a>
+          </div>
+          <hr />
+
+          <div class="chat-history clearfix" #chatHistory>
+            <ul class="">
+              <li
+                class="clearfix"
+                *ngFor="let item of messages"
+                [style]="
+                  isSeenByCurrentUser(item) || item.senderId === user$?.id
+                    ? ''
+                    : 'background-color: azure'
+                "
+              >
+                <div *ngIf="item.senderId !== user$?.id; else loggedIn">
+                  <div class="message-data text-right">
+                    <span class="message-data-time">
+                      {{ item.createdAt | date }},
+                      {{ item.createdAt | date : "shortTime" }}
+                    </span>
+                    &nbsp; &nbsp;
+                    <span class="message-data-name">{{ item.name }}</span>
+                    <i class="zmdi zmdi-circle me"></i>
+                  </div>
+                  <div class="message text-right other-message float-right">
+                    {{ item.message }}
+                  </div>
+                </div>
+
+                <ng-template #loggedIn>
+                  <div class="message-data">
+                    <span class="message-data-name"
+                      ><i class="zmdi zmdi-circle online"></i>
+                      {{ item.name }}</span
+                    >
+                    <span class="message-data-time">
+                      {{ item.createdAt | date }},
+                      {{ item.createdAt | date : "shortTime" }}
+                    </span>
+                  </div>
+                  <div class="message my-message">
+                    <span>{{ item.message }}</span>
+                  </div>
+                  <i class="zmdi zmdi-check-all"></i>
+                  &nbsp; &nbsp;
+
+                  <a
+                    *ngFor="let seen of item.seenBy; let i = index"
+                    [routerLink]="[
+                      '/profile/' + seen.id + '/overview?viewProfile=' + true
+                    ]"
+                  >
+                    <span *ngIf="seen.id !== user$.id"> {{ seen.name }}</span
+                    ><span *ngIf="i !== item.seenBy.length && i !== 0">,</span>
+                  </a>
+                </ng-template>
+              </li>
+              <li></li>
+            </ul>
+          </div>
+          <hr />
+          <form>
+            <div class="chat-message clearfix">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  [formControl]="message"
+                  [placeholder]="
+                    'components.modals.modal-chat.form.message-input-placeholder'
+                      | translate
+                  "
+                />
+                <button class="input-group-addon" (click)="sendMessage($event)">
+                  <i class="zmdi zmdi-mail-send"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

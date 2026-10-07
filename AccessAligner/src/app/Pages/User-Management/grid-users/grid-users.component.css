@@ -1,0 +1,12 @@
+.inner-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  ::ng-deep svg image {
+    clip-path: circle(49%);   
+  }
+  

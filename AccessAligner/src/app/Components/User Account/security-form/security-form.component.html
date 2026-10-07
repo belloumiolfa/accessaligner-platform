@@ -1,0 +1,127 @@
+<div class="card">
+  <div class="header">
+    <h2>
+      <strong>
+        {{ "user-account.security-form.header-title-strong" | translate }}
+      </strong>
+      {{ "user-account.security-form.header-title" | translate }}
+    </h2>
+  </div>
+  <div class="body">
+    <form class="form" [formGroup]="securityForm" (ngSubmit)="onSubmit($event)">
+      <!-- User Name -->
+      <div
+        [class]="!errors.userName ? 'input-group' : 'input-group has-danger'"
+      >
+        <input
+          type="text"
+          [class]="
+            !errors.userName
+              ? 'form-control'
+              : 'form-control form-control-danger'
+          "
+          [placeholder]="
+            'user-account.security-form.username-placeholder' | translate
+          "
+          formControlName="userName"
+        />
+        <span *ngIf="!errors.userName" class="input-group-addon"
+          ><i class="zmdi zmdi-account-circle"></i
+        ></span>
+      </div>
+      <label *ngIf="errors.userName" for="terms" class="text-primary">
+        {{ errors.userName }}</label
+      >
+
+      <!-- Current Password  -->
+      <div
+        [class]="
+          !errors.currentPassword ? 'input-group' : 'input-group has-danger'
+        "
+      >
+        <input
+          [type]="showCurrentPassword ? 'text' : 'password'"
+          [placeholder]="
+            'user-account.security-form.old-password-placeholder' | translate
+          "
+          [class]="
+            !errors.currentPassword
+              ? 'form-control'
+              : 'form-control form-control-danger'
+          "
+          formControlName="currentPassword"
+        />
+        <span class="input-group-addon">
+          <ng-container *ngIf="!showCurrentPassword; else elseTemplate">
+            <i
+              type="button"
+              class="zmdi zmdi-lock-outline"
+              (click)="showCurrentPassword = !showCurrentPassword"
+            ></i>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <i
+              type="button"
+              class="zmdi zmdi-lock-open"
+              style="color: #f96332"
+              (click)="showCurrentPassword = !showCurrentPassword"
+            ></i>
+          </ng-template>
+        </span>
+      </div>
+      <label
+        *ngIf="errors.currentPassword !== undefined"
+        for="terms"
+        class="text-primary"
+      >
+        {{ errors.currentPassword }}</label
+      >
+
+      <!-- New Password  -->
+      <div
+        [class]="!errors.newPassword ? 'input-group' : 'input-group has-danger'"
+      >
+        <input
+          [type]="showNewPassword ? 'text' : 'password'"
+          [placeholder]="
+            'user-account.security-form.new-password-placeholder' | translate
+          "
+          [class]="
+            !errors.newPassword
+              ? 'form-control'
+              : 'form-control form-control-danger'
+          "
+          formControlName="newPassword"
+        />
+        <span class="input-group-addon">
+          <ng-container *ngIf="!showNewPassword; else elseTemplate">
+            <i
+              type="button"
+              class="zmdi zmdi-lock-outline"
+              (click)="showNewPassword = !showNewPassword"
+            ></i>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <i
+              type="button"
+              class="zmdi zmdi-lock-open"
+              style="color: #f96332"
+              (click)="showNewPassword = !showNewPassword"
+            ></i>
+          </ng-template>
+        </span>
+      </div>
+      <label
+        *ngIf="errors.newPassword !== undefined"
+        for="terms"
+        class="text-primary"
+      >
+        {{ errors.newPassword }}</label
+      >
+
+      <button class="btn btn-info btn-round">
+        {{ "user-account.security-form.update-button" | translate }}
+      </button>
+    </form>
+  </div>
+</div>

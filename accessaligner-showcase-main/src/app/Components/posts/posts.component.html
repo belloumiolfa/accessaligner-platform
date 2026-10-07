@@ -1,0 +1,48 @@
+<section class="news-section">
+  <div class="wrapper">
+    <div class="title">
+      <h3>Actualités</h3>
+      <p>Explorez nos conseils et actualités</p>
+    </div>
+
+    <ul class="posts row">
+      <li class="post col-lg-6 col-md-12" *ngFor="let post of posts">
+        <a [routerLink]="['/post', post.id]">
+          <div class="image-container">
+            <img [src]="post.image" alt="" />
+            <ul class="menu-post">
+              <li>
+                <span> <i class="bi bi-calendar3"></i> {{ post.date }}</span>
+              </li>
+              <li>
+                <span><i class="bi bi-dot" style="font-size: 20px"></i></span>
+              </li>
+              <li>
+                <span
+                  ><i class="bi bi-chat-square-text"></i> {{ post.comments
+                  }}<span> Commentaire</span>
+                </span>
+              </li>
+              <li>
+                <span><i class="bi bi-dot" style="font-size: 20px"></i></span>
+              </li>
+              <li>
+                <span
+                  ><i class="bi bi-eye"></i>{{ post.comments
+                  }}<span> Vues </span></span
+                >
+              </li>
+            </ul>
+          </div>
+          <h6>
+            {{ post.title }}
+          </h6>
+          <p>
+            {{ post.abstract }} <br />
+            <span class="footer-post">{{ post.source }}</span>
+          </p>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>

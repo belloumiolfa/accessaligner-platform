@@ -1,0 +1,208 @@
+<div class="card-plain">
+  <div class="header">
+    <h5>{{ "auth.sign-up.page-title" | translate }}</h5>
+  </div>
+
+  <form
+    class="form js-sweetalert"
+    [formGroup]="signUpForm"
+    (ngSubmit)="onSubmit($event)"
+  >
+    <div [class]="!errors.userName ? 'input-group' : 'input-group has-danger'">
+      <input
+        type="text"
+        [class]="
+          !errors.userName ? 'form-control' : 'form-control form-control-danger'
+        "
+        [placeholder]="
+          'auth.sign-up.form.user-name-input-placeholder' | translate
+        "
+        formControlName="userName"
+      />
+      <span *ngIf="!errors.userName" class="input-group-addon"
+        ><i class="zmdi zmdi-account-circle"></i
+      ></span>
+    </div>
+    <label *ngIf="errors.userName" for="terms" class="text-primary">
+      {{ errors.userName }}</label
+    >
+    <!-- ------------------------------------------------------ -->
+    <div [class]="!errors.firstName ? 'input-group' : 'input-group has-danger'">
+      <input
+        type="text"
+        [class]="
+          !errors.firstName
+            ? 'form-control'
+            : 'form-control form-control-danger'
+        "
+        [placeholder]="
+          'auth.sign-up.form.firstName-input-placeholder' | translate
+        "
+        formControlName="firstName"
+      />
+      <span *ngIf="!errors.firstName" class="input-group-addon"
+        ><i class="zmdi zmdi-account-circle"></i
+      ></span>
+    </div>
+    <label *ngIf="errors.firstName" for="terms" class="text-primary">
+      {{ errors.firstName }}</label
+    >
+
+    <div [class]="!errors.lastName ? 'input-group' : 'input-group has-danger'">
+      <input
+        type="text"
+        [class]="
+          !errors.lastName ? 'form-control' : 'form-control form-control-danger'
+        "
+        [placeholder]="
+          'auth.sign-up.form.lastName-input-placeholder' | translate
+        "
+        formControlName="lastName"
+      />
+      <span *ngIf="!errors.lastName" class="input-group-addon"
+        ><i class="zmdi zmdi-account-circle"></i
+      ></span>
+    </div>
+    <label *ngIf="errors.lastName" for="terms" class="text-primary">
+      {{ errors.lastName }}</label
+    >
+    <!-- ------------------------------------------------------ -->
+
+    <div [class]="!errors.email ? 'input-group' : 'input-group has-danger'">
+      <input
+        type="text"
+        [class]="
+          !errors.email ? 'form-control' : 'form-control form-control-danger'
+        "
+        [placeholder]="'auth.sign-up.form.email-input-placeholder' | translate"
+        formControlName="email"
+      />
+      <span *ngIf="!errors.email" class="input-group-addon"
+        ><i class="zmdi zmdi-email"></i
+      ></span>
+    </div>
+    <label *ngIf="errors.email" for="terms" class="text-primary">
+      {{ errors.email }}</label
+    >
+
+    <div [class]="!errors.phone ? 'input-group' : 'input-group has-danger'">
+      <input
+        type="text"
+        [class]="
+          !errors.phone ? 'form-control' : 'form-control form-control-danger'
+        "
+        [placeholder]="'auth.sign-up.form.phone-input-placeholder' | translate"
+        formControlName="phone"
+      />
+      <span *ngIf="!errors.phone" class="input-group-addon"
+        ><i class="zmdi zmdi-phone"></i
+      ></span>
+    </div>
+    <label *ngIf="errors.phone" for="terms" class="text-primary">
+      {{ errors.phone }}</label
+    >
+
+    <div [class]="!errors.password ? 'input-group' : 'input-group has-danger'">
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        [placeholder]="
+          'auth.sign-up.form.password-input-placeholder' | translate
+        "
+        [class]="
+          !errors.password ? 'form-control' : 'form-control form-control-danger'
+        "
+        formControlName="password"
+      />
+      <span class="input-group-addon">
+        <ng-container *ngIf="!showPassword; else elseTemplate">
+          <i
+            type="button"
+            class="zmdi zmdi-lock-outline"
+            (click)="showPassword = !showPassword"
+          ></i>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <i
+            type="button"
+            class="zmdi zmdi-lock-open"
+            style="color: #f96332"
+            (click)="showPassword = !showPassword"
+          ></i>
+        </ng-template>
+      </span>
+    </div>
+    <label
+      *ngIf="errors.password !== undefined"
+      for="terms"
+      class="text-primary"
+    >
+      {{ errors.password }}</label
+    >
+
+    <div
+      [class]="
+        !errors.confirmPassword ? 'input-group' : 'input-group has-danger'
+      "
+    >
+      <input
+        [type]="showRepeatPassword ? 'text' : 'password'"
+        [placeholder]="
+          'auth.sign-up.form.confirm-password-input-placeholder' | translate
+        "
+        [class]="
+          !errors.confirmPassword
+            ? 'form-control'
+            : 'form-control form-control-danger'
+        "
+        formControlName="confirmPassword"
+      />
+      <span class="input-group-addon">
+        <ng-container *ngIf="!showRepeatPassword; else elseTemplate">
+          <i
+            type="button"
+            class="zmdi zmdi-lock-outline"
+            (click)="showRepeatPassword = !showRepeatPassword"
+          ></i>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <i
+            type="button"
+            class="zmdi zmdi-lock-open"
+            style="color: #f96332"
+            (click)="showRepeatPassword = !showRepeatPassword"
+          ></i>
+        </ng-template>
+      </span>
+    </div>
+    <label
+      *ngIf="errors.confirmPassword !== undefined"
+      for="terms"
+      class="text-primary"
+    >
+      {{ errors.confirmPassword }}</label
+    >
+
+    <div class="checkbox">
+      <input id="terms" type="checkbox" formControlName="term" />
+      <label for="terms">
+        {{ "auth.sign-up.form.terms-label" | translate }}
+        <a href="javascript:void(0);">{{
+          "auth.sign-up.form.terms-link" | translate
+        }}</a>
+      </label>
+    </div>
+    <div class="footer">
+      <button
+        class="btn btn-primary btn-round btn-block"
+        type="submit"
+        [disabled]="!signUpForm.valid"
+      >
+        {{ "auth.sign-up.form.signup-button" | translate }}
+      </button>
+    </div>
+  </form>
+
+  <a class="link" [routerLink]="'/sign-in'">
+    {{ "auth.sign-up.form.already-have-membership" | translate }}</a
+  >
+</div>

@@ -1,0 +1,30 @@
+<div class="row clearfix">
+  <div class="col-lg-3 col-md-6">
+    <app-total-count-card
+      [icon]="'zmdi zmdi-balance zmdi-hc-3x col-amber'"
+      [title]="'Total treatments'"
+      [total]="totalTreats$"
+    ></app-total-count-card>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <app-total-count-card
+      [icon]="'zmdi zmdi-assignment zmdi-hc-3x col-blue'"
+      [title]="'Finished treatments'"
+      [total]="totalTreatsByStatus$"
+    ></app-total-count-card>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <app-total-count-card
+      [icon]="'zmdi zmdi-accounts-list zmdi-hc-3x col-purple'"
+      [title]="'Total dentists'"
+      [total]="totalDentist$"
+    ></app-total-count-card>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <app-total-count-card
+      [icon]="'zmdi zmdi-account-box zmdi-hc-3x col-green'"
+      [title]="'Total patients'"
+      [total]="totalPatient$"
+    ></app-total-count-card>
+  </div>
+</div>

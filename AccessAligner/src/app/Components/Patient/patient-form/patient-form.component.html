@@ -1,0 +1,142 @@
+<div class="">
+  <div class="header">
+    <h6 class="title">
+      {{ "components.patient.patient-form.header-title" | translate }}
+    </h6>
+  </div>
+  <div class="container">
+    <form
+      class="row clearfix"
+      [formGroup]="patientForm"
+      (ngSubmit)="onSubmit($event)"
+    >
+      <div class="col-lg-6 col-md-12">
+        <div class="form-group form-float">
+          <b>{{
+            "components.patient.patient-form.first-name-label" | translate
+          }}</b>
+          <input
+            formControlName="firstName"
+            type="text"
+            class="form-control"
+            [placeholder]="
+              'components.patient.patient-form.first-name-placeholder'
+                | translate
+            "
+            name="firstName"
+          />
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-12">
+        <div class="form-group form-float">
+          <b>{{
+            "components.patient.patient-form.last-name-label" | translate
+          }}</b>
+
+          <input
+            formControlName="lastName"
+            type="text"
+            class="form-control"
+            [placeholder]="
+              'components.patient.patient-form.last-name-placeholder'
+                | translate
+            "
+            name="lastName"
+          />
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-12">
+        <div class="form-group form-float">
+          <b>{{
+            "components.patient.patient-form.birthday-label" | translate
+          }}</b>
+
+          <input
+            formControlName="birthday"
+            id="datetimepicker"
+            type="date"
+            class="form-control birthday"
+            [placeholder]="
+              'components.patient.patient-form.birthday-placeholder' | translate
+            "
+          />
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-12">
+        <div class="form-group form-float">
+          <b>{{ "components.patient.patient-form.sex-label" | translate }}</b>
+
+          <div class="form-group form-float">
+            <div class="radio inlineblock m-r-20">
+              <input
+                formControlName="sex"
+                type="radio"
+                name="sex"
+                id="male"
+                class="with-gap"
+                value="Male"
+              />
+              <label for="male">{{
+                "components.patient.patient-form.male-label" | translate
+              }}</label>
+            </div>
+            <div class="radio inlineblock">
+              <input
+                formControlName="sex"
+                type="radio"
+                name="sex"
+                id="Female"
+                class="with-gap"
+                value="Female"
+              />
+              <label for="Female">{{
+                "components.patient.patient-form.Female-label" | translate
+              }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-12 col-md-12">
+        <b>
+          {{ "components.patient.patient-form.comment-label" | translate }}</b
+        >
+        <div class="form-group">
+          <div class="form-line">
+            <textarea
+              rows="4"
+              formControlName="comment"
+              name="comment"
+              class="form-control no-resize"
+              [placeholder]="
+                'components.patient.patient-form.comment-placeholder'
+                  | translate
+              "
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-12 col-md-12">
+        <label *ngIf="errors.existPatient" for="terms" class="text-primary">
+          {{ errors.existPatient }}</label
+        >
+      </div>
+      <div class="float-right">
+        <button
+          type="submit"
+          class="btn btn-primary btn-round"
+          [disabled]="!this.patient$?.id && !this.patientForm.valid"
+        >
+          {{ "components.patient.patient-form.save-button" | translate }}
+        </button>
+        <button type="reset" class="btn btn-primary btn-simple btn-round">
+          {{ "components.patient.patient-form.cancel-button" | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

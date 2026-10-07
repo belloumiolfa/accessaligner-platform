@@ -1,0 +1,122 @@
+<header>
+  <div class="">
+    <nav class="nav-bar">
+      <div class="logo">
+        <img src="../assets/images/logo.png" alt="" />
+      </div>
+      <i class="bi bi-list"></i>
+
+      <ul class="">
+        <li>
+          <a [routerLink]="['/home']">Accueil</a>
+        </li>
+        <li>
+          <a [routerLink]="['/about']">À propos de nous</a>
+        </li>
+        <li class="dropdown">
+          <a [routerLink]=""
+            >Nos Aligneurs <i class="bi bi-chevron-down"></i
+          ></a>
+          <ul class="dropdown-content">
+            <li><a [routerLink]="['/aligners']">Comment ça marche ?</a></li>
+            <li><a [routerLink]="['/why']">Pourquoi nous ?</a></li>
+          </ul>
+        </li>
+        <li>
+          <a [routerLink]="['/faq']">FAQ</a>
+        </li>
+        <li>
+          <a [routerLink]="['/blog']">Blog </a>
+        </li>
+      </ul>
+      <div class="connect">
+        <button
+          class="button light-button"
+          onclick="location.href = 'http://localhost:4200/sign-in'"
+        >
+          Se connecter
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<header style="position: fixed; top: 0">
+  <div class="">
+    <nav class="nav-bar">
+      <a class="logo" [routerLink]="['/home']">
+        <img src="../assets/images/logo.png" alt="" />
+      </a>
+      <i class="bi bi-list"></i>
+
+      <ul class="">
+        <li>
+          <a [routerLink]="['/home']">Accueil</a>
+        </li>
+        <li>
+          <a [routerLink]="['/about']">À propos de nous</a>
+        </li>
+        <li class="dropdown">
+          <a [routerLink]="[]"
+            >Nos Aligneurs <i class="bi bi-chevron-down"></i
+          ></a>
+          <ul class="dropdown-content">
+            <li><a [routerLink]="['/aligners']">Comment ça marche ?</a></li>
+            <li><a [routerLink]="['/why']">Pourquoi nous ?</a></li>
+          </ul>
+        </li>
+        <li>
+          <a [routerLink]="['/faq']">FAQ</a>
+        </li>
+        <li>
+          <a [routerLink]="['/blog']">Blog </a>
+        </li>
+      </ul>
+      <div class="connect">
+        <button
+          class="button light-button"
+          onclick="
+            location.href = 'http://dashbaord.accessaligner.com./sign-in'
+          "
+        >
+          Se connecter
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- End of desktop navigation menu   -->
+
+<!-- <div class="container1">
+  <img src="https://via.placeholder.com/204x44" />
+</div>
+
+<div class="container2">
+  <div class="container2-inner">
+    <div class="menu">
+      <div class="menu-item">Accueil</div>
+      <div class="menu-item">À propos de nous</div>
+      <div class="menu-dropdown">
+        <div class="menu-item">Nos Aligneurs</div>
+        <div class="arrow-container">
+          <div class="arrow"></div>
+        </div>
+      </div>
+      <div class="menu-item">FAQ</div>
+      <div class="menu-dropdown">
+        <div class="menu-item">Blog</div>
+        <div class="arrow-container">
+          <div class="arrow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="button-container">
+  <div class="button">
+    <div class="button-text">Se connecter</div>
+  </div>
+</div>
+ -->

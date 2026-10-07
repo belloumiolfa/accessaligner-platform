@@ -1,0 +1,74 @@
+<div *ngIf="action === true">
+  <div class="overlay" style="display: block" (click)="action = !action"></div>
+
+  <div [class]="'task-menu open stretchRight'">
+    <div class="slim_scroll">
+      <div class="card tasks">
+        <div class="header">
+          <h2 i18n>
+            <strong>{{
+              "layout.task-menu.header-title-strong" | translate
+            }}</strong>
+            {{ "layout.task-menu.header-title" | translate }}
+          </h2>
+        </div>
+        <div class="scrollable-container">
+          <div
+            class="alert alert-info"
+            role="alert"
+            *ngIf="treatment$.length === 0"
+          >
+            <div class="container">
+              <div class="alert-icon">
+                <i class="zmdi zmdi-alert-circle-o"></i>
+              </div>
+              <strong>
+                {{ "layout.task-menu.not-fount-msg" | translate }}</strong
+              >
+            </div>
+          </div>
+
+          <div class="body m-b-10" *ngFor="let item of treatment$">
+            <a [routerLink]="'/treatment/' + item.id">
+              <span class="text-muted"
+                >{{ item.patient?.firstName }} - {{ item.id }}
+                <span
+                  [ngClass]="getStatusClass(item.status)"
+                  class="float-right badge"
+                  >{{ item.status }}</span
+                >
+                <br />
+                <div class="progress">
+                  <div
+                    class="progress-bar l-turquoise"
+                    role="progressbar"
+                    [attr.aria-valuenow]="calculateCompletionPercentage(item)"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    [style]="
+                      'width:' + calculateCompletionPercentage(item) + '%'
+                    "
+                  ></div>
+                </div>
+                <span class="float-right"
+                  >{{ calculateCompletionPercentage(item) }}%</span
+                ></span
+              >
+              <br />
+              <p>
+                Dr. <small> {{ item.patient?.doctor?.userName }} </small>
+              </p>
+
+              <ul class="list-unstyled team-info">
+                <app-team-info
+                  [treatment]="item"
+                  [addAction]="false"
+                ></app-team-info>
+              </ul>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

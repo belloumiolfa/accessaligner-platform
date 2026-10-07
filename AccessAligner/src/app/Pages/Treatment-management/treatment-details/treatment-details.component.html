@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="row">
+    <div class="col-md-6">
+      <app-activities [treatment$]="treatment$"></app-activities>
+    </div>
+
+    <div class="col-md-6">
+      <app-treatment-header [treatment$]="treatment$"></app-treatment-header>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <app-infos [treatment$]="treatment$" [detailsTreat]="true"></app-infos>
+</div>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <app-photographs></app-photographs>
+  </div>
+  <div class="col-md-12 col-sm-12">
+    <app-clinics></app-clinics>
+  </div>
+</div>
+<div class="card">
+  <div class="row">
+    <div class="col-md-12 col-lg-12">
+      <app-teeth></app-teeth>
+    </div>
+  </div>
+</div>
+
+<app-treatment-status></app-treatment-status>
+
+<button
+  class="btn btn-primary btn-icon btn-icon-mini btn-round fixed-button btn-lg"
+  (click)="openModal(treatment$)"
+>
+  <i class="zmdi zmdi-email"> </i>
+</button>

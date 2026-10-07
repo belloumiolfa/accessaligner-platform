@@ -1,0 +1,39 @@
+<!-- doctor and if ther is one Quote/estmate accepted and if all photographs and clinics are added -->
+
+<div class="card">
+  <div class="header">
+    <h2>
+      <strong
+        >{{
+          "components.treatment.treatment-eligible.header-title-strong"
+            | translate
+        }}
+      </strong>
+      {{ "components.treatment.treatment-eligible.header-title" | translate }}
+    </h2>
+  </div>
+  <div class=" ">
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12" style="text-align: center">
+        <button
+          class="btn btn-round btn-success"
+          (click)="treatmentEligibility('QUALIFIED')"
+        >
+          {{
+            "components.treatment.treatment-eligible.eligible-button"
+              | translate
+          }}
+        </button>
+        <button
+          class="btn btn-round btn-warning"
+          (click)="treatmentEligibility('UNQUALIFIED')"
+        >
+          {{
+            "components.treatment.treatment-eligible.not-eligible-button"
+              | translate
+          }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

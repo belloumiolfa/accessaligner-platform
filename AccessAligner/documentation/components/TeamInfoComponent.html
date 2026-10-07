@@ -1,0 +1,1084 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>front-end documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">front-end documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  TeamInfoComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/Shared/Elements/team-info/team-info.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-team-info</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>RouterModule</code>
+                                <code><a href="../components/ProfileImageComponent.html" target="_self" >ProfileImageComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./team-info.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./team-info.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#errors" >errors</a>
+                            </li>
+                            <li>
+                                <a href="#show" >show</a>
+                            </li>
+                            <li>
+                                <a href="#user$" >user$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#utils" >utils</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#navigateToPorfile" >navigateToPorfile</a>
+                            </li>
+                            <li>
+                                <a href="#onAdd" >onAdd</a>
+                            </li>
+                            <li>
+                                <a href="#onRemove" >onRemove</a>
+                            </li>
+                            <li>
+                                <a href="#onReset" >onReset</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addAction" >addAction</a>
+                            </li>
+                            <li>
+                                <a href="#treatment" >treatment</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(modalService: <a href="../injectables/ModalService.html" target="_self">ModalService</a>, treatmentService: <a href="../injectables/TreatmentService.html" target="_self">TreatmentService</a>, appService: <a href="../injectables/AppService.html" target="_self">AppService</a>, spinner: NgxSpinnerService, handleErrors: <a href="../injectables/HandleErrorsService.html" target="_self">HandleErrorsService</a>, handleAlerts: <a href="../injectables/HandleAlertsService.html" target="_self">HandleAlertsService</a>, utils: <a href="../injectables/UtilsService.html" target="_self">UtilsService</a>, router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/Shared/Elements/team-info/team-info.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>modalService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ModalService.html" target="_self" >ModalService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>treatmentService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TreatmentService.html" target="_self" >TreatmentService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>appService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AppService.html" target="_self" >AppService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>spinner</td>
+                                                  
+                                                        <td>
+                                                                    <code>NgxSpinnerService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>handleErrors</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/HandleErrorsService.html" target="_self" >HandleErrorsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>handleAlerts</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/HandleAlertsService.html" target="_self" >HandleAlertsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>utils</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UtilsService.html" target="_self" >UtilsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="addAction"></a>
+                        <b>addAction</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/Shared/Elements/team-info/team-info.component.ts:23</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="treatment"></a>
+                        <b>treatment</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/Shared/Elements/team-info/team-info.component.ts:22</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToPorfile"></a>
+                    <span class="name">
+                        <span ><b>navigateToPorfile</b></span>
+                        <a href="#navigateToPorfile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToPorfile(id: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/Shared/Elements/team-info/team-info.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onAdd"></a>
+                    <span class="name">
+                        <span ><b>onAdd</b></span>
+                        <a href="#onAdd"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onAdd(treatment: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/app/Shared/Elements/team-info/team-info.component.ts:91</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>treatment</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onRemove"></a>
+                    <span class="name">
+                        <span ><b>onRemove</b></span>
+                        <a href="#onRemove"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onRemove()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/app/Shared/Elements/team-info/team-info.component.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onReset"></a>
+                    <span class="name">
+                        <span ><b>onReset</b></span>
+                        <a href="#onReset"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onReset()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">src/app/Shared/Elements/team-info/team-info.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errors"></a>
+                    <span class="name">
+                        <span ><b>errors</b></span>
+                        <a href="#errors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/Shared/Elements/team-info/team-info.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="show"></a>
+                    <span class="name">
+                        <span ><b>show</b></span>
+                        <a href="#show"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/Shared/Elements/team-info/team-info.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="user$"></a>
+                    <span class="name">
+                        <span ><b>user$</b></span>
+                        <a href="#user$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/Shared/Elements/team-info/team-info.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="utils"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>utils</b></span>
+                        <a href="#utils"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/UtilsService.html" target="_self" >UtilsService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/Shared/Elements/team-info/team-info.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Component, Input } from &#x27;@angular/core&#x27;;
+import { Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { ModalService } from &#x27;../../../Core/Helpers/modal.service&#x27;;
+import { ProfileImageComponent } from &#x27;../profile-image/profile-image.component&#x27;;
+import { TreatmentService } from &#x27;../../../Core/Services/TreatService/treatment.service&#x27;;
+import Swal from &#x27;sweetalert2&#x27;;
+import { AppService } from &#x27;../../../Core/Services/app.service&#x27;;
+import { NgxSpinnerService } from &#x27;ngx-spinner&#x27;;
+import { HandleErrorsService } from &#x27;../../../Core/Helpers/handle-errors.service&#x27;;
+import { HandleAlertsService } from &#x27;../../../Core/Helpers/handle-alerts.service&#x27;;
+import { UtilsService } from &#x27;../../../Auth/Helpers/utils.service&#x27;;
+
+@Component({
+  selector: &#x27;app-team-info&#x27;,
+  standalone: true,
+  imports: [CommonModule, RouterModule, ProfileImageComponent],
+  templateUrl: &#x27;./team-info.component.html&#x27;,
+  styleUrl: &#x27;./team-info.component.css&#x27;,
+})
+export class TeamInfoComponent {
+  @Input() treatment!: any;
+  @Input() addAction!: boolean;
+  errors: any;
+  user$: any;
+
+  constructor(
+    private modalService: ModalService,
+    private treatmentService: TreatmentService,
+    private appService: AppService,
+    private spinner: NgxSpinnerService,
+    private handleErrors: HandleErrorsService,
+    private handleAlerts: HandleAlertsService,
+    public utils: UtilsService,
+    private router: Router
+  ) {
+    this.appService.getUser$.subscribe((data) &#x3D;&gt; (this.user$ &#x3D; data));
+  }
+
+  show &#x3D; false;
+
+  onReset() {
+    Swal.fire({
+      title: &#x27;Are you sure?&#x27;,
+      text: &quot;You won&#x27;t be able to revert this!&quot;,
+      icon: &#x27;warning&#x27;,
+      showCancelButton: true,
+      confirmButtonColor: &#x27;#DD6B55&#x27;,
+      cancelButtonColor: &#x27;#b9b9b9&#x27;,
+      confirmButtonText: &#x27;Yes, delete it!&#x27;,
+      customClass: {
+        popup: &#x27;sweet-alert&#x27;,
+      },
+    }).then(
+      (result: any) &#x3D;&gt; {
+        this.treatmentService.resetTeam(this.treatment?.id).subscribe(
+          (data) &#x3D;&gt; {
+            this.appService.setTreatment({ ...this.treatment, team: [] });
+            this.show &#x3D; false;
+            this.spinner.hide();
+
+            this.handleAlerts.handleSweetAlert(data, &#x27;success&#x27;, false);
+          },
+          (err) &#x3D;&gt; {
+            this.errors &#x3D; this.handleErrors.handleError(err);
+            this.spinner.hide();
+
+            this.handleAlerts.handleSweetAlert(
+              &#x27;Check your data input carefully.&#x27;,
+              &#x27;error&#x27;,
+              false
+            );
+          }
+        );
+      },
+      (err: any) &#x3D;&gt; {}
+    );
+  }
+
+  navigateToPorfile(id: any) {
+    this.router.navigate([&#x27;/profile/&#x27; + id + &#x27;/overview&#x27;], {
+      queryParams: { viewProfile: true },
+    });
+  }
+
+  onRemove() {
+    this.show &#x3D; false;
+    this.modalService.openRemoveTeamModal(this.treatment);
+  }
+
+  onAdd(treatment: any) {
+    this.show &#x3D; false;
+
+    this.modalService.openTeamModal(treatment);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ul class&#x3D;&quot;list-unstyled team-info&quot;&gt;
+  &lt;ng-container *ngIf&#x3D;&quot;treatment?.team?.length &#x3D;&#x3D;&#x3D; 0; else elseTemplate&quot;&gt;
+    &lt;small style&#x3D;&quot;margin-right: 5px&quot;&gt;No team yet ! &lt;/small&gt;
+    &lt;a
+      href&#x3D;&quot;javascript:void(0);&quot;
+      role&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;onAdd(treatment)&quot;
+      *ngIf&#x3D;&quot;
+        treatment.status !&#x3D;&#x3D; &#x27;FINISHED&#x27; &amp;&amp;
+        treatment.status !&#x3D;&#x3D; &#x27;UNQUALIFIED&#x27; &amp;&amp;
+        treatment.status !&#x3D;&#x3D; &#x27;CANCELED&#x27; &amp;&amp;
+        this.utils.isSuperAdmin(this.user$)
+      &quot;
+    &gt;
+      &lt;i class&#x3D;&quot;zmdi zmdi-plus&quot;&gt;&lt;/i&gt;
+    &lt;/a&gt;
+  &lt;/ng-container&gt;
+
+  &lt;ng-template #elseTemplate&gt;
+    &lt;li *ngFor&#x3D;&quot;let item of treatment?.team&quot;&gt;
+      &lt;a [routerLink]&#x3D;&quot;&#x27;/profile/&#x27; + item.id&quot;
+      (click)&#x3D;&quot;navigateToPorfile(item.id)&quot;
+      &gt;
+        &lt;app-profile-image
+          [photoId]&#x3D;&quot;item?.profile?.photo?.id&quot;
+          [expression]&#x3D;&quot;
+            item?.profile?.firstName !&#x3D;&#x3D; null &amp;&amp;
+            item?.profile?.lastName !&#x3D;&#x3D; null
+              ? item?.profile?.firstName + &#x27; &#x27; + item?.profile?.lastName
+              : item?.userName
+          &quot;
+        &gt;&lt;/app-profile-image&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ng-template&gt;
+
+  &lt;li
+    style&#x3D;&quot;margin-left: 15px&quot;
+    *ngIf&#x3D;&quot;!!addAction &amp;&amp; treatment?.team?.length &gt; 0 &amp;&amp; !utils.isDoctor(user$)&quot;
+  &gt;
+    &lt;ul
+      class&#x3D;&quot;header-dropdown&quot;
+      *ngIf&#x3D;&quot;
+        treatment.status !&#x3D;&#x3D; &#x27;FINISHED&#x27; &amp;&amp;
+        treatment.status !&#x3D;&#x3D; &#x27;UNQUALIFIED&#x27; &amp;&amp;
+        treatment.status !&#x3D;&#x3D; &#x27;CANCELED&#x27;
+      &quot;
+    &gt;
+      &lt;div [class]&#x3D;&quot;show &#x3D;&#x3D;&#x3D; true ? &#x27;dropdown show&#x27; : &#x27;dropdown&#x27;&quot;&gt;
+        &lt;a
+          class&#x3D;&quot;dropdown-toggle&quot;
+          href&#x3D;&quot;javascript:void(0);&quot;
+          role&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;show &#x3D; !show&quot;
+        &gt;
+          &lt;i class&#x3D;&quot;zmdi zmdi-more&quot;&gt;&lt;/i&gt;
+        &lt;/a&gt;
+
+        &lt;div
+          [class]&#x3D;&quot;
+            show &#x3D;&#x3D;&#x3D; true ? &#x27;dropdown-menu slideUp&#x27; : &#x27;dropdown-menu slideDown&#x27;
+          &quot;
+        &gt;
+          &lt;a
+            class&#x3D;&quot;dropdown-item&quot;
+            href&#x3D;&quot;javascript:void(0);&quot;
+            (click)&#x3D;&quot;onAdd(treatment)&quot;
+            &gt;Add&lt;/a
+          &gt;
+          &lt;a
+            class&#x3D;&quot;dropdown-item&quot;
+            href&#x3D;&quot;javascript:void(0);&quot;
+            (click)&#x3D;&quot;onRemove()&quot;
+          &gt;
+            Remove
+          &lt;/a&gt;
+          &lt;div class&#x3D;&quot;dropdown-divider&quot;&gt;&lt;/div&gt;
+          &lt;a
+            class&#x3D;&quot;dropdown-item&quot;
+            href&#x3D;&quot;javascript:void(0);&quot;
+            (click)&#x3D;&quot;onReset()&quot;
+            &gt;Reset&lt;/a
+          &gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ul class="list-unstyled team-info">  <ng-container *ngIf="treatment?.team?.length === 0; else elseTemplate">    <small style="margin-right: 5px">No team yet ! </small>    <a      href="javascript:void(0);"      role="button"      (click)="onAdd(treatment)"      *ngIf="        treatment.status !== \'FINISHED\' &&        treatment.status !== \'UNQUALIFIED\' &&        treatment.status !== \'CANCELED\' &&        this.utils.isSuperAdmin(this.user$)      "    >      <i class="zmdi zmdi-plus"></i>    </a>  </ng-container>  <ng-template #elseTemplate>    <li *ngFor="let item of treatment?.team">      <a [routerLink]="\'/profile/\' + item.id"      (click)="navigateToPorfile(item.id)"      >        <app-profile-image          [photoId]="item?.profile?.photo?.id"          [expression]="            item?.profile?.firstName !== null &&            item?.profile?.lastName !== null              ? item?.profile?.firstName + \' \' + item?.profile?.lastName              : item?.userName          "        ></app-profile-image>      </a>    </li>  </ng-template>  <li    style="margin-left: 15px"    *ngIf="!!addAction && treatment?.team?.length > 0 && !utils.isDoctor(user$)"  >    <ul      class="header-dropdown"      *ngIf="        treatment.status !== \'FINISHED\' &&        treatment.status !== \'UNQUALIFIED\' &&        treatment.status !== \'CANCELED\'      "    >      <div [class]="show === true ? \'dropdown show\' : \'dropdown\'">        <a          class="dropdown-toggle"          href="javascript:void(0);"          role="button"          (click)="show = !show"        >          <i class="zmdi zmdi-more"></i>        </a>        <div          [class]="            show === true ? \'dropdown-menu slideUp\' : \'dropdown-menu slideDown\'          "        >          <a            class="dropdown-item"            href="javascript:void(0);"            (click)="onAdd(treatment)"            >Add</a          >          <a            class="dropdown-item"            href="javascript:void(0);"            (click)="onRemove()"          >            Remove          </a>          <div class="dropdown-divider"></div>          <a            class="dropdown-item"            href="javascript:void(0);"            (click)="onReset()"            >Reset</a          >        </div>      </div>    </ul>  </li></ul></div>'
+    var COMPONENTS = [{'name': 'AcceptDecisionComponent', 'selector': 'app-accept-decision'},{'name': 'AcceptFormComponent', 'selector': 'app-accept-form'},{'name': 'AccountFormComponent', 'selector': 'app-account-form'},{'name': 'ActivitiesComponent', 'selector': 'app-activities'},{'name': 'AddFileComponent', 'selector': 'app-add-file'},{'name': 'AddNewPatientComponent', 'selector': 'app-add-new-patient'},{'name': 'AddNewPlanComponent', 'selector': 'app-add-new-plan'},{'name': 'AddNewTreatmentComponent', 'selector': 'app-add-new-treatment'},{'name': 'AdminDecisionComponent', 'selector': 'app-admin-decision'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ArchiveDoctorsComponent', 'selector': 'app-archive-doctors'},{'name': 'ArchiveTreatmentsComponent', 'selector': 'app-archive-treatments'},{'name': 'BackHomeComponent', 'selector': 'app-back-home'},{'name': 'BlockHeaderComponent', 'selector': 'app-block-header'},{'name': 'ClinicsComponent', 'selector': 'app-clinics'},{'name': 'ComingPageComponent', 'selector': 'app-coming-page'},{'name': 'CompanyDetailsComponent', 'selector': 'app-company-details'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ConfirmDecisionComponent', 'selector': 'app-confirm-decision'},{'name': 'ConfirmFormComponent', 'selector': 'app-confirm-form'},{'name': 'ContentDevisTreatComponent', 'selector': 'app-content-devis-treat'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'Error403Component', 'selector': 'app-error403'},{'name': 'Error500Component', 'selector': 'app-error500'},{'name': 'Error503Component', 'selector': 'app-error503'},{'name': 'FinishTreatmentComponent', 'selector': 'app-finish-treatment'},{'name': 'ForgetPasswordComponent', 'selector': 'app-forget-password'},{'name': 'GetPlansTreatComponent', 'selector': 'app-get-plans-treat'},{'name': 'GridUsersComponent', 'selector': 'app-grid-users'},{'name': 'HelpLinkComponent', 'selector': 'app-help-link'},{'name': 'InfoProfileMenuComponent', 'selector': 'app-info-profile-menu'},{'name': 'InfosComponent', 'selector': 'app-infos'},{'name': 'LayoutContainerComponent', 'selector': 'app-layout-container'},{'name': 'LeftSidebarComponent', 'selector': 'app-left-sidebar'},{'name': 'LeftSidebarMobilComponent', 'selector': 'app-left-sidebar-mobil'},{'name': 'LinksComponent', 'selector': 'app-links'},{'name': 'ListDoctorsComponent', 'selector': 'app-list-doctors'},{'name': 'ListUsersComponent', 'selector': 'app-list-users'},{'name': 'LockedScreenComponent', 'selector': 'app-locked-screen'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MenuAppComponent', 'selector': 'app-menu-app'},{'name': 'MiniLeftbarComponent', 'selector': 'app-mini-leftbar'},{'name': 'ModalDescriptionEligibleComponent', 'selector': 'app-modal-description-eligible'},{'name': 'ModalDisplayItemPlanComponent', 'selector': 'app-modal-display-item-plan'},{'name': 'ModalDisplayPhotoComponent', 'selector': 'app-modal-display-photo'},{'name': 'ModalDisplayReportComponent', 'selector': 'app-modal-display-report'},{'name': 'ModalEstimateComponent', 'selector': 'app-modal-estimate'},{'name': 'ModalfinishtreatComponent', 'selector': 'app-modalfinishtreat'},{'name': 'ModalPlanDetailsComponent', 'selector': 'app-modal-plan-details'},{'name': 'ModalRemoveTeamComponent', 'selector': 'app-modal-remove-team'},{'name': 'ModalTeamInfoComponent', 'selector': 'app-modal-team-info'},{'name': 'NewAdminComponent', 'selector': 'app-new-admin'},{'name': 'NewPlanComponent', 'selector': 'app-new-plan'},{'name': 'NewTreatClinicsComponent', 'selector': 'app-new-treat-clinics'},{'name': 'NewTreatGeneralComponent', 'selector': 'app-new-treat-general'},{'name': 'NewTreatPatientComponent', 'selector': 'app-new-treat-patient'},{'name': 'NewTreatPhotosComponent', 'selector': 'app-new-treat-photos'},{'name': 'NewTreatTeethComponent', 'selector': 'app-new-treat-teeth'},{'name': 'NewUserDetailsComponent', 'selector': 'app-new-user-details'},{'name': 'NotifMenuComponent', 'selector': 'app-notif-menu'},{'name': 'OfflineComponent', 'selector': 'app-offline'},{'name': 'OverlayMenuComponent', 'selector': 'app-overlay-menu'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PatientComponent', 'selector': 'app-patient'},{'name': 'PatientDetailComponent', 'selector': 'app-patient-detail'},{'name': 'PatientDisplayInformationsComponent', 'selector': 'app-patient-display-informations'},{'name': 'PatientFormComponent', 'selector': 'app-patient-form'},{'name': 'PatientInfosComponent', 'selector': 'app-patient-infos'},{'name': 'PatientListComponent', 'selector': 'app-patient-list'},{'name': 'PatientTreatClinicsInformationsComponent', 'selector': 'app-patient-treat-clinics-informations'},{'name': 'PatientTreatInformationsComponent', 'selector': 'app-patient-treat-informations'},{'name': 'PatientTreatPhotosInformationsComponent', 'selector': 'app-patient-treat-photos-informations'},{'name': 'PatientTreatTeethInformationsComponent', 'selector': 'app-patient-treat-teeth-informations'},{'name': 'PhotoFormComponent', 'selector': 'app-photo-form'},{'name': 'PhotographsComponent', 'selector': 'app-photographs'},{'name': 'PlanComponent', 'selector': 'app-plan'},{'name': 'PlanListComponent', 'selector': 'app-plan-list'},{'name': 'PreloaderComponent', 'selector': 'app-preloader'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileImageComponent', 'selector': 'app-profile-image'},{'name': 'PublicLayoutComponent', 'selector': 'app-public-layout'},{'name': 'QuoteReportComponent', 'selector': 'app-quote-report'},{'name': 'RigthSidebarComponent', 'selector': 'app-rigth-sidebar'},{'name': 'ScheduleComponent', 'selector': 'app-schedule'},{'name': 'SecurityFormComponent', 'selector': 'app-security-form'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SignInComponent', 'selector': 'app-sign-in'},{'name': 'SignUpComponent', 'selector': 'app-sign-up'},{'name': 'TaskMenuComponent', 'selector': 'app-task-menu'},{'name': 'TeamInfoComponent', 'selector': 'app-team-info'},{'name': 'TeethComponent', 'selector': 'app-teeth'},{'name': 'TimelineTreatmentsComponent', 'selector': 'app-timeline-treatments'},{'name': 'TreatmentComponent', 'selector': 'app-treatment'},{'name': 'TreatmentConfirmationComponent', 'selector': 'app-treatment-confirmation'},{'name': 'TreatmentDetailsComponent', 'selector': 'app-treatment-details'},{'name': 'TreatmentEligibleComponent', 'selector': 'app-treatment-eligible'},{'name': 'TreatmentHeaderComponent', 'selector': 'app-treatment-header'},{'name': 'TreatmentListComponent', 'selector': 'app-treatment-list'},{'name': 'TreatmentsComponent', 'selector': 'app-treatments'},{'name': 'TreatmentStatusComponent', 'selector': 'app-treatment-status'},{'name': 'UpdatePasswordComponent', 'selector': 'app-update-password'},{'name': 'UpdatePatientComponent', 'selector': 'app-update-patient'},{'name': 'UsersOverviewComponent', 'selector': 'app-users-overview'},{'name': 'UsersPageComponent', 'selector': 'app-users-page'},{'name': 'WaitingComponent', 'selector': 'app-waiting'}];
+    var DIRECTIVES = [{'name': 'GetPhotoDirective', 'selector': '[appGetPhoto]'}];
+    var ACTUAL_COMPONENT = {'name': 'TeamInfoComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TeamInfoComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

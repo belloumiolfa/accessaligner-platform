@@ -1,0 +1,57 @@
+<div class="footer">
+  <ul class="social_link list-unstyled">
+    <li>
+      <a
+        target="_blank"
+        href="www.google.com/maps/search/16+immeuble+albaraka++rue+habib+thameur+5iéme+etage"
+        title="Location"
+        ><i class="zmdi zmdi zmdi-google-maps"></i
+      ></a>
+    </li>
+
+    <!-- social links  -->
+    <li *ngFor="let item of links">
+      <a target="_blank" [href]="item.link" [title]="item.socialMedia"
+        ><i [class]="item.icone"></i
+      ></a>
+    </li>
+
+    <li>
+      <a target="_blank" href="https://wa.me/50747433" title="Whatsapp"
+        ><i class="zmdi zmdi-whatsapp"></i
+      ></a>
+    </li>
+
+    <li>
+      <a
+        target="_blank"
+        href="mailto:contact@accessaligner.com"
+        title="Google plus"
+        ><i class="zmdi zmdi-google-plus"></i
+      ></a>
+    </li>
+  </ul>
+  <hr />
+  <ul>
+    <li>
+      <a target="_blank" [href]="domain + '/#contact'">{{
+        "shared.links.contact" | translate
+      }}</a>
+    </li>
+    <li>
+      <a target="_blank" [href]="domain + '/#about'">
+        {{ "shared.links.about" | translate }}
+      </a>
+    </li>
+    <li>
+      <a target="_blank" [href]="domain + '/#howorks'">
+        {{ "shared.links.services" | translate }}
+      </a>
+    </li>
+    <li>
+      <a target="_blank" [href]="domain + '/#contact'">{{
+        "shared.links.faq" | translate
+      }}</a>
+    </li>
+  </ul>
+</div>

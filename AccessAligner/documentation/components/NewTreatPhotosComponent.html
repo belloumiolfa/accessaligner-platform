@@ -1,0 +1,1546 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>front-end documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">front-end documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  NewTreatPhotosComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/Components/New Treatment/new-treat-photos/new-treat-photos.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-new-treat-photos</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>NgxDropzoneModule</code>
+                            <code>ReactiveFormsModule</code>
+                                <code><a href="../components/AddFileComponent.html" target="_self" >AddFileComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./new-treat-photos.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./new-treat-photos.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#comment" >comment</a>
+                            </li>
+                            <li>
+                                <a href="#errors" >errors</a>
+                            </li>
+                            <li>
+                                <a href="#existedFiles$" >existedFiles$</a>
+                            </li>
+                            <li>
+                                <a href="#files" >files</a>
+                            </li>
+                            <li>
+                                <a href="#photos" >photos</a>
+                            </li>
+                            <li>
+                                <a href="#treatment$" >treatment$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#deletePhoto" >deletePhoto</a>
+                            </li>
+                            <li>
+                                <a href="#existedFile" >existedFile</a>
+                            </li>
+                            <li>
+                                <a href="#onChangeFile" >onChangeFile</a>
+                            </li>
+                            <li>
+                                <a href="#onDeleteFile" >onDeleteFile</a>
+                            </li>
+                            <li>
+                                <a href="#onReset" >onReset</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                <a href="#updatePhotosComment" >updatePhotosComment</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(appService: <a href="../injectables/AppService.html" target="_self">AppService</a>, treatmentService: <a href="../injectables/TreatmentService.html" target="_self">TreatmentService</a>, handleErrors: <a href="../injectables/HandleErrorsService.html" target="_self">HandleErrorsService</a>, handleAlerts: <a href="../injectables/HandleAlertsService.html" target="_self">HandleAlertsService</a>, spinner: NgxSpinnerService, stepService: <a href="../injectables/StepsService.html" target="_self">StepsService</a>, fileServices: <a href="../injectables/FileService.html" target="_self">FileService</a>, router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/Components/New Treatment/new-treat-photos/new-treat-photos.component.ts:107</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>appService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AppService.html" target="_self" >AppService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>treatmentService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TreatmentService.html" target="_self" >TreatmentService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>handleErrors</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/HandleErrorsService.html" target="_self" >HandleErrorsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>handleAlerts</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/HandleAlertsService.html" target="_self" >HandleAlertsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>spinner</td>
+                                                  
+                                                        <td>
+                                                                    <code>NgxSpinnerService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>stepService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/StepsService.html" target="_self" >StepsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>fileServices</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FileService.html" target="_self" >FileService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deletePhoto"></a>
+                    <span class="name">
+                        <span ><b>deletePhoto</b></span>
+                        <a href="#deletePhoto"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deletePhoto(id: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="148"
+                                    class="link-to-prism">src/app/Components/New Treatment/new-treat-photos/new-treat-photos.component.ts:148</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="existedFile"></a>
+                    <span class="name">
+                        <span ><b>existedFile</b></span>
+                        <a href="#existedFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>existedFile(photo: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="135"
+                                    class="link-to-prism">src/app/Components/New Treatment/new-treat-photos/new-treat-photos.component.ts:135</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>photo</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onChangeFile"></a>
+                    <span class="name">
+                        <span ><b>onChangeFile</b></span>
+                        <a href="#onChangeFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onChangeFile(e: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="143"
+                                    class="link-to-prism">src/app/Components/New Treatment/new-treat-photos/new-treat-photos.component.ts:143</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>e</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDeleteFile"></a>
+                    <span class="name">
+                        <span ><b>onDeleteFile</b></span>
+                        <a href="#onDeleteFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDeleteFile(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">src/app/Components/New Treatment/new-treat-photos/new-treat-photos.component.ts:179</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onReset"></a>
+                    <span class="name">
+                        <span ><b>onReset</b></span>
+                        <a href="#onReset"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onReset()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="281"
+                                    class="link-to-prism">src/app/Components/New Treatment/new-treat-photos/new-treat-photos.component.ts:281</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit(e: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="210"
+                                    class="link-to-prism">src/app/Components/New Treatment/new-treat-photos/new-treat-photos.component.ts:210</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>e</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updatePhotosComment"></a>
+                    <span class="name">
+                        <span ><b>updatePhotosComment</b></span>
+                        <a href="#updatePhotosComment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updatePhotosComment()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="238"
+                                    class="link-to-prism">src/app/Components/New Treatment/new-treat-photos/new-treat-photos.component.ts:238</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="comment"></a>
+                    <span class="name">
+                        <span ><b>comment</b></span>
+                        <a href="#comment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormControl(&quot;&quot;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/Components/New Treatment/new-treat-photos/new-treat-photos.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errors"></a>
+                    <span class="name">
+                        <span ><b>errors</b></span>
+                        <a href="#errors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/Components/New Treatment/new-treat-photos/new-treat-photos.component.ts:107</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="existedFiles$"></a>
+                    <span class="name">
+                        <span ><b>existedFiles$</b></span>
+                        <a href="#existedFiles$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/Components/New Treatment/new-treat-photos/new-treat-photos.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="files"></a>
+                    <span class="name">
+                        <span ><b>files</b></span>
+                        <a href="#files"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>File[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/Components/New Treatment/new-treat-photos/new-treat-photos.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="photos"></a>
+                    <span class="name">
+                        <span ><b>photos</b></span>
+                        <a href="#photos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+      id: 0,
+      required: true,
+      name: &quot;smileExp&quot;,
+      labelEn: &quot;Smiley expression&quot;,
+      label: &quot;Face sourire&quot;,
+    },
+    {
+      id: 1,
+      required: true,
+      name: &quot;overview&quot;,
+      labelEn: &quot;Overview&quot;,
+      label: &quot;Profile&quot;,
+    },
+    {
+      id: 2,
+      required: true,
+      name: &quot;vestClosedOcc&quot;,
+      labelEn: &quot;Vestibular closed occlusion&quot;,
+      label: &quot;Occlussion Fermée vestibulaire&quot;,
+    },
+    {
+      id: 3,
+      required: true,
+      name: &quot;closedLeftLatOCC&quot;,
+      labelEn: &quot;Closed Left Lateral Occlusion&quot;,
+      label: &quot;Occlussion Fermée Latérale gauche&quot;,
+    },
+    {
+      id: 4,
+      required: true,
+      name: &quot;closedRightLatOcc&quot;,
+      labelEn: &quot;Closed Right Lateral Occlusion&quot;,
+      label: &quot;Occlussion Fermée Latérale droite&quot;,
+    },
+    {
+      id: 5,
+      required: true,
+      name: &quot;supMaxiOcc&quot;,
+      labelEn: &quot;Superior maxillary Occlusal view&quot;,
+      label: &quot;Vue occlusale du maxillaire sup&quot;,
+    },
+    {
+      id: 6,
+      required: true,
+      name: &quot;jawOccView&quot;,
+      labelEn: &quot;Jaw Occlusal view&quot;,
+      label: &quot;Vue occlusale de la mandibule&quot;,
+    },
+    {
+      id: 7,
+      required: true,
+      name: &quot;panoramicRadio&quot;,
+      labelEn: &quot;Panoramic Radio&quot;,
+      label: &quot;Radio panoramique&quot;,
+    },
+    {
+      id: 8,
+      required: true,
+      name: &quot;inocclusion&quot;,
+      labelEn: &quot;Inocclusion&quot;,
+      label: &quot;Inocclusion&quot;,
+    },
+    {
+      id: 9,
+      required: false,
+      name: &quot;teleradio&quot;,
+      labelEn: &quot;Teleradio&quot;,
+      label: &quot;Téléradio &quot;,
+    },
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/Components/New Treatment/new-treat-photos/new-treat-photos.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="treatment$"></a>
+                    <span class="name">
+                        <span ><b>treatment$</b></span>
+                        <a href="#treatment$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/Components/New Treatment/new-treat-photos/new-treat-photos.component.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &quot;@angular/common&quot;;
+import { Component } from &quot;@angular/core&quot;;
+import { NgxDropzoneModule } from &quot;ngx-dropzone&quot;;
+import { AddFileComponent } from &quot;../../../Shared/Elements/add-file/add-file.component&quot;;
+import { AppService } from &quot;../../../Core/Services/app.service&quot;;
+import { TreatmentService } from &quot;../../../Core/Services/TreatService/treatment.service&quot;;
+import { NgxSpinnerService } from &quot;ngx-spinner&quot;;
+import { HandleAlertsService } from &quot;../../../Core/Helpers/handle-alerts.service&quot;;
+import { HandleErrorsService } from &quot;../../../Core/Helpers/handle-errors.service&quot;;
+import Swal from &quot;sweetalert2&quot;;
+import { StepsService } from &quot;../../../Core/Helpers/Steps/steps.service&quot;;
+import { Router } from &quot;@angular/router&quot;;
+import { FileService } from &quot;../../../Core/Helpers/file.service&quot;;
+import { FormControl, ReactiveFormsModule } from &quot;@angular/forms&quot;;
+
+@Component({
+  selector: &quot;app-new-treat-photos&quot;,
+  standalone: true,
+  imports: [
+    CommonModule,
+    NgxDropzoneModule,
+    ReactiveFormsModule,
+    AddFileComponent,
+  ],
+  templateUrl: &quot;./new-treat-photos.component.html&quot;,
+  styleUrl: &quot;./new-treat-photos.component.css&quot;,
+})
+export class NewTreatPhotosComponent {
+  files: File[] &#x3D; [];
+  existedFiles$: any[] &#x3D; [];
+  comment &#x3D; new FormControl(&quot;&quot;);
+
+  photos &#x3D; [
+    {
+      id: 0,
+      required: true,
+      name: &quot;smileExp&quot;,
+      labelEn: &quot;Smiley expression&quot;,
+      label: &quot;Face sourire&quot;,
+    },
+    {
+      id: 1,
+      required: true,
+      name: &quot;overview&quot;,
+      labelEn: &quot;Overview&quot;,
+      label: &quot;Profile&quot;,
+    },
+    {
+      id: 2,
+      required: true,
+      name: &quot;vestClosedOcc&quot;,
+      labelEn: &quot;Vestibular closed occlusion&quot;,
+      label: &quot;Occlussion Fermée vestibulaire&quot;,
+    },
+    {
+      id: 3,
+      required: true,
+      name: &quot;closedLeftLatOCC&quot;,
+      labelEn: &quot;Closed Left Lateral Occlusion&quot;,
+      label: &quot;Occlussion Fermée Latérale gauche&quot;,
+    },
+    {
+      id: 4,
+      required: true,
+      name: &quot;closedRightLatOcc&quot;,
+      labelEn: &quot;Closed Right Lateral Occlusion&quot;,
+      label: &quot;Occlussion Fermée Latérale droite&quot;,
+    },
+    {
+      id: 5,
+      required: true,
+      name: &quot;supMaxiOcc&quot;,
+      labelEn: &quot;Superior maxillary Occlusal view&quot;,
+      label: &quot;Vue occlusale du maxillaire sup&quot;,
+    },
+    {
+      id: 6,
+      required: true,
+      name: &quot;jawOccView&quot;,
+      labelEn: &quot;Jaw Occlusal view&quot;,
+      label: &quot;Vue occlusale de la mandibule&quot;,
+    },
+    {
+      id: 7,
+      required: true,
+      name: &quot;panoramicRadio&quot;,
+      labelEn: &quot;Panoramic Radio&quot;,
+      label: &quot;Radio panoramique&quot;,
+    },
+    {
+      id: 8,
+      required: true,
+      name: &quot;inocclusion&quot;,
+      labelEn: &quot;Inocclusion&quot;,
+      label: &quot;Inocclusion&quot;,
+    },
+    {
+      id: 9,
+      required: false,
+      name: &quot;teleradio&quot;,
+      labelEn: &quot;Teleradio&quot;,
+      label: &quot;Téléradio &quot;,
+    },
+  ];
+
+  treatment$!: any;
+  errors: any;
+
+  constructor(
+    private appService: AppService,
+    private treatmentService: TreatmentService,
+    private handleErrors: HandleErrorsService,
+    private handleAlerts: HandleAlertsService,
+    private spinner: NgxSpinnerService,
+    private stepService: StepsService,
+    private fileServices: FileService,
+    private router: Router
+  ) {
+    this.stepService.markdetectedChange(false);
+    this.stepService.markCLikcedSave(false);
+
+    this.appService.getTreatment$.subscribe((data) &#x3D;&gt; {
+      this.treatment$ &#x3D; data;
+
+      this.existedFiles$ &#x3D; this.fileServices.getFiles(
+        this.treatment$?.photos,
+        this.treatment$?.id
+      );
+    });
+
+    this.stepService.markdetectedChange(false);
+    this.stepService.markCLikcedSave(false);
+  }
+
+  existedFile(photo: any) {
+    const result &#x3D; this.existedFiles$!?.filter(
+      (file: any) &#x3D;&gt; file?.name?.split(&quot;.&quot;)[0] &#x3D;&#x3D;&#x3D; photo.name
+    );
+
+    return result[0];
+  }
+
+  onChangeFile(e: any) {
+    this.files.push(e);
+    this.stepService.markdetectedChange(true);
+  }
+
+  deletePhoto(id: any) {
+    this.spinner.show();
+
+    this.treatmentService.deleteFile(id).subscribe(
+      (data) &#x3D;&gt; {
+        this.existedFiles$ &#x3D; this.existedFiles$.filter(
+          (file: any) &#x3D;&gt; file.id !&#x3D;&#x3D; id
+        );
+        this.appService.setTreatment({
+          ...this.treatment$,
+          photos: this.treatment$.photos.filter(
+            (photo: any) &#x3D;&gt; photo.id !&#x3D;&#x3D; id
+          ),
+        });
+
+        this.spinner.hide();
+        this.handleAlerts.handleSweetAlert(data.message, &quot;success&quot;, false);
+      },
+      (err) &#x3D;&gt; {
+        this.errors &#x3D; this.handleErrors.handleError(err);
+        this.spinner.hide();
+
+        this.handleAlerts.handleSweetAlert(
+          &quot;Check your data input carefully.&quot;,
+          &quot;error&quot;,
+          false
+        );
+      }
+    );
+  }
+
+  onDeleteFile(event: any) {
+    Swal.fire({
+      title: &quot;Are you sure?&quot;,
+      text: &quot;You won&#x27;t be able to revert this!&quot;,
+      icon: &quot;warning&quot;,
+      showCancelButton: true,
+      confirmButtonColor: &quot;#DD6B55&quot;,
+      cancelButtonColor: &quot;#b9b9b9&quot;,
+      confirmButtonText: &quot;Yes, delete it!&quot;,
+      customClass: {
+        popup: &quot;sweet-alert&quot;, // corrected class name
+      },
+    }).then(
+      (result) &#x3D;&gt; {
+        // delete from API
+        this.deletePhoto(event.id); // delete from existed files
+      },
+      (err) &#x3D;&gt; {
+        this.errors &#x3D; this.handleErrors.handleError(err);
+        this.spinner.hide();
+        console.log(err);
+
+        this.handleAlerts.handleSweetAlert(
+          &quot;Check your data input carefully.&quot;,
+          &quot;error&quot;,
+          false
+        );
+      }
+    );
+  }
+
+  onSubmit(e: any) {
+    this.stepService.markCLikcedSave(true);
+    e.preventDefault();
+    this.spinner.show();
+    if (this.files.length &gt; 0)
+      this.treatmentService
+        .addTreatPhotos(this.files, this.treatment$.id, &quot;photo&quot;)
+        .subscribe(
+          (data) &#x3D;&gt; {
+            this.appService.setTreatment(data);
+            this.files &#x3D; [];
+            this.updatePhotosComment();
+          },
+
+          (err) &#x3D;&gt; {
+            this.errors &#x3D; this.handleErrors.handleError(err);
+            this.spinner.hide();
+
+            this.handleAlerts.handleSweetAlert(
+              &quot;Check your data input carefully.&quot;,
+              &quot;error&quot;,
+              false
+            );
+          }
+        );
+    else this.updatePhotosComment();
+  }
+
+  updatePhotosComment() {
+    console.log(this.comment?.value);
+
+    if (this.comment?.value) {
+      // update treatment to add teeth comment
+      this.treatmentService
+        .addTreatInfo(
+          { ...this.treatment$, photosComment: this.comment.value },
+          this.treatment$.patient.id
+        )
+        .subscribe(
+          (data) &#x3D;&gt; {
+            this.spinner.hide();
+
+            this.handleAlerts.handleSweetAlert(
+              &quot;Photographes has been successfully Added!&quot;,
+              &quot;success&quot;,
+              false
+            );
+
+            this.router.navigate([
+              &quot;/treatment/new-treatment/ &quot; +
+                this.treatment$.patient.id +
+                &quot;/clinics&quot;,
+            ]);
+
+            this.stepService.markCurrentStep(4);
+            this.stepService.markCurrentStep(4);
+          },
+
+          (err) &#x3D;&gt; {
+            this.errors &#x3D; this.handleErrors.handleError(err);
+            this.spinner.hide();
+
+            this.handleAlerts.handleSweetAlert(
+              &quot;Check your data input carefully.&quot;,
+              &quot;error&quot;,
+              false
+            );
+          }
+        );
+    }
+  }
+  onReset() {
+    this.files &#x3D; [];
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;section class&#x3D;&quot;body&quot;&gt;
+  &lt;div class&#x3D;&quot;container-fluid&quot;&gt;
+    &lt;div class&#x3D;&quot;row clearfix&quot;&gt;
+      &lt;div class&#x3D;&quot;col-lg-12 col-md-12 col-sm-12 align-center&quot;&gt;
+        &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+          &lt;div class&#x3D;&quot;container&quot;&gt;
+            &lt;div class&#x3D;&quot;header&quot;&gt;
+              &lt;h6 class&#x3D;&quot;title&quot;&gt;Import your patient&#x27;s clinical photos.&lt;/h6&gt;
+              &lt;p class&#x3D;&quot; &quot;&gt;
+                Take sufficient quality photos to aid our orthodontic team&#x27;s
+                interpretation.
+                &lt;!-- &lt;strong&gt;O.F.L. &#x3D; Occlusion fermée latérale&lt;/strong&gt; --&gt;
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;form class&#x3D;&quot;row clearfix&quot;&gt;
+              &lt;div
+                class&#x3D;&quot;col-lg-3 col-md-4 col-sm-12 align-center&quot;
+                *ngFor&#x3D;&quot;let item of photos&quot;
+              &gt;
+                &lt;app-add-file
+                  [existedFile]&#x3D;&quot;existedFile(item)&quot;
+                  [item]&#x3D;&quot;item&quot;
+                  [acceptedType]&#x3D;&quot;&#x27;image/jpeg,image/jpg,image/png,image/gif&#x27;&quot;
+                  (file)&#x3D;&quot;onChangeFile($event)&quot;
+                  (deletedFile)&#x3D;&quot;onDeleteFile($event)&quot;
+                &gt;&lt;/app-add-file&gt;
+              &lt;/div&gt;
+
+              &lt;div class&#x3D;&quot;col-sm-12&quot;&gt;
+                &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                  &lt;b class&#x3D;&quot;float-left&quot;&gt;Comment&lt;/b&gt;
+                  &lt;textarea
+                    [formControl]&#x3D;&quot;comment&quot;
+                    [defaultValue]&#x3D;&quot;
+                      this.treatment$?.photosComment
+                        ? this.treatment$?.photosComment
+                        : &#x27;&#x27;
+                    &quot;
+                    rows&#x3D;&quot;2&quot;
+                    class&#x3D;&quot;form-control no-resize&quot;
+                    placeholder&#x3D;&quot;Comment&quot;
+                  &gt;&lt;/textarea&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;div class&#x3D;&quot;col-12&quot;&gt;
+                &lt;div class&#x3D;&quot;float-left&quot;&gt;
+                  &lt;button
+                    type&#x3D;&quot;submit&quot;
+                    class&#x3D;&quot;btn btn-primary btn-round&quot;
+                    (click)&#x3D;&quot;onSubmit($event)&quot;
+                  &gt;
+                    Save
+                  &lt;/button&gt;
+                  &lt;button
+                    type&#x3D;&quot;reset&quot;
+                    class&#x3D;&quot;btn btn-primary btn-simple btn-round&quot;
+                    (click)&#x3D;&quot;onReset()&quot;
+                  &gt;
+                    Cancel
+                  &lt;/button&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/form&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><section class="body">  <div class="container-fluid">    <div class="row clearfix">      <div class="col-lg-12 col-md-12 col-sm-12 align-center">        <div class="form-group form-float">          <div class="container">            <div class="header">              <h6 class="title">Import your patient\'s clinical photos.</h6>              <p class=" ">                Take sufficient quality photos to aid our orthodontic team\'s                interpretation.                <!-- <strong>O.F.L. = Occlusion fermée latérale</strong> -->              </p>            </div>            <form class="row clearfix">              <div                class="col-lg-3 col-md-4 col-sm-12 align-center"                *ngFor="let item of photos"              >                <app-add-file                  [existedFile]="existedFile(item)"                  [item]="item"                  [acceptedType]="\'image/jpeg,image/jpg,image/png,image/gif\'"                  (file)="onChangeFile($event)"                  (deletedFile)="onDeleteFile($event)"                ></app-add-file>              </div>              <div class="col-sm-12">                <div class="form-group">                  <b class="float-left">Comment</b>                  <textarea                    [formControl]="comment"                    [defaultValue]="                      this.treatment$?.photosComment                        ? this.treatment$?.photosComment                        : \'\'                    "                    rows="2"                    class="form-control no-resize"                    placeholder="Comment"                  ></textarea>                </div>              </div>              <div class="col-12">                <div class="float-left">                  <button                    type="submit"                    class="btn btn-primary btn-round"                    (click)="onSubmit($event)"                  >                    Save                  </button>                  <button                    type="reset"                    class="btn btn-primary btn-simple btn-round"                    (click)="onReset()"                  >                    Cancel                  </button>                </div>              </div>            </form>          </div>        </div>      </div>    </div>  </div></section></div>'
+    var COMPONENTS = [{'name': 'AcceptDecisionComponent', 'selector': 'app-accept-decision'},{'name': 'AcceptFormComponent', 'selector': 'app-accept-form'},{'name': 'AccountFormComponent', 'selector': 'app-account-form'},{'name': 'ActivitiesComponent', 'selector': 'app-activities'},{'name': 'AddFileComponent', 'selector': 'app-add-file'},{'name': 'AddNewPatientComponent', 'selector': 'app-add-new-patient'},{'name': 'AddNewPlanComponent', 'selector': 'app-add-new-plan'},{'name': 'AddNewTreatmentComponent', 'selector': 'app-add-new-treatment'},{'name': 'AdminDecisionComponent', 'selector': 'app-admin-decision'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ArchiveDoctorsComponent', 'selector': 'app-archive-doctors'},{'name': 'ArchiveTreatmentsComponent', 'selector': 'app-archive-treatments'},{'name': 'BackHomeComponent', 'selector': 'app-back-home'},{'name': 'BlockHeaderComponent', 'selector': 'app-block-header'},{'name': 'ClinicsComponent', 'selector': 'app-clinics'},{'name': 'ComingPageComponent', 'selector': 'app-coming-page'},{'name': 'CompanyDetailsComponent', 'selector': 'app-company-details'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ConfirmDecisionComponent', 'selector': 'app-confirm-decision'},{'name': 'ConfirmFormComponent', 'selector': 'app-confirm-form'},{'name': 'ContentDevisTreatComponent', 'selector': 'app-content-devis-treat'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'Error403Component', 'selector': 'app-error403'},{'name': 'Error500Component', 'selector': 'app-error500'},{'name': 'Error503Component', 'selector': 'app-error503'},{'name': 'FinishTreatmentComponent', 'selector': 'app-finish-treatment'},{'name': 'ForgetPasswordComponent', 'selector': 'app-forget-password'},{'name': 'GetPlansTreatComponent', 'selector': 'app-get-plans-treat'},{'name': 'GridUsersComponent', 'selector': 'app-grid-users'},{'name': 'HelpLinkComponent', 'selector': 'app-help-link'},{'name': 'InfoProfileMenuComponent', 'selector': 'app-info-profile-menu'},{'name': 'InfosComponent', 'selector': 'app-infos'},{'name': 'LayoutContainerComponent', 'selector': 'app-layout-container'},{'name': 'LeftSidebarComponent', 'selector': 'app-left-sidebar'},{'name': 'LeftSidebarMobilComponent', 'selector': 'app-left-sidebar-mobil'},{'name': 'LinksComponent', 'selector': 'app-links'},{'name': 'ListDoctorsComponent', 'selector': 'app-list-doctors'},{'name': 'ListUsersComponent', 'selector': 'app-list-users'},{'name': 'LockedScreenComponent', 'selector': 'app-locked-screen'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MenuAppComponent', 'selector': 'app-menu-app'},{'name': 'MiniLeftbarComponent', 'selector': 'app-mini-leftbar'},{'name': 'ModalDescriptionEligibleComponent', 'selector': 'app-modal-description-eligible'},{'name': 'ModalDisplayItemPlanComponent', 'selector': 'app-modal-display-item-plan'},{'name': 'ModalDisplayPhotoComponent', 'selector': 'app-modal-display-photo'},{'name': 'ModalDisplayReportComponent', 'selector': 'app-modal-display-report'},{'name': 'ModalEstimateComponent', 'selector': 'app-modal-estimate'},{'name': 'ModalfinishtreatComponent', 'selector': 'app-modalfinishtreat'},{'name': 'ModalPlanDetailsComponent', 'selector': 'app-modal-plan-details'},{'name': 'ModalRemoveTeamComponent', 'selector': 'app-modal-remove-team'},{'name': 'ModalTeamInfoComponent', 'selector': 'app-modal-team-info'},{'name': 'NewAdminComponent', 'selector': 'app-new-admin'},{'name': 'NewPlanComponent', 'selector': 'app-new-plan'},{'name': 'NewTreatClinicsComponent', 'selector': 'app-new-treat-clinics'},{'name': 'NewTreatGeneralComponent', 'selector': 'app-new-treat-general'},{'name': 'NewTreatPatientComponent', 'selector': 'app-new-treat-patient'},{'name': 'NewTreatPhotosComponent', 'selector': 'app-new-treat-photos'},{'name': 'NewTreatTeethComponent', 'selector': 'app-new-treat-teeth'},{'name': 'NewUserDetailsComponent', 'selector': 'app-new-user-details'},{'name': 'NotifMenuComponent', 'selector': 'app-notif-menu'},{'name': 'OfflineComponent', 'selector': 'app-offline'},{'name': 'OverlayMenuComponent', 'selector': 'app-overlay-menu'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PatientComponent', 'selector': 'app-patient'},{'name': 'PatientDetailComponent', 'selector': 'app-patient-detail'},{'name': 'PatientDisplayInformationsComponent', 'selector': 'app-patient-display-informations'},{'name': 'PatientFormComponent', 'selector': 'app-patient-form'},{'name': 'PatientInfosComponent', 'selector': 'app-patient-infos'},{'name': 'PatientListComponent', 'selector': 'app-patient-list'},{'name': 'PatientTreatClinicsInformationsComponent', 'selector': 'app-patient-treat-clinics-informations'},{'name': 'PatientTreatInformationsComponent', 'selector': 'app-patient-treat-informations'},{'name': 'PatientTreatPhotosInformationsComponent', 'selector': 'app-patient-treat-photos-informations'},{'name': 'PatientTreatTeethInformationsComponent', 'selector': 'app-patient-treat-teeth-informations'},{'name': 'PhotoFormComponent', 'selector': 'app-photo-form'},{'name': 'PhotographsComponent', 'selector': 'app-photographs'},{'name': 'PlanComponent', 'selector': 'app-plan'},{'name': 'PlanListComponent', 'selector': 'app-plan-list'},{'name': 'PreloaderComponent', 'selector': 'app-preloader'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileImageComponent', 'selector': 'app-profile-image'},{'name': 'PublicLayoutComponent', 'selector': 'app-public-layout'},{'name': 'QuoteReportComponent', 'selector': 'app-quote-report'},{'name': 'RigthSidebarComponent', 'selector': 'app-rigth-sidebar'},{'name': 'ScheduleComponent', 'selector': 'app-schedule'},{'name': 'SecurityFormComponent', 'selector': 'app-security-form'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SignInComponent', 'selector': 'app-sign-in'},{'name': 'SignUpComponent', 'selector': 'app-sign-up'},{'name': 'TaskMenuComponent', 'selector': 'app-task-menu'},{'name': 'TeamInfoComponent', 'selector': 'app-team-info'},{'name': 'TeethComponent', 'selector': 'app-teeth'},{'name': 'TimelineTreatmentsComponent', 'selector': 'app-timeline-treatments'},{'name': 'TreatmentComponent', 'selector': 'app-treatment'},{'name': 'TreatmentConfirmationComponent', 'selector': 'app-treatment-confirmation'},{'name': 'TreatmentDetailsComponent', 'selector': 'app-treatment-details'},{'name': 'TreatmentEligibleComponent', 'selector': 'app-treatment-eligible'},{'name': 'TreatmentHeaderComponent', 'selector': 'app-treatment-header'},{'name': 'TreatmentListComponent', 'selector': 'app-treatment-list'},{'name': 'TreatmentsComponent', 'selector': 'app-treatments'},{'name': 'TreatmentStatusComponent', 'selector': 'app-treatment-status'},{'name': 'UpdatePasswordComponent', 'selector': 'app-update-password'},{'name': 'UpdatePatientComponent', 'selector': 'app-update-patient'},{'name': 'UsersOverviewComponent', 'selector': 'app-users-overview'},{'name': 'UsersPageComponent', 'selector': 'app-users-page'},{'name': 'WaitingComponent', 'selector': 'app-waiting'}];
+    var DIRECTIVES = [{'name': 'GetPhotoDirective', 'selector': '[appGetPhoto]'}];
+    var ACTUAL_COMPONENT = {'name': 'NewTreatPhotosComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'NewTreatPhotosComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,83 @@
+<section class="body">
+  <div class="container-fluid">
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 align-center">
+        <div class="form-group form-float">
+          <div class="container">
+            <div class="header">
+              <h6 class="title">
+                {{
+                  "components.new-treatment.new-treat-photos.header-title"
+                    | translate
+                }}
+              </h6>
+              <p class=" ">
+                {{
+                  "components.new-treatment.new-treat-photos.description"
+                    | translate
+                }}
+              </p>
+            </div>
+            <form class="row clearfix">
+              <div
+                class="col-lg-3 col-md-4 col-sm-12 align-center"
+                *ngFor="let item of photos"
+              >
+                <app-add-file
+                  [existedFile]="existedFile(item)"
+                  [item]="item"
+                  [acceptedType]="'image/jpeg,image/jpg,image/png,image/gif'"
+                  (file)="onChangeFile($event)"
+                  (deletedFile)="onDeleteFile($event)"
+                ></app-add-file>
+              </div>
+
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <b class="float-left">{{
+                    "components.new-treatment.new-treat-photos.comment-label"
+                      | translate
+                  }}</b>
+                  <textarea
+                    [formControl]="comment"
+                    rows="2"
+                    class="form-control no-resize"
+                    [placeholder]="
+                      'components.new-treatment.new-treat-photos.comment-placeholder'
+                        | translate
+                    "
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="float-left">
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-round"
+                    (click)="onSubmit($event)"
+                  >
+                    {{
+                      "components.new-treatment.new-treat-photos.save-button"
+                        | translate
+                    }}
+                  </button>
+                  <button
+                    type="reset"
+                    class="btn btn-primary btn-simple btn-round"
+                    (click)="onReset()"
+                  >
+                    {{
+                      "components.new-treatment.new-treat-photos.cancel-button"
+                        | translate
+                    }}
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,112 @@
+<div class="card text-center">
+  <ng-container *ngIf="existedFile != undefined; else elseTemplate">
+    <div class="content file_manager">
+      <div class="container-fluid">
+        <div class="card">
+          <div class="file">
+            <a href="javascript:void(0);">
+              <div class="hover">
+                <button
+                  type="button"
+                  class="btn btn-icon btn-icon-mini btn-round btn-danger"
+                  (click)="deleteFile(existedFile)"
+                >
+                  <i class="zmdi zmdi-delete"></i>
+                </button>
+              </div>
+              <div class="image" (click)="onOpenPhoto(existedFile)">
+                <img
+                  *ngIf="
+                    this.existedFile.type.includes('image');
+                    else elseTemplate
+                  "
+                  [src]="existedFile?.imageUrl"
+                  alt="img"
+                  class="img-fluid"
+                />
+
+                <ng-template #elseTemplate>
+                  <div
+                    class="d-flex justify-content-center"
+                    *ngIf="showSpinner"
+                  >
+                    <div class="spinner-grow" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
+
+                  <stl-model-viewer
+                    [stlModels]="[safeUrlToString(existedFile?.imageUrl)]"
+                    [hasControls]="true"
+                  ></stl-model-viewer>
+                </ng-template>
+              </div>
+              <div class="file-name">
+                <p class="m-b-5 text-muted">
+                  <small>{{ item.label }}</small>
+                </p>
+                <small>
+                  <span class="date text-muted">
+                    {{ existedFile.createdAt | date }}
+                  </span></small
+                >
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #elseTemplate>
+    <div class="body">
+      <ngx-dropzone
+        [id]="item.id + '-' + item.name"
+        class="dropzone"
+        style="height: auto"
+        [multiple]="false"
+        maxFiles="1"
+        (change)="onSelect($event, item)"
+      >
+        <ngx-dropzone-label>
+          <div class="dz-message">
+            <div class="drag-icon-cph">
+              <!-- Update the icon  -->
+              <i class="material-icons">touch_app</i>
+            </div>
+          </div></ngx-dropzone-label
+        >
+        <ngx-dropzone-image-preview
+          style="height: 100px; width: auto"
+          ngProjectAs="ngx-dropzone-preview"
+          *ngFor="let f of selectedFiles"
+          [file]="f"
+          [removable]="true"
+          (removed)="onRemove(f)"
+        >
+          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+        </ngx-dropzone-image-preview>
+      </ngx-dropzone>
+      <div
+        class="progress-container progress-info"
+        *ngIf="uploadProgress > 0"
+        style="margin-bottom: 10px"
+      >
+        <div class="progress">
+          <div
+            class="progress-bar progress-bar-warning"
+            role="progressbar"
+            [attr.aria-valuenow]="uploadProgress"
+            [attr.aria-valuemin]="uploadProgress"
+            aria-valuemax="100"
+            [style.width.%]="uploadProgress"
+          >
+            <span class="progress-value">{{ uploadProgress }} %</span>
+          </div>
+        </div>
+      </div>
+      <small>{{ item.label }}</small>
+      <small *ngIf="item.required == true" style="color: red"> *</small>
+    </div>
+  </ng-template>
+</div>

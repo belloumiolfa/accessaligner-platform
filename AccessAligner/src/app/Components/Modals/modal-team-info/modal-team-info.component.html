@@ -1,0 +1,37 @@
+<div>
+  <div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="title">
+          {{ "components.modals.modal-team-info.header-title" | translate }}
+        </h4>
+      </div>
+      <div class="modal-body" *ngIf="dropdownList.length > 0">
+        <div class="">
+          <b>{{
+            "components.modals.modal-team-info.body-title" | translate
+          }}</b>
+          <ng-multiselect-dropdown
+            *ngIf="dropdownList.length > 0"
+            [placeholder]="
+              'components.modals.modal-team-info.select-input-placeholder'
+                | translate
+            "
+            [settings]="dropdownSettings"
+            [data]="dropdownList"
+            [(ngModel)]="selectedItems"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-round" (click)="onSaveTeam()">
+          {{ "components.modals.modal-team-info.save-button" | translate }}
+        </button>
+        <button class="btn btn-default btn-round" (click)="onResetTeam()">
+          {{ "components.modals.modal-team-info.cancel-button" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

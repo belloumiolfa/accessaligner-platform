@@ -1,0 +1,339 @@
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12">
+    <div class="card">
+      <div class="body content file_manager">
+        <div class="row clearfix">
+          <div class="col-lg-12 col-md-12" #contentToExport>
+            <div
+              class="header row"
+              style="
+                margin-top: 40px;
+                margin-bottom: 60px;
+                padding: 5px;
+                background-color: #269aab;
+                border-radius: 30px;
+              "
+            >
+              <img
+                src="assets/images/logo-h.png"
+                loading="lazy"
+                alt=""
+                style="margin: 3px"
+              />
+              <h1 class="text-right col-7" style="color: #fff">Devis</h1>
+            </div>
+
+            <div class="">
+              <div class="col-lg-12 col-md-12">
+                <div class="row clearfix">
+                  <div class="col-lg-6 col-md-6">
+                    <div class="">
+                      <h6 class="m-b-15">Acess Aligner</h6>
+                      <p>
+                        {{
+                          "components.modals.content-devis-treat.page-address"
+                            | translate
+                        }}
+                      </p>
+                      <p>
+                        {{
+                          "components.modals.content-devis-treat.page-city"
+                            | translate
+                        }}
+                      </p>
+
+                      <p>
+                        <strong>
+                          {{
+                            "components.modals.content-devis-treat.page-phone"
+                              | translate
+                          }}
+                        </strong>
+                        +216 50 74 74 33
+                      </p>
+
+                      <p>
+                        <strong>
+                          {{
+                            "components.modals.content-devis-treat.page-email"
+                              | translate
+                          }}
+                        </strong>
+                        {{ email }}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6">
+                    <p class="m-b-15">
+                      <strong> Date : </strong> {{ getCurrentDate() | date }}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="row clearfix flex-row-reverse">
+                  <div class="col-lg-6 col-md-6">
+                    <div class="">
+                      <h6 class="m-b-15">
+                        {{ treatment?.patient.doctor?.firstName }}
+                        {{ treatment?.patient.doctor?.lastName }}
+                      </h6>
+                      <p>{{ treatment?.patient.doctor?.address }}</p>
+
+                      <p *ngIf="treatment?.patient.doctor?.phone">
+                        <strong>
+                          {{
+                            "components.modals.content-devis-treat.patient-phone"
+                              | translate
+                          }}
+                        </strong>
+                        {{ treatment?.patient.doctor?.phone }}
+                      </p>
+
+                      <p *ngIf="treatment?.patient.doctor?.email">
+                        <strong>
+                          {{
+                            "components.modals.content-devis-treat.patient-email"
+                              | translate
+                          }}
+                        </strong>
+                        {{ treatment?.patient.doctor?.email }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row clearfix">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                      <div class="header">
+                        <h2>
+                          <strong
+                            >{{
+                              "components.modals.content-devis-treat.content-header-strong"
+                                | translate
+                            }}
+                          </strong>
+                          {{
+                            "components.modals.content-devis-treat.content-header-small"
+                              | translate
+                          }}<small></small>
+                        </h2>
+                      </div>
+                      <table
+                        class="ml-5 table col-11 mb-5 table-bordered"
+                        style="border: 1px solid #999999"
+                      >
+                        <thead
+                          style="
+                            font-family: CalibriBold;
+                            font-size: 12.04pt;
+                            color: #f2f2f2;
+                          "
+                        >
+                          <tr>
+                            <th
+                              scope="col"
+                              style="background-color: #269aab; color: white"
+                            >
+                              {{
+                                "components.modals.content-devis-treat.th-description"
+                                  | translate
+                              }}
+                            </th>
+                            <th
+                              scope="col"
+                              style="background-color: #269aab; color: white"
+                            >
+                              {{
+                                "components.modals.content-devis-treat.th-qantity"
+                                  | translate
+                              }}
+                            </th>
+                            <th
+                              scope="col"
+                              style="background-color: #269aab; color: white"
+                            >
+                              {{
+                                "components.modals.content-devis-treat.th-price"
+                                  | translate
+                              }}
+                            </th>
+                            <th
+                              scope="col"
+                              style="background-color: #269aab; color: white"
+                            >
+                              {{
+                                "components.modals.content-devis-treat.th-total"
+                                  | translate
+                              }}
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr
+                            style="
+                              background-color: #f7f7f7;
+                              font-family: CalibriRegular;
+                              font-size: 12.04pt;
+                            "
+                          >
+                            <td>
+                              {{
+                                "components.modals.content-devis-treat.tr-upper-arch"
+                                  | translate
+                              }}
+                            </td>
+                            <td>{{ dataDevis?.data?.upper }}</td>
+                            <td>{{ dataDevis?.data?.priceUpper }}</td>
+                            <td>{{ dataDevis?.totalSup }}</td>
+                          </tr>
+                          <tr
+                            style="
+                              background-color: #e7e6e6;
+                              font-family: CalibriRegular;
+                              font-size: 12.04pt;
+                            "
+                          >
+                            <td>
+                              {{
+                                "components.modals.content-devis-treat.tr-lower-arch"
+                                  | translate
+                              }}
+                            </td>
+                            <td>{{ dataDevis?.data?.lower }}</td>
+                            <td>{{ dataDevis?.data?.priceLower }}</td>
+                            <td>{{ dataDevis?.totalInf }}</td>
+                          </tr>
+                          <tr
+                            style="
+                              background-color: #f7f7f7;
+                              font-family: CalibriRegular;
+                              font-size: 12.04pt;
+                            "
+                          >
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                          <tr
+                            style="
+                              background-color: #e7e6e6;
+                              font-family: CalibriRegular;
+                              font-size: 12.04pt;
+                            "
+                          >
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div class="row">
+                        <div class="col-6"></div>
+                        <table
+                          class="col-5 table-bordered mb-5"
+                          style="border: 1px solid #999999; margin-left: 2.3rem"
+                        >
+                          <tr
+                            style="
+                              background-color: #f2f2f2;
+                              font-family: CalibriRegular;
+                              font-size: 12.04pt;
+                            "
+                          >
+                            <th scope="col">
+                              {{
+                                "components.modals.content-devis-treat.th-total-amount"
+                                  | translate
+                              }}
+                            </th>
+                            <th scope="col">
+                              {{ dataDevis?.total }} {{ dataDevis?.currency }}
+                            </th>
+                          </tr>
+                          <tr
+                            style="
+                              background-color: #ffffff;
+                              font-family: CalibriRegular;
+                              font-size: 12.04pt;
+                            "
+                          >
+                            <th scope="row">
+                              {{
+                                "components.modals.content-devis-treat.th-remise"
+                                  | translate
+                              }}
+                            </th>
+                            <td>{{ dataDevis?.data?.discount }}%</td>
+                          </tr>
+                          <tr
+                            style="
+                              background-color: #ffffff;
+                              font-family: CalibriBold;
+                              font-size: 12.04pt;
+                            "
+                          >
+                            <th scope="row">
+                              {{
+                                "components.modals.content-devis-treat.th-total-amount-ttc"
+                                  | translate
+                              }}
+                            </th>
+                            <td>
+                              {{ dataDevis?.totalAfterDiscount }}
+                              {{ dataDevis?.currency }}
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+
+                      <div class="row col-12 ml-5">
+                        <div class="col-9"></div>
+                        <div class="col-3" style="padding: 0; margin: 0">
+                          <div
+                            style="
+                              background-color: #269aab;
+                              border-radius: 30px 0px 0px 30px;
+                              padding: 20px;
+                              margin-bottom: 10px;
+                            "
+                          ></div>
+                          <div
+                            style="
+                              background-color: #269aab;
+                              border-radius: 30px 0px 0px 30px;
+                              padding: 20px;
+                              margin-bottom: 10px;
+                            "
+                          ></div>
+                          <div
+                            style="
+                              background-color: #269aab;
+                              border-radius: 30px 0px 0px 30px;
+                              padding: 20px;
+                              margin-bottom: 10px;
+                            "
+                          ></div>
+                        </div>
+                      </div>
+                      <div style="higth: 50px"></div>
+                      <div class="text-center">Access Aligner</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-12 float-right">
+      <button class="btn btn-primary btn-round" (click)="exportToPdf()">
+        {{ "components.modals.content-devis-treat.export-button" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="modal-content">
+  <div class="modal-header align-items-center">
+    <h6 class="title small-tag">
+      {{ "components.modals.modal-remove-team.header-title" | translate }}
+    </h6>
+  </div>
+
+  <div class="modal-body">
+    <div class="body d-flex align-items-center">
+      <div class="table-responsive">
+        <table class="table table-filter table-hover m-b-0">
+          <tbody>
+            <tr data-status="approved" *ngFor="let member of team!">
+              <td>{{ member.id }}</td>
+              <td>
+                <app-profile-image
+                  [photoId]="member?.profile?.photo?.id"
+                  [class]="'rounded-circle avatar'"
+                  [expression]="
+                    member?.profile?.firstName && member?.profile?.lastName
+                      ? member?.profile?.firstName +
+                        ' ' +
+                        member?.profile?.lastName
+                      : member?.userName
+                  "
+                >
+                </app-profile-image>
+              </td>
+              <td>{{ member.userName }}</td>
+              <td>{{ member.email }}</td>
+
+              <td>
+                <button
+                  (click)="deleteConfirm(member)"
+                  class="btn btn-icon btn-neutral btn-icon-mini"
+                >
+                  <i class="zmdi zmdi-delete"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="modal-footer">
+      <div class="float-right">
+        <button
+          type="reset"
+          class="btn btn-primary btn-simple btn-round"
+          (click)="close()"
+        >
+          {{ "components.modals.modal-remove-team.close-button" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

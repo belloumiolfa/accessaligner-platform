@@ -1,0 +1,1575 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>front-end documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">front-end documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  NewTreatGeneralComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/Components/New Treatment/new-treat-general/new-treat-general.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-new-treat-general</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>ReactiveFormsModule</code>
+                            <code>CommonModule</code>
+                            <code>RouterModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./new-treat-general.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./new-treat-general.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#doctor$" >doctor$</a>
+                            </li>
+                            <li>
+                                <a href="#errors" >errors</a>
+                            </li>
+                            <li>
+                                <a href="#initialFormValues" >initialFormValues</a>
+                            </li>
+                            <li>
+                                <a href="#patient$" >patient$</a>
+                            </li>
+                            <li>
+                                <a href="#savedTreatment$" >savedTreatment$</a>
+                            </li>
+                            <li>
+                                <a href="#treatForm" >treatForm</a>
+                            </li>
+                            <li>
+                                <a href="#treatments$" >treatments$</a>
+                            </li>
+                            <li>
+                                <a href="#valueChangesSubscription" >valueChangesSubscription</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#checkForChanges" >checkForChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onReset" >onReset</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#indexEmitter" >indexEmitter</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(formBuilder: FormBuilder, treatmentService: <a href="../injectables/TreatmentService.html" target="_self">TreatmentService</a>, appService: <a href="../injectables/AppService.html" target="_self">AppService</a>, handleErrors: <a href="../injectables/HandleErrorsService.html" target="_self">HandleErrorsService</a>, handleAlerts: <a href="../injectables/HandleAlertsService.html" target="_self">HandleAlertsService</a>, spinner: NgxSpinnerService, router: Router, stepsService: <a href="../injectables/StepsService.html" target="_self">StepsService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/Components/New Treatment/new-treat-general/new-treat-general.component.ts:36</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>formBuilder</td>
+                                                  
+                                                        <td>
+                                                                    <code>FormBuilder</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>treatmentService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TreatmentService.html" target="_self" >TreatmentService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>appService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AppService.html" target="_self" >AppService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>handleErrors</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/HandleErrorsService.html" target="_self" >HandleErrorsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>handleAlerts</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/HandleAlertsService.html" target="_self" >HandleAlertsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>spinner</td>
+                                                  
+                                                        <td>
+                                                                    <code>NgxSpinnerService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>stepsService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/StepsService.html" target="_self" >StepsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="indexEmitter"></a>
+                        <b>indexEmitter</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/Components/New Treatment/new-treat-general/new-treat-general.component.ts:33</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkForChanges"></a>
+                    <span class="name">
+                        <span ><b>checkForChanges</b></span>
+                        <a href="#checkForChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>checkForChanges(data: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/Components/New Treatment/new-treat-general/new-treat-general.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/Components/New Treatment/new-treat-general/new-treat-general.component.ts:154</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/Components/New Treatment/new-treat-general/new-treat-general.component.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onReset"></a>
+                    <span class="name">
+                        <span ><b>onReset</b></span>
+                        <a href="#onReset"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onReset($event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/Components/New Treatment/new-treat-general/new-treat-general.component.ts:150</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>$event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit($event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/Components/New Treatment/new-treat-general/new-treat-general.component.ts:111</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>$event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="doctor$"></a>
+                    <span class="name">
+                        <span ><b>doctor$</b></span>
+                        <a href="#doctor$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/Components/New Treatment/new-treat-general/new-treat-general.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errors"></a>
+                    <span class="name">
+                        <span ><b>errors</b></span>
+                        <a href="#errors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/Components/New Treatment/new-treat-general/new-treat-general.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initialFormValues"></a>
+                    <span class="name">
+                        <span ><b>initialFormValues</b></span>
+                        <a href="#initialFormValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/Components/New Treatment/new-treat-general/new-treat-general.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="patient$"></a>
+                    <span class="name">
+                        <span ><b>patient$</b></span>
+                        <a href="#patient$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/Components/New Treatment/new-treat-general/new-treat-general.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="savedTreatment$"></a>
+                    <span class="name">
+                        <span ><b>savedTreatment$</b></span>
+                        <a href="#savedTreatment$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/Components/New Treatment/new-treat-general/new-treat-general.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="treatForm"></a>
+                    <span class="name">
+                        <span ><b>treatForm</b></span>
+                        <a href="#treatForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FormGroup&lt;any&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/Components/New Treatment/new-treat-general/new-treat-general.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="treatments$"></a>
+                    <span class="name">
+                        <span ><b>treatments$</b></span>
+                        <a href="#treatments$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/Components/New Treatment/new-treat-general/new-treat-general.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="valueChangesSubscription"></a>
+                    <span class="name">
+                        <span ><b>valueChangesSubscription</b></span>
+                        <a href="#valueChangesSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/Components/New Treatment/new-treat-general/new-treat-general.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, OnDestroy, Output } from &#x27;@angular/core&#x27;;
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from &#x27;@angular/forms&#x27;;
+import { TreatmentService } from &#x27;../../../Core/Services/TreatService/treatment.service&#x27;;
+import { AppService } from &#x27;../../../Core/Services/app.service&#x27;;
+import { NgxSpinnerService } from &#x27;ngx-spinner&#x27;;
+import { HandleAlertsService } from &#x27;../../../Core/Helpers/handle-alerts.service&#x27;;
+import { HandleErrorsService } from &#x27;../../../Core/Helpers/handle-errors.service&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { RouterModule } from &#x27;@angular/router&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { StepsService } from &#x27;../../../Core/Helpers/Steps/steps.service&#x27;;
+
+@Component({
+  selector: &#x27;app-new-treat-general&#x27;,
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  templateUrl: &#x27;./new-treat-general.component.html&#x27;,
+  styleUrl: &#x27;./new-treat-general.component.css&#x27;,
+})
+export class NewTreatGeneralComponent implements OnDestroy {
+  treatForm!: FormGroup&lt;any&gt;;
+  patient$!: any;
+  doctor$!: any;
+  errors: any;
+  savedTreatment$!: any;
+
+  @Output() indexEmitter &#x3D; new EventEmitter&lt;string&gt;();
+  treatments$!: any[];
+  initialFormValues: any;
+  valueChangesSubscription: any;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private treatmentService: TreatmentService,
+    private appService: AppService,
+    private handleErrors: HandleErrorsService,
+    private handleAlerts: HandleAlertsService,
+    private spinner: NgxSpinnerService,
+    private router: Router,
+    private stepsService: StepsService
+  ) {
+    this.stepsService.markdetectedChange(false);
+    this.stepsService.markCLikcedSave(false);
+
+    appService.getPatient$.subscribe((data) &#x3D;&gt; (this.patient$ &#x3D; data));
+    appService.getUser$.subscribe((data) &#x3D;&gt; (this.doctor$ &#x3D; data));
+    appService.getTreatments$.subscribe((data) &#x3D;&gt; (this.treatments$ &#x3D; data));
+
+    appService.getTreatment$.subscribe((data) &#x3D;&gt; {
+      this.savedTreatment$ &#x3D; data;
+
+      this.treatForm &#x3D; this.formBuilder.group({
+        description: new FormControl(this.savedTreatment$.description),
+        treat: new FormControl(this.savedTreatment$.treat, [
+          Validators.required,
+        ]),
+        postCross: new FormControl(this.savedTreatment$.postCross, [
+          Validators.required,
+        ]),
+        antCross: new FormControl(this.savedTreatment$.antCross, [
+          Validators.required,
+        ]),
+        gap: new FormControl(this.savedTreatment$.gap, [Validators.required]),
+        overbite: new FormControl(this.savedTreatment$.overbite, [
+          Validators.required,
+        ]),
+        classI: new FormControl(this.savedTreatment$.classI, [
+          Validators.required,
+        ]),
+        reduceOverbite: new FormControl(this.savedTreatment$.reduceOverbite, [
+          Validators.required,
+        ]),
+        crowding: new FormControl(this.savedTreatment$.crowding, [
+          Validators.required,
+        ]),
+        extract: new FormControl(this.savedTreatment$.extract, [
+          Validators.required,
+        ]),
+      });
+    });
+  }
+  ngOnInit(): void {
+    // Save initial form values
+
+    this.initialFormValues &#x3D; this.treatForm.getRawValue();
+    this.valueChangesSubscription &#x3D; this.treatForm.valueChanges.subscribe(
+      (data) &#x3D;&gt; {
+        this.checkForChanges(data);
+      }
+    );
+  }
+
+  checkForChanges(data: any) {
+    for (let key in this.initialFormValues) {
+      if (this.initialFormValues[key] !&#x3D;&#x3D; data[key]) {
+        this.stepsService.markdetectedChange(true);
+
+        break;
+      } else {
+        this.stepsService.markdetectedChange(false);
+      }
+    }
+  }
+
+  onSubmit($event: Event) {
+    this.stepsService.markCLikcedSave(true);
+
+    $event.preventDefault();
+    this.spinner.show();
+
+    this.treatmentService
+      .addTreatInfo(this.treatForm.value, this.patient$.id)
+      .subscribe(
+        (data) &#x3D;&gt; {
+          this.spinner.hide();
+          // set treatment
+          this.handleAlerts.handleSweetAlert(
+            &#x27;Treatment information successfully added. &#x27;,
+            &#x27;success&#x27;,
+            false
+          );
+          this.appService.setTreatment(data);
+
+          this.router.navigate([
+            &#x27;/treatment/new-treatment/ &#x27; + this.patient$.id + &#x27;/teeth&#x27;,
+          ]);
+
+          this.stepsService.markCurrentStep(2);
+        },
+
+        (err) &#x3D;&gt; {
+          this.errors &#x3D; this.handleErrors.handleError(err);
+          this.spinner.hide();
+
+          this.handleAlerts.handleSweetAlert(
+            &#x27;Check your data input carefully.&#x27;,
+            &#x27;error&#x27;,
+            false
+          );
+        }
+      );
+  }
+
+  onReset($event: Event) {
+    this.treatForm.reset();
+  }
+
+  ngOnDestroy(): void {
+    this.initialFormValues &#x3D; {};
+    this.valueChangesSubscription &#x3D; {};
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;section class&#x3D;&quot;body current&quot;&gt;
+  &lt;div class&#x3D;&quot;container&quot;&gt;
+    &lt;div class&#x3D;&quot;row clearfix&quot;&gt;
+      &lt;div class&#x3D;&quot;col-lg-12 col-md-12 col-sm-12 align-center&quot;&gt;
+        &lt;div class&#x3D;&quot; &quot;&gt;
+          &lt;div class&#x3D;&quot;container&quot;&gt;
+            &lt;div class&#x3D;&quot;header&quot;&gt;
+              &lt;h6 class&#x3D;&quot;title&quot;&gt;
+                General information regarding the treatment.
+              &lt;/h6&gt;
+            &lt;/div&gt;
+            &lt;form class&#x3D;&quot;row clearfix&quot; [formGroup]&#x3D;&quot;treatForm&quot;&gt;
+              &lt;div class&#x3D;&quot;col-lg-12 col-md-12 col-sm-12 align-center&quot;&gt;
+                &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                  &lt;div class&#x3D;&quot;radio inlineblock m-r-20&quot;&gt;
+                    &lt;input
+                      type&#x3D;&quot;radio&quot;
+                      formControlName&#x3D;&quot;treat&quot;
+                      name&#x3D;&quot;treat&quot;
+                      id&#x3D;&quot;type-upper-arch&quot;
+                      class&#x3D;&quot;with-gap&quot;
+                      value&#x3D;&quot;upper-arch&quot;
+                    /&gt;
+                    &lt;label for&#x3D;&quot;type-upper-arch&quot;&gt;Upper arch&lt;/label&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;radio inlineblock m-r-20&quot;&gt;
+                    &lt;input
+                      type&#x3D;&quot;radio&quot;
+                      formControlName&#x3D;&quot;treat&quot;
+                      name&#x3D;&quot;treat&quot;
+                      id&#x3D;&quot;type-lower-arch&quot;
+                      class&#x3D;&quot;with-gap&quot;
+                      value&#x3D;&quot;lower-arch&quot;
+                    /&gt;
+                    &lt;label for&#x3D;&quot;type-lower-arch&quot;&gt;Lower arch&lt;/label&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;radio inlineblock&quot;&gt;
+                    &lt;input
+                      type&#x3D;&quot;radio&quot;
+                      formControlName&#x3D;&quot;treat&quot;
+                      name&#x3D;&quot;treat&quot;
+                      id&#x3D;&quot;type-upper-lower&quot;
+                      class&#x3D;&quot;with-gap&quot;
+                      value&#x3D;&quot;upper-lower&quot;
+                    /&gt;
+                    &lt;label for&#x3D;&quot;type-upper-lower&quot;&gt;Upper &amp; Lower arch&lt;/label&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;help-info&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;col-lg-12 col-md-12 col-sm-12 align-center&quot;&gt;
+                &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                  &lt;div class&#x3D;&quot;row&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-md-6 col-sm-12&quot;&gt;
+                      &lt;ul class&#x3D;&quot;list-group&quot;&gt;
+                        &lt;li class&#x3D;&quot;list-group-item&quot;&gt;
+                          &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                            &lt;b&gt;Correcting posterior crossbite ? &lt;/b&gt;
+
+                            &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                              &lt;div class&#x3D;&quot;radio inlineblock m-r-20&quot;&gt;
+                                &lt;input
+                                  formControlName&#x3D;&quot;postCross&quot;
+                                  name&#x3D;&quot;postCross&quot;
+                                  type&#x3D;&quot;radio&quot;
+                                  id&#x3D;&quot;postCrossY&quot;
+                                  class&#x3D;&quot;with-gap&quot;
+                                  value&#x3D;&quot;1&quot;
+                                /&gt;
+                                &lt;label for&#x3D;&quot;postCrossY&quot;&gt;Yes&lt;/label&gt;
+                              &lt;/div&gt;
+                              &lt;div class&#x3D;&quot;radio inlineblock&quot;&gt;
+                                &lt;input
+                                  formControlName&#x3D;&quot;postCross&quot;
+                                  name&#x3D;&quot;postCross&quot;
+                                  type&#x3D;&quot;radio&quot;
+                                  id&#x3D;&quot;postCrossN&quot;
+                                  class&#x3D;&quot;with-gap&quot;
+                                  value&#x3D;&quot;0&quot;
+                                  checked&#x3D;&quot;&quot;
+                                /&gt;
+                                &lt;label for&#x3D;&quot;postCrossN&quot;&gt;No&lt;/label&gt;
+                              &lt;/div&gt;
+                            &lt;/div&gt;
+                          &lt;/div&gt;
+                        &lt;/li&gt;
+                        &lt;li class&#x3D;&quot;list-group-item&quot;&gt;
+                          &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                            &lt;b&gt;Correcting anterior crossbite ? &lt;/b&gt;
+
+                            &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                              &lt;div class&#x3D;&quot;radio inlineblock m-r-20&quot;&gt;
+                                &lt;input
+                                  formControlName&#x3D;&quot;antCross&quot;
+                                  type&#x3D;&quot;radio&quot;
+                                  id&#x3D;&quot;antCrossY&quot;
+                                  class&#x3D;&quot;with-gap&quot;
+                                  value&#x3D;&quot;1&quot;
+                                /&gt;
+                                &lt;label for&#x3D;&quot;antCrossY&quot;&gt;Yes&lt;/label&gt;
+                              &lt;/div&gt;
+                              &lt;div class&#x3D;&quot;radio inlineblock&quot;&gt;
+                                &lt;input
+                                  formControlName&#x3D;&quot;antCross&quot;
+                                  type&#x3D;&quot;radio&quot;
+                                  id&#x3D;&quot;antCrossN&quot;
+                                  class&#x3D;&quot;with-gap&quot;
+                                  value&#x3D;&quot;0&quot;
+                                  checked&#x3D;&quot;&quot;
+                                /&gt;
+                                &lt;label for&#x3D;&quot;antCrossN&quot;&gt;No&lt;/label&gt;
+                              &lt;/div&gt;
+                            &lt;/div&gt;
+                          &lt;/div&gt;
+                        &lt;/li&gt;
+                        &lt;li class&#x3D;&quot;list-group-item&quot;&gt;
+                          &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                            &lt;b&gt;Closing the gap (If applicable) ?&lt;/b&gt;
+
+                            &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                              &lt;div class&#x3D;&quot;radio inlineblock m-r-20&quot;&gt;
+                                &lt;input
+                                  formControlName&#x3D;&quot;gap&quot;
+                                  type&#x3D;&quot;radio&quot;
+                                  id&#x3D;&quot;gapY&quot;
+                                  class&#x3D;&quot;with-gap&quot;
+                                  value&#x3D;&quot;1&quot;
+                                /&gt;
+                                &lt;label for&#x3D;&quot;gapY&quot;&gt;Yes&lt;/label&gt;
+                              &lt;/div&gt;
+                              &lt;div class&#x3D;&quot;radio inlineblock&quot;&gt;
+                                &lt;input
+                                  formControlName&#x3D;&quot;gap&quot;
+                                  type&#x3D;&quot;radio&quot;
+                                  id&#x3D;&quot;gapN&quot;
+                                  class&#x3D;&quot;with-gap&quot;
+                                  value&#x3D;&quot;0&quot;
+                                  checked&#x3D;&quot;&quot;
+                                /&gt;
+                                &lt;label for&#x3D;&quot;gapN&quot;&gt;No&lt;/label&gt;
+                              &lt;/div&gt;
+                            &lt;/div&gt;
+                          &lt;/div&gt;
+                        &lt;/li&gt;
+                        &lt;li class&#x3D;&quot;list-group-item&quot;&gt;
+                          &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                            &lt;b&gt;Correcting the overbite (if present) ? &lt;/b&gt;
+
+                            &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                              &lt;div class&#x3D;&quot;radio inlineblock m-r-20&quot;&gt;
+                                &lt;input
+                                  formControlName&#x3D;&quot;overbite&quot;
+                                  type&#x3D;&quot;radio&quot;
+                                  id&#x3D;&quot;overbiteY&quot;
+                                  class&#x3D;&quot;with-gap&quot;
+                                  value&#x3D;&quot;1&quot;
+                                /&gt;
+                                &lt;label for&#x3D;&quot;overbiteY&quot;&gt;Yes&lt;/label&gt;
+                              &lt;/div&gt;
+                              &lt;div class&#x3D;&quot;radio inlineblock&quot;&gt;
+                                &lt;input
+                                  formControlName&#x3D;&quot;overbite&quot;
+                                  type&#x3D;&quot;radio&quot;
+                                  id&#x3D;&quot;overbiteN&quot;
+                                  class&#x3D;&quot;with-gap&quot;
+                                  value&#x3D;&quot;0&quot;
+                                  checked&#x3D;&quot;&quot;
+                                /&gt;
+                                &lt;label for&#x3D;&quot;overbiteN&quot;&gt;No&lt;/label&gt;
+                              &lt;/div&gt;
+                            &lt;/div&gt;
+                          &lt;/div&gt;
+                        &lt;/li&gt;
+                      &lt;/ul&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;col-md-6 col-sm-12&quot;&gt;
+                      &lt;ul class&#x3D;&quot;list-group&quot;&gt;
+                        &lt;li class&#x3D;&quot;list-group-item&quot;&gt;
+                          &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                            &lt;b&gt;Restoring Class I occlusion ?&lt;/b&gt;
+
+                            &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                              &lt;div class&#x3D;&quot;radio inlineblock m-r-20&quot;&gt;
+                                &lt;input
+                                  formControlName&#x3D;&quot;classI&quot;
+                                  type&#x3D;&quot;radio&quot;
+                                  id&#x3D;&quot;classIY&quot;
+                                  class&#x3D;&quot;with-gap&quot;
+                                  value&#x3D;&quot;1&quot;
+                                /&gt;
+                                &lt;label for&#x3D;&quot;classIY&quot;&gt;Yes&lt;/label&gt;
+                              &lt;/div&gt;
+                              &lt;div class&#x3D;&quot;radio inlineblock&quot;&gt;
+                                &lt;input
+                                  formControlName&#x3D;&quot;classI&quot;
+                                  type&#x3D;&quot;radio&quot;
+                                  id&#x3D;&quot;classIN&quot;
+                                  class&#x3D;&quot;with-gap&quot;
+                                  value&#x3D;&quot;0&quot;
+                                  checked&#x3D;&quot;&quot;
+                                /&gt;
+                                &lt;label for&#x3D;&quot;classIN&quot;&gt;No&lt;/label&gt;
+                              &lt;/div&gt;
+                            &lt;/div&gt;
+                          &lt;/div&gt;
+                        &lt;/li&gt;
+                        &lt;li class&#x3D;&quot;list-group-item&quot;&gt;
+                          &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                            &lt;b&gt;Reducing the overbite ?&lt;/b&gt;
+
+                            &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                              &lt;div class&#x3D;&quot;radio inlineblock m-r-20&quot;&gt;
+                                &lt;input
+                                  formControlName&#x3D;&quot;reduceOverbite&quot;
+                                  type&#x3D;&quot;radio&quot;
+                                  id&#x3D;&quot;reduceOverbiteY&quot;
+                                  class&#x3D;&quot;with-gap&quot;
+                                  value&#x3D;&quot;1&quot;
+                                /&gt;
+                                &lt;label for&#x3D;&quot;reduceOverbiteY&quot;&gt;Yes&lt;/label&gt;
+                              &lt;/div&gt;
+                              &lt;div class&#x3D;&quot;radio inlineblock&quot;&gt;
+                                &lt;input
+                                  formControlName&#x3D;&quot;reduceOverbite&quot;
+                                  type&#x3D;&quot;radio&quot;
+                                  id&#x3D;&quot;reduceOverbiteN&quot;
+                                  class&#x3D;&quot;with-gap&quot;
+                                  value&#x3D;&quot;0&quot;
+                                  checked&#x3D;&quot;&quot;
+                                /&gt;
+                                &lt;label for&#x3D;&quot;reduceOverbiteN&quot;&gt;No&lt;/label&gt;
+                              &lt;/div&gt;
+                            &lt;/div&gt;
+                          &lt;/div&gt;
+                        &lt;/li&gt;
+                        &lt;li class&#x3D;&quot;list-group-item&quot;&gt;
+                          &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                            &lt;b&gt;Closing crowding &lt;/b&gt;
+
+                            &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                              &lt;div class&#x3D;&quot;radio inlineblock m-r-20&quot;&gt;
+                                &lt;input
+                                  formControlName&#x3D;&quot;crowding&quot;
+                                  type&#x3D;&quot;radio&quot;
+                                  id&#x3D;&quot;crowdingY&quot;
+                                  class&#x3D;&quot;with-gap&quot;
+                                  value&#x3D;&quot;1&quot;
+                                /&gt;
+                                &lt;label for&#x3D;&quot;crowdingY&quot;&gt;Yes&lt;/label&gt;
+                              &lt;/div&gt;
+                              &lt;div class&#x3D;&quot;radio inlineblock&quot;&gt;
+                                &lt;input
+                                  formControlName&#x3D;&quot;crowding&quot;
+                                  type&#x3D;&quot;radio&quot;
+                                  id&#x3D;&quot;crowdingN&quot;
+                                  class&#x3D;&quot;with-gap&quot;
+                                  value&#x3D;&quot;0&quot;
+                                  checked&#x3D;&quot;&quot;
+                                /&gt;
+                                &lt;label for&#x3D;&quot;crowdingN&quot;&gt;No &lt;/label&gt;
+                              &lt;/div&gt;
+                            &lt;/div&gt;
+                          &lt;/div&gt;
+                        &lt;/li&gt;
+                        &lt;li class&#x3D;&quot;list-group-item&quot;&gt;
+                          &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                            &lt;b&gt;Planned extractions (if necessary)&lt;/b&gt;
+
+                            &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                              &lt;div class&#x3D;&quot;radio inlineblock m-r-20&quot;&gt;
+                                &lt;input
+                                  formControlName&#x3D;&quot;extract&quot;
+                                  type&#x3D;&quot;radio&quot;
+                                  id&#x3D;&quot;extractY&quot;
+                                  class&#x3D;&quot;with-gap&quot;
+                                  value&#x3D;&quot;1&quot;
+                                /&gt;
+                                &lt;label for&#x3D;&quot;extractY&quot;&gt;Yes&lt;/label&gt;
+                              &lt;/div&gt;
+                              &lt;div class&#x3D;&quot;radio inlineblock&quot;&gt;
+                                &lt;input
+                                  formControlName&#x3D;&quot;extract&quot;
+                                  type&#x3D;&quot;radio&quot;
+                                  id&#x3D;&quot;extractN&quot;
+                                  class&#x3D;&quot;with-gap&quot;
+                                  value&#x3D;&quot;0&quot;
+                                  checked&#x3D;&quot;&quot;
+                                /&gt;
+                                &lt;label for&#x3D;&quot;extractN&quot;&gt;No&lt;/label&gt;
+                              &lt;/div&gt;
+                            &lt;/div&gt;
+                          &lt;/div&gt;
+                        &lt;/li&gt;
+                      &lt;/ul&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;br /&gt;
+
+
+              &lt;div class&#x3D;&quot;col-sm-12&quot;&gt;
+                &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                  &lt;b class&#x3D;&quot;float-left&quot;&gt;Comment&lt;/b&gt;
+                  &lt;textarea
+                    formControlName&#x3D;&quot;comment&quot;
+                    rows&#x3D;&quot;2&quot;
+                    class&#x3D;&quot;form-control no-resize&quot;
+                    placeholder&#x3D;&quot;Comment&quot;
+                  &gt;&lt;/textarea&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;!-- &lt;div class&#x3D;&quot;col-lg-12 col-md-12 col-sm-12 align-center&quot;&gt;
+                &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+                  &lt;b&gt;Comment about this treatement&lt;/b&gt;
+                  &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                    &lt;div class&#x3D;&quot;form-line&quot;&gt;
+                      &lt;textarea
+                        formControlName&#x3D;&quot;description&quot;
+                        rows&#x3D;&quot;4&quot;
+                        class&#x3D;&quot;form-control no-resize&quot;
+                        placeholder&#x3D;&quot;Please type what you want...&quot;
+                      &gt;&lt;/textarea&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt; --&gt;
+              &lt;div class&#x3D;&quot;float-right&quot;&gt;
+                &lt;button
+                  type&#x3D;&quot;submit&quot;
+                  class&#x3D;&quot;btn btn-primary btn-round&quot;
+                  (click)&#x3D;&quot;onSubmit($event)&quot;
+                &gt;
+                  Save
+                &lt;/button&gt;
+
+                &lt;button
+                (click)&#x3D;&quot;onReset($event)&quot;
+                class&#x3D;&quot;btn btn-primary btn-simple btn-round&quot;
+                &gt;
+                  Cancel
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/form&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><section class="body current">  <div class="container">    <div class="row clearfix">      <div class="col-lg-12 col-md-12 col-sm-12 align-center">        <div class=" ">          <div class="container">            <div class="header">              <h6 class="title">                General information regarding the treatment.              </h6>            </div>            <form class="row clearfix" [formGroup]="treatForm">              <div class="col-lg-12 col-md-12 col-sm-12 align-center">                <div class="form-group form-float">                  <div class="radio inlineblock m-r-20">                    <input                      type="radio"                      formControlName="treat"                      name="treat"                      id="type-upper-arch"                      class="with-gap"                      value="upper-arch"                    />                    <label for="type-upper-arch">Upper arch</label>                  </div>                  <div class="radio inlineblock m-r-20">                    <input                      type="radio"                      formControlName="treat"                      name="treat"                      id="type-lower-arch"                      class="with-gap"                      value="lower-arch"                    />                    <label for="type-lower-arch">Lower arch</label>                  </div>                  <div class="radio inlineblock">                    <input                      type="radio"                      formControlName="treat"                      name="treat"                      id="type-upper-lower"                      class="with-gap"                      value="upper-lower"                    />                    <label for="type-upper-lower">Upper & Lower arch</label>                  </div>                  <div class="help-info"></div>                </div>              </div>              <div class="col-lg-12 col-md-12 col-sm-12 align-center">                <div class="form-group form-float">                  <div class="row">                    <div class="col-md-6 col-sm-12">                      <ul class="list-group">                        <li class="list-group-item">                          <div class="form-group form-float">                            <b>Correcting posterior crossbite ? </b>                            <div class="form-group form-float">                              <div class="radio inlineblock m-r-20">                                <input                                  formControlName="postCross"                                  name="postCross"                                  type="radio"                                  id="postCrossY"                                  class="with-gap"                                  value="1"                                />                                <label for="postCrossY">Yes</label>                              </div>                              <div class="radio inlineblock">                                <input                                  formControlName="postCross"                                  name="postCross"                                  type="radio"                                  id="postCrossN"                                  class="with-gap"                                  value="0"                                  checked=""                                />                                <label for="postCrossN">No</label>                              </div>                            </div>                          </div>                        </li>                        <li class="list-group-item">                          <div class="form-group form-float">                            <b>Correcting anterior crossbite ? </b>                            <div class="form-group form-float">                              <div class="radio inlineblock m-r-20">                                <input                                  formControlName="antCross"                                  type="radio"                                  id="antCrossY"                                  class="with-gap"                                  value="1"                                />                                <label for="antCrossY">Yes</label>                              </div>                              <div class="radio inlineblock">                                <input                                  formControlName="antCross"                                  type="radio"                                  id="antCrossN"                                  class="with-gap"                                  value="0"                                  checked=""                                />                                <label for="antCrossN">No</label>                              </div>                            </div>                          </div>                        </li>                        <li class="list-group-item">                          <div class="form-group form-float">                            <b>Closing the gap (If applicable) ?</b>                            <div class="form-group form-float">                              <div class="radio inlineblock m-r-20">                                <input                                  formControlName="gap"                                  type="radio"                                  id="gapY"                                  class="with-gap"                                  value="1"                                />                                <label for="gapY">Yes</label>                              </div>                              <div class="radio inlineblock">                                <input                                  formControlName="gap"                                  type="radio"                                  id="gapN"                                  class="with-gap"                                  value="0"                                  checked=""                                />                                <label for="gapN">No</label>                              </div>                            </div>                          </div>                        </li>                        <li class="list-group-item">                          <div class="form-group form-float">                            <b>Correcting the overbite (if present) ? </b>                            <div class="form-group form-float">                              <div class="radio inlineblock m-r-20">                                <input                                  formControlName="overbite"                                  type="radio"                                  id="overbiteY"                                  class="with-gap"                                  value="1"                                />                                <label for="overbiteY">Yes</label>                              </div>                              <div class="radio inlineblock">                                <input                                  formControlName="overbite"                                  type="radio"                                  id="overbiteN"                                  class="with-gap"                                  value="0"                                  checked=""                                />                                <label for="overbiteN">No</label>                              </div>                            </div>                          </div>                        </li>                      </ul>                    </div>                    <div class="col-md-6 col-sm-12">                      <ul class="list-group">                        <li class="list-group-item">                          <div class="form-group form-float">                            <b>Restoring Class I occlusion ?</b>                            <div class="form-group form-float">                              <div class="radio inlineblock m-r-20">                                <input                                  formControlName="classI"                                  type="radio"                                  id="classIY"                                  class="with-gap"                                  value="1"                                />                                <label for="classIY">Yes</label>                              </div>                              <div class="radio inlineblock">                                <input                                  formControlName="classI"                                  type="radio"                                  id="classIN"                                  class="with-gap"                                  value="0"                                  checked=""                                />                                <label for="classIN">No</label>                              </div>                            </div>                          </div>                        </li>                        <li class="list-group-item">                          <div class="form-group form-float">                            <b>Reducing the overbite ?</b>                            <div class="form-group form-float">                              <div class="radio inlineblock m-r-20">                                <input                                  formControlName="reduceOverbite"                                  type="radio"                                  id="reduceOverbiteY"                                  class="with-gap"                                  value="1"                                />                                <label for="reduceOverbiteY">Yes</label>                              </div>                              <div class="radio inlineblock">                                <input                                  formControlName="reduceOverbite"                                  type="radio"                                  id="reduceOverbiteN"                                  class="with-gap"                                  value="0"                                  checked=""                                />                                <label for="reduceOverbiteN">No</label>                              </div>                            </div>                          </div>                        </li>                        <li class="list-group-item">                          <div class="form-group form-float">                            <b>Closing crowding </b>                            <div class="form-group form-float">                              <div class="radio inlineblock m-r-20">                                <input                                  formControlName="crowding"                                  type="radio"                                  id="crowdingY"                                  class="with-gap"                                  value="1"                                />                                <label for="crowdingY">Yes</label>                              </div>                              <div class="radio inlineblock">                                <input                                  formControlName="crowding"                                  type="radio"                                  id="crowdingN"                                  class="with-gap"                                  value="0"                                  checked=""                                />                                <label for="crowdingN">No </label>                              </div>                            </div>                          </div>                        </li>                        <li class="list-group-item">                          <div class="form-group form-float">                            <b>Planned extractions (if necessary)</b>                            <div class="form-group form-float">                              <div class="radio inlineblock m-r-20">                                <input                                  formControlName="extract"                                  type="radio"                                  id="extractY"                                  class="with-gap"                                  value="1"                                />                                <label for="extractY">Yes</label>                              </div>                              <div class="radio inlineblock">                                <input                                  formControlName="extract"                                  type="radio"                                  id="extractN"                                  class="with-gap"                                  value="0"                                  checked=""                                />                                <label for="extractN">No</label>                              </div>                            </div>                          </div>                        </li>                      </ul>                    </div>                  </div>                </div>              </div>              <br />              <div class="col-sm-12">                <div class="form-group">                  <b class="float-left">Comment</b>                  <textarea                    formControlName="comment"                    rows="2"                    class="form-control no-resize"                    placeholder="Comment"                  ></textarea>                </div>              </div>              <!-- <div class="col-lg-12 col-md-12 col-sm-12 align-center">                <div class="form-group form-float">                  <b>Comment about this treatement</b>                  <div class="form-group">                    <div class="form-line">                      <textarea                        formControlName="description"                        rows="4"                        class="form-control no-resize"                        placeholder="Please type what you want..."                      ></textarea>                    </div>                  </div>                </div>              </div> -->              <div class="float-right">                <button                  type="submit"                  class="btn btn-primary btn-round"                  (click)="onSubmit($event)"                >                  Save                </button>                <button                (click)="onReset($event)"                class="btn btn-primary btn-simple btn-round"                >                  Cancel                </button>              </div>            </form>          </div>        </div>      </div>    </div>  </div></section></div>'
+    var COMPONENTS = [{'name': 'AcceptDecisionComponent', 'selector': 'app-accept-decision'},{'name': 'AcceptFormComponent', 'selector': 'app-accept-form'},{'name': 'AccountFormComponent', 'selector': 'app-account-form'},{'name': 'ActivitiesComponent', 'selector': 'app-activities'},{'name': 'AddFileComponent', 'selector': 'app-add-file'},{'name': 'AddNewPatientComponent', 'selector': 'app-add-new-patient'},{'name': 'AddNewPlanComponent', 'selector': 'app-add-new-plan'},{'name': 'AddNewTreatmentComponent', 'selector': 'app-add-new-treatment'},{'name': 'AdminDecisionComponent', 'selector': 'app-admin-decision'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ArchiveDoctorsComponent', 'selector': 'app-archive-doctors'},{'name': 'ArchiveTreatmentsComponent', 'selector': 'app-archive-treatments'},{'name': 'BackHomeComponent', 'selector': 'app-back-home'},{'name': 'BlockHeaderComponent', 'selector': 'app-block-header'},{'name': 'ClinicsComponent', 'selector': 'app-clinics'},{'name': 'ComingPageComponent', 'selector': 'app-coming-page'},{'name': 'CompanyDetailsComponent', 'selector': 'app-company-details'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ConfirmDecisionComponent', 'selector': 'app-confirm-decision'},{'name': 'ConfirmFormComponent', 'selector': 'app-confirm-form'},{'name': 'ContentDevisTreatComponent', 'selector': 'app-content-devis-treat'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'Error403Component', 'selector': 'app-error403'},{'name': 'Error500Component', 'selector': 'app-error500'},{'name': 'Error503Component', 'selector': 'app-error503'},{'name': 'FinishTreatmentComponent', 'selector': 'app-finish-treatment'},{'name': 'ForgetPasswordComponent', 'selector': 'app-forget-password'},{'name': 'GetPlansTreatComponent', 'selector': 'app-get-plans-treat'},{'name': 'GridUsersComponent', 'selector': 'app-grid-users'},{'name': 'HelpLinkComponent', 'selector': 'app-help-link'},{'name': 'InfoProfileMenuComponent', 'selector': 'app-info-profile-menu'},{'name': 'InfosComponent', 'selector': 'app-infos'},{'name': 'LayoutContainerComponent', 'selector': 'app-layout-container'},{'name': 'LeftSidebarComponent', 'selector': 'app-left-sidebar'},{'name': 'LeftSidebarMobilComponent', 'selector': 'app-left-sidebar-mobil'},{'name': 'LinksComponent', 'selector': 'app-links'},{'name': 'ListDoctorsComponent', 'selector': 'app-list-doctors'},{'name': 'ListUsersComponent', 'selector': 'app-list-users'},{'name': 'LockedScreenComponent', 'selector': 'app-locked-screen'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MenuAppComponent', 'selector': 'app-menu-app'},{'name': 'MiniLeftbarComponent', 'selector': 'app-mini-leftbar'},{'name': 'ModalDescriptionEligibleComponent', 'selector': 'app-modal-description-eligible'},{'name': 'ModalDisplayItemPlanComponent', 'selector': 'app-modal-display-item-plan'},{'name': 'ModalDisplayPhotoComponent', 'selector': 'app-modal-display-photo'},{'name': 'ModalDisplayReportComponent', 'selector': 'app-modal-display-report'},{'name': 'ModalEstimateComponent', 'selector': 'app-modal-estimate'},{'name': 'ModalfinishtreatComponent', 'selector': 'app-modalfinishtreat'},{'name': 'ModalPlanDetailsComponent', 'selector': 'app-modal-plan-details'},{'name': 'ModalRemoveTeamComponent', 'selector': 'app-modal-remove-team'},{'name': 'ModalTeamInfoComponent', 'selector': 'app-modal-team-info'},{'name': 'NewAdminComponent', 'selector': 'app-new-admin'},{'name': 'NewPlanComponent', 'selector': 'app-new-plan'},{'name': 'NewTreatClinicsComponent', 'selector': 'app-new-treat-clinics'},{'name': 'NewTreatGeneralComponent', 'selector': 'app-new-treat-general'},{'name': 'NewTreatPatientComponent', 'selector': 'app-new-treat-patient'},{'name': 'NewTreatPhotosComponent', 'selector': 'app-new-treat-photos'},{'name': 'NewTreatTeethComponent', 'selector': 'app-new-treat-teeth'},{'name': 'NewUserDetailsComponent', 'selector': 'app-new-user-details'},{'name': 'NotifMenuComponent', 'selector': 'app-notif-menu'},{'name': 'OfflineComponent', 'selector': 'app-offline'},{'name': 'OverlayMenuComponent', 'selector': 'app-overlay-menu'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PatientComponent', 'selector': 'app-patient'},{'name': 'PatientDetailComponent', 'selector': 'app-patient-detail'},{'name': 'PatientDisplayInformationsComponent', 'selector': 'app-patient-display-informations'},{'name': 'PatientFormComponent', 'selector': 'app-patient-form'},{'name': 'PatientInfosComponent', 'selector': 'app-patient-infos'},{'name': 'PatientListComponent', 'selector': 'app-patient-list'},{'name': 'PatientTreatClinicsInformationsComponent', 'selector': 'app-patient-treat-clinics-informations'},{'name': 'PatientTreatInformationsComponent', 'selector': 'app-patient-treat-informations'},{'name': 'PatientTreatPhotosInformationsComponent', 'selector': 'app-patient-treat-photos-informations'},{'name': 'PatientTreatTeethInformationsComponent', 'selector': 'app-patient-treat-teeth-informations'},{'name': 'PhotoFormComponent', 'selector': 'app-photo-form'},{'name': 'PhotographsComponent', 'selector': 'app-photographs'},{'name': 'PlanComponent', 'selector': 'app-plan'},{'name': 'PlanListComponent', 'selector': 'app-plan-list'},{'name': 'PreloaderComponent', 'selector': 'app-preloader'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileImageComponent', 'selector': 'app-profile-image'},{'name': 'PublicLayoutComponent', 'selector': 'app-public-layout'},{'name': 'QuoteReportComponent', 'selector': 'app-quote-report'},{'name': 'RigthSidebarComponent', 'selector': 'app-rigth-sidebar'},{'name': 'ScheduleComponent', 'selector': 'app-schedule'},{'name': 'SecurityFormComponent', 'selector': 'app-security-form'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SignInComponent', 'selector': 'app-sign-in'},{'name': 'SignUpComponent', 'selector': 'app-sign-up'},{'name': 'TaskMenuComponent', 'selector': 'app-task-menu'},{'name': 'TeamInfoComponent', 'selector': 'app-team-info'},{'name': 'TeethComponent', 'selector': 'app-teeth'},{'name': 'TimelineTreatmentsComponent', 'selector': 'app-timeline-treatments'},{'name': 'TreatmentComponent', 'selector': 'app-treatment'},{'name': 'TreatmentConfirmationComponent', 'selector': 'app-treatment-confirmation'},{'name': 'TreatmentDetailsComponent', 'selector': 'app-treatment-details'},{'name': 'TreatmentEligibleComponent', 'selector': 'app-treatment-eligible'},{'name': 'TreatmentHeaderComponent', 'selector': 'app-treatment-header'},{'name': 'TreatmentListComponent', 'selector': 'app-treatment-list'},{'name': 'TreatmentsComponent', 'selector': 'app-treatments'},{'name': 'TreatmentStatusComponent', 'selector': 'app-treatment-status'},{'name': 'UpdatePasswordComponent', 'selector': 'app-update-password'},{'name': 'UpdatePatientComponent', 'selector': 'app-update-patient'},{'name': 'UsersOverviewComponent', 'selector': 'app-users-overview'},{'name': 'UsersPageComponent', 'selector': 'app-users-page'},{'name': 'WaitingComponent', 'selector': 'app-waiting'}];
+    var DIRECTIVES = [{'name': 'GetPhotoDirective', 'selector': '[appGetPhoto]'}];
+    var ACTUAL_COMPONENT = {'name': 'NewTreatGeneralComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'NewTreatGeneralComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

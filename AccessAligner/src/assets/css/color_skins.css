@@ -1,0 +1,100 @@
+.theme-black .minileftbar {
+  background: #22252b;
+}
+.theme-black .minileftbar .btn-neutral {
+  color: #22252b;
+}
+.theme-black .minileftbar .menu_list li a {
+  color: #afafaf;
+}
+.theme-black .minileftbar .menu_list .notify .point {
+  background-color: #fff;
+}
+.theme-black .minileftbar .menu_list .notify .heartbit {
+  background-color: #afafaf;
+}
+.theme-black .right_menu .menu-app a:hover {
+  background: linear-gradient(45deg, #177ca8, #525a65);
+  color: #fff;
+}
+.theme-black.menu_sm .sidebar .list li .ml-menu a {
+  color: #78909c;
+}
+.theme-black.menu_sm .sidebar .list li .ml-menu a::before {
+  color: #78909c;
+}
+.theme-black.menu_sm .sidebar .list li .ml-menu a:hover {
+  background: linear-gradient(45deg, #177ca8, #525a65);
+  color: #fff;
+}
+.theme-black .btn-primary {
+  background: #177ca8;
+}
+.theme-black .btn-primary:active,
+.theme-black .btn-primary:hover,
+.theme-black .btn-primary:focus {
+  background: #525a65;
+}
+.theme-black .btn-primary.btn-simple {
+  border-color: #177ca8;
+  color: #177ca8;
+  background: transparent;
+}
+.theme-black .page-loader-wrapper {
+  background: linear-gradient(45deg, #177ca8, #525a65);
+}
+.theme-black .sidebar .menu .list li.active.open {
+  background: #177ca8;
+}
+.theme-black .sidebar .menu .list li.active.open a {
+  color: #afafaf;
+}
+.theme-black .sidebar .menu .list li.active.open a::before {
+  color: #afafaf;
+}
+.theme-black .checkbox input[type="checkbox"]:checked + label::after {
+  border-color: #177ca8;
+  background: #177ca8;
+  color: white;
+}
+.theme-black .nav-tabs .nav-link {
+  border: 1px solid #afafaf;
+}
+.theme-black .nav-tabs .nav-link.active {
+  border: 1px solid #177ca8 !important;
+  background: #177ca8;
+  color: #fff;
+}
+.theme-black .card .header h2:before {
+  background: #177ca8;
+}
+.theme-black .card .header .dropdown-menu li a:hover {
+  background-color: #177ca8;
+  color: #fff;
+}
+.theme-black .chat-widget li.left .message {
+  background: #177ca8;
+}
+.theme-black .authentication {
+  background: #177ca8 !important;
+}
+
+.theme-black .coming {
+  background: #313740 !important ;
+}
+
+.theme-black .menu-container ul > li > ul > li a:hover,
+.theme-black .menu-container ul.normal-sub > li a:hover {
+  background: #177ca8;
+}
+.theme-black .fc .fc-toolbar .fc-right .fc-state-active {
+  background: #177ca8;
+  color: #fff;
+}
+.theme-black .form-control:focus,
+.theme-black .form-control:focus + .input-group-addon,
+.theme-black .form-control:focus ~ .input-group-addon,
+.theme-black .input-group-focus .input-group-addon {
+  border-color: #177ca8;
+  background: #fff;
+}

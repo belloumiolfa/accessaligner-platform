@@ -1,0 +1,53 @@
+<div class="question-section">
+  <div class="wrapper">
+    <h1>Questions Fréquentes</h1>
+
+    <ul class="questions">
+      <li class="question-item" *ngFor="let item of questions1">
+        <h2
+          class="question-header"
+          type="button"
+          data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#' + item.id"
+          aria-expanded="false"
+          [attr.aria-controls]="item.id"
+        >
+          <span> {{ item.question }}</span>
+          <i class="bi bi-chevron-down"></i>
+        </h2>
+        <div class="question-collapse collapse" [id]="item.id">
+          <div class="question-body">
+            <p>{{ item.responce }}</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- **************************** -->
+<div class="question-section background-gray">
+  <div class="wrapper">
+    <h1>Questions Fréquentes</h1>
+
+    <ul class="questions">
+      <li class="question-item" *ngFor="let item of questions2">
+        <h2
+          class="question-header"
+          type="button"
+          data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#' + item.id"
+          aria-expanded="false"
+          [attr.aria-controls]="item.id"
+        >
+          <span> {{ item.question }}</span>
+          <i class="bi bi-chevron-down"></i>
+        </h2>
+        <div class="question-collapse collapse" [id]="item.id">
+          <div class="question-body">
+            <p>{{ item.responce }}</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

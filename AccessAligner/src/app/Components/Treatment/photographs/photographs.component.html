@@ -1,0 +1,179 @@
+<div class="card">
+  <div class="header">
+    <h2>
+      <strong>{{
+        "components.treatment.photographs.header-title-strong" | translate
+      }}</strong>
+      {{ "components.treatment.photographs.header-title" | translate }}
+    </h2>
+    <ul
+      class="header-dropdown"
+      *ngIf="
+        ['NEW', 'COMPLETED', 'QUALIFIED', 'CONFIRMED'].includes(
+          treatment$.status
+        )
+      "
+    >
+      <div [class]="show === true ? 'dropdown show' : 'dropdown'">
+        <a
+          class="dropdown-toggle"
+          href="javascript:void(0);"
+          role="button"
+          (click)="show = !show"
+        >
+          <i class="zmdi zmdi-more"></i>
+        </a>
+
+        <div
+          [class]="
+            show === true ? 'dropdown-menu slideUp' : 'dropdown-menu slideDown'
+          "
+        >
+          <a
+            class="dropdown-item"
+            [routerLink]="
+              '/treatment/new-treatment/' + treatment$?.patient?.id + '/photos'
+            "
+            >{{
+              "components.treatment.photographs.update-button" | translate
+            }}</a
+          >
+        </div>
+      </div>
+    </ul>
+  </div>
+  <div class="body">
+    <div
+      class="progress-container progress-primary text-center"
+      *ngIf="treatment$?.lengthPhotos === 0; else loadTemplate"
+    >
+      <span class="progress-badge">{{
+        "components.treatment.photographs.no-photos-msg" | translate
+      }}</span>
+      <div class="progress">
+        <div
+          class="progress-bar progress-bar-warning"
+          role="progressbar"
+          style="width: 100%"
+        ></div>
+      </div>
+    </div>
+
+    <ng-template #loadTemplate>
+      <div
+        class="d-flex justify-content-center"
+        *ngIf="existedFiles$.length === 0; else displayTemplate"
+      >
+        <div class="spinner-grow" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #displayTemplate>
+      <div class="content file_manager">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-3 col-sm-12" *ngFor="let item of photos">
+              <div class="card" *ngIf="existedFile(item)">
+                <div class="file">
+                  <a href="javascript:void(0);">
+                    <div class="image" (click)="onOpenPhoto(existedFile(item))">
+                      <img
+                        [src]="existedFile(item)?.imageUrl"
+                        alt="img"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="file-name">
+                      <p class="m-b-5 text-muted">
+                        <small>{{ item.label }}</small>
+                      </p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--  <div
+        id="demo2"
+        class="carousel slide"
+        data-ride="carousel"
+        *ngIf="existedFiles$.length != 0"
+      >
+        <ul class="carousel-indicators">
+          <li
+            *ngFor="let item of photos; let i = index"
+            [attr.data-target]="'#demo2'"
+            [attr.data-slide-to]="i"
+            [class.active]="i === 0"
+          ></li>
+        </ul>
+         <div class="carousel-inner">
+          <div
+            class="carousel-item"
+            *ngFor="let item of photos; let i = index"
+            [class]="{ active: i === 0 }"
+          >
+            <ng-container
+              *ngIf="existedFile(item) != undefined; else elseTemplate"
+            >
+              <div>
+                <img
+                  fill
+                  loading="lazy"
+                  [src]="existedFile(item)?.imageUrl"
+                  class="img-fluid"
+                  alt=""
+                />
+                <div class="carousel-caption">
+                  <h3>{{ item.label }}</h3>
+                  <p>{{ item.name }}</p>
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-template #elseTemplate>
+              <img
+                fill
+                loading="lazy"
+                src="assets/images/image-gallery/5.png"
+                class="img-fluid"
+                alt=""
+              />
+              <div class="carousel-caption">
+                <h3>{{ item.label }}</h3>
+                <p>{{ item.name }}</p>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+
+          <a class="carousel-control-prev" href="#demo2" data-slide="prev"
+          ><span class="carousel-control-prev-icon"></span
+        ></a>
+        <a class="carousel-control-next" href="#demo2" data-slide="next"
+          ><span class="carousel-control-next-icon"></span
+        ></a>
+      </div> -->
+    </ng-template>
+  </div>
+</div>
+<div class="col-lg-12 col-md-12" *ngIf="this.treatment$?.photosComment">
+  <div class="progress-container">
+    <span class="progress-badge">{{ this.treatment$?.photosComment }}</span>
+    <div class="progress">
+      <div
+        class="progress-bar"
+        role="progressbar"
+        aria-valuenow="100"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        style="width: 100%"
+      ></div>
+    </div>
+  </div>
+</div>

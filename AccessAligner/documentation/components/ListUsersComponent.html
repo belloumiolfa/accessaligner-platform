@@ -1,0 +1,1807 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>front-end documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">front-end documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ListUsersComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/Pages/User-Management/list-users/list-users.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-list-users</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>RouterModule</code>
+                            <code>FormsModule</code>
+                                <code><a href="../components/ProfileImageComponent.html" target="_self" >ProfileImageComponent</a></code>
+                            <code>ReactiveFormsModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./list-users.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./list-users.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#admin$" >admin$</a>
+                            </li>
+                            <li>
+                                <a href="#admins$" >admins$</a>
+                            </li>
+                            <li>
+                                <a href="#adminsAfterFilter" >adminsAfterFilter</a>
+                            </li>
+                            <li>
+                                <a href="#enableSwitch" >enableSwitch</a>
+                            </li>
+                            <li>
+                                <a href="#errors" >errors</a>
+                            </li>
+                            <li>
+                                <a href="#filter" >filter</a>
+                            </li>
+                            <li>
+                                <a href="#form" >form</a>
+                            </li>
+                            <li>
+                                <a href="#searchTerm" >searchTerm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#utils" >utils</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#deleteAdmin" >deleteAdmin</a>
+                            </li>
+                            <li>
+                                <a href="#enableSwitchChange" >enableSwitchChange</a>
+                            </li>
+                            <li>
+                                <a href="#getAdmins" >getAdmins</a>
+                            </li>
+                            <li>
+                                <a href="#getClassRole" >getClassRole</a>
+                            </li>
+                            <li>
+                                <a href="#getClassStatus" >getClassStatus</a>
+                            </li>
+                            <li>
+                                <a href="#getCurrentUser" >getCurrentUser</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadAdminSwitches" >loadAdminSwitches</a>
+                            </li>
+                            <li>
+                                <a href="#navigateToPorfile" >navigateToPorfile</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onDeleteAdmin" >onDeleteAdmin</a>
+                            </li>
+                            <li>
+                                <a href="#serachByName" >serachByName</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(adminService: <a href="../injectables/AdminService.html" target="_self">AdminService</a>, spinner: NgxSpinnerService, handleErrors: <a href="../injectables/HandleErrorsService.html" target="_self">HandleErrorsService</a>, handleAlerts: <a href="../injectables/HandleAlertsService.html" target="_self">HandleAlertsService</a>, searchService: <a href="../injectables/SearchService.html" target="_self">SearchService</a>, appService: <a href="../injectables/AppService.html" target="_self">AppService</a>, statusService: <a href="../injectables/StatusClassService.html" target="_self">StatusClassService</a>, utils: <a href="../injectables/UtilsService.html" target="_self">UtilsService</a>, fb: FormBuilder, router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:45</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>adminService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AdminService.html" target="_self" >AdminService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>spinner</td>
+                                                  
+                                                        <td>
+                                                                    <code>NgxSpinnerService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>handleErrors</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/HandleErrorsService.html" target="_self" >HandleErrorsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>handleAlerts</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/HandleAlertsService.html" target="_self" >HandleAlertsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>searchService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/SearchService.html" target="_self" >SearchService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>appService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AppService.html" target="_self" >AppService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>statusService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/StatusClassService.html" target="_self" >StatusClassService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>utils</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UtilsService.html" target="_self" >UtilsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                    <code>FormBuilder</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteAdmin"></a>
+                    <span class="name">
+                        <span ><b>deleteAdmin</b></span>
+                        <a href="#deleteAdmin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deleteAdmin(id: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:151</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="enableSwitchChange"></a>
+                    <span class="name">
+                        <span ><b>enableSwitchChange</b></span>
+                        <a href="#enableSwitchChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>enableSwitchChange(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAdmins"></a>
+                    <span class="name">
+                        <span ><b>getAdmins</b></span>
+                        <a href="#getAdmins"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAdmins()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getClassRole"></a>
+                    <span class="name">
+                        <span ><b>getClassRole</b></span>
+                        <a href="#getClassRole"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getClassRole(role: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="197"
+                                    class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:197</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>role</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getClassStatus"></a>
+                    <span class="name">
+                        <span ><b>getClassStatus</b></span>
+                        <a href="#getClassStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getClassStatus(status: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:193</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCurrentUser"></a>
+                    <span class="name">
+                        <span ><b>getCurrentUser</b></span>
+                        <a href="#getCurrentUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCurrentUser()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="145"
+                                    class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:145</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadAdminSwitches"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadAdminSwitches</b></span>
+                        <a href="#loadAdminSwitches"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadAdminSwitches()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:67</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToPorfile"></a>
+                    <span class="name">
+                        <span ><b>navigateToPorfile</b></span>
+                        <a href="#navigateToPorfile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToPorfile(id: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:139</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="123"
+                                    class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:123</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDeleteAdmin"></a>
+                    <span class="name">
+                        <span ><b>onDeleteAdmin</b></span>
+                        <a href="#onDeleteAdmin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDeleteAdmin(user: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="172"
+                                    class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:172</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>user</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="serachByName"></a>
+                    <span class="name">
+                        <span ><b>serachByName</b></span>
+                        <a href="#serachByName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>serachByName()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="126"
+                                    class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:126</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="admin$"></a>
+                    <span class="name">
+                        <span ><b>admin$</b></span>
+                        <a href="#admin$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="admins$"></a>
+                    <span class="name">
+                        <span ><b>admins$</b></span>
+                        <a href="#admins$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="adminsAfterFilter"></a>
+                    <span class="name">
+                        <span ><b>adminsAfterFilter</b></span>
+                        <a href="#adminsAfterFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="enableSwitch"></a>
+                    <span class="name">
+                        <span ><b>enableSwitch</b></span>
+                        <a href="#enableSwitch"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormControl&lt;Boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errors"></a>
+                    <span class="name">
+                        <span ><b>errors</b></span>
+                        <a href="#errors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filter"></a>
+                    <span class="name">
+                        <span ><b>filter</b></span>
+                        <a href="#filter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="form"></a>
+                    <span class="name">
+                        <span ><b>form</b></span>
+                        <a href="#form"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FormGroup</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchTerm"></a>
+                    <span class="name">
+                        <span ><b>searchTerm</b></span>
+                        <a href="#searchTerm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="utils"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>utils</b></span>
+                        <a href="#utils"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/UtilsService.html" target="_self" >UtilsService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/Pages/User-Management/list-users/list-users.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input } from &quot;@angular/core&quot;;
+import { AdminService } from &quot;../../../Core/Services/AdminService/admin.service&quot;;
+import { NgxSpinnerService } from &quot;ngx-spinner&quot;;
+import { HandleErrorsService } from &quot;../../../Core/Helpers/handle-errors.service&quot;;
+import { CommonModule } from &quot;@angular/common&quot;;
+import { Router, RouterModule } from &quot;@angular/router&quot;;
+import { HandleAlertsService } from &quot;../../../Core/Helpers/handle-alerts.service&quot;;
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from &quot;@angular/forms&quot;;
+import { SearchService } from &quot;../../../Core/Helpers/search.service&quot;;
+import { ProfileImageComponent } from &quot;../../../Shared/Elements/profile-image/profile-image.component&quot;;
+import Swal from &quot;sweetalert2&quot;;
+import { AuthService } from &quot;../../../Core/Services/AuthService/auth.service&quot;;
+import { AppService } from &quot;../../../Core/Services/app.service&quot;;
+import { StatusClassService } from &quot;../../../Core/Helpers/status-class.service&quot;;
+import { UtilsService } from &quot;../../../Auth/Helpers/utils.service&quot;;
+
+@Component({
+  selector: &quot;app-list-users&quot;,
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ProfileImageComponent,
+    ReactiveFormsModule,
+  ],
+  templateUrl: &quot;./list-users.component.html&quot;,
+  styleUrl: &quot;./list-users.component.css&quot;,
+})
+export class ListUsersComponent {
+  errors!: any;
+  admins$: any[] &#x3D; [];
+  filter: boolean &#x3D; false;
+  adminsAfterFilter: any[] &#x3D; [];
+  searchTerm: any;
+  admin$!: any;
+  enableSwitch &#x3D; new FormControl&lt;Boolean&gt;(false); // or false, depending on your initial state
+  form!: FormGroup;
+
+  constructor(
+    private adminService: AdminService,
+    private spinner: NgxSpinnerService,
+    private handleErrors: HandleErrorsService,
+    private handleAlerts: HandleAlertsService,
+    private searchService: SearchService,
+
+    private appService: AppService,
+    private statusService: StatusClassService,
+    public utils: UtilsService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
+    this.getAdmins();
+    this.form &#x3D; this.fb.group({
+      switches: this.fb.array([]),
+    });
+
+    this.loadAdminSwitches();
+  }
+  private loadAdminSwitches(): void {
+    const control &#x3D; this.form.get(&quot;switches&quot;) as FormArray;
+    const admins &#x3D; this.filter ? this.adminsAfterFilter : this.admins$;
+
+    control.clear(); // Clear any existing controls
+
+    admins.forEach((admin) &#x3D;&gt; {
+      control.push(this.fb.control(this.utils.isSuperAdmin(admin)));
+    });
+  }
+
+  enableSwitchChange(index: number, event: Event) {
+    const target &#x3D; event.target as HTMLInputElement;
+
+    this.adminService.switchToSuperAdmin(index, target.checked).subscribe(
+      (data) &#x3D;&gt; {
+        console.log(data);
+
+        this.spinner.hide();
+
+        this.handleAlerts.handleSweetAlert(
+          &quot;Successfully switch.&quot;,
+          &quot;success&quot;,
+          false
+        );
+        this.getAdmins();
+      },
+      (err) &#x3D;&gt; {
+        this.spinner.hide();
+        //this.handleErrors.handleError(err);
+        this.handleAlerts.handleSweetAlert(
+          &quot;Check your data input carefully.&quot;,
+          &quot;error&quot;,
+          false
+        );
+      }
+    );
+  }
+
+  getAdmins() {
+    this.spinner.show();
+    this.adminService.getAdmins().subscribe(
+      (data) &#x3D;&gt; {
+        this.spinner.hide();
+
+        this.admins$ &#x3D; data;
+      },
+      (err) &#x3D;&gt; {
+        this.spinner.hide();
+        this.handleErrors.handleError(err);
+
+        this.errors &#x3D; this.handleErrors.handleError(err);
+      }
+    );
+  }
+
+  ngOnInit(): void {
+    this.getCurrentUser();
+  }
+  serachByName() {
+    if (this.searchTerm.trim() !&#x3D;&#x3D; &quot;&quot;) {
+      this.filter &#x3D; true;
+
+      this.adminsAfterFilter &#x3D; this.searchService.searchUser(
+        this.searchTerm,
+        this.admins$
+      );
+    } else {
+      this.filter &#x3D; false;
+    }
+  }
+
+  navigateToPorfile(id: any) {
+    this.router.navigate([&quot;/profile/&quot; + id + &quot;/overview&quot;], {
+      queryParams: { viewProfile: true },
+    });
+  }
+
+  getCurrentUser() {
+    this.appService.getUser$.subscribe((data: any) &#x3D;&gt; {
+      this.admin$ &#x3D; data;
+    });
+  }
+
+  deleteAdmin(id: any) {
+    this.adminService.deleteAdmin(id).subscribe(
+      (data) &#x3D;&gt; {
+        this.spinner.hide();
+
+        this.handleAlerts.handleSweetAlert(data.message, &quot;success&quot;, false);
+        this.getAdmins();
+      },
+      (err) &#x3D;&gt; {
+        this.spinner.hide();
+        this.handleErrors.handleError(err);
+
+        this.handleAlerts.handleSweetAlert(
+          &quot;Check your data input carefully.&quot;,
+          &quot;error&quot;,
+          false
+        );
+      }
+    );
+  }
+
+  onDeleteAdmin(user: any) {
+    Swal.fire({
+      title: &quot;Are you sure?&quot;,
+      text: &quot;You won&#x27;t be able to revert this!&quot;,
+      icon: &quot;warning&quot;,
+      showCancelButton: true,
+      confirmButtonColor: &quot;#DD6B55&quot;,
+      cancelButtonColor: &quot;#b9b9b9&quot;,
+      confirmButtonText: &quot;Yes, delete Admin !&quot;,
+      customClass: {
+        popup: &quot;sweet-alert&quot;,
+      },
+    }).then((result) &#x3D;&gt; {
+      if (result.isConfirmed) {
+        this.spinner.show();
+
+        this.deleteAdmin(user);
+      }
+    });
+  }
+
+  getClassStatus(status: any) {
+    return this.statusService.getClassStatusUser(status);
+  }
+
+  getClassRole(role: any) {
+    return this.statusService.getClassAdmin(role);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;tab-pane&quot; id&#x3D;&quot;List&quot;&gt;
+  &lt;div class&#x3D;&quot;card&quot;&gt;
+    &lt;div class&#x3D;&quot;body&quot;&gt;
+      &lt;div&gt;
+        &lt;label
+          &gt;Search:&lt;input
+            type&#x3D;&quot;search&quot;
+            class&#x3D;&quot;form-control form-control-sm&quot;
+            placeholder&#x3D;&quot;search by user name&quot;
+            [(ngModel)]&#x3D;&quot;searchTerm&quot;
+            (input)&#x3D;&quot;serachByName()&quot;
+            aria-controls&#x3D;&quot;DataTables_Table_0&quot;
+        /&gt;&lt;/label&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;table-responsive&quot;&gt;
+        &lt;table class&#x3D;&quot;table table-hover m-b-0 c_list&quot;&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th&gt;#&lt;/th&gt;
+              &lt;th data-breakpoints&#x3D;&quot;xs sm md&quot;&gt;Name&lt;/th&gt;
+              &lt;th data-breakpoints&#x3D;&quot;xs&quot;&gt;Role&lt;/th&gt;
+              &lt;th data-breakpoints&#x3D;&quot;xs&quot;&gt;Phone&lt;/th&gt;
+              &lt;th data-breakpoints&#x3D;&quot;xs sm md&quot;&gt;Email&lt;/th&gt;
+              &lt;th data-breakpoints&#x3D;&quot;xs sm md&quot;&gt;Address&lt;/th&gt;
+              &lt;th data-breakpoints&#x3D;&quot;xs&quot; *ngIf&#x3D;&quot;utils.isSuperAdmin(admin$)&quot;&gt;
+                SuperAdmin
+              &lt;/th&gt;
+              &lt;th data-breakpoints&#x3D;&quot;xs&quot; *ngIf&#x3D;&quot;utils.isSuperAdmin(admin$)&quot;&gt;
+                Action
+              &lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;tr *ngIf&#x3D;&quot;admins$.length &#x3D;&#x3D;&#x3D; 0 &amp;&amp; !filter&quot;&gt;
+              &lt;td colspan&#x3D;&quot;10&quot;&gt;
+                &lt;div class&#x3D;&quot;progress-container progress-info text-center&quot;&gt;
+                  &lt;span class&#x3D;&quot;progress-badge&quot;&gt;Admins not added yet ...&lt;/span&gt;
+                  &lt;div class&#x3D;&quot;progress&quot;&gt;
+                    &lt;div
+                      class&#x3D;&quot;progress-bar progress-bar-info&quot;
+                      role&#x3D;&quot;progressbar&quot;
+                      style&#x3D;&quot;width: 100%&quot;
+                    &gt;&lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr *ngIf&#x3D;&quot;adminsAfterFilter.length &#x3D;&#x3D;&#x3D; 0 &amp;&amp; filter&quot;&gt;
+              &lt;td colspan&#x3D;&quot;10&quot; *ngIf&#x3D;&quot;adminsAfterFilter.length &#x3D;&#x3D;&#x3D; 0 &amp;&amp; filter&quot;&gt;
+                &lt;div class&#x3D;&quot;progress-container progress-primary text-center&quot;&gt;
+                  &lt;span class&#x3D;&quot;progress-badge&quot;&gt;Admin not found...&lt;/span&gt;
+                  &lt;div class&#x3D;&quot;progress&quot;&gt;
+                    &lt;div
+                      class&#x3D;&quot;progress-bar progress-bar-warning&quot;
+                      role&#x3D;&quot;progressbar&quot;
+                      style&#x3D;&quot;width: 100%&quot;
+                    &gt;&lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+
+            &lt;tr
+              *ngFor&#x3D;&quot;
+                let admin of filter ? adminsAfterFilter : admins$;
+                let i &#x3D; index
+              &quot;
+            &gt;
+              &lt;td&gt;#{{ admin.id }}&lt;/td&gt;
+              &lt;td style&#x3D;&quot;cursor: pointer&quot; (click)&#x3D;&quot;navigateToPorfile(admin.id)&quot;&gt;
+                &lt;app-profile-image
+                  [photoId]&#x3D;&quot;admin?.profile?.photo.id&quot;
+                  [class]&#x3D;&quot;&#x27;rounded-circle avatar&#x27;&quot;
+                  [expression]&#x3D;&quot;
+                    admin?.profile?.firstName &amp;&amp; admin?.profile?.lastName
+                      ? admin?.profile?.firstName +
+                        &#x27; &#x27; +
+                        admin?.profile?.lastName
+                      : admin?.userName
+                  &quot;
+                &gt;
+                &lt;/app-profile-image&gt;
+
+                &lt;p
+                  class&#x3D;&quot;c_name&quot;
+                  *ngIf&#x3D;&quot;
+                    admin.profile.firstName &amp;&amp; admin.profile.lastName;
+                    else showUserName
+                  &quot;
+                &gt;
+                  {{ admin.profile.firstName }}
+                  {{ admin.profile.lastName }}
+                &lt;/p&gt;
+                &lt;ng-template #showUserName&gt;
+                  &lt;p class&#x3D;&quot;c_name&quot;&gt;
+                    {{ admin.userName }}
+                  &lt;/p&gt;
+                &lt;/ng-template&gt;
+              &lt;/td&gt;
+
+              &lt;td&gt;
+                &lt;div class&#x3D;&quot;row&quot; *ngIf&#x3D;&quot;admin.roleList?.length !&#x3D;&#x3D; 0&quot;&gt;
+                  &lt;div *ngFor&#x3D;&quot;let role of admin.roleList&quot;&gt;
+                    &lt;span
+                      class&#x3D;&quot;badge m-l-10 hidden-sm-down&quot;
+                      [ngClass]&#x3D;&quot;getClassRole(role.name)&quot;
+                    &gt;
+                      {{ role.name }}
+                    &lt;/span&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/td&gt;
+
+              &lt;td&gt;
+                &lt;span class&#x3D;&quot;phone&quot;
+                  &gt;&lt;i class&#x3D;&quot;zmdi zmdi-phone m-r-10&quot;&gt;&lt;/i
+                  &gt;{{ admin.profile.phone }}&lt;/span
+                &gt;
+              &lt;/td&gt;
+
+              &lt;td&gt;
+                &lt;span class&#x3D;&quot;phone&quot;
+                  &gt;&lt;i class&#x3D;&quot;zmdi zmdi-email m-r-10&quot;&gt;&lt;/i&gt;{{ admin.email }}&lt;/span
+                &gt;
+              &lt;/td&gt;
+
+              &lt;td&gt;
+                &lt;address&gt;
+                  &lt;i class&#x3D;&quot;zmdi zmdi-pin&quot;&gt;&lt;/i&gt;{{ admin.profile.address }}
+                &lt;/address&gt;
+              &lt;/td&gt;
+              &lt;td *ngIf&#x3D;&quot;utils.isSuperAdmin(admin$)&quot;&gt;
+                &lt;form class&#x3D;&quot;custom-control custom-switch&quot; [formGroup]&#x3D;&quot;form&quot;&gt;
+                  &lt;input
+                    [formControlName]&#x3D;&quot;i&quot;
+                    (change)&#x3D;&quot;enableSwitchChange(admin.id, $event)&quot;
+                    [defaultChecked]&#x3D;&quot;utils.isSuperAdmin(admin)&quot;
+                    type&#x3D;&quot;checkbox&quot;
+                    class&#x3D;&quot;custom-control-input&quot;
+                    [id]&#x3D;&quot;&#x27;customSwitch&#x27; + i&quot;
+                  /&gt;
+                  &lt;label
+                    class&#x3D;&quot;custom-control-label&quot;
+                    [for]&#x3D;&quot;&#x27;customSwitch&#x27; + i&quot;
+                  &gt;&lt;/label&gt;
+                &lt;/form&gt;
+              &lt;/td&gt;
+              &lt;td&gt;
+                &lt;!--  &lt;button class&#x3D;&quot;btn btn-icon btn-neutral btn-icon-mini&quot;&gt;
+                  &lt;i class&#x3D;&quot;zmdi zmdi-edit&quot;&gt;&lt;/i&gt;
+                &lt;/button&gt; --&gt;
+                &lt;button
+                  *ngIf&#x3D;&quot;utils.isSuperAdmin(admin$) &amp;&amp; admin.id !&#x3D;&#x3D; admin$.id&quot;
+                  (click)&#x3D;&quot;onDeleteAdmin(admin)&quot;
+                  class&#x3D;&quot;btn btn-icon btn-neutral btn-icon-mini&quot;
+                &gt;
+                  &lt;i class&#x3D;&quot;zmdi zmdi-delete&quot;&gt;&lt;/i&gt;
+                &lt;/button&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="tab-pane" id="List">  <div class="card">    <div class="body">      <div>        <label          >Search:<input            type="search"            class="form-control form-control-sm"            placeholder="search by user name"            [(ngModel)]="searchTerm"            (input)="serachByName()"            aria-controls="DataTables_Table_0"        /></label>      </div>      <div class="table-responsive">        <table class="table table-hover m-b-0 c_list">          <thead>            <tr>              <th>#</th>              <th data-breakpoints="xs sm md">Name</th>              <th data-breakpoints="xs">Role</th>              <th data-breakpoints="xs">Phone</th>              <th data-breakpoints="xs sm md">Email</th>              <th data-breakpoints="xs sm md">Address</th>              <th data-breakpoints="xs" *ngIf="utils.isSuperAdmin(admin$)">                SuperAdmin              </th>              <th data-breakpoints="xs" *ngIf="utils.isSuperAdmin(admin$)">                Action              </th>            </tr>          </thead>          <tbody>            <tr *ngIf="admins$.length === 0 && !filter">              <td colspan="10">                <div class="progress-container progress-info text-center">                  <span class="progress-badge">Admins not added yet ...</span>                  <div class="progress">                    <div                      class="progress-bar progress-bar-info"                      role="progressbar"                      style="width: 100%"                    ></div>                  </div>                </div>              </td>            </tr>            <tr *ngIf="adminsAfterFilter.length === 0 && filter">              <td colspan="10" *ngIf="adminsAfterFilter.length === 0 && filter">                <div class="progress-container progress-primary text-center">                  <span class="progress-badge">Admin not found...</span>                  <div class="progress">                    <div                      class="progress-bar progress-bar-warning"                      role="progressbar"                      style="width: 100%"                    ></div>                  </div>                </div>              </td>            </tr>            <tr              *ngFor="                let admin of filter ? adminsAfterFilter : admins$;                let i = index              "            >              <td>#{{ admin.id }}</td>              <td style="cursor: pointer" (click)="navigateToPorfile(admin.id)">                <app-profile-image                  [photoId]="admin?.profile?.photo.id"                  [class]="\'rounded-circle avatar\'"                  [expression]="                    admin?.profile?.firstName && admin?.profile?.lastName                      ? admin?.profile?.firstName +                        \' \' +                        admin?.profile?.lastName                      : admin?.userName                  "                >                </app-profile-image>                <p                  class="c_name"                  *ngIf="                    admin.profile.firstName && admin.profile.lastName;                    else showUserName                  "                >                  {{ admin.profile.firstName }}                  {{ admin.profile.lastName }}                </p>                <ng-template #showUserName>                  <p class="c_name">                    {{ admin.userName }}                  </p>                </ng-template>              </td>              <td>                <div class="row" *ngIf="admin.roleList?.length !== 0">                  <div *ngFor="let role of admin.roleList">                    <span                      class="badge m-l-10 hidden-sm-down"                      [ngClass]="getClassRole(role.name)"                    >                      {{ role.name }}                    </span>                  </div>                </div>              </td>              <td>                <span class="phone"                  ><i class="zmdi zmdi-phone m-r-10"></i                  >{{ admin.profile.phone }}</span                >              </td>              <td>                <span class="phone"                  ><i class="zmdi zmdi-email m-r-10"></i>{{ admin.email }}</span                >              </td>              <td>                <address>                  <i class="zmdi zmdi-pin"></i>{{ admin.profile.address }}                </address>              </td>              <td *ngIf="utils.isSuperAdmin(admin$)">                <form class="custom-control custom-switch" [formGroup]="form">                  <input                    [formControlName]="i"                    (change)="enableSwitchChange(admin.id, $event)"                    [defaultChecked]="utils.isSuperAdmin(admin)"                    type="checkbox"                    class="custom-control-input"                    [id]="\'customSwitch\' + i"                  />                  <label                    class="custom-control-label"                    [for]="\'customSwitch\' + i"                  ></label>                </form>              </td>              <td>                <!--  <button class="btn btn-icon btn-neutral btn-icon-mini">                  <i class="zmdi zmdi-edit"></i>                </button> -->                <button                  *ngIf="utils.isSuperAdmin(admin$) && admin.id !== admin$.id"                  (click)="onDeleteAdmin(admin)"                  class="btn btn-icon btn-neutral btn-icon-mini"                >                  <i class="zmdi zmdi-delete"></i>                </button>              </td>            </tr>          </tbody>        </table>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AcceptDecisionComponent', 'selector': 'app-accept-decision'},{'name': 'AcceptFormComponent', 'selector': 'app-accept-form'},{'name': 'AccountFormComponent', 'selector': 'app-account-form'},{'name': 'ActivitiesComponent', 'selector': 'app-activities'},{'name': 'AddFileComponent', 'selector': 'app-add-file'},{'name': 'AddNewPatientComponent', 'selector': 'app-add-new-patient'},{'name': 'AddNewPlanComponent', 'selector': 'app-add-new-plan'},{'name': 'AddNewTreatmentComponent', 'selector': 'app-add-new-treatment'},{'name': 'AdminDecisionComponent', 'selector': 'app-admin-decision'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ArchiveDoctorsComponent', 'selector': 'app-archive-doctors'},{'name': 'ArchiveTreatmentsComponent', 'selector': 'app-archive-treatments'},{'name': 'BackHomeComponent', 'selector': 'app-back-home'},{'name': 'BlockHeaderComponent', 'selector': 'app-block-header'},{'name': 'ClinicsComponent', 'selector': 'app-clinics'},{'name': 'ComingPageComponent', 'selector': 'app-coming-page'},{'name': 'CompanyDetailsComponent', 'selector': 'app-company-details'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ConfirmDecisionComponent', 'selector': 'app-confirm-decision'},{'name': 'ConfirmFormComponent', 'selector': 'app-confirm-form'},{'name': 'ContentDevisTreatComponent', 'selector': 'app-content-devis-treat'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'Error403Component', 'selector': 'app-error403'},{'name': 'Error500Component', 'selector': 'app-error500'},{'name': 'Error503Component', 'selector': 'app-error503'},{'name': 'FinishTreatmentComponent', 'selector': 'app-finish-treatment'},{'name': 'ForgetPasswordComponent', 'selector': 'app-forget-password'},{'name': 'GetPlansTreatComponent', 'selector': 'app-get-plans-treat'},{'name': 'GridUsersComponent', 'selector': 'app-grid-users'},{'name': 'HelpLinkComponent', 'selector': 'app-help-link'},{'name': 'InfoProfileMenuComponent', 'selector': 'app-info-profile-menu'},{'name': 'InfosComponent', 'selector': 'app-infos'},{'name': 'LayoutContainerComponent', 'selector': 'app-layout-container'},{'name': 'LeftSidebarComponent', 'selector': 'app-left-sidebar'},{'name': 'LeftSidebarMobilComponent', 'selector': 'app-left-sidebar-mobil'},{'name': 'LinksComponent', 'selector': 'app-links'},{'name': 'ListDoctorsComponent', 'selector': 'app-list-doctors'},{'name': 'ListUsersComponent', 'selector': 'app-list-users'},{'name': 'LockedScreenComponent', 'selector': 'app-locked-screen'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MenuAppComponent', 'selector': 'app-menu-app'},{'name': 'MiniLeftbarComponent', 'selector': 'app-mini-leftbar'},{'name': 'ModalDescriptionEligibleComponent', 'selector': 'app-modal-description-eligible'},{'name': 'ModalDisplayItemPlanComponent', 'selector': 'app-modal-display-item-plan'},{'name': 'ModalDisplayPhotoComponent', 'selector': 'app-modal-display-photo'},{'name': 'ModalDisplayReportComponent', 'selector': 'app-modal-display-report'},{'name': 'ModalEstimateComponent', 'selector': 'app-modal-estimate'},{'name': 'ModalfinishtreatComponent', 'selector': 'app-modalfinishtreat'},{'name': 'ModalPlanDetailsComponent', 'selector': 'app-modal-plan-details'},{'name': 'ModalRemoveTeamComponent', 'selector': 'app-modal-remove-team'},{'name': 'ModalTeamInfoComponent', 'selector': 'app-modal-team-info'},{'name': 'NewAdminComponent', 'selector': 'app-new-admin'},{'name': 'NewPlanComponent', 'selector': 'app-new-plan'},{'name': 'NewTreatClinicsComponent', 'selector': 'app-new-treat-clinics'},{'name': 'NewTreatGeneralComponent', 'selector': 'app-new-treat-general'},{'name': 'NewTreatPatientComponent', 'selector': 'app-new-treat-patient'},{'name': 'NewTreatPhotosComponent', 'selector': 'app-new-treat-photos'},{'name': 'NewTreatTeethComponent', 'selector': 'app-new-treat-teeth'},{'name': 'NewUserDetailsComponent', 'selector': 'app-new-user-details'},{'name': 'NotifMenuComponent', 'selector': 'app-notif-menu'},{'name': 'OfflineComponent', 'selector': 'app-offline'},{'name': 'OverlayMenuComponent', 'selector': 'app-overlay-menu'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PatientComponent', 'selector': 'app-patient'},{'name': 'PatientDetailComponent', 'selector': 'app-patient-detail'},{'name': 'PatientDisplayInformationsComponent', 'selector': 'app-patient-display-informations'},{'name': 'PatientFormComponent', 'selector': 'app-patient-form'},{'name': 'PatientInfosComponent', 'selector': 'app-patient-infos'},{'name': 'PatientListComponent', 'selector': 'app-patient-list'},{'name': 'PatientTreatClinicsInformationsComponent', 'selector': 'app-patient-treat-clinics-informations'},{'name': 'PatientTreatInformationsComponent', 'selector': 'app-patient-treat-informations'},{'name': 'PatientTreatPhotosInformationsComponent', 'selector': 'app-patient-treat-photos-informations'},{'name': 'PatientTreatTeethInformationsComponent', 'selector': 'app-patient-treat-teeth-informations'},{'name': 'PhotoFormComponent', 'selector': 'app-photo-form'},{'name': 'PhotographsComponent', 'selector': 'app-photographs'},{'name': 'PlanComponent', 'selector': 'app-plan'},{'name': 'PlanListComponent', 'selector': 'app-plan-list'},{'name': 'PreloaderComponent', 'selector': 'app-preloader'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileImageComponent', 'selector': 'app-profile-image'},{'name': 'PublicLayoutComponent', 'selector': 'app-public-layout'},{'name': 'QuoteReportComponent', 'selector': 'app-quote-report'},{'name': 'RigthSidebarComponent', 'selector': 'app-rigth-sidebar'},{'name': 'ScheduleComponent', 'selector': 'app-schedule'},{'name': 'SecurityFormComponent', 'selector': 'app-security-form'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SignInComponent', 'selector': 'app-sign-in'},{'name': 'SignUpComponent', 'selector': 'app-sign-up'},{'name': 'TaskMenuComponent', 'selector': 'app-task-menu'},{'name': 'TeamInfoComponent', 'selector': 'app-team-info'},{'name': 'TeethComponent', 'selector': 'app-teeth'},{'name': 'TimelineTreatmentsComponent', 'selector': 'app-timeline-treatments'},{'name': 'TreatmentComponent', 'selector': 'app-treatment'},{'name': 'TreatmentConfirmationComponent', 'selector': 'app-treatment-confirmation'},{'name': 'TreatmentDetailsComponent', 'selector': 'app-treatment-details'},{'name': 'TreatmentEligibleComponent', 'selector': 'app-treatment-eligible'},{'name': 'TreatmentHeaderComponent', 'selector': 'app-treatment-header'},{'name': 'TreatmentListComponent', 'selector': 'app-treatment-list'},{'name': 'TreatmentsComponent', 'selector': 'app-treatments'},{'name': 'TreatmentStatusComponent', 'selector': 'app-treatment-status'},{'name': 'UpdatePasswordComponent', 'selector': 'app-update-password'},{'name': 'UpdatePatientComponent', 'selector': 'app-update-patient'},{'name': 'UsersOverviewComponent', 'selector': 'app-users-overview'},{'name': 'UsersPageComponent', 'selector': 'app-users-page'},{'name': 'WaitingComponent', 'selector': 'app-waiting'}];
+    var DIRECTIVES = [{'name': 'GetPhotoDirective', 'selector': '[appGetPhoto]'}];
+    var ACTUAL_COMPONENT = {'name': 'ListUsersComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ListUsersComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

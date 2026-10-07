@@ -1,0 +1,23 @@
+.teeth {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin: 5px;
+}
+.circle-light {
+  width: 64px;
+  height: 64px;
+
+  border-radius: 50%; /* Makes it a circle-green */
+  background-color: var(--pastel-green-color); /*  Set a background color */
+  display: flex;
+  justify-content: center; /* Center the image horizontally */
+  align-items: center; /* Center the image vertically */
+  overflow: hidden; /* Ensures the image is clipped to the circle-green */
+}
+
+.teeth img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover; /* Ensures the image covers the circle-green without distortion */
+}

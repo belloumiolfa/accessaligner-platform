@@ -1,0 +1,15 @@
+<h6>
+  <ng-container *ngIf="user.userStatus.status.id == 4; else elseTemplate">
+    <span>{{ "auth.accept-decision.decision-accept" | translate }}</span>
+  </ng-container>
+  <ng-template #elseTemplate
+    ><span i18n>{{ "auth.accept-decision.decision-block" | translate }}</span>
+  </ng-template>
+
+  <a href="javascript:void(0);"
+    ><span>
+      {{ user.userStatus.responsible?.profile?.firstName }}
+      {{ user.userStatus.responsible?.profile?.lastName }}
+    </span></a
+  >
+</h6>

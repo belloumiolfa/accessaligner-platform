@@ -1,0 +1,56 @@
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12">
+    <div class="card">
+      <div class="header">
+        <h2>
+          <strong
+            >{{
+              "components.treatment.treatment-confirmation.header-title-strong"
+                | translate
+            }}
+          </strong>
+          {{
+            "components.treatment.treatment-confirmation.header-title"
+              | translate
+          }}
+        </h2>
+      </div>
+      <div class=" ">
+        <div class="row clearfix">
+          <div class="col-lg-12 col-md-12" style="text-align: center">
+            <!--   [disabled]="
+                !(
+                  this.treatment$?.lengthPhotos >= 9 &&
+                  this.treatment$?.lengthClinics >= 3
+                )
+              " -->
+            <button
+              class="btn btn-round btn-success"
+              (click)="treatmentConfirmation('CONFIRMED')"
+            >
+              {{
+                "components.treatment.treatment-confirmation.confirm-button"
+                  | translate
+              }}
+            </button>
+            <button
+              [disabled]="
+                !(
+                  this.treatment$?.lengthPhotos >= 10 &&
+                  this.treatment$?.lengthClinics >= 4
+                )
+              "
+              class="btn btn-round btn-warning"
+              (click)="treatmentConfirmation('CANCELED')"
+            >
+              {{
+                "components.treatment.treatment-confirmation.cancel-button"
+                  | translate
+              }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

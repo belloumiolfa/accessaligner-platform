@@ -1,0 +1,205 @@
+<div class="card">
+  <div class="body m-t-10">
+    <div class="header">
+      <h6 class="title align-center">
+        {{ "pages.plan-management.add-new-plan.header-title" | translate }}
+      </h6>
+    </div>
+    <div class="container">
+      <form
+        class="row clearfix"
+        [formGroup]="form"
+        (ngSubmit)="onSubmit($event)"
+      >
+        <div class="col-lg-12 col-md-12">
+          <div class="card text-center">
+            <div class="body">
+              <ngx-dropzone
+                class="dropzone"
+                style="height: auto"
+                [multiple]="true"
+                maxFiles="10"
+                (change)="onSelect($event)"
+              >
+                <ngx-dropzone-label>
+                  <div class="dz-message">
+                    <div class="drag-icon-cph">
+                      <i
+                        class="material-icons zmdi zmdi-collection-folder-image"
+                      ></i>
+                      <p class="text-muted">
+                        {{
+                          "pages.plan-management.add-new-plan.upload-photos-msg"
+                            | translate
+                        }}
+                      </p>
+                    </div>
+                  </div>
+                </ngx-dropzone-label>
+                <ngx-dropzone-image-preview
+                  ngProjectAs="ngx-dropzone-preview"
+                  [removable]="true"
+                  (removed)="onRemove(photo, 'photo')"
+                  *ngFor="let photo of photos"
+                  [file]="photo"
+                >
+                  <ngx-dropzone-label
+                    >{{ photo.name }} ({{ photo.type }})</ngx-dropzone-label
+                  >
+                </ngx-dropzone-image-preview>
+              </ngx-dropzone>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12">
+          <div class="card text-center">
+            <div class="body">
+              <ngx-dropzone
+                class="dropzone"
+                style="height: auto"
+                [multiple]="true"
+                maxFiles="4"
+                (change)="onSelect($event)"
+              >
+                <ngx-dropzone-label>
+                  <div class="dz-message">
+                    <div class="drag-icon-cph">
+                      <i class="material-icons zmdi zmdi-collection-video"></i>
+                      <p class="text-muted">
+                        {{
+                          "pages.plan-management.add-new-plan.upload-videos-msg"
+                            | translate
+                        }}
+                      </p>
+                    </div>
+                  </div>
+                </ngx-dropzone-label>
+                <ngx-dropzone-video-preview
+                  ngProjectAs="ngx-dropzone-preview"
+                  [removable]="true"
+                  (removed)="onRemove(video, 'video')"
+                  *ngFor="let video of videos"
+                  [file]="video"
+                >
+                  <ngx-dropzone-label
+                    >{{ video.name }} ({{ video.type }})</ngx-dropzone-label
+                  >
+                </ngx-dropzone-video-preview>
+              </ngx-dropzone>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12">
+          <div class="card text-center">
+            <div class="body">
+              <ngx-dropzone
+                class="dropzone"
+                style="height: auto"
+                [multiple]="true"
+                maxFiles="4"
+                (change)="onSelect($event)"
+              >
+                <ngx-dropzone-label>
+                  <div class="dz-message">
+                    <div class="drag-icon-cph">
+                      <i class="material-icons zmdi zmdi-file-plus"></i>
+                      <p class="text-muted">
+                        {{
+                          "pages.plan-management.add-new-plan.upload-reports-msg"
+                            | translate
+                        }}
+                      </p>
+                    </div>
+                  </div>
+                </ngx-dropzone-label>
+                <ngx-dropzone-preview
+                  ngProjectAs="ngx-dropzone-preview"
+                  [removable]="true"
+                  (removed)="onRemove(report, 'report')"
+                  *ngFor="let report of reports"
+                  [file]="report"
+                >
+                  <ngx-dropzone-label
+                    >{{ report.name }} ({{ report.type }})</ngx-dropzone-label
+                  >
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-12">
+          <div class="form-group form-float">
+            <b>{{
+              "pages.plan-management.add-new-plan.code-label" | translate
+            }}</b>
+            <br />
+            <input
+              formControlName="code"
+              type="text"
+              class="form-control"
+              [placeholder]="
+                'pages.plan-management.add-new-plan.code-placeholder'
+                  | translate
+              "
+              name="code"
+            />
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12">
+          <div class="form-group form-float">
+            <b>
+              {{
+                "pages.plan-management.add-new-plan.description-label"
+                  | translate
+              }}</b
+            >
+            <textarea
+              rows="4"
+              class="form-control"
+              formControlName="description"
+              class="form-control no-resize"
+              [placeholder]="
+                'pages.plan-management.add-new-plan.description-placeholder'
+                  | translate
+              "
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12">
+          <!--  <div class="checkbox">
+            <input id="terms" type="checkbox" formControlName="term" />
+            <label for="terms" i18n>
+              {{
+                "pages.plan-management.add-new-plan.terms-label" | translate
+              }}
+              <a href="javascript:void(0);">
+                {{
+                  "pages.plan-management.add-new-plan.terms-links" | translate
+                }}
+              </a></label
+            >
+          </div> -->
+          <div class="d-flex justify-content-end">
+            <button
+              type="submit"
+              class="btn btn-primary btn-round"
+              [disabled]="this.form.valid !== true"
+            >
+              {{ "pages.plan-management.add-new-plan.save-button" | translate }}
+            </button>
+            <button type="reset" class="btn btn-primary btn-simple btn-round">
+              {{
+                "pages.plan-management.add-new-plan.cancel-button" | translate
+              }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

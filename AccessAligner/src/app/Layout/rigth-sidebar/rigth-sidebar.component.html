@@ -1,0 +1,15 @@
+<div *ngIf="action === true">
+  <div class="overlay" style="display: block" (click)="action = !action"></div>
+  <div id="rightsidebar" class="right-sidebar open stretchLeft">
+    <div class="tab-content">
+      <div
+        class="tab-pane slideRight active"
+        id="setting"
+        *ngIf="actSet === true"
+      >
+        <app-security-form></app-security-form>
+        <app-photo-form></app-photo-form>
+      </div>
+    </div>
+  </div>
+</div>

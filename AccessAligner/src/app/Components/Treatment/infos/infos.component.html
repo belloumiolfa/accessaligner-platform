@@ -1,0 +1,65 @@
+<div class="card">
+  <div class="header">
+    <div *ngIf="detailsTreat">
+      <h2>
+        <strong
+          >{{ "components.treatment.infos.header-title-strong" | translate }}
+        </strong>
+        {{ "components.treatment.infos.header-title" | translate }}
+      </h2>
+      <ul
+        class="header-dropdown"
+        *ngIf="
+          ['NEW', 'COMPLETED', 'QUALIFIED', 'CONFIRMED'].includes(
+            treatment$.status
+          )
+        "
+      >
+        <div [class]="show === true ? 'dropdown show' : 'dropdown'">
+          <a
+            class="dropdown-toggle"
+            href="javascript:void(0);"
+            role="button"
+            (click)="show = !show"
+          >
+            <i class="zmdi zmdi-more"></i>
+          </a>
+
+          <div
+            [class]="
+              show === true
+                ? 'dropdown-menu slideUp'
+                : 'dropdown-menu slideDown'
+            "
+          >
+            <a
+              class="dropdown-item"
+              [routerLink]="
+                '/treatment/new-treatment/' +
+                treatment$?.patient?.id +
+                '/general'
+              "
+              >{{ "components.treatment.infos.update-button" | translate }}</a
+            >
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+  <app-treat-general [treatment$]="treatment$"></app-treat-general>
+  <div class="col-lg-12 col-md-12" *ngIf="this.treatment$?.description">
+    <div class="progress-container">
+      <span class="progress-badge"> {{ this.treatment$?.description }}</span>
+      <div class="progress">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          aria-valuenow="100"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          style="width: 100%"
+        ></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="card text-center">
+  <div class="body">
+    <p class="m-b-20">
+      <i [class]="icon"></i>
+    </p>
+    <span>{{ title }}</span>
+    <h3 class="m-b-10">
+      <span
+        class="number count-to"
+        data-from="0"
+        [attr.data-to]="total"
+        data-speed="2000"
+        data-fresh-interval="700"
+        >{{ total }}</span
+      >
+    </h3>
+    <!--     <small class="text-muted">27% lower growth</small>
+ -->
+  </div>
+</div>

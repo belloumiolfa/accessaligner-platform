@@ -1,0 +1,23 @@
+<form class="form-group">
+  <h6>{{ "auth.accept-form.form-title" | translate }}</h6>
+  <div class="footer row">
+    <div class="col-lg-6 col-sm-12">
+      <button
+        type="button"
+        class="btn btn-primary btn-round btn-block"
+        (click)="onAccept(userId)"
+      >
+        {{ "auth.accept-form.accept-button" | translate }}
+      </button>
+    </div>
+    <div class="col-lg-6 col-sm-12">
+      <button
+        type="button"
+        class="btn btn-default btn-round btn-block"
+        (click)="onReject (userId)"
+      >
+        {{ "auth.accept-form.block-button" | translate }}
+      </button>
+    </div>
+  </div>
+</form>

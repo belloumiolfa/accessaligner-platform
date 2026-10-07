@@ -1,0 +1,792 @@
+{
+  "auth": {
+    "accept-decision": {
+      "decision-accept": "The user has been accepted by ",
+      "decision-block": "The user has been blocked by "
+    },
+    "accept-form": {
+      "form-title": "Make a choice regarding this user.",
+      "accept-button": "Accept",
+      "block-button": "Bloquer"
+    },
+    "company-details": {
+      "title": "THE ULTIMATE INVISIBLE DENTAL ALIGNER",
+      "description": "In the creation of its invisible orthodontic aligners, Access Aligner is constantly seeking performance and innovation."
+    },
+    "confirm-form": {
+      "terms-label": "I read and Agree to the",
+      "terms-link": "Terms of Usage",
+      "confirm-button": "Confirm",
+      "cancel-button": "Cancel"
+    },
+    "confirmation": {
+      "confirmed-title": "Account confirmed",
+      "confirmed-subtitle": "Please Wait after administration decision.",
+
+      "canceled-title": "Account Canceled",
+      "canceled-subtitle": "We hope you will join us in this adventure by making another account.",
+
+      "accepted-title": "Welcome to AccessAligner",
+      "accepted-subtitle": "We hope you have a fantastic experience with us. Please login with your email and password and start the adventure.",
+
+      "rejected-title": "Sorry we reject you",
+      "rejected-subtitle": "Sorry, You were blocked from access aligner, please contact the administration if you feel there is something wrong."
+    },
+    "forget-password": {
+      "page-title": "Forgot Password?",
+      "page-description": "Enter your e-mail address below to reset your password.",
+      "form": {
+        "email-input-placeholder": "Enter Email",
+        "button": "Request"
+      }
+    },
+    "sign-in": {
+      "page-title": "Log in",
+      "form": {
+        "email-input-placeholder": "Enter Email",
+        "password-input-placeholder": "Enter Password",
+        "checkbox-label": "Remember Me",
+        "signin-button": "SIGN IN",
+        "signup-button": "SIGN UP",
+        "forget-password-link": "Forgot Password?"
+      }
+    },
+    "sign-up": {
+      "page-title": "Sign Up",
+      "form": {
+        "user-name-input-placeholder": "Enter User Name",
+        "email-input-placeholder": "Enter Email",
+        "phone-input-placeholder": "Enter Phone",
+        "password-input-placeholder": "Enter Password",
+        "confirm-password-input-placeholder": "Confirm Password",
+        "terms-label": "I read and Agree to the",
+        "terms-link": "Terms of Usage",
+        "signup-button": "SIGN UP",
+        "already-have-membership": "You already have a membership?"
+      }
+    },
+
+    "update-password": {
+      "page-title": "Update Password?",
+      "page-description": "Enter your old and new password below to update your password.",
+
+      "form": {
+        "password-input-placeholder": "Enter your new Password",
+        "confirm-password-input-placeholder": "Confirm your new Password",
+        "update-button": "Update"
+      }
+    },
+    "waiting": {
+      "page-title": "Wait",
+      "page-description": "Please try after administration decision.",
+
+      "form": {
+        "search-input-placeholder": "Enter your search term..."
+      }
+    }
+  },
+
+  "components": {
+    "dashboard": {},
+    "modals": {
+      "content-devis-treat": {
+        "page-address": "Apartment No. 07, Building No. 17, Habib Thameur Avenue,",
+        "page-city": "1096 Tunis, Tunisia",
+        "page-phone": "Phone Number",
+        "page-email": "Email",
+        "patient-phone": "Patient Phone Number",
+        "patient-email": "Patient Email",
+        "content-header-strong": "Object : ",
+        "content-header-small": "Devis",
+
+        "th-description": "Description",
+        "th-qantity": "Quantity",
+        "th-price": "Unit Price HT",
+        "th-total": "Total HT",
+        "tr-upper-arch": "Upper arch gutter",
+        "tr-lower-arch": "Lower arch gutter",
+        "th-total-amount": "Total amount",
+        "th-remise": "Remise HT",
+        "th-total-amount-ttc": "Total amount TTC",
+        "export-button": "Export to PDF"
+      },
+      "modal-chat": {
+        "already": "already",
+        "messages": "messages",
+        "form": {
+          "message-input-placeholder": "Enter message here..."
+        }
+      },
+      "modal-description-eligible": {
+        "header-title": "Letter of not eligible treatment",
+        "card-title": "Treatment : ",
+        "card-description": "Description",
+        "save-button": "Save",
+        "cancel-button": "Cancel",
+        "textarea-placeholder": "Please type your description...",
+        "update-title": "Are you sure to update treatment to UNQUALIFIED ?",
+        "update-subTitle": "You won't be able to revert this!"
+      },
+      "modal-display-item-plan": {},
+      "modal-display-photo": {},
+      "modal-display-report": {},
+      "modal-estimate": {
+        "header-title": "Generate an estimate",
+        "form": {
+          "upper-label": "Upper dental arch trays",
+          "price": "price",
+          "lower-label": "Lower dental arch trays",
+          "discount-label": "Discount",
+          "discount-placeholder": "-- Please select discount --",
+          "currency-label": "Currency",
+          "currency-placeholder": "-- Please select cuurency --",
+          "save-button": "Save",
+          "cancel-button": "Cancel"
+        }
+      },
+      "modal-plan-details": {
+        "header-title": "Plans Informations",
+        "card-title": "Treatment :",
+        "photo-title": "PHOTOGRAPHS.",
+        "video-title": "VIDEOS.",
+        "reports-title": "REPORTS.",
+        "ask-accept-reject-msg": "Examine this treatment plan carefully; based on your preferences, you can accept or reject it.",
+        "accept-button": "Accept",
+        "reject-button": "Reject",
+        "feedback-input-placeholder": "Please type Your feedback...",
+        "accept-message": "Thank you for accepting the proposal. We will notify you when the production begins.",
+        "reject-message": "Thank you for your time; we will send another plan based on your feedback.",
+        "ask-start-production": " After carefully reviewing the plan, you can begin production by estimating the delay based on the number of days required. ",
+        "start-production-button": "START",
+        "start-production-message": "The production has begun,",
+        "for-dentist": "and you will receive your aligner",
+        "for-admin": "and will be finished",
+        "in": "in",
+        "days": "days.",
+        "start-delivery-message": "We anticipate that your aligner will be delivered on",
+        "deliveryDate-input-placeholder": "Choose Date and Time",
+        "delivery-button": "DELIVERY",
+        "delivered-message": "We will export your aligner on ",
+        "availability-message": "So be available on those days; the deliverer will contact you at any moment.",
+        "close-button": "Close"
+      },
+      "modal-remove-team": {
+        "header-title": "Members of the team",
+        "close-button": "Close"
+      },
+      "modal-team-info": {
+        "header-title": "Team",
+        "body-title": "Select your team",
+        "select-input-placeholder": "Add team to this treatment",
+        "save-button": "Save",
+        "cancel-button": "Cancel"
+      },
+      "modal-finish-treat": {
+        "header-title": "Treatment",
+        "terms-label": "I read and Agree to the",
+        "terms-link": "Terms of Usage",
+        "update-button": "UPDATE",
+        "complete-button": "COMPLETED",
+        "close-button": "CLOSE"
+      }
+    },
+    "new-treatment": {
+      "new-treat-clinics": {
+        "header-title": "Import your patient's clinical scans.",
+        "description": "Take sufficient quality scans to aid our orthodontic team's interpretation.",
+        "comment-label": "Comment",
+        "comment-placeholder": "Add your comment ..",
+        "save-button": "Save",
+        "cancel-button": "Cancel"
+      },
+      "new-treat-general": {
+        "form-title": "General information regarding the treatment.",
+        "upper-arch-label": "Upper arch",
+        "lower-arch-label": "Lower arch",
+        "upper-lower-label": "Upper & Lower arch",
+        "postCross-question": "Correcting posterior crossbite ? ",
+        "antCross-question": "Correcting anterior crossbite ?",
+        "gap-question": "Closing the open bite (If applicable) ?",
+        "overbite-question": "Correcting the overbite (if present) ?",
+        "classI-question": "Restoring Class I occlusion ?",
+        "reduceOverbite-question": "Reducing the over bite ?",
+        "crowding-question": "Closing the gaps",
+        "extract-question": "Planned extractions (if necessary)",
+        "yes-answer": "Yes",
+        "no-answer": "No",
+        "comment-label": "Comment",
+        "comment-placeholder": "Add your comment ..",
+        "save-button": "Save",
+        "cancel-button": "Cancel"
+      },
+      "new-treat-photos": {
+        "header-title": "Import your patient's clinical photos.",
+        "description": "Take sufficient quality photos to aid our orthodontic team's interpretation.",
+        "comment-label": "Comment",
+        "comment-placeholder": "Add your comment ..",
+        "save-button": "Save",
+        "cancel-button": "Cancel",
+        "delete": {
+          "alert-title": "Are you sure?",
+          "alert-text": "You won't be able to revert this!",
+          "alert-button": "Yes, delete it!",
+          "failed-msg": "The selected photo was unable to delete"
+        }
+      },
+      "new-treat-teeth": {
+        "header-title": "Choose the appropriate color and color the teet.",
+        "comment-label": "Comment",
+        "comment-placeholder": "Add your comment ..",
+        "save-button": "Save",
+        "cancel-button": "Cancel",
+        "undo-label": "undo",
+        "missing-label": "Missing",
+        "no moving-label": "No moving",
+        "implant-label": "Implant",
+        "crown-label": "Crown"
+      }
+    },
+    "patient": {
+      "patient-display-informations": {
+        "patient-label": "Patient",
+        "name-label": "Complete Name",
+        "email-label": "Email",
+        "birthday-label": "Birthday",
+        "phone-label": "Phone",
+        "address-label": "Address",
+        "disease-label": "Disease"
+      },
+      "patient-form": {
+        "header-title": "Complete the form with your patient information...",
+        "first-name-label": "Patient first name",
+        "first-name-placeholder": "Enter the patient's first name.",
+        "last-name-label": "Patient last name",
+        "last-name-placeholder": "Enter the patient's last name.",
+        "birthday-label": "Patient birthday name",
+        "birthday-placeholder": "Enter the patient's birthday name.",
+        "sex-label": "Patient sex name",
+        "male-label": "Male",
+        "Female-label": "Female",
+        "comment-label": "Comment",
+        "comment-placeholder": "Add your comment ..",
+        "save-button": "Save",
+        "cancel-button": "Cancel"
+      },
+      "patient-infos": {
+        "disease-label": "Disease",
+        "birthday-label": "Birth Date",
+        "comment": "Comment"
+      }
+    },
+    "timeline-new-treatment": {
+      "patient-treat-clinics-informations": {
+        "header-title": "PATIENT'S CLINICAL",
+        "header-title-information": "SCANS."
+      },
+      "patient-treat-informations": {
+        "header-title": "Treatment :"
+      },
+      "patient-treat-photos-informations": {
+        "header-title": "PATIENT'S CLINICAL",
+        "header-title-photos": "PHOTOGRAPHS."
+      }
+    },
+    "treatment": {
+      "activities": {
+        "header-title-strong": "Patient",
+        "header-title": "Activities",
+        "update-button": "Update",
+        "birthday-label": "Birthday"
+      },
+      "clinics": {
+        "header-title-strong": "Clinics",
+        "header-title": "Activities",
+        "update-button": "Update",
+        "no-clinics-msg": "No clinics added yet...!"
+      },
+      "finish-treatment": {
+        "header-title-strong": "Finished -",
+        "header-title": "Please notify us if you successfully received your aligner.",
+        "received-button": "RECEIVED"
+      },
+      "get-plans-treat": {
+        "header-title-strong": "Start - ",
+        "header-title": "The plan Process",
+        "card-title": "Treatment :",
+        "plan-id": "PLAN :",
+        "delivery": "Delivery at :"
+      },
+      "infos": {
+        "header-title-strong": "Treatments",
+        "header-title": "informations",
+        "update-button": "Update"
+      },
+      "new-plan": {
+        "header-title-strong": "Treatment",
+        "header-title": "decision",
+        "wait-team-msg": "Wait the team to add a plan ",
+        "card-title-strong": "Start - ",
+        "card-title": "The plan Process ",
+        "new-plan-button": "Update",
+        "ask-add-team-strong": "Please add an admin ",
+        "ask-add-team": "to work on this treatment."
+      },
+      "photographs": {
+        "header-title-strong": "Photographes ",
+        "header-title": "Activities",
+        "update-button": "Update",
+        "no-photos-msg": "No photographs added yet...!"
+      },
+      "quote-report": {
+        "header-title-strong": "Treatment",
+        "header-title": "decision",
+        "wait-estimate-msg": "Wait for the superadmin to add an estimate.",
+        "card-title-strong": "Make an estimate ",
+        "card-title": "Report ",
+        "add-new-button": "Add new",
+        "delete-all-button": "Delete all"
+      },
+      "teeth": {
+        "header-title-strong": "Teeth ",
+        "update-button": "Update"
+      },
+      "treat-general": {
+        "postCross-question": "Correcting posterior crossbite ? ",
+        "antCross-question": "Correcting anterior crossbite ?",
+        "gap-question": "Closing the gap (If applicable) ?",
+        "overbite-question": "Correcting the overbite (if present) ?",
+        "classI-question": "Restoring Class I occlusion ?",
+        "reduceOverbite-question": "Reducing the overbite ?",
+        "crowding-question": "Closing crowding",
+        "extract-question": "Planned extractions (if necessary)",
+        "yes-answer": "Yes",
+        "no-answer": "No"
+      },
+      "treatment-confirmation": {
+        "header-title-strong": "Confirm your treatment - ",
+        "header-title": "That allow us to start the plan.",
+        "confirm-button": "Confirm",
+        "cancel-button": "Cancel"
+      },
+      "treatment-eligible": {
+        "header-title-strong": "Evaluate treatment eligibility - ",
+        "header-title": "That allow you to generate an estimate.",
+        "eligible-button": "Eligible",
+        "not-eligible-button": "Not eligible"
+      },
+      "treatment-header": {
+        "header-title-strong": "Treatment ",
+        "header-title": "Report",
+        "update-button": "Update",
+        "archive-button": "Archive",
+        "delete-button": "Delete"
+      },
+      "treatment-status": {
+        "header-title-strong": "Treatment ",
+        "header-title": "decision",
+        "card-status-title": "TREATMENT IS ",
+        "add-treat-msg": "You can add an other treatment."
+      }
+    }
+  },
+
+  "user-account": {
+    "account-form": {
+      "form-title-strong": "Account ",
+      "form-title": "Settings",
+
+      "first-name-label": "First name",
+      "first-name-placeholder": "Enter your first name",
+
+      "last-name-label": " Last name",
+      "last-name-placeholder": "Enter your last name",
+
+      "tax-label": "Tax Number",
+      "tax-placeholder": "Enter your Tax Number",
+
+      "phone-label": "Phone Number",
+      "phone-placeholder": "Enter your Phone Number",
+
+      "mobile-label": "Mobile Number",
+      "mobile-placeholder": "Enter your Mobile ",
+
+      "birthday-label": "Birthday  ",
+      "birthday-placeholder": "Enter your Birthday ",
+
+      "address-label": "Address",
+      "address-placeholder": "Enter your Address ",
+
+      "profession-label": "Speciality",
+      "profession-placeholder": "Enter your Speciality ",
+
+      "description-label": "Description",
+      "description-placeholder": "Enter a Description about you ",
+
+      "save-button": "Save Changes"
+    },
+    "photo-form": {
+      "header-title-strong": "Update",
+      "header-title": "your photo",
+      "update-button": "Update",
+      "upload-msg": "DROP FILES HERE OR CLICK TO UPLOAD"
+    },
+    "security-form": {
+      "header-title-strong": "Update",
+      "header-title": "your photo",
+      "update-button": "Update",
+      "username-placeholder": "Enter your user name ",
+      "old-password-placeholder": "Enter your old password  ",
+      "new-password-placeholder": "Enter a new password "
+    }
+  },
+
+  "layout": {
+    "overlay-menu": {
+      "copyright": "Coded by Artemico & Designed by "
+    },
+    "menu-labels": {
+      "navigation-main": "MAIN",
+      "dashboard": "Dashboard",
+      "navigation-treatment": "Treatment",
+      "patient": { "label": "Patients", "list": "List", "new": "New Patient" },
+      "treatment": {
+        "label": "Treatment",
+        "list": "List",
+        "archive": "Archive",
+        "new": "New Treatment"
+      },
+      "user-management": {
+        "label": "Users Management"
+      }
+    },
+    "task-menu": {
+      "header-title-strong": "Progress ",
+      "header-title": "Treatments",
+      "not-fount-msg": "Progress Treatments Not found!"
+    }
+  },
+
+  "pages": {
+    "patient-management": {
+      "patient-list": {
+        "th-name": "Name",
+        "th-birthday": "Birthday",
+        "th-created-at": "Created At",
+        "th-dentist": "Doctor",
+        "th-treatment": "Treatement",
+        "th-action": "Action",
+        "form": {
+          "search-label": "Search",
+          "search-placeholder": "Search by name "
+        }
+      }
+    },
+    "plan-management": {
+      "add-new-plan": {
+        "header-title": "Complete the form with your plan informations",
+        "upload-photos-msg": "Upload your photos here",
+        "upload-videos-msg": "Upload your videos here",
+        "upload-reports-msg": "Upload your reports here",
+        "code-label": "Code plan",
+        "code-placeholder": "Please type your code plan",
+        "description-label": "Description",
+        "description-placeholder": "Please type your description...",
+        "terms-label": "I read and Agree to the ",
+        "terms-links": "Terms of Usage",
+        "save-button": "Save Plan",
+        "cancel-button": "Cancel"
+      }
+    },
+    "profile-management": {
+      "overview": {
+        "patients-label": "Patients",
+        "treatments-label": "Treatments",
+        "finish-treatments-label": "Finished Treatments",
+        "progress-treatments-label": "In Progress Treatments",
+        "card-title": "Infos",
+        "address-label": "Address:",
+        "email-label": "Email address:",
+        "tax-label": "Tax Number:",
+        "birthday-label": "Birth Date:",
+        "phone-label": "Phone:",
+        "mobile-label": "Mobile:",
+        "no-patients-msg": "No patients! You have not added any patients yet...",
+        "treat-card-title-strong": "Treatments ",
+        "treat-card-title": "Infos",
+        "new-treat-button": "New Treatment",
+        "no-treatment-msg": "No treatments! added yet..."
+      },
+      "profile": {
+        "ernings": "Earnings: ",
+        "sales": "Sales: ",
+        "total-label": "Total Treatments",
+        "complete-label": "Profile Completion ",
+        "overview-button": "Overview",
+        "settings-button": "Settings"
+      }
+    },
+    "treatment-management": {
+      "add-new-treatment": {
+        "header-title": " - Treatment",
+        "current-step": " current step:",
+        "previous-button": "Previous",
+        "next-button": "Next",
+        "finish-button": "Finish",
+        "steps-messages": {
+          "add-patient-msg": "Please add a patient before preceed.",
+          "save-msg": "Please save your changes before preceed this step."
+        }
+      },
+      "treatment-list": {
+        "search-label": "Search: ",
+        "search-placeholder": "Search by name",
+        "status-label": {
+          "all": "ALL",
+          "new": "NEW",
+          "confirmed": "CONFIRMED",
+          "completed": "COMPLETED",
+          "progress": "PROGRESS",
+          "qualified": "QUALIFIED",
+          "finished": "FINISHED",
+          "canceled": "CANCELED",
+          "unqualified": "UN QUALIFIED",
+          "production": "PRODUCTION",
+          "delivered": "DELIVERED",
+          "accepted": "ACCEPTED"
+        },
+        "th-status": "Status",
+        "th-treatment": "Treatment",
+        "th-progress": "Progress",
+        "th-dentist": "Dentist",
+        "th-team": "team",
+        "th-plan": "Plan",
+        "th-delivery-date": "Date Delivery",
+        "th-action": "Action",
+        "no-treat-found-msg": "No treatments found...",
+        "no-treat-added-msg": "No treatments added yet...!",
+        "progress-label": "Completion with: ",
+        "view-button": "View"
+      }
+    },
+    "user-management": {
+      "grid-users": {
+        "search-label": "Search: ",
+        "search-placeholder": "Search by name",
+        "no-dentist-found": "Dentist not found...",
+        "no-dentist-added": "Dentists not added yet ..."
+      },
+      "list-users": {
+        "search-label": "Search: ",
+        "search-placeholder": "Search by name",
+        "th-name": "Name",
+        "th-role": "Role",
+        "th-phone": "Phone",
+        "th-email": "Email",
+        "th-address": "Address",
+        "th-super-admin": "SuperAdmin",
+        "th-action": "Action",
+        "no-admin-added": "Admins not added yet ...",
+        "no-admin-found": "Admin not found..."
+      },
+      "new-admin": {
+        "header-title-strong": "Add ",
+        "header-title": "New Admin",
+        "email-label": "Email",
+        "password-label": "Password",
+        "email-placeholder": "Enter Admin Email",
+        "password-placeholder": "Generate Password",
+        "generate-button": "GENERATE",
+        "save-button": "Save",
+        "cancel-button": "Cancel"
+      },
+      "user-overview": {
+        "doctor-button": "Dentists",
+        "admins-button": "Admins",
+        "archive-button": "Archived",
+        "new-admin-button": "New Admin"
+      }
+    },
+    "headers-title": {
+      "add-new-patient": {
+        "page": "Patients",
+        "father": "Patient",
+        "subPage": "New"
+      },
+      "profile": {
+        "page": "Overview",
+        "father": "Profile",
+        "subPage": ""
+      },
+      "treatment": {
+        "page": "Treatments",
+        "father": "Treatment",
+        "subPage": "List"
+      },
+      "users-page": {
+        "page": "Admin",
+        "father": "Users",
+        "subPage": "List"
+      }
+    }
+  },
+
+  "shared": {
+    "back-home-button": "Back To Home",
+    "need-help": "Need Help?",
+    "search-placeholder": "Enter your search term...",
+    "french-label": "French ",
+    "english-label": "English ",
+
+    "links": {
+      "contact": "Contact Us",
+      "about": "About Us",
+      "services": "Services",
+      "faq": "FAQ"
+    },
+    "team-infos": {
+      "no-team-msg": "No team yet ! ",
+      "add-button": "Add",
+      "remove-button": "Remove",
+      "reset-button": "Reset"
+    },
+    "pages": {
+      "coming-page": {
+        "page-title": "Coming Soon ",
+        "page-subtitle": "Coming Soon Feature! ",
+        "page-description": "This feature is still in development and will be available soon.",
+        "soon": "Soon..."
+      },
+      "error403": {
+        "page-title": "Error 403",
+        "page-subtitle": "Forbiddon Error!"
+      },
+      "error500": {
+        "page-title": "Error 500",
+        "page-subtitle": "Something's broken :-("
+      },
+      "error503": {
+        "page-title": "Error 503",
+        "page-subtitle": "Please try after some time"
+      },
+      "locked-screen": {
+        "page-title": "",
+        "page-subtitle": ""
+      },
+      "offline": {
+        "page-title": " Our site is getting a little tune up and some love. Chekc your network!"
+      }
+    }
+  },
+
+  "static-data": {
+    "clinical": {
+      "smile-exp": "Smiley expression",
+      "overview": "Overview",
+      "vestClosedOcc": "Vestibular closed occlusion",
+      "closedLeftLatOCC": "Closed Left Lateral Occlusion",
+      "closedRightLatOcc": "Closed Right Lateral Occlusion",
+      "supMaxiOcc": "Superior maxillary Occlusal view",
+      "jawOccView": "Jaw Occlusal view",
+      "panoramicRadio": "Panoramic Radio",
+      "inocclusion": "Inocclusion",
+      "teleradio": "Teleradio"
+    }
+  },
+
+  "alert-msg": {
+    "network-alert": "Your network may be slow; please check it and continue working.",
+    "delete": {
+      "alert-title": "Are you sure?",
+      "alert-text": "You won't be able to revert this!",
+      "alert-button": "Yes, delete it!",
+      "failed-msg": "The selected photo was unable to delete"
+    },
+    "admin-service": {
+      "failed-msg": "Check your admin data carefully.",
+      "success-switch-msg": "Successfully switch."
+    },
+    "auth-service": {
+      "sigin-failed-msg": "Check your credential carefully.",
+      "sigup-failed-msg": "Check your data carefully.",
+      "forget-password-failed-msg": "Your request to update your password has not been processed, please contact the administration.",
+      "confirmed-msg": "You have successfully confirmed your account.",
+      "canceled-msg": "You've successfully deactivated your account."
+    },
+    "estimate-service": {
+      "success-upload-msg": "File has been uploaded successfully.",
+      "failed-upload-msg": "File upload failed.",
+      "failed-generate-pdf": "An error occurred when producing the PDF.",
+      "success-update-estimate": "Estimate has been updated successfully.",
+      "failed-update-estimate": "Estimate update failed.",
+      "success-delete-estimate": "Estimate has been deleted successfully.",
+      "failed-delete-estimate": "Estimate delete failed.",
+      "success-delete-all-estimate": "All estimates had been deleted successfully.",
+      "failed-delete-all-estimate": "Estimates delete failed."
+    },
+    "messages-service": {
+      "failed-send-msg": "Message was not successfully sent. ",
+      "failed-get-msg": "Failed to get messages from this chat.   "
+    },
+    "patient-service": {
+      "success-add-patient": "Patient has been successfully Added.",
+      "failed-add-patient": "The patient's add has failed. ",
+      "success-update-patient": "Patient has been successfully Updated.",
+      "failed-update-patient": "The patient's update has failed. ",
+      "success-delete-patient": "Patient has been successfully Deleted.",
+      "failed-delete-patient": "The patient's delete has failed. "
+    },
+    "plan-service": {
+      "success-add-files": "Plan files's have been successfully added.",
+      "failed-add-files": "The plan files's add have failed.",
+      "success-add-plan": "Plan's have been successfully added.",
+      "failed-add-plan": "The plan's add has failed.",
+      "success-delete-plan": "Plan has been successfully deleted. ",
+      "failed-delete-plan": "The plan's delete has failed.",
+      "success-update-feedback": "Your feedback has been added successfully.",
+      "failed-update-feedback": "The feedback's add has failed.",
+      "success-update-status": "The plan has been updated successfully.",
+      "failed-update-status": "The plan's update has failed.",
+      "update-plan-title": "Are you sure to update the plan ?"
+    },
+    "treatment-service": {
+      "failed-add-treat": "The treatment's add has failed.",
+      "success-update-treat": "The treatment has been updated successfully.",
+      "failed-update-treat": "The treatment's update has failed.",
+      "success-delete-treat": "The treatment has been deleted successfully.",
+      "failed-delete-treat": "The treatment's delete has failed.",
+      "success-add-team": "The treatment team has been added successfully.",
+      "failed-add-team": "The treatment's team's add has failed.",
+      "success-remove-team": "This admin has been removed successfully.",
+      "failed-remove-team": "The treatment's team's remove has failed.",
+      "success-add-files": "The treatment files have been added successfully.",
+      "failed-add-files": "The treatment's files's add have failed.",
+      "success-add-teeth": "The treatment teeth have been added successfully.",
+      "failed-add-teeth": "The treatment's teeth's add have failed.",
+      "success-delete-file": "The file has been deleted successfully.",
+      "failed-delete-file": "The file's delete has failed.",
+      "success-add-infos": "The treatment infos has been added successfully.",
+      "failed-add-infos": "The treatment's infos's add has failed."
+    },
+    "user-service": {
+      "success-update-settings": "Password has been successfully Updated",
+      "failed-update-settings": "Password's update has failed.",
+      "success-update-profile": "Profile has been successfully Updated",
+      "failed-update-profile": "Profile's update has failed.",
+      "success-update-photo": "Photo has been successfully Updated",
+      "failed-update-photo": "Photo's update has failed.",
+      "failed-get-photo": "Photo's get has failed."
+    },
+    "confirm-alert": {
+      "confirm-title": "Are you sure?",
+      "confirm-text": "You won't be able to revert this!",
+      "confirm-button": "Yes! Sure ",
+      "cancel-button": "No"
+    }
+  },
+  "type-treat": {
+    "upper-arch-label": "Upper arch",
+    "lower-arch-label": "Lower arch",
+    "upper-lower-label": "Upper & Lower arch",
+    "nothing": "Nothing has been added yet."
+  }
+}

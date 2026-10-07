@@ -1,0 +1,510 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h6 class="title">
+      {{ "components.modals.modal-plan-details.header-title" | translate }}
+    </h6>
+  </div>
+  <div class="modal-body">
+    <div class="row clearfix">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="body">
+            <ul class="cbp_tmtimeline">
+              <li>
+                <time class="cbp_tmtime" datetime=""
+                  ><span class="hidden"> </span>
+                </time>
+                <div class="cbp_tmicon"><i class="zmdi zmdi-account"></i></div>
+                <div class="cbp_tmlabel empty">
+                  <div class="body" style="text-align: left">
+                    <h2 class="m-b-15">
+                      {{
+                        "components.modals.modal-plan-details.card-title"
+                          | translate
+                      }}
+                      {{ getTypeTreatement(treatment?.treat) }}
+                    </h2>
+                    <p>
+                      {{ this.plan$?.comment }}
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <time class="cbp_tmtime" datetime=""><span> </span> </time>
+                <div class="cbp_tmicon bg-orange">
+                  <i class="zmdi zmdi-camera"></i>
+                </div>
+                <div class="cbp_tmlabel">
+                  <h2 style="text-align: center">
+                    <span> PLAN </span>
+                    <a href="javascript:void(0);">
+                      {{
+                        "components.modals.modal-plan-details.photo-title"
+                          | translate
+                      }}</a
+                    >
+                  </h2>
+
+                  <div
+                    class="d-flex justify-content-center"
+                    *ngIf="
+                      this.plan$?.photos!?.length !== 0 &&
+                        existedFilesPhotos.length == 0;
+                      else elsePhotos
+                    "
+                  >
+                    <div class="spinner-grow" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
+
+                  <ng-template #elsePhotos>
+                    <div class="row">
+                      <div
+                        class="col-lg-3 col-md-6 col-6"
+                        *ngFor="let photo of existedFilesPhotos"
+                      >
+                        <a
+                          href="javascript:void(0);"
+                          (click)="displayItem(photo)"
+                          ><img
+                            fill
+                            loading="lazy"
+                            [src]="photo.resource"
+                            alt=""
+                            class="img-fluid img-thumbnail m-t-30"
+                        /></a>
+                      </div>
+                    </div>
+                  </ng-template>
+                </div>
+              </li>
+              <li>
+                <time class="cbp_tmtime" datetime=""><span> </span> </time>
+                <div class="cbp_tmicon bg-orange">
+                  <i class="zmdi zmdi-camera"></i>
+                </div>
+                <div class="cbp_tmlabel">
+                  <h2 style="text-align: center">
+                    <span> PLAN </span>
+                    <a href="javascript:void(0);">
+                      {{
+                        "components.modals.modal-plan-details.video-title"
+                          | translate
+                      }}</a
+                    >
+                  </h2>
+                  <div
+                    class="d-flex justify-content-center"
+                    *ngIf="
+                      this.plan$?.videos!?.length !== 0 &&
+                        existedFilesVedios!?.length == 0;
+                      else elseVideos
+                    "
+                  >
+                    <div class="spinner-grow" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
+                  <ng-template #elseVideos>
+                    <div class="row">
+                      <div
+                        class="col-lg-3 col-md-6 col-6"
+                        *ngFor="let video of existedFilesVedios"
+                      >
+                        <a
+                          href="javascript:void(0);"
+                          (click)="displayItem(video)"
+                        >
+                          <video
+                            class="img-fluid img-thumbnail"
+                            style="width: 300px"
+                            [muted]="true"
+                            loop="loop"
+                            muted
+                          >
+                            <source [src]="video.resource" type="video/mp4" />
+                          </video>
+                        </a>
+                      </div>
+                    </div>
+                  </ng-template>
+                </div>
+              </li>
+              <li>
+                <time class="cbp_tmtime" datetime=""><span> </span> </time>
+                <div class="cbp_tmicon bg-orange">
+                  <i class="zmdi zmdi-camera"></i>
+                </div>
+                <div class="cbp_tmlabel">
+                  <h2 style="text-align: center">
+                    <span> PLAN </span>
+                    <a href="javascript:void(0);">
+                      {{
+                        "components.modals.modal-plan-details.reports-title"
+                          | translate
+                      }}</a
+                    >
+                  </h2>
+
+                  <div
+                    class="d-flex justify-content-center"
+                    *ngIf="
+                      this.plan$?.reports!?.length !== 0 &&
+                      existedFilesReports!?.length == 0
+                    "
+                  >
+                    <div class="spinner-grow" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
+
+                  <div class="content file_manager">
+                    <div class="row clearfix">
+                      <div
+                        class="col-lg-4 col-md-4 col-sm-12"
+                        *ngFor="let report of existedFilesReports"
+                      >
+                        <div class="card" (click)="onOpenPdf(report)">
+                          <div class="file">
+                            <a href="javascript:void(0);">
+                              <div class="icon">
+                                <i class="zmdi zmdi-file-text"></i>
+                              </div>
+                              <div class="file-name">
+                                <p class="m-b-5 text-muted align-center">
+                                  {{ report.name }}
+                                </p>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <!-- ACCEPT / REJECT plan  -->
+              <li
+                *ngIf="
+                  this.plan$?.status === 'NEW' &&
+                  (utils.isSuperAdmin(user$) || utils.isDoctor(user$))
+                "
+              >
+                <time class="cbp_tmtime" datetime=""
+                  ><span class="hidden"> </span>
+                </time>
+                <div class="cbp_tmicon">
+                  <i class="zmdi zmdi-account"></i>
+                </div>
+                <div class="cbp_tmlabel empty">
+                  <span
+                    ><i class="zmdi zmdi-alert-circle-o"></i>
+                    {{
+                      "components.modals.modal-plan-details.ask-accept-reject-msg"
+                        | translate
+                    }}
+                  </span>
+                  <div class="row">
+                    <div class="col-lg-2 col-md-6 col-6">
+                      <button
+                        class="btn btn-success btn-round"
+                        (click)="onUpdateStatus(this.plan$?.id, 'ACCEPTED')"
+                      >
+                        {{
+                          "components.modals.modal-plan-details.accept-button"
+                            | translate
+                        }}
+                      </button>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-6">
+                      <button
+                        class="btn btn-warning btn-round"
+                        (click)="onUpdateStatus(this.plan$?.id, 'REJECTED')"
+                      >
+                        {{
+                          "components.modals.modal-plan-details.reject-button"
+                            | translate
+                        }}
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <div class="form-line">
+                        <textarea
+                          rows="2"
+                          class="form-control no-resize"
+                          [placeholder]="
+                            'components.modals.modal-plan-details.feedback-input-placeholder'
+                              | translate
+                          "
+                          [formControl]="feedBackForm"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- ACCEPTED status  -->
+              <li
+                *ngIf="
+                  this.plan$?.status !== 'REJECTED' &&
+                  this.plan$?.status !== 'NEW'
+                "
+                [style]="'margin-right: 15px'"
+              >
+                <time class="cbp_tmtime"><span class="hidden"> </span> </time>
+                <div class="cbp_tmicon">
+                  <i class="zmdi zmdi-account"></i>
+                </div>
+                <div class="cbp_tmlabel empty">
+                  <!-- ACCEPTED status  -->
+                  <div>
+                    <span class="badge" [ngClass]="getStatusClass('ACCEPTED')"
+                      >ACCEPTED</span
+                    >
+                    <br />
+                    <span *ngIf="utils.isDoctor(user$)"
+                      ><i class="zmdi zmdi-mood"></i>
+                      {{
+                        "components.modals.modal-plan-details.accept-message"
+                          | translate
+                      }}
+                    </span>
+                    <span *ngIf="this.plan$?.feedBack != null"
+                      ><i class="zmdi zmdi-mood"></i>
+                      {{ this.plan$?.feedBack }}
+                    </span>
+                  </div>
+                </div>
+              </li>
+              <!-- REJECTED status  -->
+              <li *ngIf="this.plan$?.status === 'REJECTED'">
+                <time class="cbp_tmtime" datetime=""
+                  ><span class="hidden"> </span>
+                </time>
+                <div class="cbp_tmicon">
+                  <i class="zmdi zmdi-account"></i>
+                </div>
+                <div class="cbp_tmlabel empty">
+                  <div>
+                    <span
+                      class="badge"
+                      [ngClass]="getStatusClass(this.plan$?.status)"
+                      >REJECTED
+                    </span>
+                    <br />
+                    <span *ngIf="utils.isDoctor(user$)"
+                      ><i class="zmdi zmdi-mood-bad"></i>
+                      {{
+                        "components.modals.modal-plan-details.reject-message"
+                          | translate
+                      }}
+                    </span>
+                    <br />
+                    <span *ngIf="this.plan$?.feedBack != null"
+                      ><i class="zmdi zmdi-mood-bad"></i>
+                      {{ this.plan$?.feedBack }}
+                    </span>
+                  </div>
+                </div>
+              </li>
+              <!-- start Production  -->
+              <li
+                *ngIf="
+                  this.plan$?.status === 'ACCEPTED' && utils.isAdmin(user$)
+                "
+              >
+                <time class="cbp_tmtime"><span class="hidden"></span> </time>
+                <div class="cbp_tmicon">
+                  <i class="zmdi zmdi-account"></i>
+                </div>
+                <div class="cbp_tmlabel empty">
+                  <span
+                    ><i class="zmdi zmdi-alert-circle-o"></i>
+                    {{
+                      "components.modals.modal-plan-details.ask-start-production"
+                        | translate
+                    }}
+                  </span>
+                  <form>
+                    <div class="row clearfix">
+                      <div class="col-lg-8 col-md-6 col-sm-12">
+                        <div class="form-group">
+                          <input
+                            type="number"
+                            class="form-control"
+                            placeholder="Estimate days "
+                            [formControl]="productionForm"
+                          />
+                        </div>
+                      </div>
+                      <!-- CALCULATE THE ESTIMATE DELEVERY DATE  -->
+                      <div class="col-lg-4 col-md-6 col-sm-12">
+                        <button
+                          *ngIf="utils.isAdmin(user$)"
+                          [disabled]="!productionForm.valid"
+                          type="button"
+                          class="btn btn-raised btn-primary btn-round waves-effect m-l-20"
+                          (click)="onStartProduction(this.plan$?.id)"
+                        >
+                          {{
+                            "components.modals.modal-plan-details.start-production-button"
+                              | translate
+                          }}
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </li>
+              <!-- Production status -->
+              <li
+                *ngIf="
+                  this.plan$?.status === 'PRODUCTION' ||
+                  this.plan$?.status === 'DELIVERED'
+                "
+              >
+                <time class="cbp_tmtime" datetime=""
+                  ><span class="hidden"> </span>
+                </time>
+                <div class="cbp_tmicon"><i class="zmdi zmdi-account"></i></div>
+                <div class="cbp_tmlabel empty">
+                  <span class="badge" [ngClass]="getStatusClass('PRODUCTION')"
+                    >PRODUCTION</span
+                  >
+                  <br />
+                  <span>
+                    {{
+                      "components.modals.modal-plan-details.start-production-message"
+                        | translate
+                    }}
+                    <span *ngIf="utils.isDoctor(user$)">{{
+                      "components.modals.modal-plan-details.for-dentist"
+                        | translate
+                    }}</span
+                    ><span *ngIf="!utils.isDoctor(user$)"
+                      >{{
+                        "components.modals.modal-plan-details.for-admin"
+                          | translate
+                      }}
+                    </span>
+                    {{ "components.modals.modal-plan-details.in" | translate }}
+                    {{ this.plan$?.productionDays }}
+                    {{
+                      "components.modals.modal-plan-details.days" | translate
+                    }}
+                  </span>
+                </div>
+              </li>
+              <!-- Start the plan delevery  -->
+              <li
+                *ngIf="
+                  this.plan$?.status === 'PRODUCTION' && utils.isAdmin(user$)
+                "
+              >
+                <time class="cbp_tmtime" datetime=""
+                  ><span class="hidden"> </span>
+                </time>
+                <div class="cbp_tmicon">
+                  <i class="zmdi zmdi-account"></i>
+                </div>
+                <div class="cbp_tmlabel empty">
+                  <span
+                    ><i class="zmdi zmdi-alert-circle-o"></i>
+                    {{
+                      "components.modals.modal-plan-details.start-delivery-message"
+                        | translate
+                    }}
+                    {{ this.plan$?.deleveryDate | date : "dd-MM-YYYY" }}.
+                  </span>
+                  <!-- CALCULATE THE ESTIMATE DELEVERY DATE  -->
+                  <form>
+                    <div class="row clearfix">
+                      <div class="col-lg-8 col-md-6 col-sm-12">
+                        <div class="form-group">
+                          <input
+                            [formControl]="deliveryDate"
+                            id="datetimepicker"
+                            type="date"
+                            class="form-control birthday"
+                            [ngModel]="
+                              this.plan$?.deliveryDate | date : 'yyyy-MM-dd'
+                            "
+                            [placeholder]="
+                              'components.modals.modal-plan-details.deliveryDate-input-placeholder'
+                                | translate
+                            "
+                          />
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        [disabled]="!deliveryDate.valid"
+                        class="btn btn-raised btn-primary btn-round waves-effect m-l-20"
+                        (click)="
+                          onUpdateDeleveryDate(
+                            this.plan$?.id,
+                            deliveryDate.value,
+                            'DELIVERED'
+                          )
+                        "
+                      >
+                        {{
+                          "components.modals.modal-plan-details.delivery-button"
+                            | translate
+                        }}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </li>
+              <!-- DELIVERED status  -->
+              <li *ngIf="this.plan$?.status === 'DELIVERED'">
+                <time class="cbp_tmtime" datetime=""
+                  ><span class="hidden"> </span>
+                </time>
+                <div class="cbp_tmicon"><i class="zmdi zmdi-account"></i></div>
+                <div class="cbp_tmlabel empty">
+                  <span class="badge" [ngClass]="getStatusClass('DELIVERED')"
+                    >DELIVERED</span
+                  >
+                  <br />
+                  <span
+                    ><i class="zmdi zmdi-mood"></i>
+                    {{
+                      "components.modals.modal-plan-details.delivered-message"
+                        | translate
+                    }}
+                    {{ this.plan$?.deleveryDate | date }} .<span
+                      *ngIf="utils.isDoctor(user$)"
+                    >
+                      {{
+                        "components.modals.modal-plan-details.availability-message"
+                          | translate
+                      }}
+                    </span>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="float-right">
+      <button
+        type="reset"
+        class="btn btn-primary btn-simple btn-round"
+        (click)="close()"
+      >
+        {{ "components.modals.modal-plan-details.close-button" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

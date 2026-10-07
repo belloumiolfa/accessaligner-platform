@@ -1,0 +1,71 @@
+<!-- 
+ 
+<time class="cbp_tmtime" datetime="2017-10-22T12:13"
+  ><span>12:13 PM</span> <span>Two weeks ago</span></time
+>
+
+-->
+<div class="cbp_tmicon bg-info">
+  <i class="zmdi zmdi-file"></i>
+</div>
+<div class="cbp_tmlabel">
+  <h2>
+    <span>
+      {{
+        "components.timeline-new-treatment.patient-treat-clinics-informations.header-title"
+          | translate
+      }}
+    </span>
+    <a href="javascript:void(0);">
+      {{
+        "components.timeline-new-treatment.patient-treat-clinics-informations.header-title-information"
+          | translate
+      }}
+    </a>
+  </h2>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-5 col-6" *ngFor="let item of clinics">
+      <ng-container *ngIf="existedFile(item) != undefined; else elseTemplate">
+        <a href="javascript:void(0);" *ngIf="existedFile(item) != undefined">
+          <div class="img-fluid img-thumbnail m-t-30">
+            <stl-model-viewer
+              [stlModels]="[safeUrlToString(existedFile(item).imageUrl)]"
+              [hasControls]="true"
+            ></stl-model-viewer>
+            <p class="m-b-5 text-muted align-center">
+              <small>{{ item.label }}</small>
+            </p>
+          </div>
+        </a>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <div class="post-img">
+          <img
+            fill
+            loading="lazy"
+            src="assets/images/image-grise.png"
+            class="img-fluid img-thumbnail m-t-30"
+            alt=""
+          />
+          <small>{{ item.label }}</small>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <div class="col-lg-12 col-md-12" *ngIf="this.treatment?.clinicsComment">
+    <div class="progress-container">
+      <span class="progress-badge">{{ this.treatment?.clinicsComment }}</span>
+      <div class="progress">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          aria-valuenow="100"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          style="width: 100%"
+        ></div>
+      </div>
+    </div>
+  </div>
+</div>

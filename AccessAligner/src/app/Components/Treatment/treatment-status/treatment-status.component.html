@@ -1,0 +1,120 @@
+<!-- || treatment$?.status === 'NEW' -->
+<app-treatment-eligible
+  *ngIf="treatment$?.status === 'COMPLETED' && utils.isSuperAdmin(user$)"
+></app-treatment-eligible>
+<!-- check those condition to fit the production and the delevery status for treatment  
+ 
+treatment$?.status == 'QUALIFIED' ||
+      treatment$?.status === 'CONFIRMED' ||
+      treatment$?.status === 'PROGRESS' ||
+      treatment$?.status === 'COMPLETED'-->
+<app-quote-report
+  *ngIf="
+    (utils.isDoctor(user$) || utils.isSuperAdmin(user$)) &&
+    treatment$?.status !== 'NEW' &&
+    treatment$?.status !== 'COMPLETED'
+  "
+>
+</app-quote-report>
+
+<!-- doctotr and the treatment status is completed  and one estime is accepted   -->
+<app-treatment-confirmation
+  *ngIf="
+    (utils.isDoctor(user$) || utils.isSuperAdmin(user$)) &&
+    treatment$?.status === 'QUALIFIED' &&
+    !!oneAcceptedEstimate(treatment$?.estimates)
+  "
+></app-treatment-confirmation>
+
+<!-- admin and the treatment status is confirmed by the doctor  -->
+<app-new-plan
+  [treatment$]="treatment$"
+  *ngIf="
+    (treatment$?.status === 'CONFIRMED' ||
+      treatment$?.status === 'PROGRESS' ||
+      treatment$?.status === 'ACCEPTED') &&
+    treatment$?.plans?.length === 0
+  "
+></app-new-plan>
+<!--  (treatment$?.status === 'PROGRESS' || treatment$?.status === 'FINISHED') && -->
+<app-get-plans-treat
+  *ngIf="treatment$?.plans?.length > 0"
+></app-get-plans-treat>
+
+<div
+  class="row clearfix"
+  *ngIf="
+    treatment$?.status === 'CANCELED' ||
+    treatment$?.status === 'UNQUALIFIED' ||
+    treatment$?.status === 'FINISHED'
+  "
+>
+  <div class="col-lg-12 col-md-12">
+    <div class="card">
+      <div class="header">
+        <h2>
+          <strong
+            >{{
+              "components.treatment.treatment-status.header-title-strong"
+                | translate
+            }}
+          </strong>
+
+          {{ "components.treatment.treatment-status.header-title" | translate }}
+        </h2>
+      </div>
+      <div class=" ">
+        <div class="row clearfix">
+          <div class="col-lg-12 col-md-12" style="text-align: center">
+            <div class="progress-container progress-danger text-center">
+              <span class="progress-badge">
+                {{
+                  "components.treatment.treatment-status.card-status-title"
+                    | translate
+                }}
+                {{ treatment$?.frenchStatus }}</span
+              ><br />
+              <span
+                *ngIf="
+                  treatment$.status === 'UNQUALIFIED' &&
+                  treatment$.description != null
+                "
+                >{{ treatment$.description }}<br />
+              </span>
+              <!--   <a
+                [routerLink]="
+                  '/treatment/new-treatment/' +
+                  treatment$?.patient?.id +
+                  '/general'
+                "
+              >
+                {{
+                  "components.treatment.treatment-status.add-treat-msg"
+                    | translate
+                }}</a
+              > -->
+              <div class="progress">
+                <div
+                  class="progress-bar progress-bar-danger"
+                  role="progressbar"
+                  aria-valuenow="60"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style="width: 100%"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- treatment$?.status === 'PROGRESS' -->
+<app-finish-treatment
+  *ngIf="
+    utils.isDoctor(user$) &&
+    selectedPlan(treatment$?.plans)?.status === 'DELIVERED' &&
+    treatment$?.status !== 'FINISHED'
+  "
+></app-finish-treatment>

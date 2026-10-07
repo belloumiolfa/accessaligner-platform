@@ -1,0 +1,194 @@
+<div class="tab-pane" id="List">
+  <div class="card">
+    <div class="body">
+      <div>
+        <h6 style="text-align: right">Totale : {{ admins$.length }}</h6>
+
+        <label
+          >{{ "pages.user-management.list-users.search-label" | translate
+          }}<input
+            type="search"
+            class="form-control form-control-sm"
+            [placeholder]="
+              'pages.user-management.list-users.search-placeholder' | translate
+            "
+            [(ngModel)]="searchTerm"
+            (input)="serachByName()"
+            aria-controls="DataTables_Table_0"
+        /></label>
+        <hr />
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover m-b-0 c_list">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th data-breakpoints="xs sm md">
+                {{ "pages.user-management.list-users.th-name" | translate }}
+              </th>
+              <th data-breakpoints="xs">
+                {{ "pages.user-management.list-users.th-role" | translate }}
+              </th>
+              <th data-breakpoints="xs">
+                {{ "pages.user-management.list-users.th-phone" | translate }}
+              </th>
+              <th data-breakpoints="xs sm md">
+                {{ "pages.user-management.list-users.th-email" | translate }}
+              </th>
+              <!--  <th data-breakpoints="xs sm md">
+                {{ "pages.user-management.list-users.th-address" | translate }}
+              </th> -->
+              <th data-breakpoints="xs" *ngIf="utils.isSuperAdmin(admin$)">
+                {{
+                  "pages.user-management.list-users.th-super-admin" | translate
+                }}
+              </th>
+              <th data-breakpoints="xs" *ngIf="utils.isSuperAdmin(admin$)">
+                {{ "pages.user-management.list-users.th-action" | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="admins$.length === 0 && !filter">
+              <td colspan="10">
+                <div class="progress-container progress-info text-center">
+                  <span class="progress-badge">
+                    {{
+                      "pages.user-management.list-users.no-admin-added"
+                        | translate
+                    }}
+                  </span>
+                  <div class="progress">
+                    <div
+                      class="progress-bar progress-bar-info"
+                      role="progressbar"
+                      style="width: 100%"
+                    ></div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="admins$?.length === 0 && filter">
+              <td colspan="10" *ngIf="adminsAfterFilter.length === 0 && filter">
+                <div class="progress-container progress-primary text-center">
+                  <span class="progress-badge">
+                    {{
+                      "pages.user-management.list-users.no-admin-found"
+                        | translate
+                    }}
+                  </span>
+                  <div class="progress">
+                    <div
+                      class="progress-bar progress-bar-warning"
+                      role="progressbar"
+                      style="width: 100%"
+                    ></div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <!--  *ngFor="
+                let admin of filter ? adminsAfterFilter : admins$;
+                let i = index -->
+            <tr *ngFor="let admin of admins$; let i = index">
+              <td>#{{ admin?.id }}</td>
+              <td
+                style="cursor: pointer"
+                (click)="navigateToPorfile(admin?.id)"
+              >
+                <app-profile-image
+                  [photoId]="admin?.profile?.photo?.id"
+                  [class]="'rounded-circle avatar'"
+                  [expression]="
+                    admin?.profile?.firstName && admin?.profile?.lastName
+                      ? admin?.profile?.firstName +
+                        ' ' +
+                        admin?.profile?.lastName
+                      : admin?.userName
+                  "
+                >
+                </app-profile-image>
+
+                <p
+                  class="c_name"
+                  *ngIf="
+                    admin?.profile.firstName != '' &&
+                      admin?.profile.lastName != '';
+                    else showUserName
+                  "
+                >
+                  {{ admin?.profile.firstName }}
+                  {{ admin?.profile.lastName }}
+                </p>
+                <ng-template #showUserName>
+                  <p class="c_name">
+                    {{ admin?.userName }}
+                  </p>
+                </ng-template>
+              </td>
+
+              <td>
+                <div class="row" *ngIf="admin?.roleList?.length !== 0">
+                  <div *ngFor="let role of admin?.roleList">
+                    <span
+                      class="badge m-l-10 hidden-sm-down"
+                      [ngClass]="getClassRole(role.name)"
+                    >
+                      {{ role.name }}
+                    </span>
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <span class="phone"
+                  ><i class="zmdi zmdi-phone m-r-10"></i
+                  >{{ admin?.profile.phone }}</span
+                >
+              </td>
+
+              <td>
+                <span class="phone"
+                  ><i class="zmdi zmdi-email m-r-10"></i
+                  >{{ admin?.email }}</span
+                >
+              </td>
+
+              <!--   <td>
+                <address>
+                  <i class="zmdi zmdi-pin"></i>{{ admin?.profile.address }}
+                </address>
+              </td> -->
+              <td *ngIf="utils.isSuperAdmin(admin$)">
+                <form class="custom-control custom-switch" [formGroup]="form">
+                  <input
+                    [formControlName]="i"
+                    (change)="enableSwitchChange(admin?.id, $event)"
+                    [defaultChecked]="utils.isSuperAdmin(admin)"
+                    type="checkbox"
+                    class="custom-control-input"
+                    [id]="'customSwitch' + i"
+                  />
+                  <label
+                    class="custom-control-label"
+                    [for]="'customSwitch' + i"
+                  ></label>
+                </form>
+              </td>
+              <td>
+                <button
+                  *ngIf="utils.isSuperAdmin(admin$) && admin?.id !== admin$?.id"
+                  (click)="onDeleteAdmin(admin)"
+                  class="btn btn-icon btn-neutral btn-icon-mini"
+                >
+                  <i class="zmdi zmdi-delete"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

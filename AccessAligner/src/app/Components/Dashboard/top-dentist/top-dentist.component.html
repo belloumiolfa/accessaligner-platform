@@ -1,0 +1,83 @@
+<div class="card">
+  <div class="header">
+    <h2><strong>Top </strong> Dentists</h2>
+    <!--  <ul class="header-dropdown">
+      <li class="dropdown">
+        <a
+          href="javascript:void(0);"
+          class="dropdown-toggle"
+          data-toggle="dropdown"
+          role="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="zmdi zmdi-more"></i>
+        </a>
+        <ul class="dropdown-menu slideUp">
+          <li><a href="javascript:void(0);">Action</a></li>
+          <li><a href="javascript:void(0);">Another action</a></li>
+          <li><a href="javascript:void(0);">Something else</a></li>
+          <li>
+            <a href="javascript:void(0);" class="boxs-close">Deletee</a>
+          </li>
+        </ul>
+      </li>
+    </ul> -->
+  </div>
+  <div class="body sales_report">
+    <div class="tab-pane active">
+      <div class="container-fluid">
+        <div class="table-responsive" style="overflow-y: auto"></div>
+        <table class="table table-hover m-b-0 c_list">
+          <thead>
+            <tr>
+              <th>Top</th>
+
+              <th>Dentist</th>
+              <!--   <th data-breakpoints="xs sm md">Date join</th>     -->
+              <th>Treatments</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let dentist of topDentist$; index as i">
+              <td>
+                <span class="font-bold">#{{ i + 1 }}</span>
+              </td>
+
+              <td>
+                <app-profile-image
+                  (click)="navigateToPorfile(dentist.userId)"
+                  [photoId]="dentist.photoFileId"
+                  [class]="'rounded-circle avatar'"
+                  [expression]=""
+                ></app-profile-image>
+
+                <p class="c_name">
+                  Dr.
+                  <a
+                    (click)="navigateToPorfile(dentist.userId)"
+                    style="color: #f96332; cursor: pointer"
+                  >
+                    {{ dentist.firstName }} {{ dentist.lastName }}
+                  </a>
+                </p>
+              </td>
+              <!--   <td>
+                <span class="phone"
+                  ><i class="zmdi zmdi-calendar m-r-10"></i
+                  >{{ dentist.joinDate | date }}</span
+                >
+              </td> -->
+              <td>
+                <span class="badge badge-success m-l-10 hidden-sm-down">
+                  {{ dentist.treatmentCount }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

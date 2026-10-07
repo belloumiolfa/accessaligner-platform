@@ -1,0 +1,49 @@
+<div class="card">
+  <div class="header">
+    <h2>
+      <strong
+        >{{ "user-account.photo-form.header-title-strong" | translate }}
+      </strong>
+      {{ "user-account.photo-form.header-title" | translate }}
+    </h2>
+  </div>
+
+  <div class="body">
+    <form>
+      <ngx-dropzone
+        id="frmFileUpload"
+        class="dropzone"
+        style="height: auto"
+        [multiple]="false"
+        accept="image/jpeg,image/jpg,image/png,image/gif"
+        (change)="onSelect($event)"
+      >
+        <ngx-dropzone-label>
+          <div class="dz-message">
+            <div class="drag-icon-cph">
+              <i class="material-icons">touch_app</i>
+            </div>
+            <h6>{{ "user-account.photo-form.upload-msg" | translate }}</h6>
+          </div></ngx-dropzone-label
+        >
+        <ngx-dropzone-image-preview
+          style="height: 100px; width: auto"
+          ngProjectAs="ngx-dropzone-preview"
+          *ngFor="let f of selectedFile"
+          [file]="f"
+          [removable]="true"
+          (removed)="onRemove(f)"
+        >
+          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+        </ngx-dropzone-image-preview>
+      </ngx-dropzone>
+      <button
+        class="btn btn-info btn-round"
+        style="margin-top: 10px"
+        (click)="submitPhoto($event)"
+      >
+        {{ "user-account.photo-form.update-button" | translate }}
+      </button>
+    </form>
+  </div>
+</div>

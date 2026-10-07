@@ -1,0 +1,188 @@
+<div class="card">
+  <div class="body">
+    <div class="row clearfix">
+      <div class="col-md-2 col-sm-4">
+        <label for="email_address_2">{{
+          "pages.user-management.grid-users.search-label" | translate
+        }}</label>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            [placeholder]="
+              'pages.user-management.grid-users.search-placeholder' | translate
+            "
+            [(ngModel)]="searchTerm"
+            (input)="serachByName()"
+            aria-controls="DataTables_Table_0"
+          />
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12" style="text-align: right">
+        <h6>Totale : {{ doctors$.length }}</h6>
+      </div>
+    </div>
+    <hr />
+
+    <!--   <div>
+      <label
+        >{{ "pages.user-management.grid-users.search-label" | translate
+        }}<input
+          type="search"
+          class="form-control form-control-sm"
+          [placeholder]="
+            'pages.user-management.grid-users.search-placeholder' | translate
+          "
+          [(ngModel)]="searchTerm"
+          (input)="serachByName()"
+          aria-controls="DataTables_Table_0"
+      /></label>
+      <h6 style="text-align: right">Totale : {{ doctors$.length }}</h6>
+    </div> -->
+
+    <div class="tab-pane active" id="Grid">
+      <div class="col-lg-12" *ngIf="filter && doctorsAfterFilter?.length === 0">
+        <div class="progress-container progress-primary text-center">
+          <span class="progress-badge">{{
+            "pages.user-management.grid-users.no-dentist-found" | translate
+          }}</span>
+          <div class="progress">
+            <div
+              class="progress-bar progress-bar-warning"
+              role="progressbar"
+              style="width: 100%"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-12" *ngIf="!filter && doctors$?.length === 0">
+        <div class="progress-container progress-info text-center">
+          <span class="progress-badge">{{
+            "pages.user-management.grid-users.no-dentist-added" | translate
+          }}</span>
+          <div class="progress">
+            <div
+              class="progress-bar progress-bar-info"
+              role="progressbar"
+              style="width: 100%"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div
+          class="col-lg-4 col-md-8 col-sm-12"
+          *ngFor="
+            let doctor of filter ? doctorsAfterFilter : doctors$;
+            let i = index
+          "
+        >
+          <div class="card">
+            <div class="body content file_manager">
+              <div class="hover float-right">
+                <button
+                  *ngIf="
+                    doctor?.userStatus?.status?.name === 'CONFIRMED' || archive
+                  "
+                  (click)="confirmUpdateUser(doctor?.id, 'ACCEPTED')"
+                  class="btn btn-icon btn-icon-mini btn-round btn-success btn-sm"
+                >
+                  <i class="zmdi zmdi-check"></i>
+                </button>
+
+                <button
+                  *ngIf="doctor?.userStatus?.status?.name === 'CONFIRMED'"
+                  (click)="confirmUpdateUser(doctor?.id, 'REJECTED')"
+                  class="btn btn-icon btn-icon-mini btn-round btn-default btn-sm"
+                >
+                  <i class="zmdi zmdi-close"></i>
+                </button>
+                <button
+                  (click)="confirmUpdateUser(doctor?.profile?.id, 'BLOCKED')"
+                  *ngIf="
+                    doctor?.userStatus?.status?.name !== 'WAIT' && !archive
+                  "
+                  class="btn btn-icon btn-icon-mini btn-round btn-neutral btn-sm"
+                >
+                  <i class="zmdi zmdi-block-alt"></i>
+                </button>
+              </div>
+
+              <circle-progress
+                [percent]="getPercentUser(doctor?.profile)"
+                [radius]="50"
+                [outerStrokeWidth]="4"
+                [innerStrokeWidth]="2"
+                [outerStrokeColor]="'#f96332'"
+                [innerStrokeColor]="'#EEEEEE'"
+                [showTitle]="false"
+                [showUnits]="false"
+                [showSubtitle]="false"
+                [showImage]="true"
+                [imageSrc]="findPhotoById(doctor?.profile)"
+                [imageHeight]="55"
+                [imageWidth]="55"
+                [backgroundStrokeWidth]="2"
+              >
+              </circle-progress>
+
+              <div class="d-flex">
+                <div class="" (click)="navigateToPorfile(doctor?.id)">
+                  <h6
+                    *ngIf="
+                      doctor?.profile.firstName && doctor?.profile.lastName;
+                      else userName
+                    "
+                  >
+                    {{ doctor?.profile.firstName }}
+                    {{ doctor?.profile.lastName }}
+                  </h6>
+
+                  <ng-template #userName>
+                    <h6>
+                      {{ doctor?.userName }}
+                    </h6>
+                  </ng-template>
+                </div>
+
+                <div class="col-sm-6">
+                  <span
+                    class="badge text-center"
+                    [ngClass]="getClassStatus(doctor?.userStatus?.status?.name)"
+                    >{{ doctor?.userStatus?.status?.name }}</span
+                  >
+                </div>
+              </div>
+              <div>
+                <a title="phone" href="javascript:void(0);"
+                  ><i class="zmdi zmdi-phone"></i
+                ></a>
+                {{ doctor?.profile.phone }}
+                <div class="float-right">
+                  <a
+                    title="phone"
+                    href="javascript:void(0);"
+                    *ngIf="doctor?.profile.mobile !== null"
+                    ><i class="zmdi zmdi-phone"></i
+                  ></a>
+                  {{ doctor?.profile.mobile }}
+                </div>
+
+                <br />
+
+                <a title="email" href="javascript:void(0);"
+                  ><i class="zmdi zmdi-email"></i
+                ></a>
+                {{ doctor?.email }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

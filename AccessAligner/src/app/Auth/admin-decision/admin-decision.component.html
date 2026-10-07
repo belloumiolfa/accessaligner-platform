@@ -1,0 +1,13 @@
+<div class="card-plain">
+  <app-new-user-details [user]="user$"></app-new-user-details>
+
+  <ng-container *ngIf="user$.userStatus.status.id == 1; else elseTemplate">
+    <app-accept-form [adminId]="admin" [userId]="user"></app-accept-form>
+  </ng-container>
+
+  <ng-template #elseTemplate>
+    <app-accept-decision [user]="user$"></app-accept-decision>
+  </ng-template>
+
+  <app-help-link></app-help-link>
+</div>

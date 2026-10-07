@@ -1,0 +1,32 @@
+<div class="row clearfix">
+  <div class="col-lg-9 col-md-12">
+    <div class="card">
+      <div
+        class="header"
+        *ngIf="
+          readyToAddNewTreatment(treatments$) && this.utils.isDoctor(this.user$)
+        "
+      >
+        <div class="header-dropdown">
+          <button
+            class="btn btn-primary btn-round right-align"
+            [routerLink]="'/treatment/new-treatment/' + id + '/patient'"
+          >
+            New Treatment
+          </button>
+        </div>
+        <br />
+      </div>
+
+      <app-treatment-list
+        [treatments$]="treatments$"
+        [overview]="true"
+        [archive]="true"
+      >
+      </app-treatment-list>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-12">
+    <app-patient-infos [patient$]="patient$"></app-patient-infos>
+  </div>
+</div>

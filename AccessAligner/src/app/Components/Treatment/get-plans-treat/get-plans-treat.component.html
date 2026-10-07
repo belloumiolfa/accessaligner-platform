@@ -1,0 +1,178 @@
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12">
+    <div class="card">
+      <div class="header">
+        <h2>
+          <strong>
+            {{
+              "components.treatment.get-plans-treat.header-title-strong"
+                | translate
+            }}
+          </strong>
+          {{ "components.treatment.get-plans-treat.header-title" | translate }}
+        </h2>
+      </div>
+      <div class=" ">
+        <div class="row clearfix">
+          <div class="col-lg-12 col-md-12">
+            <div class="body content file_manager">
+              <div class="row clearfix">
+                <div
+                  class="col-lg-12 col-md-12 align-center"
+                  *ngIf="spinnerShow"
+                >
+                  <div class="spinner-grow" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+
+                <div
+                  class="col-lg-4 col-md-6 col-sm-12"
+                  *ngFor="let plan of treatment$?.plans"
+                >
+                  <div class="card">
+                    <div class="file">
+                      <a href="javascript:void(0);">
+                        <div class="hover">
+                          <!-- for doctor -->
+
+                          <!-- 
+
+                          (plan.status === 'NEW' || plan.status === 'REJECTED') && !!acceptedPlan() && 
+
+                              -->
+                          <button
+                            *ngIf="
+                              this.utils.isDoctor(this.user$) &&
+                              (plan.status === 'NEW' ||
+                                plan.status === 'REJECTED')
+                            "
+                            (click)="onUpdateSatusConfirm(plan.id, 'ACCEPTED')"
+                            class="btn btn-icon btn-icon-mini btn-round btn-success"
+                          >
+                            <i class="zmdi zmdi-check"></i>
+                          </button>
+                          <button
+                            *ngIf="
+                              plan.status !== 'DELIVERED' &&
+                              plan.status !== 'PRODUCTION' &&
+                              plan.status !== 'REJECTED' &&
+                              this.utils.isDoctor(this.user$)
+                            "
+                            (click)="onUpdateSatusConfirm(plan.id, 'REJECTED')"
+                            class="btn btn-icon btn-icon-mini btn-round btn-warning"
+                          >
+                            <i class="zmdi zmdi-close"></i>
+                          </button>
+
+                          <!-- for admin -->
+                          <button
+                            *ngIf="
+                              !this.utils.isDoctor(this.user$) &&
+                              (plan.status === 'NEW' ||
+                                plan.status === 'REJECTED')
+                            "
+                            (click)="onDeletePlan(plan.id, plan.status)"
+                            class="btn btn-icon btn-icon-mini btn-round btn-danger"
+                          >
+                            <i class="zmdi zmdi-delete"></i>
+                          </button>
+                        </div>
+
+                        <div
+                          class="body content"
+                          style="text-align: left"
+                          (click)="onOpenModalPlan(plan)"
+                        >
+                          <h6 class="m-b-15">
+                            {{
+                              "components.treatment.get-plans-treat.card-title"
+                                | translate
+                            }}
+                            {{ getTypeTreatement(treatment$?.treat) }}
+                          </h6>
+                          <p>
+                            {{ plan.comment }}
+                          </p>
+
+                          <app-team-info
+                            [addAction]="false"
+                            [treatment]="treatment$"
+                          ></app-team-info>
+                          <div class="progress-container l-black m-b-20">
+                            <!-- 
+                            
+                            <span class="progress-badge">Progress</span> 
+                            
+                            -->
+                            <div class="progress progress-plan">
+                              <div
+                                [ngClass]="getPCClass(plan.status)"
+                                class="progress-bar l-green"
+                                role="progressbar"
+                                aria-valuenow="87"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                [ngStyle]="{
+                                  width: getPCByStatus(plan.status)
+                                }"
+                              ></div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-7">
+                              <small
+                                >{{
+                                  "components.treatment.get-plans-treat.plan-id"
+                                    | translate
+                                }}
+                                #{{ plan.id }}</small
+                              ><br />
+                              <small>CODE : {{ plan.code }}</small>
+
+                              <h6 *ngIf="plan.deleveryDate !== null">
+                                {{
+                                  "components.treatment.get-plans-treat.delivery"
+                                    | translate
+                                }}
+                                {{ plan.deleveryDate | date }}
+                              </h6>
+                            </div>
+                            <div class="col-5">
+                              <span
+                                class="badge float-right"
+                                [ngClass]="getSatusClass(plan.status)"
+                                >{{ plan.status }}</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="float-right">
+                  <button
+                    *ngIf="
+                      treatment$.status !== 'DELIVERED' &&
+                      treatment$.status !== 'FINISHED' &&
+                      acceptedPlan() &&
+                      acceptedPlan().status !== 'ACCEPTED' &&
+                      utils.isAdmin(user$)
+                    "
+                    class="btn btn-primary btn-lg btn-simple btn-round"
+                    style="bottom: 0"
+                    [routerLink]="['/plan/new-plan/', treatment$?.id]"
+                  >
+                    <i class="zmdi zmdi-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="row clearfix">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="body">
+        <ul class="cbp_tmtimeline">
+          <li>
+            <app-patient-display-informations
+              [treatment]="treatment"
+            ></app-patient-display-informations>
+          </li>
+          <li>
+            <app-patient-treat-informations
+              [treatment]="treatment"
+            ></app-patient-treat-informations>
+          </li>
+          <li>
+            <app-patient-treat-teeth-informations
+              [treatment]="treatment"
+            ></app-patient-treat-teeth-informations>
+          </li>
+
+          <li>
+            <app-patient-treat-photos-informations
+              [treatment]="treatment"
+            ></app-patient-treat-photos-informations>
+          </li>
+
+          <li>
+            <app-patient-treat-clinics-informations
+              [treatment]="treatment"
+            ></app-patient-treat-clinics-informations>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

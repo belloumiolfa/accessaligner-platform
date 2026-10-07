@@ -1,0 +1,50 @@
+<div class="card">
+  <div class="body m-b-10 widget-user">
+    <img
+      *ngIf="patient$?.sex === 'Female'"
+      class="rounded-circle ng-star-inserted"
+      fill
+      loading="lazy"
+      src="assets/images/femme.png"
+      alt=""
+    />
+    <img
+      *ngIf="patient$?.sex === 'Male'"
+      class="rounded-circle ng-star-inserted"
+      fill
+      loading="lazy"
+      src="assets/images/profile_av.png"
+      alt=""
+    />
+    <div class="wid-u-info">
+      <h5>{{ patient$?.firstName }} {{ patient$?.lastName }}</h5>
+
+      <p class="text-muted m-b-0">Age : {{ patient$?.birthday | date }}</p>
+      <small class="text-warning"
+        ><b>{{ patient$?.sex }}</b></small
+      >
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="body">
+      <small class="text-muted">
+        {{ "components.patient.patient-infos.disease-label" | translate }}
+        :
+      </small>
+      <p>{{ patient$?.disease }}</p>
+      <hr />
+
+      <small class="text-muted">
+        {{ "components.patient.patient-infos.birthday-label" | translate }}
+      </small>
+      <p class="m-b-0">{{ patient$?.birthday | date }}</p>
+      <hr />
+      <small class="text-muted">
+        {{ "components.patient.patient-infos.comment" | translate }}
+        :
+      </small>
+      <p>{{ patient$?.comment }}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,107 @@
+<time class="cbp_tmtime" datetime="2017-11-04T18:30"
+  ><span class="hidden">25/12/2017</span>
+  <span class="large">{{
+    "components.patient.patient-display-informations.patient-label" | translate
+  }}</span>
+</time>
+<div class="cbp_tmicon"><i class="zmdi zmdi-account"></i></div>
+
+<div class="cbp_tmlabel row clearfix">
+  <div class="col-lg-6 col-md-12">
+    <h2>
+      <p class="text-primary">
+        {{
+          "components.patient.patient-display-informations.name-label"
+            | translate
+        }}
+      </p>
+    </h2>
+    <p>
+      {{ this.treatment?.patient?.firstName }}
+      {{ this.treatment?.patient?.lastName }}
+
+      <span
+        *ngIf="this.treatment?.patient?.sex !== ''"
+        [class]="
+          this.treatment?.patient?.sex == 'Male'
+            ? 'badge badge-default m-l-10 hidden-sm-down'
+            : 'badge badge-primary m-l-10 hidden-sm-down'
+        "
+        >{{ this.treatment?.patient?.sex }}</span
+      >
+    </p>
+  </div>
+  <div class="col-lg-6 col-md-12" *ngIf="this.treatment?.patient?.email">
+    <h2>
+      <p class="text-primary">
+        {{
+          "components.patient.patient-display-informations.email-label"
+            | translate
+        }}
+      </p>
+    </h2>
+    <p>{{ this.treatment?.patient?.email }}</p>
+  </div>
+  <div class="col-lg-6 col-md-12" *ngIf="this.treatment?.patient?.phone">
+    <h2>
+      <p class="text-primary">
+        {{
+          "components.patient.patient-display-informations.birthday-label"
+            | translate
+        }}
+      </p>
+    </h2>
+    <p>{{ this.treatment?.patient?.birthday | date }}</p>
+  </div>
+
+  <div class="col-lg-6 col-md-12" *ngIf="this.treatment?.patient?.phone">
+    <h2>
+      <p class="text-primary">
+        {{
+          "components.patient.patient-display-informations.phone-label"
+            | translate
+        }}
+      </p>
+    </h2>
+    <p>{{ this.treatment?.patient?.phone }}</p>
+  </div>
+  <div class="col-lg-6 col-md-12" *ngIf="this.treatment?.patient?.address">
+    <h2>
+      <p class="text-primary">
+        {{
+          "components.patient.patient-display-informations.address-label"
+            | translate
+        }}
+      </p>
+    </h2>
+    <p>{{ this.treatment?.patient?.address }}</p>
+  </div>
+  <div class="col-lg-6 col-md-12" *ngIf="this.treatment?.patient?.disease">
+    <h2>
+      <p class="text-primary">
+        {{
+          "components.patient.patient-display-informations.disease-label"
+            | translate
+        }}
+      </p>
+    </h2>
+    <p>{{ this.treatment?.patient?.disease }}</p>
+  </div>
+  <div class="col-lg-12 col-md-12" *ngIf="this.treatment?.patient?.description">
+    <div class="progress-container">
+      <span class="progress-badge">{{
+        this.treatment?.patient?.description
+      }}</span>
+      <div class="progress">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          aria-valuenow="100"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          style="width: 100%"
+        ></div>
+      </div>
+    </div>
+  </div>
+</div>

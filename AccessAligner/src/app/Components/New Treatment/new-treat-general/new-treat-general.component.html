@@ -1,0 +1,434 @@
+<section class="body current">
+  <div class="container">
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 align-center">
+        <div class=" ">
+          <div class="container">
+            <div class="header">
+              <h6 class="title">
+                {{
+                  "components.new-treatment.new-treat-general.form-title"
+                    | translate
+                }}
+              </h6>
+            </div>
+            <form class="row clearfix" [formGroup]="treatForm">
+              <div class="col-lg-12 col-md-12 col-sm-12 align-center">
+                <div class="form-group form-float">
+                  <div class="radio inlineblock m-r-20">
+                    <input
+                      type="radio"
+                      formControlName="treat"
+                      name="treat"
+                      id="type-upper-arch"
+                      class="with-gap"
+                      value="S"
+                    />
+                    <label for="type-upper-arch">{{
+                      "components.new-treatment.new-treat-general.upper-arch-label"
+                        | translate
+                    }}</label>
+                  </div>
+                  <div class="radio inlineblock m-r-20">
+                    <input
+                      type="radio"
+                      formControlName="treat"
+                      name="treat"
+                      id="type-lower-arch"
+                      class="with-gap"
+                      value="I"
+                    />
+                    <label for="type-lower-arch">{{
+                      "components.new-treatment.new-treat-general.lower-arch-label"
+                        | translate
+                    }}</label>
+                  </div>
+                  <div class="radio inlineblock">
+                    <input
+                      type="radio"
+                      formControlName="treat"
+                      name="treat"
+                      id="type-upper-lower"
+                      class="with-gap"
+                      value="IS"
+                    />
+                    <label for="type-upper-lower">{{
+                      "components.new-treatment.new-treat-general.upper-lower-label"
+                        | translate
+                    }}</label>
+                  </div>
+                  <div class="help-info"></div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 align-center">
+                <div class="form-group form-float">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <ul class="list-group">
+                        <li class="list-group-item">
+                          <div class="form-group form-float">
+                            <b
+                              >{{
+                                "components.new-treatment.new-treat-general.postCross-question"
+                                  | translate
+                              }}
+                            </b>
+
+                            <div class="form-group form-float">
+                              <div class="radio inlineblock m-r-20">
+                                <input
+                                  formControlName="postCross"
+                                  name="postCross"
+                                  type="radio"
+                                  id="postCrossY"
+                                  class="with-gap"
+                                  value="1"
+                                />
+                                <label for="postCrossY">{{
+                                  "components.new-treatment.new-treat-general.yes-answer"
+                                    | translate
+                                }}</label>
+                              </div>
+                              <div class="radio inlineblock">
+                                <input
+                                  formControlName="postCross"
+                                  name="postCross"
+                                  type="radio"
+                                  id="postCrossN"
+                                  class="with-gap"
+                                  value="0"
+                                  checked=""
+                                />
+                                <label for="postCrossN">{{
+                                  "components.new-treatment.new-treat-general.no-answer"
+                                    | translate
+                                }}</label>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="list-group-item">
+                          <div class="form-group form-float">
+                            <b
+                              >{{
+                                "components.new-treatment.new-treat-general.antCross-question"
+                                  | translate
+                              }}
+                            </b>
+
+                            <div class="form-group form-float">
+                              <div class="radio inlineblock m-r-20">
+                                <input
+                                  formControlName="antCross"
+                                  type="radio"
+                                  id="antCrossY"
+                                  class="with-gap"
+                                  value="1"
+                                />
+                                <label for="antCrossY">{{
+                                  "components.new-treatment.new-treat-general.yes-answer"
+                                    | translate
+                                }}</label>
+                              </div>
+                              <div class="radio inlineblock">
+                                <input
+                                  formControlName="antCross"
+                                  type="radio"
+                                  id="antCrossN"
+                                  class="with-gap"
+                                  value="0"
+                                  checked=""
+                                />
+                                <label for="antCrossN">{{
+                                  "components.new-treatment.new-treat-general.no-answer"
+                                    | translate
+                                }}</label>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="list-group-item">
+                          <div class="form-group form-float">
+                            <b>{{
+                              "components.new-treatment.new-treat-general.gap-question"
+                                | translate
+                            }}</b>
+
+                            <div class="form-group form-float">
+                              <div class="radio inlineblock m-r-20">
+                                <input
+                                  formControlName="gap"
+                                  type="radio"
+                                  id="gapY"
+                                  class="with-gap"
+                                  value="1"
+                                />
+                                <label for="gapY">{{
+                                  "components.new-treatment.new-treat-general.yes-answer"
+                                    | translate
+                                }}</label>
+                              </div>
+                              <div class="radio inlineblock">
+                                <input
+                                  formControlName="gap"
+                                  type="radio"
+                                  id="gapN"
+                                  class="with-gap"
+                                  value="0"
+                                  checked=""
+                                />
+                                <label for="gapN">{{
+                                  "components.new-treatment.new-treat-general.no-answer"
+                                    | translate
+                                }}</label>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="list-group-item">
+                          <div class="form-group form-float">
+                            <b>{{
+                              "components.new-treatment.new-treat-general.overbite-question"
+                                | translate
+                            }}</b>
+
+                            <div class="form-group form-float">
+                              <div class="radio inlineblock m-r-20">
+                                <input
+                                  formControlName="overbite"
+                                  type="radio"
+                                  id="overbiteY"
+                                  class="with-gap"
+                                  value="1"
+                                />
+                                <label for="overbiteY">{{
+                                  "components.new-treatment.new-treat-general.yes-answer"
+                                    | translate
+                                }}</label>
+                              </div>
+                              <div class="radio inlineblock">
+                                <input
+                                  formControlName="overbite"
+                                  type="radio"
+                                  id="overbiteN"
+                                  class="with-gap"
+                                  value="0"
+                                  checked=""
+                                />
+                                <label for="overbiteN">{{
+                                  "components.new-treatment.new-treat-general.no-answer"
+                                    | translate
+                                }}</label>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <ul class="list-group">
+                        <li class="list-group-item">
+                          <div class="form-group form-float">
+                            <b>{{
+                              "components.new-treatment.new-treat-general.classI-question"
+                                | translate
+                            }}</b>
+
+                            <div class="form-group form-float">
+                              <div class="radio inlineblock m-r-20">
+                                <input
+                                  formControlName="classI"
+                                  type="radio"
+                                  id="classIY"
+                                  class="with-gap"
+                                  value="1"
+                                />
+                                <label for="classIY">{{
+                                  "components.new-treatment.new-treat-general.yes-answer"
+                                    | translate
+                                }}</label>
+                              </div>
+                              <div class="radio inlineblock">
+                                <input
+                                  formControlName="classI"
+                                  type="radio"
+                                  id="classIN"
+                                  class="with-gap"
+                                  value="0"
+                                  checked=""
+                                />
+                                <label for="classIN">{{
+                                  "components.new-treatment.new-treat-general.no-answer"
+                                    | translate
+                                }}</label>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="list-group-item">
+                          <div class="form-group form-float">
+                            <b>{{
+                              "components.new-treatment.new-treat-general.reduceOverbite-question"
+                                | translate
+                            }}</b>
+
+                            <div class="form-group form-float">
+                              <div class="radio inlineblock m-r-20">
+                                <input
+                                  formControlName="reduceOverbite"
+                                  type="radio"
+                                  id="reduceOverbiteY"
+                                  class="with-gap"
+                                  value="1"
+                                />
+                                <label for="reduceOverbiteY">{{
+                                  "components.new-treatment.new-treat-general.yes-answer"
+                                    | translate
+                                }}</label>
+                              </div>
+                              <div class="radio inlineblock">
+                                <input
+                                  formControlName="reduceOverbite"
+                                  type="radio"
+                                  id="reduceOverbiteN"
+                                  class="with-gap"
+                                  value="0"
+                                  checked=""
+                                />
+                                <label for="reduceOverbiteN">{{
+                                  "components.new-treatment.new-treat-general.no-answer"
+                                    | translate
+                                }}</label>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="list-group-item">
+                          <div class="form-group form-float">
+                            <b
+                              >{{
+                                "components.new-treatment.new-treat-general.crowding-question"
+                                  | translate
+                              }}
+                            </b>
+
+                            <div class="form-group form-float">
+                              <div class="radio inlineblock m-r-20">
+                                <input
+                                  formControlName="crowding"
+                                  type="radio"
+                                  id="crowdingY"
+                                  class="with-gap"
+                                  value="1"
+                                />
+                                <label for="crowdingY">{{
+                                  "components.new-treatment.new-treat-general.yes-answer"
+                                    | translate
+                                }}</label>
+                              </div>
+                              <div class="radio inlineblock">
+                                <input
+                                  formControlName="crowding"
+                                  type="radio"
+                                  id="crowdingN"
+                                  class="with-gap"
+                                  value="0"
+                                  checked=""
+                                />
+                                <label for="crowdingN">No </label>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="list-group-item">
+                          <div class="form-group form-float">
+                            <b>{{
+                              "components.new-treatment.new-treat-general.extract-question"
+                                | translate
+                            }}</b>
+
+                            <div class="form-group form-float">
+                              <div class="radio inlineblock m-r-20">
+                                <input
+                                  formControlName="extract"
+                                  type="radio"
+                                  id="extractY"
+                                  class="with-gap"
+                                  value="1"
+                                />
+                                <label for="extractY">{{
+                                  "components.new-treatment.new-treat-general.yes-answer"
+                                    | translate
+                                }}</label>
+                              </div>
+                              <div class="radio inlineblock">
+                                <input
+                                  formControlName="extract"
+                                  type="radio"
+                                  id="extractN"
+                                  class="with-gap"
+                                  value="0"
+                                  checked=""
+                                />
+                                <label for="extractN">{{
+                                  "components.new-treatment.new-treat-general.no-answer"
+                                    | translate
+                                }}</label>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <b class="float-left">{{
+                    "components.new-treatment.new-treat-general.comment-label"
+                      | translate
+                  }}</b>
+                  <textarea
+                    formControlName="description"
+                    rows="2"
+                    class="form-control no-resize"
+                    [placeholder]="
+                      'components.new-treatment.new-treat-general.comment-placeholder'
+                        | translate
+                    "
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="float-right">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-round"
+                  (click)="onSubmit($event)"
+                >
+                  {{
+                    "components.new-treatment.new-treat-general.save-button"
+                      | translate
+                  }}
+                </button>
+
+                <button
+                  (click)="onReset($event)"
+                  class="btn btn-primary btn-simple btn-round"
+                >
+                  {{
+                    "components.new-treatment.new-treat-general.cancel-button"
+                      | translate
+                  }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

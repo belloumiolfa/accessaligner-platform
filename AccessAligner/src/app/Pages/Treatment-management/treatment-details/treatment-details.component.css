@@ -1,0 +1,13 @@
+.fixed-button {
+  position: fixed;
+  bottom: 2%; /* Adjust as needed */
+  right: 2%; /* Adjust as needed */
+  cursor: pointer;
+  z-index: 1000; /* Make sure it's on top of other elements */
+}
+
+@media (max-width: 768px) {
+  .fixed-button {
+    right: 1%;
+  }
+}

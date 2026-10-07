@@ -1,0 +1,9 @@
+.row {
+  font-size: 14px;
+  padding: 90px;
+
+  background: #fff;
+  color: #616161;
+  font-weight: 400;
+  transition: all 0.2s ease-in-out;
+}

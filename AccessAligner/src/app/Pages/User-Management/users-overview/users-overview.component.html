@@ -1,0 +1,63 @@
+<div class="row clearfix">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="body m-b-10">
+        <ul class="nav nav-tabs padding-0 d-flex flex-row">
+          <li
+            class="nav-item"
+            *ngFor="
+              let item of [
+                {
+                  tab:
+                    'pages.user-management.user-overview.doctor-button'
+                    | translate,
+                  url: 'doctors'
+                },
+                {
+                  tab:
+                    'pages.user-management.user-overview.admins-button'
+                    | translate,
+                  url: 'list'
+                },
+
+                {
+                  tab:
+                    'pages.user-management.user-overview.archive-button'
+                    | translate,
+                  url: 'archive-doctors'
+                }
+              ];
+              let i = index
+            "
+          >
+            <a
+              class="nav-link"
+              [class.active]="clickedIndex === i"
+              (click)="clickedIndex = i"
+              [routerLink]="item.url"
+              >{{ item.tab }}</a
+            >
+          </li>
+
+          <li class="nav-item ml-auto p-2">
+            <a
+              class="nav-link"
+              (click)="setClickedIndex(3)"
+              [class.active]="clickedIndex === 3"
+              routerLink="new-admin"
+            >
+              {{
+                "pages.user-management.user-overview.new-admin-button"
+                  | translate
+              }}</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

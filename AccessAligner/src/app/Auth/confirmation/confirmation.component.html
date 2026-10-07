@@ -1,0 +1,38 @@
+<div class="">
+  <div class="card-plain">
+    <div [ngSwitch]="confirmationInfos$?.currentStatus">
+      <div *ngSwitchCase="1">
+        <app-confirm-decision
+          [title]="'auth.confirmation.confirmed-title' | translate"
+          [subTitle]="'auth.confirmation.confirmed-subtitle' | translate"
+        ></app-confirm-decision>
+      </div>
+      <div *ngSwitchCase="2">
+        <app-confirm-decision
+          [title]="'auth.confirmation.canceled-title' | translate"
+          [subTitle]="'auth.confirmation.canceled-subtitle' | translate"
+        ></app-confirm-decision>
+      </div>
+      <div *ngSwitchCase="4">
+        <app-confirm-decision
+          [title]="'auth.confirmation.accepted-title' | translate"
+          [subTitle]="'auth.confirmation.accepted-subtitle' | translate"
+        ></app-confirm-decision>
+      </div>
+      <div *ngSwitchCase="5">
+        <app-confirm-decision
+          [title]="'auth.confirmation.rejected-title' | translate"
+          [subTitle]="'auth.confirmation.rejected-subtitle' | translate"
+        ></app-confirm-decision>
+      </div>
+
+      <div *ngSwitchDefault>
+        <app-confirm-form
+          [user]="this.confirmationInfos$"
+          [token]="this.token"
+          (updatedUser$)="onChangeUser($event)"
+        ></app-confirm-form>
+      </div>
+    </div>
+  </div>
+</div>

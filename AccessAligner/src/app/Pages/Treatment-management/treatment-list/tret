@@ -1,0 +1,506 @@
+<div class="tab-pane active">
+  <div class="card">
+    <div class="body">
+      <div class="table-responsive">
+        <div class="row">
+          <div class="col-sm-12 col-md-4">
+            <div>
+              <label>
+                {{
+                  "pages.treatment-management.treatment-list.search-label"
+                    | translate
+                }}<input
+                  type="search"
+                  class="form-control form-control-sm"
+                  [placeholder]="
+                    'pages.treatment-management.treatment-list.search-placeholder'
+                      | translate
+                  "
+                  [(ngModel)]="searchTerm"
+                  (input)="serachByName()"
+                  aria-controls="DataTables_Table_0"
+                />
+                <h6 *ngIf="filter; else all">
+                  Totale : {{ treatmentsAfterFilter.length }}
+                </h6>
+                <ng-template #all>
+                  <h6>Totale : {{ treatments$.length }}</h6>
+                </ng-template>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-8" *ngIf="!overview">
+            <div class="header">
+              <div class="align-right">
+                <button
+                  type="button"
+                  class="btn btn-round btn-sm bg-blue-grey waves-effect btn-filter"
+                  (click)="intitalizedTreatments()"
+                >
+                  {{
+                    "pages.treatment-management.treatment-list.status-label.all"
+                      | translate
+                  }}
+                </button>
+                <button
+                  type="button"
+                  [ngClass]="getStatusClass('NEW')"
+                  class="btn btn-round btn-sm btn-filter"
+                  data-target="all"
+                  (click)="filterTreatment(['NEW'])"
+                  *ngIf="!archive || overview"
+                >
+                  {{
+                    "pages.treatment-management.treatment-list.status-label.new"
+                      | translate
+                  }}
+                </button>
+                <button
+                  type="button"
+                  [ngClass]="getStatusClass('CONFIRMED')"
+                  class="btn btn-round btn-sm btn-filter"
+                  data-target="approved"
+                  (click)="filterTreatment(['CONFIRMED'])"
+                  *ngIf="!archive || overview"
+                >
+                  {{
+                    "pages.treatment-management.treatment-list.status-label.confirmed"
+                      | translate
+                  }}
+                </button>
+                <button
+                  type="button"
+                  [ngClass]="getStatusClass('COMPLETED')"
+                  class="btn btn-round btn-sm"
+                  data-target="suspended"
+                  (click)="filterTreatment(['COMPLETED'])"
+                  *ngIf="!archive || overview"
+                >
+                  {{
+                    "pages.treatment-management.treatment-list.status-label.completed"
+                      | translate
+                  }}
+                </button>
+                <button
+                  type="button"
+                  [ngClass]="getStatusClass('PROGRESS')"
+                  class="btn btn-round btn-sm btn-filter"
+                  data-target="pending"
+                  (click)="
+                    filterTreatment(['PROGRESS', 'PRODUCTION', 'DELIVERED'])
+                  "
+                  *ngIf="!archive || overview"
+                >
+                  {{
+                    "pages.treatment-management.treatment-list.status-label.progress"
+                      | translate
+                  }}
+                </button>
+
+                <button
+                  type="button"
+                  [ngClass]="getStatusClass('QUALIFIED')"
+                  class="btn btn-round btn-sm btn-filter"
+                  data-target="blocked"
+                  (click)="filterTreatment(['QUALIFIED'])"
+                  *ngIf="!archive || overview"
+                >
+                  {{
+                    "pages.treatment-management.treatment-list.status-label.qualified"
+                      | translate
+                  }}
+                </button>
+
+                <button
+                  type="button"
+                  [ngClass]="getStatusClass('FINISHED')"
+                  class="btn btn-round btn-sm btn-filter"
+                  data-target="blocked"
+                  (click)="filterTreatment(['FINISHED'])"
+                  *ngIf="archive"
+                >
+                  {{
+                    "pages.treatment-management.treatment-list.status-label.finished"
+                      | translate
+                  }}
+                </button>
+
+                <button
+                  type="button"
+                  [ngClass]="getStatusClass('CANCELED')"
+                  class="btn btn-round btn-sm btn-filter"
+                  data-target="blocked"
+                  (click)="filterTreatment(['CANCELED'])"
+                  *ngIf="archive"
+                >
+                  {{
+                    "pages.treatment-management.treatment-list.status-label.canceled"
+                      | translate
+                  }}
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-round btn-sm btn-filter"
+                  [ngClass]="getStatusClass('UNQUALIFIED')"
+                  data-target="blocked"
+                  (click)="filterTreatment(['UNQUALIFIED'])"
+                  *ngIf="archive"
+                >
+                  {{
+                    "pages.treatment-management.treatment-list.status-label.unqualified"
+                      | translate
+                  }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <table class="table table-hover c_list">
+          <thead>
+            <tr>
+              <th></th>
+              <th>
+                {{
+                  "pages.treatment-management.treatment-list.th-status"
+                    | translate
+                }}
+              </th>
+              <th>
+                {{
+                  "pages.treatment-management.treatment-list.th-treatment"
+                    | translate
+                }}
+              </th>
+              <th data-breakpoints="xs sm md">
+                {{
+                  "pages.treatment-management.treatment-list.th-progress"
+                    | translate
+                }}
+              </th>
+              <th
+                data-breakpoints="xs sm md"
+                *ngIf="!overview && !utils.isDoctor(user$)"
+              >
+                {{
+                  "pages.treatment-management.treatment-list.th-dentist"
+                    | translate
+                }}
+              </th>
+              <th data-breakpoints="xs sm md" *ngIf="!overview">
+                {{
+                  "pages.treatment-management.treatment-list.th-team"
+                    | translate
+                }}
+              </th>
+
+              <th>
+                {{
+                  "pages.treatment-management.treatment-list.th-plan"
+                    | translate
+                }}
+              </th>
+              <th *ngIf="!overview">
+                {{
+                  "pages.treatment-management.treatment-list.th-delivery-date"
+                    | translate
+                }}
+              </th>
+
+              <th>
+                {{
+                  "pages.treatment-management.treatment-list.th-action"
+                    | translate
+                }}
+              </th>
+            </tr>
+          </thead>
+          <!--  <div
+            class="d-flex justify-content-center align-items-center"
+            *ngIf="treatments$.length === 0; else displayTreatment"
+          >
+            <div class="spinner-grow" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div> 
+          
+          
+                    <ng-template #displayTreatment>
+            </ng-template>
+-->
+          <tbody>
+            <tr *ngIf="treatmentsAfterFilter.length === 0 && filter">
+              <td
+                colspan="10"
+                *ngIf="treatmentsAfterFilter.length === 0 && filter"
+              >
+                <div class="progress-container progress-primary text-center">
+                  <span class="progress-badge">
+                    {{
+                      "pages.treatment-management.treatment-list.no-treat-found-msg"
+                        | translate
+                    }}
+                  </span>
+                  <div class="progress">
+                    <div
+                      class="progress-bar progress-bar-warning"
+                      role="progressbar"
+                      style="width: 100%"
+                    ></div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr *ngIf="treatments$?.length === 0 && !filter">
+              <td colspan="10">
+                <div class="progress-container progress-info text-center">
+                  <span class="progress-badge">
+                    {{
+                      "pages.treatment-management.treatment-list.no-treat-added-msg"
+                        | translate
+                    }}
+                  </span>
+                  <div class="progress">
+                    <div
+                      class="progress-bar progress-bar-warning"
+                      style="width: 100%"
+                    ></div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr
+              *ngFor="
+                let treatment of filter ? treatmentsAfterFilter : treatments$
+              "
+            >
+              <td><span class="font-bold">#</span>{{ treatment?.id }}</td>
+
+              <td>
+                <span
+                  class="badge"
+                  [ngClass]="getStatusClass(treatment?.status)"
+                  *ngIf="lang == 'en'; else frenchStatus"
+                  >{{ treatment?.status }}</span
+                >
+                <ng-template #frenchStatus>
+                  <span
+                    class="badge"
+                    [ngClass]="getStatusClass(treatment?.status)"
+                    >{{ treatment?.frenchStatus }}</span
+                  >
+                </ng-template>
+              </td>
+              <td class="project-title">
+                <h6>
+                  <a
+                    [routerLink]="'/patients/detail/' + treatment?.patient?.id"
+                  >
+                    {{ treatment?.patient.firstName }}
+                    {{ treatment?.patient.lastName }}</a
+                  >
+                </h6>
+                <small>
+                  {{ getTypeTreatement(treatment?.treat) }}
+                </small>
+              </td>
+
+              <td>
+                <div class="progress">
+                  <div
+                    class="progress-bar l-dark"
+                    role="progressbar"
+                    [attr.aria-valuenow]="treatment?.Progress"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    [style]="'width:' + treatment?.Progress + '%'"
+                  ></div>
+                </div>
+                <small>
+                  {{
+                    "pages.treatment-management.treatment-list.progress-label"
+                      | translate
+                  }}
+                  {{ treatment?.Progress }}%</small
+                >
+              </td>
+
+              <td
+                *ngIf="!overview && !utils.isDoctor(user$)"
+                style="cursor: pointer"
+              >
+                <app-profile-image
+                  (click)="navigateToPorfile(treatment?.dentist?.id)"
+                  [photoId]="treatment?.dentist?.photo?.id"
+                  [class]="'rounded-circle avatar'"
+                  [expression]="
+                    treatment?.dentist?.firstName &&
+                    treatment?.dentist?.lastName
+                      ? treatment?.dentist?.firstName +
+                        ' ' +
+                        treatment?.dentist?.lastName
+                      : treatment?.dentist?.userName
+                  "
+                ></app-profile-image>
+
+                <p class="c_name">
+                  Dr.
+                  <a
+                    (click)="navigateToPorfile(treatment?.dentist?.id)"
+                    style="color: #f96332; cursor: pointer"
+                    >{{
+                      treatment?.dentist?.lastName
+                        ? treatment?.dentist?.lastName
+                        : treatment?.dentist?.userName
+                    }}
+                  </a>
+                </p>
+              </td>
+
+              <td *ngIf="!overview">
+                <app-team-info
+                  [treatment]="treatment"
+                  [addAction]="archive && overview"
+                ></app-team-info>
+              </td>
+
+              <td class="project-actions">
+                <ng-container
+                  *ngIf="treatment?.planId !== null; else elseTemplate"
+                >
+                  <a
+                    class="btn btn-primary btn-round btn-simple"
+                    (click)="
+                      onOpenModalPlan(this.selectedPlan(treatment), treatment)
+                    "
+                  >
+                    {{
+                      "pages.treatment-management.treatment-list.view-button"
+                        | translate
+                    }}
+                    <i class="zmdi zmdi-arrow-right"></i>
+                  </a>
+                </ng-container>
+
+                <ng-template #elseTemplate>
+                  <h6 class="">
+                    <i class="zmdi zmdi-block"></i>
+                  </h6>
+                </ng-template>
+              </td>
+
+              <td class="project-actions" *ngIf="!overview">
+                <ng-container
+                  *ngIf="treatment?.deliveryDate != null; else elseTemplateX"
+                >
+                  <h6>
+                    {{ treatment?.deliveryDate | date }}
+                  </h6>
+                </ng-container>
+                <ng-template #elseTemplateX>
+                  <h6>--/--/----</h6>
+                </ng-template>
+              </td>
+
+              <td class="project-actions">
+                <button
+                  [routerLink]="'/treatment/' + treatment?.id"
+                  class="btn btn-neutral btn-icon btn-icon-mini btn-round"
+                >
+                  <i class="zmdi zmdi-eye"></i>
+                </button>
+                <button
+                  *ngIf="!archive"
+                  [routerLink]="
+                    '/treatment/new-treatment/' + treatment?.patient.id
+                  "
+                  class="btn btn-icon btn-neutral btn-icon-mini"
+                >
+                  <i class="zmdi zmdi-edit"></i>
+                </button>
+                <button
+                  *ngIf="!overview && this.utils.isSuperAdmin(this.user$)"
+                  (click)="onDelete(treatment?.id)"
+                  class="btn btn-icon btn-neutral btn-icon-mini"
+                >
+                  <i class="zmdi zmdi-delete"></i>
+                </button>
+
+                <button
+                  *ngIf="
+                    archive && this.utils.isSuperAdmin(this.user$) && !overview
+                  "
+                  (click)="onReback(treatment)"
+                  class="btn btn-icon btn-neutral btn-icon-mini"
+                >
+                  <i class="zmdi zmdi-rotate-left"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+
+          <tfoot *ngIf="initialFiltred(treatments$).length >= 5">
+            <tr>
+              <th></th>
+              <th>
+                {{
+                  "pages.treatment-management.treatment-list.th-status"
+                    | translate
+                }}
+              </th>
+              <th>
+                {{
+                  "pages.treatment-management.treatment-list.th-treatment"
+                    | translate
+                }}
+              </th>
+              <th data-breakpoints="xs sm md">
+                {{
+                  "pages.treatment-management.treatment-list.th-progress"
+                    | translate
+                }}
+              </th>
+              <th
+                data-breakpoints="xs sm md"
+                *ngIf="!overview && !utils.isDoctor(user$)"
+              >
+                {{
+                  "pages.treatment-management.treatment-list.th-dentist"
+                    | translate
+                }}
+              </th>
+              <th data-breakpoints="xs sm md" *ngIf="!overview">
+                {{
+                  "pages.treatment-management.treatment-list.th-team"
+                    | translate
+                }}
+              </th>
+
+              <th>
+                {{
+                  "pages.treatment-management.treatment-list.th-plan"
+                    | translate
+                }}
+              </th>
+              <th *ngIf="!overview">
+                {{
+                  "pages.treatment-management.treatment-list.th-delivery-date"
+                    | translate
+                }}
+              </th>
+
+              <th>
+                {{
+                  "pages.treatment-management.treatment-list.th-action"
+                    | translate
+                }}
+              </th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

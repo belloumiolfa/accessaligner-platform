@@ -1,0 +1,115 @@
+<div class="card">
+  <div class="header">
+    <h2>
+      <strong>{{
+        "components.treatment.treatment-header.header-title-strong" | translate
+      }}</strong>
+      {{ "components.treatment.treatment-header.header-title" | translate }}
+    </h2>
+
+    <ul
+      class="header-dropdown"
+      *ngIf="
+        (utils.isDoctor(user$) &&
+          ['NEW', 'COMPLETED', 'QUALIFIED', 'CONFIRMED'].includes(
+            treatment$.status
+          )) ||
+        (['FINISHED', 'UNQUALIFIED', 'CANCELED'].includes(
+          treatment$?.status
+        ) === false &&
+          !utils.isDoctor(user$))
+      "
+    >
+      <div [class]="show === true ? 'dropdown show' : 'dropdown'">
+        <a
+          class="dropdown-toggle"
+          href="javascript:void(0);"
+          role="button"
+          (click)="show = !show"
+        >
+          <i class="zmdi zmdi-more"></i>
+        </a>
+
+        <div
+          [class]="
+            show === true ? 'dropdown-menu slideUp' : 'dropdown-menu slideDown'
+          "
+        >
+          <a
+            *ngIf="
+              ['NEW', 'COMPLETED', 'QUALIFIED', 'CONFIRMED'].includes(
+                treatment$.status
+              )
+            "
+            class="dropdown-item"
+            [routerLink]="'/treatment/new-treatment/' + treatment$?.patient?.id"
+          >
+            {{
+              "components.treatment.treatment-header.update-button" | translate
+            }}
+          </a>
+          <a
+            *ngIf="!utils.isDoctor(user$)"
+            class="dropdown-item"
+            href="javascript:void(0);"
+            (click)="onUpdateStatus('CANCELED')"
+          >
+            {{
+              "components.treatment.treatment-header.archive-button" | translate
+            }}
+          </a>
+          <a
+            *ngIf="
+              utils.isSuperAdmin(user$) && treatment$.status == 'DELIVERED'
+            "
+            class="dropdown-item"
+            href="javascript:void(0);"
+            (click)="onUpdateStatus('FINISHED')"
+          >
+            Términer
+          </a>
+          <!--           <div class="dropdown-divider"></div>
+ -->
+          <a
+            *ngIf="
+              !utils.isDoctor(user$) &&
+              ['NEW', 'COMPLETED', 'QUALIFIED', 'CONFIRMED'].includes(
+                treatment$.status
+              )
+            "
+            class="dropdown-item"
+            href="javascript:void(0);"
+            (click)="onDelete(treatment$?.id)"
+          >
+            {{
+              "components.treatment.treatment-header.delete-button" | translate
+            }}
+          </a>
+        </div>
+      </div>
+    </ul>
+  </div>
+  <div class="body m-b-10 bg-dark">
+    <div class="row">
+      <div class="col-6">
+        <h6 class="m-b-0 m-t-0">
+          {{ getTypeTreatement(treatment$?.treat) }}
+        </h6>
+
+        <h4 class="text-success m-b-0 m-t-0">
+          <small *ngIf="lang == 'en'; else frenchStatus">{{
+            treatment$.status
+          }}</small>
+          <ng-template #frenchStatus>
+            <small>{{ treatment$.frenchStatus }}</small></ng-template
+          >
+        </h4>
+        <h6 class="m-b-0 m-t-0">Date : {{ treatment$?.createdAt | date }}</h6>
+      </div>
+      <div class="col-6 text-right">
+        <app-team-info [treatment]="treatment$" [addAction]="true">
+        </app-team-info>
+      </div>
+    </div>
+  </div>
+</div>

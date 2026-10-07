@@ -1,0 +1,1590 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>front-end documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">front-end documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PatientFormComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/Components/Patient/patient-form/patient-form.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>AfterViewInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                            <code>provideNativeDateAdapter()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-patient-form</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>ReactiveFormsModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./patient-form.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./patient-form.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#errors" >errors</a>
+                            </li>
+                            <li>
+                                <a href="#initialFormValues" >initialFormValues</a>
+                            </li>
+                            <li>
+                                <a href="#patient$" >patient$</a>
+                            </li>
+                            <li>
+                                <a href="#patientForm" >patientForm</a>
+                            </li>
+                            <li>
+                                <a href="#patients$" >patients$</a>
+                            </li>
+                            <li>
+                                <a href="#user$" >user$</a>
+                            </li>
+                            <li>
+                                <a href="#valueChangesSubscription" >valueChangesSubscription</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#checkForChanges" >checkForChanges</a>
+                            </li>
+                            <li>
+                                <a href="#getdate" >getdate</a>
+                            </li>
+                            <li>
+                                <a href="#initializeForm" >initializeForm</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit" >ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                <a href="#saveNewPatient" >saveNewPatient</a>
+                            </li>
+                            <li>
+                                <a href="#updatePatient" >updatePatient</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(formBuilder: FormBuilder, patientService: <a href="../injectables/PatientService.html" target="_self">PatientService</a>, handleErrors: <a href="../injectables/HandleErrorsService.html" target="_self">HandleErrorsService</a>, handleAlerts: <a href="../injectables/HandleAlertsService.html" target="_self">HandleAlertsService</a>, spinner: NgxSpinnerService, appService: <a href="../injectables/AppService.html" target="_self">AppService</a>, stepsService: <a href="../injectables/StepsService.html" target="_self">StepsService</a>, router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:38</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>formBuilder</td>
+                                                  
+                                                        <td>
+                                                                    <code>FormBuilder</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>patientService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/PatientService.html" target="_self" >PatientService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>handleErrors</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/HandleErrorsService.html" target="_self" >HandleErrorsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>handleAlerts</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/HandleAlertsService.html" target="_self" >HandleAlertsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>spinner</td>
+                                                  
+                                                        <td>
+                                                                    <code>NgxSpinnerService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>appService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AppService.html" target="_self" >AppService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>stepsService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/StepsService.html" target="_self" >StepsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkForChanges"></a>
+                    <span class="name">
+                        <span ><b>checkForChanges</b></span>
+                        <a href="#checkForChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>checkForChanges(data: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="159"
+                                    class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:159</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getdate"></a>
+                    <span class="name">
+                        <span ><b>getdate</b></span>
+                        <a href="#getdate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getdate(date: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="178"
+                                    class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:178</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initializeForm"></a>
+                    <span class="name">
+                        <span ><b>initializeForm</b></span>
+                        <a href="#initializeForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initializeForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <span ><b>ngAfterViewInit</b></span>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:129</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="56"
+                                    class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit(e: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:170</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>e</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveNewPatient"></a>
+                    <span class="name">
+                        <span ><b>saveNewPatient</b></span>
+                        <a href="#saveNewPatient"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>saveNewPatient()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="181"
+                                    class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:181</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updatePatient"></a>
+                    <span class="name">
+                        <span ><b>updatePatient</b></span>
+                        <a href="#updatePatient"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updatePatient()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="221"
+                                    class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:221</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errors"></a>
+                    <span class="name">
+                        <span ><b>errors</b></span>
+                        <a href="#errors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initialFormValues"></a>
+                    <span class="name">
+                        <span ><b>initialFormValues</b></span>
+                        <a href="#initialFormValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="patient$"></a>
+                    <span class="name">
+                        <span ><b>patient$</b></span>
+                        <a href="#patient$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="patientForm"></a>
+                    <span class="name">
+                        <span ><b>patientForm</b></span>
+                        <a href="#patientForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FormGroup&lt;any&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="patients$"></a>
+                    <span class="name">
+                        <span ><b>patients$</b></span>
+                        <a href="#patients$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="user$"></a>
+                    <span class="name">
+                        <span ><b>user$</b></span>
+                        <a href="#user$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="valueChangesSubscription"></a>
+                    <span class="name">
+                        <span ><b>valueChangesSubscription</b></span>
+                        <a href="#valueChangesSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/Components/Patient/patient-form/patient-form.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { AfterViewInit, Component } from &#x27;@angular/core&#x27;;
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from &#x27;@angular/forms&#x27;;
+import { PatientService } from &#x27;../../../Core/Services/PatientService/patient.service&#x27;;
+import { HandleAlertsService } from &#x27;../../../Core/Helpers/handle-alerts.service&#x27;;
+import { HandleErrorsService } from &#x27;../../../Core/Helpers/handle-errors.service&#x27;;
+import { NgxSpinnerService } from &#x27;ngx-spinner&#x27;;
+import { AppService } from &#x27;../../../Core/Services/app.service&#x27;;
+
+import { provideNativeDateAdapter } from &#x27;@angular/material/core&#x27;;
+import { StepsService } from &#x27;../../../Core/Helpers/Steps/steps.service&#x27;;
+import { filter, take } from &#x27;rxjs&#x27;;
+import { NavigationEnd, Router } from &#x27;@angular/router&#x27;;
+
+declare var $: any;
+
+@Component({
+  selector: &#x27;app-patient-form&#x27;,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
+  providers: [provideNativeDateAdapter()],
+  templateUrl: &#x27;./patient-form.component.html&#x27;,
+  styleUrl: &#x27;./patient-form.component.css&#x27;,
+})
+export class PatientFormComponent implements AfterViewInit {
+  patientForm!: FormGroup&lt;any&gt;;
+  errors: any &#x3D; {};
+  user$!: any;
+  patient$!: any;
+  patients$!: any;
+  initialFormValues: any;
+  valueChangesSubscription: any;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private patientService: PatientService,
+    private handleErrors: HandleErrorsService,
+    private handleAlerts: HandleAlertsService,
+    private spinner: NgxSpinnerService,
+    private appService: AppService,
+    private stepsService: StepsService,
+    private router: Router
+  ) {
+    this.stepsService.markdetectedChange(false);
+    this.stepsService.markCLikcedSave(false);
+
+    this.appService.getUser$.subscribe((data) &#x3D;&gt; (this.user$ &#x3D; data));
+    this.appService.getPatients$.subscribe((data) &#x3D;&gt; (this.patients$ &#x3D; data));
+  }
+  ngOnDestroy(): void {
+    this.initialFormValues &#x3D; {};
+    this.valueChangesSubscription &#x3D; {};
+    $(&#x27;#datetimepicker&#x27;).bootstrapMaterialDatePicker(&#x27;destroy&#x27;);
+  }
+
+  initializeForm(): void {
+    this.patientForm &#x3D; this.formBuilder.group({
+      firstName: new FormControl(&#x27;&#x27;, [Validators.required]),
+      lastName: new FormControl(&#x27;&#x27;, [Validators.required]),
+      birthday: new FormControl(null, [Validators.required]),
+      sex: new FormControl(&#x27;&#x27;),
+      email: new FormControl(&#x27;&#x27;),
+      phone: new FormControl(&#x27;&#x27;),
+      disease: new FormControl(&#x27;&#x27;),
+      address: new FormControl(&#x27;&#x27;),
+      comment: new FormControl(&#x27;&#x27;),
+    });
+
+    this.appService.getPatient$.subscribe((data) &#x3D;&gt; {
+      this.patient$ &#x3D; data;
+      if (this.patient$) {
+        this.patientForm.patchValue({
+          firstName: this.patient$.firstName,
+          lastName: this.patient$.lastName,
+
+          birthday: this.patient$.birthday
+            ? this.getdate(this.patient$.birthday)
+            : this.patient$.birthday,
+          sex: this.patient$.sex,
+          email: this.patient$.email,
+          phone: this.patient$.phone,
+          disease: this.patient$.disease,
+          address: this.patient$.address,
+          comment: this.patient$.comment,
+        });
+      }
+    });
+  }
+
+  ngOnInit(): void {
+    this.initializeForm();
+
+    $(&#x27;#datetimepicker&#x27;)
+      .bootstrapMaterialDatePicker({
+        weekStart: 0,
+        time: false,
+        maxDate: new Date(),
+      })
+      .on(&#x27;change&#x27;, (e: any, date: { format: (arg0: string) &#x3D;&gt; any }) &#x3D;&gt; {
+        const formattedDate &#x3D; date.format(&#x27;YYYY-MM-DD&#x27;);
+        this.patientForm.get(&#x27;birthday&#x27;)?.setValue(formattedDate);
+      });
+    // Set the initial date in the date picker and form control
+
+    this.patientForm
+      .get(&#x27;birthday&#x27;)
+      ?.setValue(this.patient$.birthday.format(&#x27;YYYY-MM-DD&#x27;));
+
+    // Save initial form values
+
+    this.initialFormValues &#x3D; this.patientForm.valueChanges
+      .pipe(take(1))
+      .subscribe((data) &#x3D;&gt; {
+        this.valueChangesSubscription &#x3D; data;
+        this.valueChangesSubscription &#x3D; this.patientForm.valueChanges
+          .pipe(take(2))
+          .subscribe((data) &#x3D;&gt; {
+            this.checkForChanges(data);
+          });
+      });
+  }
+
+  ngAfterViewInit() {
+    this.router.events
+      .pipe(filter((event) &#x3D;&gt; event instanceof NavigationEnd))
+      .subscribe(() &#x3D;&gt; {
+        setTimeout(() &#x3D;&gt; {
+          $(&#x27;#datetimepicker&#x27;)
+            .bootstrapMaterialDatePicker({
+              weekStart: 0,
+              time: false,
+              maxDate: new Date(),
+            })
+            .on(&#x27;change&#x27;, (e: any, date: { format: (arg0: string) &#x3D;&gt; any }) &#x3D;&gt; {
+              const formattedDate &#x3D; date.format(&#x27;YYYY-MM-DD&#x27;);
+              this.patientForm.get(&#x27;birthday&#x27;)?.setValue(formattedDate);
+            });
+        }, 0);
+      });
+
+    this.initialFormValues &#x3D; this.patientForm.valueChanges
+      .pipe(take(1))
+      .subscribe((data) &#x3D;&gt; {
+        this.valueChangesSubscription &#x3D; data;
+        this.valueChangesSubscription &#x3D; this.patientForm.valueChanges
+          .pipe(take(2))
+          .subscribe((data) &#x3D;&gt; {
+            this.checkForChanges(data);
+          });
+      });
+  }
+
+  checkForChanges(data: any) {
+    for (let key in this.initialFormValues) {
+      if (this.initialFormValues[key] !&#x3D;&#x3D; data[key]) {
+        this.stepsService.markdetectedChange(true);
+        break;
+      } else {
+        this.stepsService.markdetectedChange(false);
+      }
+    }
+  }
+
+  onSubmit(e: any) {
+    this.errors &#x3D; this.handleErrors.handleError({});
+
+    if (this.patientForm.valid) {
+      if (this.patient$?.id) this.updatePatient();
+      else this.saveNewPatient();
+    }
+  }
+  getdate(date: any) {
+    return date.slice(0, 10);
+  }
+  saveNewPatient() {
+    this.stepsService.markCLikcedSave(true);
+    this.errors &#x3D; this.handleErrors.handleError({});
+    console.log(&#x27;ehmm&#x27;, this.patientForm.value);
+    this.patientService
+      .addPatient(this.patientForm.value, this.user$.id)
+      .subscribe(
+        (data) &#x3D;&gt; {
+          this.handleAlerts.handleSweetAlert(
+            &#x27;Patient has been successfully Added!&#x27;,
+            &#x27;success&#x27;,
+            false
+          );
+
+          if (this.router.url &#x3D;&#x3D;&#x3D; &#x27;/patients/new-patient&#x27;) {
+            this.router.navigate([&#x27;/patients&#x27;]);
+          } else if (
+            this.router.url &#x3D;&#x3D;&#x3D; &#x27;/treatment/new-treatment/null/patient&#x27;
+          ) {
+            this.router.navigate([
+              &#x27;/treatment/new-treatment/ &#x27; + data[0].id + &#x27;/general&#x27;,
+            ]);
+          }
+
+          this.stepsService.setDisabledSteps(false);
+          this.appService.setPatients$(data);
+          this.appService.setPatient$(data[0]);
+        },
+        (err) &#x3D;&gt; {
+          this.errors &#x3D; this.handleErrors.handleError(err);
+          this.spinner.hide();
+          this.handleAlerts.handleSweetAlert(
+            &#x27;Check your data input carefully.&#x27;,
+            &#x27;error&#x27;,
+            false
+          );
+        }
+      );
+  }
+
+  updatePatient() {
+    this.stepsService.markCLikcedSave(true);
+    this.errors &#x3D; this.handleErrors.handleError({});
+
+    this.patientService
+      .updatePatient(this.patientForm.value, this.patient$.id)
+      .subscribe(
+        (data) &#x3D;&gt; {
+          this.spinner.hide();
+          this.appService.setPatient$(data);
+          this.appService.setPatients$(this.patients$);
+          this.handleAlerts.handleSweetAlert(
+            &#x27;Patient successfully updated!&#x27;,
+            &#x27;success&#x27;,
+            false
+          );
+        },
+        (err) &#x3D;&gt; {
+          this.errors &#x3D; this.handleErrors.handleError(err);
+          this.spinner.hide();
+          this.handleAlerts.handleSweetAlert(
+            &#x27;Check your data input carefully.&#x27;,
+            &#x27;error&#x27;,
+            false
+          );
+        }
+      );
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;&quot;&gt;
+  &lt;div class&#x3D;&quot;header&quot;&gt;
+    &lt;h6 class&#x3D;&quot;title&quot;&gt;Complete the form with your patient information...&lt;/h6&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;container&quot;&gt;
+    &lt;form
+      class&#x3D;&quot;row clearfix&quot;
+      [formGroup]&#x3D;&quot;patientForm&quot;
+      (ngSubmit)&#x3D;&quot;onSubmit($event)&quot;
+    &gt;
+      &lt;div class&#x3D;&quot;col-lg-3 col-md-12&quot;&gt;
+        &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+          &lt;b&gt;Patient first name&lt;/b&gt;
+          &lt;input
+            formControlName&#x3D;&quot;firstName&quot;
+            type&#x3D;&quot;text&quot;
+            class&#x3D;&quot;form-control&quot;
+            placeholder&#x3D;&quot;Ex: Jhone *&quot;
+            name&#x3D;&quot;firstName&quot;
+          /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;col-lg-3 col-md-12&quot;&gt;
+        &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+          &lt;b&gt;Patient last name&lt;/b&gt;
+
+          &lt;input
+            formControlName&#x3D;&quot;lastName&quot;
+            type&#x3D;&quot;text&quot;
+            class&#x3D;&quot;form-control&quot;
+            placeholder&#x3D;&quot;Ex: Smith *&quot;
+            name&#x3D;&quot;lastName&quot;
+          /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;col-lg-3 col-md-12&quot;&gt;
+        &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+          &lt;b&gt;Birthday Date&lt;/b&gt;
+
+          &lt;input
+            formControlName&#x3D;&quot;birthday&quot;
+            id&#x3D;&quot;datetimepicker&quot;
+            type&#x3D;&quot;date&quot;
+            class&#x3D;&quot;form-control birthday&quot;
+            placeholder&#x3D;&quot;Choose Date and Time&quot;
+          /&gt;
+        
+        &lt;/div&gt;
+
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;col-lg-3 col-md-12&quot;&gt;
+        &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+          &lt;b&gt;Patient sex&lt;/b&gt;
+
+          &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+            &lt;div class&#x3D;&quot;radio inlineblock m-r-20&quot;&gt;
+              &lt;input
+                formControlName&#x3D;&quot;sex&quot;
+                type&#x3D;&quot;radio&quot;
+                name&#x3D;&quot;sex&quot;
+                id&#x3D;&quot;male&quot;
+                class&#x3D;&quot;with-gap&quot;
+                value&#x3D;&quot;Male&quot;
+              /&gt;
+              &lt;label for&#x3D;&quot;male&quot;&gt;Male&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;radio inlineblock&quot;&gt;
+              &lt;input
+                formControlName&#x3D;&quot;sex&quot;
+                type&#x3D;&quot;radio&quot;
+                name&#x3D;&quot;sex&quot;
+                id&#x3D;&quot;Female&quot;
+                class&#x3D;&quot;with-gap&quot;
+                value&#x3D;&quot;Female&quot;
+              /&gt;
+              &lt;label for&#x3D;&quot;Female&quot;&gt;Female&lt;/label&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- 
+      
+      &lt;div class&#x3D;&quot;col-lg-6 col-md-12&quot;&gt;
+        &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+          &lt;b&gt;Email Address&lt;/b&gt;
+
+          &lt;input
+            formControlName&#x3D;&quot;email&quot;
+            type&#x3D;&quot;text&quot;
+            name&#x3D;&quot;email&quot;
+            class&#x3D;&quot;form-control email&quot;
+            placeholder&#x3D;&quot;Ex: example@example.com&quot;
+          /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;col-lg-6 col-md-12&quot;&gt;
+        &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+          &lt;b&gt;Mobile Phone Number&lt;/b&gt;
+          &lt;input
+            formControlName&#x3D;&quot;phone&quot;
+            type&#x3D;&quot;text&quot;
+            name&#x3D;&quot;phone&quot;
+            class&#x3D;&quot;form-control mobile-phone-number&quot;
+            placeholder&#x3D;&quot;Ex: +00 (000) 000-00-00&quot;
+          /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;col-lg-6 col-md-12&quot;&gt;
+        &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+          &lt;b&gt;Patient disease&lt;/b&gt;
+          &lt;input
+            formControlName&#x3D;&quot;disease&quot;
+            type&#x3D;&quot;text&quot;
+            class&#x3D;&quot;form-control&quot;
+            placeholder&#x3D;&quot;Ex: Dentist *&quot;
+            name&#x3D;&quot;disease&quot;
+          /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;col-lg-6 col-md-12&quot;&gt;
+        &lt;div class&#x3D;&quot;form-group form-float&quot;&gt;
+          &lt;b&gt; Address&lt;/b&gt;
+          &lt;input
+            formControlName&#x3D;&quot;address&quot;
+            type&#x3D;&quot;text&quot;
+            class&#x3D;&quot;form-control&quot;
+            placeholder&#x3D;&quot;Ex: Jhone *&quot;
+            name&#x3D;&quot;address&quot;
+          /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      --&gt;
+
+      &lt;div class&#x3D;&quot;col-lg-12 col-md-12&quot;&gt;
+        &lt;b&gt;Comment about this patient&lt;/b&gt;
+        &lt;div class&#x3D;&quot;form-group&quot;&gt;
+          &lt;div class&#x3D;&quot;form-line&quot;&gt;
+            &lt;textarea
+              rows&#x3D;&quot;4&quot;
+              formControlName&#x3D;&quot;comment&quot;
+              name&#x3D;&quot;comment&quot;
+              class&#x3D;&quot;form-control no-resize&quot;
+              placeholder&#x3D;&quot;Please type what you want...&quot;
+            &gt;&lt;/textarea&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;col-lg-12 col-md-12&quot;&gt;
+        &lt;label *ngIf&#x3D;&quot;errors.existPatient&quot; for&#x3D;&quot;terms&quot; class&#x3D;&quot;text-primary&quot;&gt;
+          {{ errors.existPatient }}&lt;/label
+        &gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;float-right&quot;&gt;
+        &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary btn-round&quot;&gt;Save&lt;/button&gt;
+        &lt;button type&#x3D;&quot;reset&quot; class&#x3D;&quot;btn btn-primary btn-simple btn-round&quot;&gt;
+          Cancel
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="">  <div class="header">    <h6 class="title">Complete the form with your patient information...</h6>  </div>  <div class="container">    <form      class="row clearfix"      [formGroup]="patientForm"      (ngSubmit)="onSubmit($event)"    >      <div class="col-lg-3 col-md-12">        <div class="form-group form-float">          <b>Patient first name</b>          <input            formControlName="firstName"            type="text"            class="form-control"            placeholder="Ex: Jhone *"            name="firstName"          />        </div>      </div>      <div class="col-lg-3 col-md-12">        <div class="form-group form-float">          <b>Patient last name</b>          <input            formControlName="lastName"            type="text"            class="form-control"            placeholder="Ex: Smith *"            name="lastName"          />        </div>      </div>      <div class="col-lg-3 col-md-12">        <div class="form-group form-float">          <b>Birthday Date</b>          <input            formControlName="birthday"            id="datetimepicker"            type="date"            class="form-control birthday"            placeholder="Choose Date and Time"          />                </div>      </div>      <div class="col-lg-3 col-md-12">        <div class="form-group form-float">          <b>Patient sex</b>          <div class="form-group form-float">            <div class="radio inlineblock m-r-20">              <input                formControlName="sex"                type="radio"                name="sex"                id="male"                class="with-gap"                value="Male"              />              <label for="male">Male</label>            </div>            <div class="radio inlineblock">              <input                formControlName="sex"                type="radio"                name="sex"                id="Female"                class="with-gap"                value="Female"              />              <label for="Female">Female</label>            </div>          </div>        </div>      </div>      <!--             <div class="col-lg-6 col-md-12">        <div class="form-group form-float">          <b>Email Address</b>          <input            formControlName="email"            type="text"            name="email"            class="form-control email"            placeholder="Ex: example@example.com"          />        </div>      </div>      <div class="col-lg-6 col-md-12">        <div class="form-group form-float">          <b>Mobile Phone Number</b>          <input            formControlName="phone"            type="text"            name="phone"            class="form-control mobile-phone-number"            placeholder="Ex: +00 (000) 000-00-00"          />        </div>      </div>      <div class="col-lg-6 col-md-12">        <div class="form-group form-float">          <b>Patient disease</b>          <input            formControlName="disease"            type="text"            class="form-control"            placeholder="Ex: Dentist *"            name="disease"          />        </div>      </div>      <div class="col-lg-6 col-md-12">        <div class="form-group form-float">          <b> Address</b>          <input            formControlName="address"            type="text"            class="form-control"            placeholder="Ex: Jhone *"            name="address"          />        </div>      </div>      -->      <div class="col-lg-12 col-md-12">        <b>Comment about this patient</b>        <div class="form-group">          <div class="form-line">            <textarea              rows="4"              formControlName="comment"              name="comment"              class="form-control no-resize"              placeholder="Please type what you want..."            ></textarea>          </div>        </div>      </div>      <div class="col-lg-12 col-md-12">        <label *ngIf="errors.existPatient" for="terms" class="text-primary">          {{ errors.existPatient }}</label        >      </div>      <div class="float-right">        <button type="submit" class="btn btn-primary btn-round">Save</button>        <button type="reset" class="btn btn-primary btn-simple btn-round">          Cancel        </button>      </div>    </form>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AcceptDecisionComponent', 'selector': 'app-accept-decision'},{'name': 'AcceptFormComponent', 'selector': 'app-accept-form'},{'name': 'AccountFormComponent', 'selector': 'app-account-form'},{'name': 'ActivitiesComponent', 'selector': 'app-activities'},{'name': 'AddFileComponent', 'selector': 'app-add-file'},{'name': 'AddNewPatientComponent', 'selector': 'app-add-new-patient'},{'name': 'AddNewPlanComponent', 'selector': 'app-add-new-plan'},{'name': 'AddNewTreatmentComponent', 'selector': 'app-add-new-treatment'},{'name': 'AdminDecisionComponent', 'selector': 'app-admin-decision'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ArchiveDoctorsComponent', 'selector': 'app-archive-doctors'},{'name': 'ArchiveTreatmentsComponent', 'selector': 'app-archive-treatments'},{'name': 'BackHomeComponent', 'selector': 'app-back-home'},{'name': 'BlockHeaderComponent', 'selector': 'app-block-header'},{'name': 'ClinicsComponent', 'selector': 'app-clinics'},{'name': 'ComingPageComponent', 'selector': 'app-coming-page'},{'name': 'CompanyDetailsComponent', 'selector': 'app-company-details'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ConfirmDecisionComponent', 'selector': 'app-confirm-decision'},{'name': 'ConfirmFormComponent', 'selector': 'app-confirm-form'},{'name': 'ContentDevisTreatComponent', 'selector': 'app-content-devis-treat'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'Error403Component', 'selector': 'app-error403'},{'name': 'Error500Component', 'selector': 'app-error500'},{'name': 'Error503Component', 'selector': 'app-error503'},{'name': 'FinishTreatmentComponent', 'selector': 'app-finish-treatment'},{'name': 'ForgetPasswordComponent', 'selector': 'app-forget-password'},{'name': 'GetPlansTreatComponent', 'selector': 'app-get-plans-treat'},{'name': 'GridUsersComponent', 'selector': 'app-grid-users'},{'name': 'HelpLinkComponent', 'selector': 'app-help-link'},{'name': 'InfoProfileMenuComponent', 'selector': 'app-info-profile-menu'},{'name': 'InfosComponent', 'selector': 'app-infos'},{'name': 'LayoutContainerComponent', 'selector': 'app-layout-container'},{'name': 'LeftSidebarComponent', 'selector': 'app-left-sidebar'},{'name': 'LeftSidebarMobilComponent', 'selector': 'app-left-sidebar-mobil'},{'name': 'LinksComponent', 'selector': 'app-links'},{'name': 'ListDoctorsComponent', 'selector': 'app-list-doctors'},{'name': 'ListUsersComponent', 'selector': 'app-list-users'},{'name': 'LockedScreenComponent', 'selector': 'app-locked-screen'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MenuAppComponent', 'selector': 'app-menu-app'},{'name': 'MiniLeftbarComponent', 'selector': 'app-mini-leftbar'},{'name': 'ModalDescriptionEligibleComponent', 'selector': 'app-modal-description-eligible'},{'name': 'ModalDisplayItemPlanComponent', 'selector': 'app-modal-display-item-plan'},{'name': 'ModalDisplayPhotoComponent', 'selector': 'app-modal-display-photo'},{'name': 'ModalDisplayReportComponent', 'selector': 'app-modal-display-report'},{'name': 'ModalEstimateComponent', 'selector': 'app-modal-estimate'},{'name': 'ModalfinishtreatComponent', 'selector': 'app-modalfinishtreat'},{'name': 'ModalPlanDetailsComponent', 'selector': 'app-modal-plan-details'},{'name': 'ModalRemoveTeamComponent', 'selector': 'app-modal-remove-team'},{'name': 'ModalTeamInfoComponent', 'selector': 'app-modal-team-info'},{'name': 'NewAdminComponent', 'selector': 'app-new-admin'},{'name': 'NewPlanComponent', 'selector': 'app-new-plan'},{'name': 'NewTreatClinicsComponent', 'selector': 'app-new-treat-clinics'},{'name': 'NewTreatGeneralComponent', 'selector': 'app-new-treat-general'},{'name': 'NewTreatPatientComponent', 'selector': 'app-new-treat-patient'},{'name': 'NewTreatPhotosComponent', 'selector': 'app-new-treat-photos'},{'name': 'NewTreatTeethComponent', 'selector': 'app-new-treat-teeth'},{'name': 'NewUserDetailsComponent', 'selector': 'app-new-user-details'},{'name': 'NotifMenuComponent', 'selector': 'app-notif-menu'},{'name': 'OfflineComponent', 'selector': 'app-offline'},{'name': 'OverlayMenuComponent', 'selector': 'app-overlay-menu'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PatientComponent', 'selector': 'app-patient'},{'name': 'PatientDetailComponent', 'selector': 'app-patient-detail'},{'name': 'PatientDisplayInformationsComponent', 'selector': 'app-patient-display-informations'},{'name': 'PatientFormComponent', 'selector': 'app-patient-form'},{'name': 'PatientInfosComponent', 'selector': 'app-patient-infos'},{'name': 'PatientListComponent', 'selector': 'app-patient-list'},{'name': 'PatientTreatClinicsInformationsComponent', 'selector': 'app-patient-treat-clinics-informations'},{'name': 'PatientTreatInformationsComponent', 'selector': 'app-patient-treat-informations'},{'name': 'PatientTreatPhotosInformationsComponent', 'selector': 'app-patient-treat-photos-informations'},{'name': 'PatientTreatTeethInformationsComponent', 'selector': 'app-patient-treat-teeth-informations'},{'name': 'PhotoFormComponent', 'selector': 'app-photo-form'},{'name': 'PhotographsComponent', 'selector': 'app-photographs'},{'name': 'PlanComponent', 'selector': 'app-plan'},{'name': 'PlanListComponent', 'selector': 'app-plan-list'},{'name': 'PreloaderComponent', 'selector': 'app-preloader'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileImageComponent', 'selector': 'app-profile-image'},{'name': 'PublicLayoutComponent', 'selector': 'app-public-layout'},{'name': 'QuoteReportComponent', 'selector': 'app-quote-report'},{'name': 'RigthSidebarComponent', 'selector': 'app-rigth-sidebar'},{'name': 'ScheduleComponent', 'selector': 'app-schedule'},{'name': 'SecurityFormComponent', 'selector': 'app-security-form'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SignInComponent', 'selector': 'app-sign-in'},{'name': 'SignUpComponent', 'selector': 'app-sign-up'},{'name': 'TaskMenuComponent', 'selector': 'app-task-menu'},{'name': 'TeamInfoComponent', 'selector': 'app-team-info'},{'name': 'TeethComponent', 'selector': 'app-teeth'},{'name': 'TimelineTreatmentsComponent', 'selector': 'app-timeline-treatments'},{'name': 'TreatmentComponent', 'selector': 'app-treatment'},{'name': 'TreatmentConfirmationComponent', 'selector': 'app-treatment-confirmation'},{'name': 'TreatmentDetailsComponent', 'selector': 'app-treatment-details'},{'name': 'TreatmentEligibleComponent', 'selector': 'app-treatment-eligible'},{'name': 'TreatmentHeaderComponent', 'selector': 'app-treatment-header'},{'name': 'TreatmentListComponent', 'selector': 'app-treatment-list'},{'name': 'TreatmentsComponent', 'selector': 'app-treatments'},{'name': 'TreatmentStatusComponent', 'selector': 'app-treatment-status'},{'name': 'UpdatePasswordComponent', 'selector': 'app-update-password'},{'name': 'UpdatePatientComponent', 'selector': 'app-update-patient'},{'name': 'UsersOverviewComponent', 'selector': 'app-users-overview'},{'name': 'UsersPageComponent', 'selector': 'app-users-page'},{'name': 'WaitingComponent', 'selector': 'app-waiting'}];
+    var DIRECTIVES = [{'name': 'GetPhotoDirective', 'selector': '[appGetPhoto]'}];
+    var ACTUAL_COMPONENT = {'name': 'PatientFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PatientFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

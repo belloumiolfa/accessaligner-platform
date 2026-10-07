@@ -1,0 +1,53 @@
+<div class="modal-content">
+  <div class="modal-body">
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12">
+        <div class="body content align-center justify-content-center">
+          <div class="post-img" *ngIf="typeImage">
+            <img
+              loading="lazy"
+              fill
+              [src]="data?.imageUrl"
+              class="img-fluid img-thumbnail m-t-30"
+              alt=""
+            />
+          </div>
+
+          <div class="post-img justify-content-center" *ngIf="typeStl">
+            <div>
+              <stl-model-viewer
+                [stlModels]="[modelSrc]"
+                [hasControls]="true"
+              ></stl-model-viewer>
+            </div>
+          </div>
+
+          <div class="post-img" *ngIf="typeVideo">
+            <video
+              style="max-width: 500px; max-height: 500px"
+              class="img-fluid img-thumbnail"
+              autoplay
+              loop="loop"
+              muted
+            >
+              <source [src]="data?.imageUrl" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer" *ngIf="typeStl && !utils.isDoctor(user$)">
+    <div class="modal-footer">
+      <div class="float-right">
+        <button
+          (click)="downloadFile(data, modelSrc)"
+          class="btn btn-lg btn-primary btn-simple btn-icon btn-icon-mini btn-round"
+        >
+          <i class="zmdi zmdi-download"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

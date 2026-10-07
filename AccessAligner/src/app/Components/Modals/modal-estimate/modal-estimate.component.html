@@ -1,0 +1,177 @@
+<div class="modal-content" *ngIf="displayDevis === false">
+  <div class="modal-header">
+    <h6 class="title">
+      {{ "components.modals.modal-estimate.header-title" | translate }}
+    </h6>
+  </div>
+  <div class="modal-body">
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="header"></div>
+          <div class="body content file_manager">
+            <div class="row clearfix">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="container">
+                  <div>
+                    <!-- Your HTML content to be exported -->
+                    <div class="">
+                      <div class="container">
+                        <form
+                          id="estimateForm"
+                          class="row clearfix"
+                          [formGroup]="estimateForm"
+                        >
+                          <div class="col-lg-6 col-md-12">
+                            <div class="form-group form-float">
+                              <b>{{
+                                "components.modals.modal-estimate.form.upper-label"
+                                  | translate
+                              }}</b>
+                              <input
+                                formControlName="upper"
+                                type="number"
+                                class="form-control"
+                                placeholder="Ex: 2 *"
+                                name="upper"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-12">
+                            <div class="form-group form-float">
+                              <b>{{
+                                "components.modals.modal-estimate.form.price"
+                                  | translate
+                              }}</b>
+                              <input
+                                formControlName="priceUpper"
+                                type="number"
+                                class="form-control"
+                                placeholder="Ex: 2 *"
+                                name="priceUpper"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-12">
+                            <div class="form-group form-float">
+                              <b>
+                                {{
+                                  "components.modals.modal-estimate.form.lower-label"
+                                    | translate
+                                }}</b
+                              >
+
+                              <input
+                                formControlName="lower"
+                                type="number"
+                                class="form-control"
+                                placeholder="Ex: 2 *"
+                                name="lower"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-12">
+                            <div class="form-group form-float">
+                              <b>{{
+                                "components.modals.modal-estimate.form.price"
+                                  | translate
+                              }}</b>
+                              <input
+                                formControlName="priceLower"
+                                type="number"
+                                class="form-control"
+                                placeholder="Ex: 2 *"
+                                name="priceLower"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-12 m-b-20">
+                            <div class="form-group form-float">
+                              <b
+                                >{{
+                                  "components.modals.modal-estimate.form.discount-label"
+                                    | translate
+                                }}
+                              </b>
+
+                              <ng-multiselect-dropdown
+                                [placeholder]="
+                                  'components.modals.modal-estimate.form.discount-placeholder'
+                                    | translate
+                                "
+                                [settings]="dropdownSettings"
+                                [data]="dropdownListDiscount"
+                                [(ngModel)]="selectedItemDiscount"
+                                (onSelect)="onItemSelectDicount($event)"
+                              >
+                              </ng-multiselect-dropdown>
+                            </div>
+                          </div>
+
+                          <div class="col-lg-6 col-md-12 m-b-20">
+                            <div class="form-group form-float">
+                              <b
+                                >{{
+                                  "components.modals.modal-estimate.form.currency-label"
+                                    | translate
+                                }}
+                              </b>
+
+                              <ng-multiselect-dropdown
+                                [placeholder]="
+                                  'components.modals.modal-estimate.form.currency-placeholder'
+                                    | translate
+                                "
+                                [settings]="dropdownSettings"
+                                [data]="dropdownListCurrency"
+                                (onSelect)="onItemSelectCurrency($event)"
+                              >
+                              </ng-multiselect-dropdown>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="float-right">
+      <button
+        type="submit"
+        class="btn btn-primary btn-round"
+        [disabled]="this.estimateForm.valid !== true"
+        (click)="onSubmit()"
+      >
+        {{ "components.modals.modal-estimate.form.save-button" | translate }}
+      </button>
+      <button
+        type="reset"
+        class="btn btn-primary btn-simple btn-round"
+        (click)="close()"
+      >
+        {{ "components.modals.modal-estimate.form.cancel-button" | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-content" *ngIf="displayDevis === true">
+  <div class="modal-header">
+    <h6 class="title">Devis</h6>
+  </div>
+  <div class="modal-body">
+    <app-content-devis-treat
+      [treatment]="treatment$"
+      [dataDevis]="dataForDevis"
+    >
+    </app-content-devis-treat>
+  </div>
+</div>

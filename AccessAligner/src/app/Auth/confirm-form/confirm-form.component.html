@@ -1,0 +1,42 @@
+<div class="header">
+  <img
+    [src]="'assets/images/profile_av.png'"
+    class="rounded-circle"
+    alt="User"
+  />
+  <h5>{{ user?.firstName }} {{ user?.lastName }}</h5>
+  <span>{{ user?.email }}</span>
+</div>
+<form class="form-group" [formGroup]="confirmForm">
+  <div class="checkbox">
+    <input id="terms" type="checkbox" formControlName="term" />
+    <label for="terms"
+      >{{ "auth.confirm-form.terms-label" | translate }}
+      <a href="javascript:void(0);">
+        {{ "auth.confirm-form.terms-link" | translate }}</a
+      ></label
+    >
+  </div>
+
+  <div class="footer row">
+    <div class="col-lg-6 col-sm-12">
+      <button
+        class="btn btn-primary btn-round btn-block"
+        [disabled]="!confirmForm.valid"
+        (click)="onConfirm(token)"
+      >
+        {{ "auth.confirm-form.confirm-button" | translate }}
+      </button>
+    </div>
+    <div class="col-lg-6 col-sm-12">
+      <button
+        class="btn btn-default btn-round btn-block"
+        [disabled]="!confirmForm.valid"
+        type="button"
+        (click)="onCancel(token)"
+      >
+        {{ "auth.confirm-form.cancel-button" | translate }}
+      </button>
+    </div>
+  </div>
+</form>

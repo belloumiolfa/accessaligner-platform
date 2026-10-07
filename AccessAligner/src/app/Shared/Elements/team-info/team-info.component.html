@@ -1,0 +1,92 @@
+<ul class="list-unstyled team-info">
+  <ng-container *ngIf="treatment?.team?.length === 0; else elseTemplate">
+    <small style="margin-right: 5px">
+      {{ "shared.team-infos.no-team-msg" | translate }}
+    </small>
+    <a
+      href="javascript:void(0);"
+      role="button"
+      (click)="onAdd(treatment)"
+      *ngIf="
+        ['NEW', 'COMPLETED', 'QUALIFIED', 'CONFIRMED', 'PROGRESS'].includes(
+          treatment.status
+        ) && this.utils.isSuperAdmin(this.user$)
+      "
+    >
+      <i class="zmdi zmdi-plus"></i>
+    </a>
+  </ng-container>
+
+  <ng-template #elseTemplate>
+    <li *ngFor="let item of treatment?.team">
+      <a
+        [routerLink]="'/profile/' + item.id"
+        (click)="navigateToPorfile(item.id)"
+      >
+        <app-profile-image
+          [photoId]="item?.profile?.photo?.id"
+          [expression]="
+            item?.profile?.firstName !== null &&
+            item?.profile?.lastName !== null
+              ? item?.profile?.firstName + ' ' + item?.profile?.lastName
+              : item?.userName
+          "
+        ></app-profile-image>
+      </a>
+    </li>
+  </ng-template>
+
+  <li
+    style="margin-left: 15px"
+    *ngIf="!!addAction && treatment?.team?.length > 0 && !utils.isDoctor(user$)"
+  >
+    <ul
+      class="header-dropdown"
+      *ngIf="
+        ['NEW', 'COMPLETED', 'QUALIFIED', 'CONFIRMED', 'PROGRESS'].includes(
+          treatment.status
+        )
+      "
+    >
+      <div [class]="show === true ? 'dropdown show' : 'dropdown'">
+        <a
+          class="dropdown-toggle"
+          href="javascript:void(0);"
+          role="button"
+          (click)="show = !show"
+        >
+          <i class="zmdi zmdi-more"></i>
+        </a>
+
+        <div
+          [class]="
+            show === true ? 'dropdown-menu slideUp' : 'dropdown-menu slideDown'
+          "
+        >
+          <a
+            class="dropdown-item"
+            href="javascript:void(0);"
+            (click)="onAdd(treatment)"
+          >
+            {{ "shared.team-infos.add-button" | translate }}
+          </a>
+          <a
+            class="dropdown-item"
+            href="javascript:void(0);"
+            (click)="onRemove()"
+          >
+            {{ "shared.team-infos.remove-button" | translate }}
+          </a>
+          <!--  <div class="dropdown-divider"></div>
+          <a
+            class="dropdown-item"
+            href="javascript:void(0);"
+            (click)="onReset()"
+          >
+            {{ "shared.team-infos.reset-button" | translate }}
+          </a> -->
+        </div>
+      </div>
+    </ul>
+  </li>
+</ul>

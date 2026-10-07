@@ -1,0 +1,112 @@
+<div class="body">
+  <br />
+  <ul class="list-group">
+    <li class="list-group-item">
+      {{ "components.treatment.treat-general.postCross-question" | translate }}
+      <span
+        class="badge badge-success float-right"
+        *ngIf="treatment$?.postCross == 1"
+        >{{ "components.treatment.treat-general.yes-answer" | translate }}</span
+      >
+      <span
+        class="badge badge-danger float-right"
+        *ngIf="treatment$?.postCross == 0"
+        >{{ "components.treatment.treat-general.yes-answer" | translate }}</span
+      >
+    </li>
+    <li class="list-group-item">
+      {{ "components.treatment.treat-general.antCross-question" | translate }}
+      <span
+        class="badge badge-success float-right"
+        *ngIf="treatment$?.antCross == 1"
+        >{{ "components.treatment.treat-general.yes-answer" | translate }}</span
+      >
+      <span
+        class="badge badge-danger float-right"
+        *ngIf="treatment$?.antCross == 0"
+        >{{ "components.treatment.treat-general.no-answer" | translate }}</span
+      >
+    </li>
+    <li class="list-group-item">
+      {{ "components.treatment.treat-general.gap-question" | translate }}
+
+      <span
+        class="badge badge-success float-right"
+        *ngIf="treatment$?.gap == 1"
+        >{{ "components.treatment.treat-general.yes-answer" | translate }}</span
+      >
+      <span
+        class="badge badge-danger float-right"
+        *ngIf="treatment$?.gap == 0"
+        >{{ "components.treatment.treat-general.no-answer" | translate }}</span
+      >
+    </li>
+    <li class="list-group-item">
+      {{ "components.treatment.treat-general.overbite-question" | translate }}
+      <span
+        class="badge badge-success float-right"
+        *ngIf="treatment$?.overbite == 1"
+        >{{ "components.treatment.treat-general.yes-answer" | translate }}</span
+      >
+      <span
+        class="badge badge-danger float-right"
+        *ngIf="treatment$?.overbite == 0"
+        >{{ "components.treatment.treat-general.no-answer" | translate }}</span
+      >
+    </li>
+    <li class="list-group-item">
+      {{ "components.treatment.treat-general.classI-question" | translate }}
+      <span
+        class="badge badge-success float-right"
+        *ngIf="treatment$?.classI == 1"
+        >{{ "components.treatment.treat-general.yes-answer" | translate }}</span
+      >
+      <span
+        class="badge badge-danger float-right"
+        *ngIf="treatment$?.classI == 0"
+        >{{ "components.treatment.treat-general.no-answer" | translate }}</span
+      >
+    </li>
+    <li class="list-group-item">
+      {{
+        "components.treatment.treat-general.reduceOverbite-question" | translate
+      }}
+      <span
+        class="badge badge-success float-right"
+        *ngIf="treatment$?.reduceOverbite == 1"
+        >{{ "components.treatment.treat-general.yes-answer" | translate }}</span
+      >
+      <span
+        class="badge badge-danger float-right"
+        *ngIf="treatment$?.reduceOverbite == 0"
+        >{{ "components.treatment.treat-general.no-answer" | translate }}</span
+      >
+    </li>
+    <li class="list-group-item">
+      {{ "components.treatment.treat-general.crowding-question" | translate }}
+      <span
+        class="badge badge-success float-right"
+        *ngIf="treatment$?.crowding == 1"
+        >{{ "components.treatment.treat-general.yes-answer" | translate }}</span
+      >
+      <span
+        class="badge badge-danger float-right"
+        *ngIf="treatment$?.crowding == 0"
+        >{{ "components.treatment.treat-general.no-answer" | translate }}</span
+      >
+    </li>
+    <li class="list-group-item">
+      {{ "components.treatment.treat-general.extract-question" | translate }}
+      <span
+        class="badge badge-success float-right"
+        *ngIf="treatment$?.extract == 1"
+        >{{ "components.treatment.treat-general.yes-answer" | translate }}</span
+      >
+      <span
+        class="badge badge-danger float-right"
+        *ngIf="treatment$?.extract == 0"
+        >{{ "components.treatment.treat-general.no-answer" | translate }}</span
+      >
+    </li>
+  </ul>
+</div>

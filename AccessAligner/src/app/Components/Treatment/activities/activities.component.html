@@ -1,0 +1,82 @@
+<div class="card">
+  <div class="header">
+    <h2>
+      <strong>
+        {{ "components.treatment.activities.header-title-strong" | translate }}
+      </strong>
+      {{ "components.treatment.activities.header-title" | translate }}
+    </h2>
+    <ul
+      class="header-dropdown"
+      *ngIf="
+        ['NEW', 'COMPLETED', 'QUALIFIED', 'CONFIRMED'].includes(
+          treatment$.status
+        )
+      "
+    >
+      <div [class]="show === true ? 'dropdown show' : 'dropdown'">
+        <a
+          class="dropdown-toggle"
+          href="javascript:void(0);"
+          role="button"
+          (click)="show = !show"
+        >
+          <i class="zmdi zmdi-more"></i>
+        </a>
+
+        <div
+          [class]="
+            show === true ? 'dropdown-menu slideUp' : 'dropdown-menu slideDown'
+          "
+        >
+          <a
+            class="dropdown-item"
+            [routerLink]="
+              '/treatment/new-treatment/' + treatment$?.patient?.id + '/patient'
+            "
+          >
+            {{ "components.treatment.activities.update-button" | translate }}
+          </a>
+        </div>
+      </div>
+    </ul>
+  </div>
+
+  <!-- move it to seperate component  -->
+  <div class="body m-b-10 widget-user">
+    <img
+      *ngIf="treatment$?.patient?.sex === 'Female'"
+      class="rounded-circle"
+      fill
+      loading="lazy"
+      src="assets/images/femme.png"
+      alt=""
+    />
+    <img
+      *ngIf="treatment$?.patient?.sex === 'Male'"
+      class="rounded-circle"
+      fill
+      loading="lazy"
+      src="assets/images/profile_av.png"
+      alt=""
+    />
+
+    <div
+      class="wid-u-info"
+      [routerLink]="'/patients/detail/' + treatment$?.patient?.id"
+      style="cursor: pointer"
+    >
+      <h5>
+        {{ treatment$?.patient?.firstName }} {{ treatment$?.patient?.lastName }}
+      </h5>
+
+      <p class="text-muted m-b-0">
+        {{ "components.treatment.activities.birthday-label" | translate }} :
+        {{ treatment$?.patient?.birthday | date }}
+      </p>
+      <small class="text-warning"
+        ><b>{{ treatment$?.patient?.sex }}</b></small
+      >
+    </div>
+  </div>
+</div>

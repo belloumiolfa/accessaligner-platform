@@ -1,0 +1,130 @@
+<div class="tab-pane" id="Addnew">
+  <div class="card">
+    <div class="header">
+      <h2>
+        <strong>{{
+          "pages.user-management.new-admin.header-title-strong" | translate
+        }}</strong>
+        {{ "pages.user-management.new-admin.header-title" | translate }}
+      </h2>
+    </div>
+    <div class="body">
+      <form
+        [formGroup]="adminForm"
+        (ngSubmit)="onSubmit($event)"
+        class="form js-sweetalert"
+      >
+        <div class="row clearfix">
+          <div class="col-md-6 col-sm-12">
+            <label for="email">
+              {{
+                "pages.user-management.new-admin.email-label" | translate
+              }}</label
+            >
+            <div
+              [class]="!errors.email ? 'input-group' : 'input-group has-danger'"
+            >
+              <input
+                type="text"
+                [class]="
+                  !errors.email
+                    ? 'form-control'
+                    : 'form-control form-control-danger'
+                "
+                [placeholder]="
+                  'pages.user-management.new-admin.email-placeholder'
+                    | translate
+                "
+                formControlName="email"
+              />
+              <span *ngIf="!errors.email" class="input-group-addon"
+                ><i class="zmdi zmdi-email"></i
+              ></span>
+            </div>
+            <label *ngIf="errors.email" for="terms" class="text-primary">
+              {{ errors.email }}</label
+            >
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <label for="password">
+              {{ "pages.user-management.new-admin.password-label" | translate }}
+            </label>
+
+            <div
+              [class]="
+                !errors.password ? 'input-group' : 'input-group has-danger'
+              "
+            >
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                [placeholder]="
+                  'pages.user-management.new-admin.password-placeholder'
+                    | translate
+                "
+                [class]="
+                  !errors.password
+                    ? 'form-control'
+                    : 'form-control form-control-danger'
+                "
+                formControlName="password"
+              />
+              <span class="input-group-addon">
+                <ng-container *ngIf="!showPassword; else elseTemplate">
+                  <i
+                    type="button"
+                    class="zmdi zmdi-lock-outline"
+                    (click)="showPassword = !showPassword"
+                  ></i>
+                </ng-container>
+                <ng-template #elseTemplate>
+                  <i
+                    type="button"
+                    class="zmdi zmdi-lock-open"
+                    style="color: #f96332"
+                    (click)="showPassword = !showPassword"
+                  ></i>
+                </ng-template>
+              </span>
+            </div>
+            <label
+              *ngIf="errors.password !== undefined"
+              for="terms"
+              class="text-primary"
+            >
+              {{ errors.password }}</label
+            >
+          </div>
+          <div class="col-md-2 col-sm-12">
+            <label> </label>
+
+            <div [class]="''">
+              <a
+                class="btn btn-primary btn-simple btn-round"
+                (click)="onGenerateStrongPassword()"
+              >
+                {{
+                  "pages.user-management.new-admin.generate-button" | translate
+                }}
+              </a>
+            </div>
+          </div>
+        </div>
+        <br />
+        <button
+          type="submit"
+          class="btn btn-primary btn-round"
+          [disabled]="!this.adminForm.valid"
+        >
+          {{ "pages.user-management.new-admin.save-button" | translate }}
+        </button>
+        <button
+          type="reset"
+          class="btn btn-danger btn-round"
+          (click)="onReset()"
+        >
+          {{ "pages.user-management.new-admin.cancel-button" | translate }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

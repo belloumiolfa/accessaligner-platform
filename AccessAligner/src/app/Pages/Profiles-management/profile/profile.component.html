@@ -1,0 +1,373 @@
+<section class="content profile-page">
+  <div class="container-fluid">
+    <app-block-header
+      [page]="'pages.headers-title.profile.page' | translate"
+      [father]="'pages.headers-title.profile.father' | translate"
+      [subPage]="'pages.headers-title.profile.subPage' | translate"
+    ></app-block-header>
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="body bg-dark profile-header">
+            <div class="row">
+              <div class="col-lg-10 col-md-12">
+                <app-profile-image
+                  [photoId]="profilePhoto$"
+                  [class]="'user_pic rounded img-raised fixed_size '"
+                  [expression]="
+                    user$.profile.firstName && user$.profile.lastName
+                      ? user$.profile.firstName + ' ' + user$.profile.lastName
+                      : user$.userName
+                  "
+                ></app-profile-image>
+
+                <div class="detail">
+                  <div class="u_name">
+                    <ng-container
+                      *ngIf="user$.profile?.firstName; else elseTemplate"
+                    >
+                      <h4>
+                        <strong>{{ user$.profile?.firstName }}</strong>
+                        {{ user$.profile?.lastName }}
+                      </h4>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                      <h4>
+                        <strong>{{ user$.userName }}</strong>
+                      </h4>
+                    </ng-template>
+
+                    <span *ngFor="let item of user$.roleList">{{
+                      item.name
+                    }}</span
+                    >,
+                  </div>
+
+                  <div
+                    id="m_area_chart"
+                    style="
+                      position: relative;
+                      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                    "
+                  >
+                    <svg
+                      height="250"
+                      version="1.1"
+                      width="713.047"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      style="
+                        overflow: hidden;
+                        position: relative;
+                        top: 0.221344px;
+                      "
+                    >
+                      <desc
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                      >
+                        Created with Raphaël 2.2.0
+                      </desc>
+                      <defs
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                      ></defs>
+                      <path
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        fill="none"
+                        stroke="none"
+                        d="M25,225H688.047"
+                        stroke-width="0.5"
+                      ></path>
+                      <path
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        fill="none"
+                        stroke="none"
+                        d="M25,175H688.047"
+                        stroke-width="0.5"
+                      ></path>
+                      <path
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        fill="none"
+                        stroke="none"
+                        d="M25,125H688.047"
+                        stroke-width="0.5"
+                      ></path>
+                      <path
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        fill="none"
+                        stroke="none"
+                        d="M25,75H688.047"
+                        stroke-width="0.5"
+                      ></path>
+                      <path
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        fill="none"
+                        stroke="none"
+                        d="M25,25H688.047"
+                        stroke-width="0.5"
+                      ></path>
+                      <path
+                        style="
+                          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                          fill-opacity: 0.03;
+                        "
+                        fill="#79c477"
+                        stroke="none"
+                        d="M25,195C52.601751254562046,180.83333333333334,107.80525376368614,141.24601003191975,135.40700501824819,138.33333333333334C163.0843775091241,135.41267669858644,218.43912249087592,167.32740538075697,246.11649498175183,171.66666666666669C273.71824623631386,175.99407204742363,328.921748745438,181.33333333333334,356.5235,173C384.12525125456204,164.66666666666666,439.3287537636861,107.25,466.93050501824814,105C494.5322562728102,102.75,549.7357587819344,157.49658002735978,577.3375100364964,155C605.0148825273723,152.49658002735978,660.3696275091241,102.5,688.047,85L688.047,225L25,225Z"
+                        fill-opacity="0.03"
+                      ></path>
+                      <path
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        fill="none"
+                        stroke="#50b94d"
+                        d="M25,195C52.601751254562046,180.83333333333334,107.80525376368614,141.24601003191975,135.40700501824819,138.33333333333334C163.0843775091241,135.41267669858644,218.43912249087592,167.32740538075697,246.11649498175183,171.66666666666669C273.71824623631386,175.99407204742363,328.921748745438,181.33333333333334,356.5235,173C384.12525125456204,164.66666666666666,439.3287537636861,107.25,466.93050501824814,105C494.5322562728102,102.75,549.7357587819344,157.49658002735978,577.3375100364964,155C605.0148825273723,152.49658002735978,660.3696275091241,102.5,688.047,85"
+                        stroke-width="1"
+                      ></path>
+                      <circle
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        cx="25"
+                        cy="195"
+                        r="2"
+                        fill="#50b94d"
+                        stroke="#50b94d"
+                        stroke-width="1"
+                      ></circle>
+                      <circle
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        cx="135.40700501824819"
+                        cy="138.33333333333334"
+                        r="2"
+                        fill="#50b94d"
+                        stroke="#50b94d"
+                        stroke-width="1"
+                      ></circle>
+                      <circle
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        cx="246.11649498175183"
+                        cy="171.66666666666669"
+                        r="2"
+                        fill="#50b94d"
+                        stroke="#50b94d"
+                        stroke-width="1"
+                      ></circle>
+                      <circle
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        cx="356.5235"
+                        cy="173"
+                        r="2"
+                        fill="#50b94d"
+                        stroke="#50b94d"
+                        stroke-width="1"
+                      ></circle>
+                      <circle
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        cx="466.93050501824814"
+                        cy="105"
+                        r="2"
+                        fill="#50b94d"
+                        stroke="#50b94d"
+                        stroke-width="1"
+                      ></circle>
+                      <circle
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        cx="577.3375100364964"
+                        cy="155"
+                        r="2"
+                        fill="#50b94d"
+                        stroke="#50b94d"
+                        stroke-width="1"
+                      ></circle>
+                      <circle
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        cx="688.047"
+                        cy="85"
+                        r="2"
+                        fill="#50b94d"
+                        stroke="#50b94d"
+                        stroke-width="1"
+                      ></circle>
+                      <path
+                        style="
+                          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                          fill-opacity: 0.03;
+                        "
+                        fill="#f49373"
+                        stroke="none"
+                        d="M25,175C52.601751254562046,169.16666666666669,107.80525376368614,150.4183766529868,135.40700501824819,151.66666666666669C163.0843775091241,152.9183766529868,218.43912249087592,192.92749658002737,246.11649498175183,185C273.71824623631386,177.09416324669402,328.921748745438,93.66666666666667,356.5235,88.33333333333334C384.12525125456204,83.00000000000001,439.3287537636861,133.58333333333334,466.93050501824814,142.33333333333334C494.5322562728102,151.08333333333334,549.7357587819344,162.9936160510716,577.3375100364964,158.33333333333334C605.0148825273723,153.66028271773826,660.3696275091241,118.33333333333334,688.047,105L688.047,225L25,225Z"
+                        fill-opacity="0.03"
+                      ></path>
+                      <path
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        fill="none"
+                        stroke="#f96332"
+                        d="M25,175C52.601751254562046,169.16666666666669,107.80525376368614,150.4183766529868,135.40700501824819,151.66666666666669C163.0843775091241,152.9183766529868,218.43912249087592,192.92749658002737,246.11649498175183,185C273.71824623631386,177.09416324669402,328.921748745438,93.66666666666667,356.5235,88.33333333333334C384.12525125456204,83.00000000000001,439.3287537636861,133.58333333333334,466.93050501824814,142.33333333333334C494.5322562728102,151.08333333333334,549.7357587819344,162.9936160510716,577.3375100364964,158.33333333333334C605.0148825273723,153.66028271773826,660.3696275091241,118.33333333333334,688.047,105"
+                        stroke-width="1"
+                      ></path>
+                      <circle
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        cx="25"
+                        cy="175"
+                        r="2"
+                        fill="#f96332"
+                        stroke="#f96332"
+                        stroke-width="1"
+                      ></circle>
+                      <circle
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        cx="135.40700501824819"
+                        cy="151.66666666666669"
+                        r="2"
+                        fill="#f96332"
+                        stroke="#f96332"
+                        stroke-width="1"
+                      ></circle>
+                      <circle
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        cx="246.11649498175183"
+                        cy="185"
+                        r="2"
+                        fill="#f96332"
+                        stroke="#f96332"
+                        stroke-width="1"
+                      ></circle>
+                      <circle
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        cx="356.5235"
+                        cy="88.33333333333334"
+                        r="2"
+                        fill="#f96332"
+                        stroke="#f96332"
+                        stroke-width="1"
+                      ></circle>
+                      <circle
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        cx="466.93050501824814"
+                        cy="142.33333333333334"
+                        r="2"
+                        fill="#f96332"
+                        stroke="#f96332"
+                        stroke-width="1"
+                      ></circle>
+                      <circle
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        cx="577.3375100364964"
+                        cy="158.33333333333334"
+                        r="2"
+                        fill="#f96332"
+                        stroke="#f96332"
+                        stroke-width="1"
+                      ></circle>
+                      <circle
+                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
+                        cx="688.047"
+                        cy="105"
+                        r="2"
+                        fill="#f96332"
+                        stroke="#f96332"
+                        stroke-width="1"
+                      ></circle>
+                    </svg>
+                    <div
+                      class="morris-hover morris-default-style"
+                      style="left: 410.485px; top: 39px; display: none"
+                    >
+                      <div class="morris-hover-row-label">2015</div>
+                      <div class="morris-hover-point" style="color: #50b94d">
+                        {{
+                          "pages.profile-management.profile.ernings" | translate
+                        }}
+                        180
+                      </div>
+                      <div class="morris-hover-point" style="color: #f96332">
+                        {{
+                          "pages.profile-management.profile.sales" | translate
+                        }}
+                        124
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-12 user_earnings">
+                <div *ngIf="utilsService.isDoctor(user$)">
+                  <h6>
+                    {{
+                      "pages.profile-management.profile.total-label" | translate
+                    }}
+                  </h6>
+                  <h4>
+                    <small
+                      class="number count-to"
+                      data-from="0"
+                      data-to="2124"
+                      data-speed="1500"
+                      data-fresh-interval="1000"
+                      >{{ totalTreatments }}</small
+                    >
+                  </h4>
+                </div>
+
+                <circle-progress
+                  [percent]="getPercentUser(user$.profile)"
+                  [radius]="40"
+                  [outerStrokeWidth]="3"
+                  [innerStrokeWidth]="2"
+                  [outerStrokeColor]="'rgb(249, 124, 83)'"
+                  [innerStrokeColor]="'#9e9e9e'"
+                  [space]="-2"
+                  [animation]="true"
+                  [animationDuration]="300"
+                  [showSubtitle]="false"
+                  [showUnits]="false"
+                  [titleColor]="'rgb(249, 124, 83)'"
+                  [showBackground]="false"
+                ></circle-progress>
+
+                <span>
+                  {{
+                    "pages.profile-management.profile.complete-label"
+                      | translate
+                  }}
+                  {{ getPercentUser(user$.profile) }}%
+                  <i class="zmdi zmdi-caret-up text-success"></i
+                ></span>
+              </div>
+            </div>
+          </div>
+          <ul class="nav nav-tabs profile_tab" *ngIf="!viewProfile">
+            <li
+              class="nav-item"
+              *ngFor="
+                let item of [
+                  {
+                    tab:
+                      'pages.profile-management.profile.overview-button'
+                      | translate,
+                    url: 'overview'
+                  },
+                  {
+                    tab:
+                      'pages.profile-management.profile.settings-button'
+                      | translate,
+                    url: 'settings'
+                  }
+                ];
+                let i = index
+              "
+            >
+              <a
+                class="nav-link"
+                [class.active]="clickedIndex === i"
+                (click)="clickedIndex = i"
+                [routerLink]="item.url"
+                >{{ item.tab }}</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="tab-content">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

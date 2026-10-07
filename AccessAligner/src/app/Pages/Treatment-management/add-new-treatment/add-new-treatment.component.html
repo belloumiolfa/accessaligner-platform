@@ -1,0 +1,86 @@
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="card">
+      <div class="header">
+        <h2>
+          <strong
+            >{{ treatment$?.patient?.firstName }}
+            {{ treatment$?.patient?.lastName }}
+          </strong>
+          {{
+            "pages.treatment-management.add-new-treatment.header-title"
+              | translate
+          }}
+        </h2>
+      </div>
+      <div id="wizard_horizontal" role="application" class="wizard clearfix">
+        <div class="steps clearfix">
+          <ul role="tablist">
+            <li
+              *ngFor="let step of steps; let i = index"
+              role="tab"
+              [class]="
+                clickedIndex === i
+                  ? 'current'
+                  : step.done === true
+                  ? 'done last'
+                  : 'disabled'
+              "
+              (click)="getAlert(i)"
+              type="button"
+            >
+              <a
+                [routerLink]="
+                  getLink(step.url, i, !detected$, clickedSave$, disabledSteps$)
+                "
+                role="button"
+                aria-controls="wizard_horizontal-p-0"
+                ><span class="current-info audible">
+                  {{
+                    "pages.treatment-management.add-new-treatment.current-step"
+                      | translate
+                  }} </span
+                ><span class="number">{{ step.id }}.</span> {{ step.label }}.</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="content clearfix">
+          <router-outlet></router-outlet>
+        </div>
+        <div class="actions clearfix m-t-30">
+          <ul role="menu" aria-label="Pagination">
+            <li
+              class="disabled"
+              *ngIf="clickedIndex !== 0"
+              (click)="previousStep()"
+            >
+              <a>
+                {{
+                  "pages.treatment-management.add-new-treatment.previous-button"
+                    | translate
+                }}</a
+              >
+            </li>
+            <li *ngIf="clickedIndex !== 4" (click)="nextStep()">
+              <a>
+                {{
+                  "pages.treatment-management.add-new-treatment.next-button"
+                    | translate
+                }}</a
+              >
+            </li>
+            <li *ngIf="clickedIndex === 4" (click)="finishing()">
+              <a>
+                {{
+                  "pages.treatment-management.add-new-treatment.finish-button"
+                    | translate
+                }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

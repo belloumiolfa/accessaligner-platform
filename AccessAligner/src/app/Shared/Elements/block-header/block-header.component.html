@@ -1,0 +1,28 @@
+<div class="block-header">
+  <div class="row clearfix">
+    <div class="col-lg-5 col-md-5 col-sm-12">
+      <h2>{{ page }}</h2>
+      <ul class="breadcrumb padding-0">
+        <li class="breadcrumb-item">
+          <a href="index.html"><i class="zmdi zmdi-home"></i></a>
+        </li>
+        <li class="breadcrumb-item" *ngIf="father !== ''">
+          <a href="javascript:void(0);">{{ father }}</a>
+        </li>
+        <li class="breadcrumb-item active" *ngIf="subPage !== ''">
+          {{ subPage }}
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-12">
+      <div class="row clearfix">
+        <div class="col-lg-12 col-md-12">
+          <div class="card">
+            <!--             <app-translate-button [color]="'#197ca9ff'"></app-translate-button>
+ -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
