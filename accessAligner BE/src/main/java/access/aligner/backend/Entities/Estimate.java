@@ -22,6 +22,7 @@ public class Estimate {
 
     private Enum_Status status;
     private Date createdAt;
+    @Column(name = "bloburl")
     private String blobURL;
     @OneToOne(cascade = CascadeType.ALL)
     private File file;

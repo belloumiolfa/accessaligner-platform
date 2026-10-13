@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -21,9 +22,13 @@ import java.util.ResourceBundle;
 @Transactional
 
 public class DBOperationRunner implements CommandLineRunner {
-    @Value("${spring.super.admin}")
+    @Value("${app.bootstrap.super-admin.enabled:false}")
+    private boolean bootstrapSuperAdminEnabled;
+    @Value("${app.bootstrap.super-admin.username:}")
+    private String superAdminUsername;
+    @Value("${app.bootstrap.super-admin.email:}")
     private String superAdminEmail;
-    @Value("${spring.super.admin.password}")
+    @Value("${app.bootstrap.super-admin.password:}")
     private String superAdminPassword;
     @Autowired
     private final RoleRepository roleRepository;
@@ -130,46 +135,54 @@ public class DBOperationRunner implements CommandLineRunner {
         /**
          * save super admin
          */
-        if(userRepository.findByUserName("SuperAdmin").isEmpty()) {
-            User superAdmin = User.builder()
-                    .userName("SuperAdmin")
-                    .email(superAdminEmail)
-                    .password(passwordEncoder.encode(superAdminPassword))
-                    .createdAt(new Date())
-                    .profile(Profile.builder()
-                            .phone("25896321")
-                            .firstName("Admin")
-                            .lastName("Super")
-                            .dateOfBirth(new Date())
-                            .description(messages.getString("SUPER-ADMIN.DEFAULT.DESCRIPTION"))
-                            .createdAt(new Date())
-                            .build())
-                    .build();
-            // Add USER role by default
-            Role superAdminRole = roleRepository.findByName(Enum_Role.SUPER_ADMIN)
-                    .orElseThrow(() -> new IllegalStateException("SUPER_ADMIN role was not initialized"));
-            Role adminRole = roleRepository.findByName(Enum_Role.ADMIN)
-                    .orElseThrow(() -> new IllegalStateException("ADMIN role was not initialized"));
-            superAdmin.setRole(superAdminRole);
-            superAdmin.setRole(adminRole);
+        if (bootstrapSuperAdminEnabled) {
+            if (!StringUtils.hasText(superAdminUsername)
+                    || !StringUtils.hasText(superAdminEmail)
+                    || !StringUtils.hasText(superAdminPassword)) {
+                throw new IllegalStateException(
+                        "Super-admin bootstrap is enabled but its username, email, or password is missing");
+            }
+            if (userRepository.findByUserName(superAdminUsername).isEmpty()) {
+                if (userRepository.findByEmail(superAdminEmail).isPresent()) {
+                    throw new IllegalStateException(
+                            "Super-admin bootstrap email is already assigned to another user");
+                }
+                User superAdmin = User.builder()
+                        .userName(superAdminUsername)
+                        .email(superAdminEmail)
+                        .password(passwordEncoder.encode(superAdminPassword))
+                        .createdAt(new Date())
+                        .profile(Profile.builder()
+                                .phone("25896321")
+                                .firstName("Admin")
+                                .lastName("Super")
+                                .dateOfBirth(new Date())
+                                .description(messages.getString("SUPER-ADMIN.DEFAULT.DESCRIPTION"))
+                                .createdAt(new Date())
+                                .build())
+                        .build();
+                Role superAdminRole = roleRepository.findByName(Enum_Role.SUPER_ADMIN)
+                        .orElseThrow(() -> new IllegalStateException("SUPER_ADMIN role was not initialized"));
+                Role adminRole = roleRepository.findByName(Enum_Role.ADMIN)
+                        .orElseThrow(() -> new IllegalStateException("ADMIN role was not initialized"));
+                superAdmin.setRole(superAdminRole);
+                superAdmin.setRole(adminRole);
 
-            User newUser = userRepository.save(superAdmin);
+                User newUser = userRepository.save(superAdmin);
 
-            // Add ACCEPTED status by default
-            Status acceptedStatus = statusRepository.findByName(Enum_Status.ACCEPTED)
-                    .orElseThrow(() -> new IllegalStateException("ACCEPTED status was not initialized"));
-            UserStatus userStatus = UserStatus.builder()
-                    .status(acceptedStatus)
-                    .updatedLast(true)
-                    .user(newUser)
-                    .updatedAt(new Date())
-                    //.responsible((Admin) newUser)
-                    .id(new UserStatusKey(newUser.getId(), acceptedStatus.getId()))
-                    .build();
-            superAdmin.setStatus(userStatus);
+                Status acceptedStatus = statusRepository.findByName(Enum_Status.ACCEPTED)
+                        .orElseThrow(() -> new IllegalStateException("ACCEPTED status was not initialized"));
+                UserStatus userStatus = UserStatus.builder()
+                        .status(acceptedStatus)
+                        .updatedLast(true)
+                        .user(newUser)
+                        .updatedAt(new Date())
+                        .id(new UserStatusKey(newUser.getId(), acceptedStatus.getId()))
+                        .build();
+                superAdmin.setStatus(userStatus);
 
-            // save user
-            userStatusRepository.save(userStatus);
+                userStatusRepository.save(userStatus);
+            }
         }
     }
 }

@@ -110,9 +110,9 @@ public class UserController {
                 @RequestBody SecuritySettingRequest securitySettingRequest, HttpServletRequest request){
         return new ResponseEntity<>(userService.securitySettings(securitySettingRequest),HttpStatus.OK);
     }
-      @GetMapping("/private/get-admins")
-      @PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")
-      public ResponseEntity<List<AdminDTO>> getAdminsControleller( HttpServletRequest request)   {
+    @GetMapping("/private/get-admins")
+    @PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")
+    public ResponseEntity<List<AdminDTO>> getAdminsControleller( HttpServletRequest request)   {
         return new ResponseEntity<>( adminService.getAdmins(), HttpStatus.OK);
     }
     @GetMapping("/private/get-doctors")

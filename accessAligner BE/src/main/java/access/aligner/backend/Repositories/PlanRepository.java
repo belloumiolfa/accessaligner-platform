@@ -11,7 +11,7 @@ import java.util.Set;
 public interface PlanRepository extends JpaRepository<Plan, Long> {
     Set<Plan> findByTreatment(Treatment treatment);
     @Query(value = """
-                SELECT MONTH(p.created_at) AS month, COUNT(p.plan_id) AS plan_count
+                SELECT MONTH(p.created_at) AS month, COUNT(p.id) AS plan_count
                    FROM accessaligner.plan p 
                    WHERE YEAR(p.created_at) = :year
                    GROUP BY MONTH(p.created_at)

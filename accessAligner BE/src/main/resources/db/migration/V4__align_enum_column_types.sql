@@ -1,0 +1,11 @@
+ALTER TABLE estimate
+    MODIFY COLUMN status TINYINT;
+
+ALTER TABLE treatment
+    MODIFY COLUMN status TINYINT;
+
+ALTER TABLE plan
+    MODIFY COLUMN status TINYINT;
+
+ALTER TABLE teeth
+    MODIFY COLUMN action TINYINT;

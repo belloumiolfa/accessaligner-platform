@@ -25,6 +25,7 @@ public class Treatment {
     private Long id ;
 
     private String antCross;
+    @Column(name = "classi")
     private String classI;
     private String crowding;
     private String extract;
