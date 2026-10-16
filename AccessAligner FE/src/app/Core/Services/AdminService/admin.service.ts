@@ -32,13 +32,14 @@ export class AdminService {
 
   /******************************************************************************** */
 
-  approveUser(userId: number): void {
+  approveUser(userId: number, onSuccess?: () => void): void {
     this.handleErrors.handleError({});
     this.spinner.show();
 
     this.adminRequests.approveUser(userId).subscribe(
       () => {
         this.spinner.hide();
+        onSuccess?.();
 
         const title = this.translate.instant(
           'alert-msg.auth-service.accepted-msg',
@@ -54,23 +55,28 @@ export class AdminService {
 
       (err: any) => {
         this.spinner.hide();
-        this.handleErrors.handleError(err);
+        this.errors = this.handleErrors.handleError(err);
 
         this.handleAlerts.handleSweetAlert(
-          this.errors.status,
+          this.errors?.status ?? err.statusText ?? 'Approval failed',
           'warning',
           false,
         );
       },
     );
   }
-  rejectUser(userId: number, reason: string): void {
+  rejectUser(
+    userId: number,
+    reason: string,
+    onSuccess?: () => void,
+  ): void {
     this.handleErrors.handleError({});
     this.spinner.show();
 
     this.adminRequests.rejectUser(userId, reason).subscribe({
       next: () => {
         this.spinner.hide();
+        onSuccess?.();
 
         const title = this.translate.instant(
           'alert-msg.auth-service.rejected-msg',
@@ -83,10 +89,10 @@ export class AdminService {
 
       error: (err) => {
         this.spinner.hide();
-        this.handleErrors.handleError(err);
+        this.errors = this.handleErrors.handleError(err);
 
         this.handleAlerts.handleSweetAlert(
-          this.errors.status,
+          this.errors?.status ?? err.statusText ?? 'Rejection failed',
           'warning',
           false,
         );

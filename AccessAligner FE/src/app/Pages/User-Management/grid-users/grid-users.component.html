@@ -88,7 +88,7 @@
                   *ngIf="
                     doctor?.userStatus?.status?.name === 'CONFIRMED' || archive
                   "
-                  (click)="confirmUpdateUser(doctor?.id, 'ACCEPTED')"
+                  (click)="confirmApproveUser(doctor.id)"
                   class="btn btn-icon btn-icon-mini btn-round btn-success btn-sm"
                 >
                   <i class="zmdi zmdi-check"></i>
@@ -96,20 +96,20 @@
 
                 <button
                   *ngIf="doctor?.userStatus?.status?.name === 'CONFIRMED'"
-                  (click)="confirmUpdateUser(doctor?.id, 'REJECTED')"
+                  (click)="confirmRejectUser(doctor.id)"
                   class="btn btn-icon btn-icon-mini btn-round btn-default btn-sm"
                 >
                   <i class="zmdi zmdi-close"></i>
                 </button>
-                <button
-                  (click)="confirmUpdateUser(doctor?.profile?.id, 'BLOCKED')"
+                <!-- <button
+                  (click)="confirmUpdateUser(doctor?.id, 'BLOCKED')"
                   *ngIf="
                     doctor?.userStatus?.status?.name !== 'WAIT' && !archive
                   "
                   class="btn btn-icon btn-icon-mini btn-round btn-neutral btn-sm"
                 >
                   <i class="zmdi zmdi-block-alt"></i>
-                </button>
+                </button> -->
               </div>
 
               <circle-progress

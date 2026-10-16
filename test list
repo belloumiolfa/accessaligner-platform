@@ -1,0 +1,28 @@
+AccessAligner platform functionalities
+
+1. Sign in and sign up                          ---done 
+2. Confirm or cancel account registration       --- done 
+3. Admin approval or rejection of new users (get doctors stutus issues )    --- done (Update status 404) --- done (reject send email 500 )               --- remoove email sending 
+4. Forgot-password and password-reset flows (forget password  403)          --- done 
+5. Update account and security settings 
+6. View and update user profiles                --- done
+7. Upload and view profile photos (file issues ) --done
+8. Add, browse, search, view, edit, and delete patients  --- done 
+9. View patients associated with a dentist (liste patient doesn't exist in the doctor profile )
+10. Create treatments for patients -- done
+11. Enter treatment details and tooth information --done
+12. Upload and manage treatment photos and files --done
+13. View, search, and filter treatments ---done
+14. Track treatment status and progress ---done
+15. View archived treatments --done
+16. Assign, remove, and reset treatment teams (we can't remove or reset the team from treatment)
+17. Create and manage treatment plans --done
+18. Upload and retrieve plan files --done
+19. Update plan status, feedback, delivery date, and production delay --done 
+20. Upload, download, update, and delete estimates --done
+21. Send and view treatment messages; mark messages as seen --doen
+22. Admin dashboard statistics and yearly treatment/plan reports
+23. Manage users, doctors, and admins; switch roles         ---done 
+24. View top dentists and treatment counts 
+25. Translated interface and locale-aware requests
+26. Public showcase pages: home, about, aligners, why AccessAligner, FAQ, blog, posts, and clinic cases ---done

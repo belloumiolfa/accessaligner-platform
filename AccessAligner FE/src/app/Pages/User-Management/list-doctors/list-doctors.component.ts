@@ -26,8 +26,8 @@ export class ListDoctorsComponent {
       (data) => {
         console.log('doctors data', data);
         this.doctors$ = data.filter(
-          (doctor: { userStatus: { status: { name: string } } }) =>
-            doctor.userStatus.status.name != 'BLOCKED',
+          (doctor: { userStatus?: { status?: { name?: string } } }) =>
+            doctor.userStatus?.status?.name !== 'BLOCKED',
         );
 
         this.spinner.hide();

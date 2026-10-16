@@ -84,30 +84,36 @@ public class FileServiceImpl implements FileService {
     }
 
     public File saveFile(MultipartFile file, String destination) throws IOException {
-        try {
-
-            // Create directory if it doesn't exist
-            java.io.File directory = new java.io.File(UPLOAD_DIR+java.io.File.separator+destination);
-            if (!directory.exists()) {
-                directory.mkdir();
-            }
-            // Save file to server
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOAD_DIR+java.io.File.separator+destination +
-                    java.io.File.separator + file.getOriginalFilename());
-            // write f iel to server
-            Files.write(path, bytes);
-
-            return File.builder()
-                    .name(file.getOriginalFilename())
-                    .type(file.getContentType())
-                    .size(file.getSize())
-                    .createdAt(new Date())
-                    .build();
-
-        }catch (Exception exception){
-            throw exception;
+        Path uploadRoot = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize();
+        Path directory = uploadRoot.resolve(destination).normalize();
+        if (!directory.startsWith(uploadRoot)) {
+            throw new IOException("Upload destination is outside the upload directory");
         }
+
+        Files.createDirectories(directory);
+
+        String originalFilename = file.getOriginalFilename();
+        if (originalFilename == null || originalFilename.isBlank()) {
+            throw new IOException("Uploaded file must have a filename");
+        }
+        Path filenamePath = Paths.get(originalFilename.replace('\\', '/')).getFileName();
+        if (filenamePath == null || filenamePath.toString().isBlank()) {
+            throw new IOException("Uploaded file must have a filename");
+        }
+        String filename = filenamePath.toString();
+        Path path = directory.resolve(filename).normalize();
+        if (!path.startsWith(directory)) {
+            throw new IOException("Uploaded file path is outside the destination directory");
+        }
+
+        Files.write(path, file.getBytes());
+
+        return File.builder()
+                .name(filename)
+                .type(file.getContentType())
+                .size(file.getSize())
+                .createdAt(new Date())
+                .build();
     }
 
     @Override
@@ -127,7 +133,7 @@ public class FileServiceImpl implements FileService {
                 fileRepository.delete(file);
                 return  MessageResponse.builder().message(messages.getString("FileService.deleteFile.MessageResponse.success")).build();
             } else {
-                 return  MessageResponse.builder().message(messages.getString("FileService.deleteFile.MessageResponse.failed")).build();
+                return  MessageResponse.builder().message(messages.getString("FileService.deleteFile.MessageResponse.failed")).build();
             }
         } else {
              return  MessageResponse.builder().message(messages.getString("FileService.deleteFile.MessageResponse.notExist")).build();

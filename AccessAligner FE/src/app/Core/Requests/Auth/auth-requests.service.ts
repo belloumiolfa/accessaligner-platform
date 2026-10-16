@@ -136,7 +136,7 @@ export class AuthRequestsService {
   forgetPassword(email: any): Observable<any> {
     return this.http
       .post<any>(
-        `${this.apiBaseUrl}/api/forgetPassword`,
+        `${this.apiBaseUrl}/api/public/forgetPassword`,
         { email },
         {
           headers: new HttpHeaders().set('Accept-Language', this.lang), // Set the Accept-Language header
@@ -152,7 +152,7 @@ export class AuthRequestsService {
   ): Observable<any> {
     return this.http
       .post<any>(
-        `${this.apiBaseUrl}/api/updatePassword`,
+        `${this.apiBaseUrl}/api/public/updatePassword`,
         {
           token,
           password,

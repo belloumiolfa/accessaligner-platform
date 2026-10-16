@@ -195,6 +195,7 @@ public class UserServiceImpl implements UserService {
 
         user.setStatus(userStatus);
         user.setUpdatedAt(new Date());
+        userStatusRepository.save(userStatus);
         // send email to super admin to accept or reject the user
 
         return MessageResponse.builder().message(
@@ -262,6 +263,7 @@ public class UserServiceImpl implements UserService {
 
         user.setStatus(userStatus);
         user.setUpdatedAt(new Date());
+        userStatusRepository.save(userStatus);
         // send email to super admin to accept or reject the user
 
         return MessageResponse.builder().message(
@@ -269,15 +271,15 @@ public class UserServiceImpl implements UserService {
     }
 
     private User getCurrentAdmin() {
-
         Authentication authentication =
                 SecurityContextHolder
                         .getContext()
                         .getAuthentication();
 
-        String username = authentication.getName();
+        String email = authentication.getName();
+        System.out.println("Authenticated admin username: " + email);
 
-        return userRepository.findByUserName(username)
+        return userRepository.findByEmail(email)
                 .orElseThrow(() ->
                         new ResourceNotFoundException(
                                 "Authenticated admin not found"
@@ -297,8 +299,6 @@ public class UserServiceImpl implements UserService {
         Long currentStatus = user.getCurrentStatus();
 
         if (currentStatus == Enum_Status.valueOf("CONFIRMED").ordinal()) {
-
-
             throw new IllegalStateException(
                     "Only confirmed users can be approved"
             );
@@ -332,6 +332,7 @@ public class UserServiceImpl implements UserService {
 
         user.setStatus(userStatus);
         user.setUpdatedAt(new Date());
+        userStatusRepository.save(userStatus);
 
         return MessageResponse.builder().message(
                 messages.getString("UserService.accept.MessageResponse")).build();
@@ -350,8 +351,6 @@ public class UserServiceImpl implements UserService {
         Long currentStatus = user.getCurrentStatus();
 
         if (currentStatus == Enum_Status.valueOf("CONFIRMED").ordinal()) {
-
-
             throw new IllegalStateException(
                     "Only confirmed users can be rejected"
             );
@@ -386,16 +385,23 @@ public class UserServiceImpl implements UserService {
 
         user.setStatus(userStatus);
         user.setUpdatedAt(new Date());
+        userStatusRepository.save(userStatus);
 
         // Optional:
         // send rejection email to user with the reason
-        emailService.sendRegistrationRejection(user, data.getReason());
+        // emailService.sendRegistrationRejection(user, data.getReason());
 
+      /*  User superAdmin = userRepository.findByUserName("SuperAdmin")
+                .orElseThrow(() -> new ResourceNotFoundException("Super Admin user not found"));
+        User decisionAdmin = admin != null ? admin : superAdmin;
+        Map<String, Object> claims = new HashMap<>();
+        var jwtToken = jwtService.generateToken(claims, decisionAdmin);
+        emailService.sendEmailDecision(data.getUserId(), superAdmin, jwtToken);
+*/
         return MessageResponse.builder().message(
                 messages.getString("UserService.REJECT.MessageResponse")).build();
 
     }
-
 
     @Override
     public UserDTO getUserById(Long id){
@@ -403,6 +409,7 @@ public class UserServiceImpl implements UserService {
          return userDTOMapper.apply(user) ;
     }
 
+    @Transactional
     @Override
     public UserDTO updateStatus(UpdateStatusRequest data) {
 
@@ -521,6 +528,7 @@ public class UserServiceImpl implements UserService {
                 .build();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<UserDTO> getDoctors() {
         Role dentistRole = roleRepository.findByName(Enum_Role.DENTIST)

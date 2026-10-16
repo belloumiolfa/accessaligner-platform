@@ -5,6 +5,7 @@ import access.aligner.backend.Entities.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -25,9 +26,7 @@ public class UserDTOMapper implements Function<User, UserDTO> {
                 user.getRoleList(),
                 profileDtoMapper.apply(user.getProfile()),
                 user.getEventList(),
-                user.getUserStatus().stream()
-                        .filter(s -> s.getUpdatedLast())
-                        .findFirst()
+                Optional.ofNullable(user.resolveCurrentUserStatus())
                         .map(userStatusDTO)
                         .orElse(null)
         );

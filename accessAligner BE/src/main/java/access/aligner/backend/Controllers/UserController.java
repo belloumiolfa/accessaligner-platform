@@ -56,13 +56,6 @@ public class UserController {
         return new ResponseEntity<>(userService.cancelRegistration(token), HttpStatus.OK);
     }
 
-
-
-
-
-
-
-
     @PostMapping("/public/signin")
     public ResponseEntity<AuthenticationResponse> signInController (
             @Validated(SequenceValidation.class)
@@ -91,13 +84,13 @@ public class UserController {
         return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
     }
 
-    @PostMapping("/forgetPassword")
+    @PostMapping("/public/forgetPassword")
     public ResponseEntity<MessageResponse> forgetPasswordController(
             @Validated(SequenceValidation.class)
                 @RequestBody ForgetPasswordRequest forgetPasswordRequest, HttpServletRequest request){
         return new ResponseEntity<>(userService.forgetPassword(forgetPasswordRequest.getEmail()),HttpStatus.OK);
     }
-    @PostMapping("/updatePassword")
+    @PostMapping("/public/updatePassword")
     @PreAuthorize("permitAll()")
     public ResponseEntity<MessageResponse> updatePasswordController(
             @Validated(SequenceValidation.class)

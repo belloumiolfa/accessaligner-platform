@@ -1,9 +1,9 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable, map } from "rxjs";
-import { environment } from "../../../../environments/environment.development";
-import { loggedInUser } from "../../Helpers/utils";
-import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
+import { environment } from '../../../../environments/environment.development';
+import { loggedInUser } from '../../Helpers/utils';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -68,8 +68,9 @@ export class AdminRequestsService {
   }
 
   approveUser(userId: number): Observable<any> {
-    return this.http.patch<any>(
-      `${this.apiBaseUrl}/admin/users/${userId}/accept`,
+    return this.http.put<any>(
+      `${this.apiBaseUrl}/api/private/admin/users/${userId}/accept`,
+      { userId },
       {
         headers: new HttpHeaders()
           .set('Authorization', `Bearer ${loggedInUser()}`)
@@ -79,9 +80,9 @@ export class AdminRequestsService {
   }
 
   rejectUser(userId: number, reason: string): Observable<any> {
-    return this.http.patch<any>(
-      `${this.apiBaseUrl}/admin/users/${userId}/reject`,
-      { reason },
+    return this.http.put<any>(
+      `${this.apiBaseUrl}/api/private/admin/users/${userId}/reject`,
+      { userId, reason },
       {
         headers: new HttpHeaders()
           .set('Authorization', `Bearer ${loggedInUser()}`)

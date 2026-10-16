@@ -103,14 +103,28 @@ public class User implements UserDetails {
         this.userStatus.add(status);
     }
     public Long getCurrentStatus() {
+        UserStatus currentStatus = resolveCurrentUserStatus();
+        if (currentStatus == null || currentStatus.getStatus() == null) {
+            return null;
+        }
+
+        return currentStatus.getStatus().getId();
+    }
+
+    public UserStatus resolveCurrentUserStatus() {
         if (userStatus == null || userStatus.isEmpty()) {
             return null;
         }
 
+        Comparator<UserStatus> newestFirst = Comparator.comparing(
+                UserStatus::getUpdatedAt,
+                Comparator.nullsFirst(Comparator.naturalOrder())
+        );
+
         return userStatus.stream()
-                .findFirst()
-                .map(status -> status.getStatus().getId())
-                .orElse(null);
+                .filter(status -> Boolean.TRUE.equals(status.getUpdatedLast()))
+                .max(newestFirst)
+                .orElseGet(() -> userStatus.stream().max(newestFirst).orElse(null));
     }
 
 

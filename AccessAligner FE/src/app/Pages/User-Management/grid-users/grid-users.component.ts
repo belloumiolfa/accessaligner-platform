@@ -1,23 +1,25 @@
-import { CommonModule } from "@angular/common";
-import { Component, Input, SimpleChanges } from "@angular/core";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { DomSanitizer } from "@angular/platform-browser";
-import { Router, RouterModule } from "@angular/router";
-import { NgCircleProgressModule } from "ng-circle-progress";
-import { NgxSpinnerService } from "ngx-spinner";
-import Swal from "sweetalert2";
-import { HandleAlertsService } from "../../../Core/Helpers/handle-alerts.service";
-import { SearchService } from "../../../Core/Helpers/search.service";
-import { StatusClassService } from "../../../Core/Helpers/status-class.service";
-import { AppService } from "../../../Core/Services/app.service";
-import { AuthService } from "../../../Core/Services/AuthService/auth.service";
-import { UserService } from "../../../Core/Services/UserService/user.service";
-import { HandleErrorsService } from "../../../Core/Helpers/handle-errors.service";
-import { AuthRequestsService } from "../../../Core/Requests/Auth/auth-requests.service";
-import { TranslateModule } from "@ngx-translate/core";
+import { CommonModule } from '@angular/common';
+import { Component, Input, SimpleChanges } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Router, RouterModule } from '@angular/router';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { NgxSpinnerService } from 'ngx-spinner';
+import Swal from 'sweetalert2';
+import { HandleAlertsService } from '../../../Core/Helpers/handle-alerts.service';
+import { SearchService } from '../../../Core/Helpers/search.service';
+import { StatusClassService } from '../../../Core/Helpers/status-class.service';
+import { AppService } from '../../../Core/Services/app.service';
+import { AuthService } from '../../../Core/Services/AuthService/auth.service';
+import { UserService } from '../../../Core/Services/UserService/user.service';
+import { HandleErrorsService } from '../../../Core/Helpers/handle-errors.service';
+import { AuthRequestsService } from '../../../Core/Requests/Auth/auth-requests.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { AdminService } from '../../../Core/Services/AdminService/admin.service';
+import { UserRequestsService } from '../../../Core/Requests/User/user-requests.service';
 
 @Component({
-  selector: "app-grid-users",
+  selector: 'app-grid-users',
   standalone: true,
   imports: [
     CommonModule,
@@ -28,8 +30,8 @@ import { TranslateModule } from "@ngx-translate/core";
     FormsModule,
     TranslateModule,
   ],
-  templateUrl: "./grid-users.component.html",
-  styleUrl: "./grid-users.component.css",
+  templateUrl: './grid-users.component.html',
+  styleUrl: './grid-users.component.css',
 })
 export class GridUsersComponent {
   searchTerm: any;
@@ -53,13 +55,15 @@ export class GridUsersComponent {
     private handleAlerts: HandleAlertsService,
     private handleErrors: HandleErrorsService,
     private router: Router,
-    private authRequests: AuthRequestsService
+    private authRequests: AuthRequestsService,
+    private adminService: AdminService,
+    private userRequests: UserRequestsService,
   ) {
     this.appService.getUser$.subscribe((data) => (this.user$ = data));
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes["doctors$"] && changes["doctors$"].currentValue) {
+    if (changes['doctors$'] && changes['doctors$'].currentValue) {
       this.doctors$.forEach((doctor: any) => {
         if (doctor?.profile?.photo !== null)
           this.getProfilePhoto(doctor?.profile?.photo?.id);
@@ -68,7 +72,7 @@ export class GridUsersComponent {
   }
 
   navigateToPorfile(id: any) {
-    this.router.navigate(["/profile/" + id + "/overview"], {
+    this.router.navigate(['/profile/' + id + '/overview'], {
       queryParams: { viewProfile: true },
     });
   }
@@ -81,7 +85,7 @@ export class GridUsersComponent {
 
   safeUrlToString(safeUrl: any): string {
     return (
-      safeUrl["changingThisBreaksApplicationSecurity"] ||
+      safeUrl['changingThisBreaksApplicationSecurity'] ||
       (safeUrl as any).changingThisBreaksApplicationSecurity
     );
   }
@@ -92,19 +96,19 @@ export class GridUsersComponent {
       duration: 0,
       enabled: false,
     },
-    barColor: "#2C3E50",
+    barColor: '#2C3E50',
     scaleColor: false,
     lineWidth: 20,
-    lineCap: "circle",
+    lineCap: 'circle',
   };
 
   serachByName() {
-    if (this.searchTerm.trim() !== "") {
+    if (this.searchTerm.trim() !== '') {
       this.filter = true;
 
       this.doctorsAfterFilter = this.searchService.searchUser(
         this.searchTerm,
-        this.doctors$
+        this.doctors$,
       );
     } else {
       this.filter = false;
@@ -121,7 +125,7 @@ export class GridUsersComponent {
 
       return this.photoMap.filter((photo) => photo.id === id)[0]?.imageUrl;
     } else {
-      return "/assets/images/profile_av.png";
+      return '/assets/images/profile_av.png';
     }
   }
 
@@ -136,7 +140,7 @@ export class GridUsersComponent {
         if (
           profile[key] !== null &&
           profile[key] !== undefined &&
-          profile[key] !== ""
+          profile[key] !== ''
         ) {
           completedFields++;
         }
@@ -151,7 +155,7 @@ export class GridUsersComponent {
     }
   }
 
-  updateUser(userId: any, status: any) {
+  /*  updateUser(userId: any, status: any) {
     this.authRequests.updateStatus(userId, status, this.user$.id).subscribe(
       (data) => {
         console.log(data);
@@ -192,6 +196,46 @@ export class GridUsersComponent {
 
         this.updateUser(userId, status);
       }
+    });
+  }
+ */
+
+  confirmApproveUser(userId: number) {
+    this.handleAlerts.handleConfirmAlert().then((result) => {
+      if (result.isConfirmed) {
+        console.log('User ID to approve:', userId); // Log the user ID for debugging
+        this.adminService.approveUser(userId, () => this.refreshDoctors());
+      }
+    });
+  }
+
+  confirmRejectUser(userId: number) {
+    this.handleAlerts.handleConfirmAlert().then((result) => {
+      if (result.isConfirmed) {
+        this.adminService.rejectUser(userId, 'User rejected', () =>
+          this.refreshDoctors(),
+        );
+      }
+    });
+  }
+
+  private refreshDoctors() {
+    this.userRequests.getDoctors().subscribe({
+      next: (doctors) => {
+        this.doctors$ = doctors.filter((doctor: any) =>
+          this.archive
+            ? doctor?.userStatus?.status?.name === 'BLOCKED'
+            : doctor?.userStatus?.status?.name !== 'BLOCKED',
+        );
+      },
+      error: (err) => {
+        this.handleErrors.handleError(err);
+        this.handleAlerts.handleSweetAlert(
+          'Could not refresh the doctor list.',
+          'error',
+          false,
+        );
+      },
     });
   }
 }

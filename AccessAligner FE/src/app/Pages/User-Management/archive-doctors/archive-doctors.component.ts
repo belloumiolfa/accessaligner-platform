@@ -25,8 +25,8 @@ export class ArchiveDoctorsComponent {
     this.userRequests.getDoctors().subscribe(
       (data) => {
         this.doctors$ = data.filter(
-          (doctor: { userStatus: { status: { name: string } } }) =>
-            doctor.userStatus.status.name === 'BLOCKED'
+          (doctor: { userStatus?: { status?: { name?: string } } }) =>
+            doctor.userStatus?.status?.name === 'BLOCKED'
         );
 
         this.spinner.hide();
